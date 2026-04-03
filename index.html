@@ -1,1 +1,500 @@
-<h1>Iron atlas</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>IRON ATLAS ☠ Organization</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&family=Creepster&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ═══ LOADING ═══ -->
+    <div id="loader">
+        <div class="loader-wrap">
+            <div class="skull-loader">☠</div>
+            <div class="loader-rings">
+                <div class="ring r1"></div>
+                <div class="ring r2"></div>
+                <div class="ring r3"></div>
+            </div>
+            <p class="loader-msg">
+                BREACHING SYSTEM<span class="blink">_</span>
+            </p>
+            <div class="loader-bar">
+                <div class="loader-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ MATRIX RAIN ═══ -->
+    <canvas id="matrix"></canvas>
+
+    <!-- ═══ FOG OVERLAY ═══ -->
+    <div class="fog-layer fog1"></div>
+    <div class="fog-layer fog2"></div>
+
+    <!-- ═══ SCAN LINES ═══ -->
+    <div class="scanlines"></div>
+
+    <!-- ═══ BLOOD DRIP TOP ═══ -->
+    <div class="blood-drip-container">
+        <div class="blood-drip" style="left:5%; height:40px; animation-delay:0s"></div>
+        <div class="blood-drip" style="left:12%; height:65px; animation-delay:1.2s"></div>
+        <div class="blood-drip" style="left:23%; height:35px; animation-delay:0.5s"></div>
+        <div class="blood-drip" style="left:34%; height:55px; animation-delay:2s"></div>
+        <div class="blood-drip" style="left:45%; height:45px; animation-delay:0.8s"></div>
+        <div class="blood-drip" style="left:56%; height:70px; animation-delay:1.5s"></div>
+        <div class="blood-drip" style="left:67%; height:30px; animation-delay:0.3s"></div>
+        <div class="blood-drip" style="left:78%; height:50px; animation-delay:1.8s"></div>
+        <div class="blood-drip" style="left:89%; height:40px; animation-delay:0.7s"></div>
+        <div class="blood-drip" style="left:95%; height:60px; animation-delay:2.2s"></div>
+    </div>
+
+    <!-- ═══ NAVBAR ═══ -->
+    <nav id="navbar">
+        <div class="nav-wrap">
+            <a href="#home" class="nav-brand">
+                <span class="brand-skull">☠</span>
+                <span class="brand-name" data-text="IRON ATLAS">IRON ATLAS</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#home" class="nav-link active">INICIO</a>
+                <a href="#manifesto" class="nav-link">MANIFIESTO</a>
+                <a href="#allies" class="nav-link">ALIADOS</a>
+                <a href="#exposed" class="nav-link">EXPUESTOS</a>
+                <a href="forum.html" class="nav-link">FORO</a>
+                <a href="https://t.me/ironatlas_organization" target="_blank"
+                   rel="noopener noreferrer" class="nav-link nav-tg">
+                    ✈ TELEGRAM
+                </a>
+            </div>
+            <div class="nav-right">
+                <span class="nav-pulse"></span>
+                <span class="nav-status">ACTIVE</span>
+            </div>
+            <button class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════
+         HERO
+         ═══════════════════════════════ -->
+    <section id="home" class="section hero">
+        <div class="hero-bg-glow"></div>
+
+        <!-- Floating skulls decoration -->
+        <div class="floating-skulls">
+            <span class="float-skull" style="top:10%;left:5%">☠</span>
+            <span class="float-skull" style="top:20%;right:8%">💀</span>
+            <span class="float-skull" style="top:60%;left:3%">☠</span>
+            <span class="float-skull" style="top:70%;right:5%">💀</span>
+            <span class="float-skull" style="top:40%;left:90%">☠</span>
+        </div>
+
+        <div class="hero-content">
+            <!-- LOGO PRINCIPAL -->
+            <div class="hero-logo-wrap">
+                <div class="logo-glitch-frame">
+                    <div class="corner-deco tl"></div>
+                    <div class="corner-deco tr"></div>
+                    <div class="corner-deco bl"></div>
+                    <div class="corner-deco br"></div>
+                    <img src="https://i.postimg.cc/2qXggwYm/1adae273.png"
+                         alt="IRON ATLAS"
+                         class="hero-logo"
+                         id="heroLogo">
+                    <div class="logo-scanline"></div>
+                    <div class="logo-glitch-overlay"></div>
+                </div>
+                <div class="logo-reflection"></div>
+            </div>
+
+            <!-- TITLE -->
+            <div class="hero-text">
+                <div class="hero-tag">
+                    <span class="tag-line"></span>
+                    HACKTIVISM ORGANIZATION
+                    <span class="tag-line"></span>
+                </div>
+                <h1 class="glitch-title" data-text="IRON ATLAS">
+                    IRON ATLAS
+                </h1>
+                <p class="hero-sub">
+                    <span class="typed" id="typed"></span>
+                    <span class="typed-cursor">|</span>
+                </p>
+
+                <!-- STATS -->
+                <div class="hero-stats">
+                    <div class="hstat">
+                        <span class="hstat-icon">⚡</span>
+                        <span class="hstat-num" data-count="247">0</span>
+                        <span class="hstat-label">TARGETS</span>
+                    </div>
+                    <div class="hstat-divider"></div>
+                    <div class="hstat">
+                        <span class="hstat-icon">☠</span>
+                        <span class="hstat-num" data-count="89">0</span>
+                        <span class="hstat-label">EXPOSED</span>
+                    </div>
+                    <div class="hstat-divider"></div>
+                    <div class="hstat">
+                        <span class="hstat-icon">⬡</span>
+                        <span class="hstat-num" data-count="3">0</span>
+                        <span class="hstat-label">ALLIES</span>
+                    </div>
+                </div>
+
+                <div class="hero-actions">
+                    <a href="https://t.me/ironatlas_organization" target="_blank"
+                       rel="noopener noreferrer" class="btn-main">
+                        <span class="btn-bg"></span>
+                        <span class="btn-content">
+                            <span class="btn-icon">✈</span>
+                            UNIRSE AL MOVIMIENTO
+                        </span>
+                    </a>
+                    <a href="#manifesto" class="btn-ghost">
+                        LEER MANIFIESTO
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- TERMINAL -->
+        <div class="hero-terminal">
+            <div class="term-bar">
+                <div class="term-dots">
+                    <span class="td red"></span>
+                    <span class="td yellow"></span>
+                    <span class="td green"></span>
+                </div>
+                <span class="term-title">root@ironatlas:~#</span>
+            </div>
+            <div class="term-body" id="termBody">
+                <p class="term-line">> Initializing attack vector...</p>
+                <p class="term-line">> Loading exploit database... <span class="tg">OK</span></p>
+                <p class="term-line">> Connecting to darknet nodes... <span class="tg">CONNECTED</span></p>
+                <p class="term-line">> Government firewall status: <span class="tr">BREACHED</span></p>
+                <p class="term-line">> Corruption data: <span class="tc">DOWNLOADING</span></p>
+                <p class="term-line term-input">> <span class="blink">_</span></p>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>SCROLL</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════
+         MANIFESTO
+         ═══════════════════════════════ -->
+    <section id="manifesto" class="section manifesto">
+        <div class="section-wrap">
+            <div class="sec-header">
+                <span class="sec-num">001</span>
+                <h2 class="sec-title glitch-title" data-text="MANIFIESTO">
+                    MANIFIESTO
+                </h2>
+                <div class="sec-line"></div>
+            </div>
+
+            <div class="manifesto-content">
+                <div class="manifesto-card main-card">
+                    <div class="mc-border"></div>
+                    <div class="mc-skull">☠</div>
+                    <blockquote class="manifesto-text">
+                        "No somos criminales. Somos la respuesta a un sistema corrupto
+                        que roba, miente y oprime a su pueblo. Cada gobierno que oculta
+                        la verdad se convierte en nuestro objetivo. No pedimos permiso.
+                        No esperamos justicia. <span class="accent-red">LA CREAMOS.</span>"
+                    </blockquote>
+                    <div class="mc-author">— IRON ATLAS ORGANIZATION</div>
+                </div>
+
+                <div class="manifesto-grid">
+                    <div class="m-card">
+                        <div class="m-card-glow"></div>
+                        <div class="m-icon">⚔</div>
+                        <h3>EXPOSE</h3>
+                        <p>Desenmascaramos la corrupcion gubernamental.
+                           Cada secreto oculto sera revelado al pueblo.</p>
+                    </div>
+                    <div class="m-card">
+                        <div class="m-card-glow"></div>
+                        <div class="m-icon">🛡</div>
+                        <h3>PROTECT</h3>
+                        <p>Protegemos a quienes no pueden protegerse.
+                           Los whistleblowers son nuestros heroes.</p>
+                    </div>
+                    <div class="m-card">
+                        <div class="m-card-glow"></div>
+                        <div class="m-icon">⚡</div>
+                        <h3>DISRUPT</h3>
+                        <p>Interrumpimos los sistemas que perpetuan
+                           la injusticia y la opresion sistematica.</p>
+                    </div>
+                    <div class="m-card">
+                        <div class="m-card-glow"></div>
+                        <div class="m-icon">👁</div>
+                        <h3>VIGILANCE</h3>
+                        <p>Somos los ojos que el gobierno no puede cerrar.
+                           Vigilancia constante contra el abuso de poder.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════
+         ALLIES
+         ═══════════════════════════════ -->
+    <section id="allies" class="section allies">
+        <div class="section-wrap">
+            <div class="sec-header">
+                <span class="sec-num">002</span>
+                <h2 class="sec-title glitch-title" data-text="ALIADOS">
+                    ALIADOS
+                </h2>
+                <div class="sec-line"></div>
+                <p class="sec-desc">Fuerzas aliadas en la lucha contra la corrupcion</p>
+            </div>
+
+            <div class="allies-showcase">
+
+                <!-- ALLY 1 - NULLSEC -->
+                <a href="https://t.me/nullsechackers" target="_blank"
+                   rel="noopener noreferrer" class="ally-card">
+                    <div class="ally-bg-pulse"></div>
+                    <div class="ally-number">01</div>
+                    <div class="ally-img-wrap">
+                        <div class="ally-img-frame">
+                            <img src="https://i.postimg.cc/mPCTw51J/nullsec.png"
+                                 alt="Nullsec Philippines"
+                                 class="ally-img"
+                                 onerror="this.style.display='none'">
+                            <div class="ally-img-glitch"></div>
+                        </div>
+                        <div class="ally-img-ring"></div>
+                    </div>
+                    <h3 class="ally-name">NULLSEC PHILIPPINES</h3>
+                    <p class="ally-desc">Philippine Hacktivism Division</p>
+                    <div class="ally-tg">
+                        <span>☠ TELEGRAM ➜</span>
+                    </div>
+                    <div class="ally-bottom-line"></div>
+                </a>
+
+                <!-- ALLY 2 - HACK PURGATORY -->
+                <a href="https://t.me/MyWebBackup" target="_blank"
+                   rel="noopener noreferrer" class="ally-card">
+                    <div class="ally-bg-pulse"></div>
+                    <div class="ally-number">02</div>
+                    <div class="ally-img-wrap">
+                        <div class="ally-img-frame">
+                            <div class="ally-skull-placeholder">☠</div>
+                            <div class="ally-img-glitch"></div>
+                        </div>
+                        <div class="ally-img-ring"></div>
+                    </div>
+                    <h3 class="ally-name">HACK PURGATORY™</h3>
+                    <p class="ally-desc">Underground Cyber Operations</p>
+                    <div class="ally-tg">
+                        <span>☠ TELEGRAM ➜</span>
+                    </div>
+                    <div class="ally-bottom-line"></div>
+                </a>
+
+                <!-- ALLY 3 - TEAM JXLL -->
+                <a href="https://t.me/zconchita" target="_blank"
+                   rel="noopener noreferrer" class="ally-card">
+                    <div class="ally-bg-pulse"></div>
+                    <div class="ally-number">03</div>
+                    <div class="ally-img-wrap">
+                        <div class="ally-img-frame">
+                            <img src="https://i.postimg.cc/3yq9xnnX/teamjxll.png"
+                                 alt="Team JXLL"
+                                 class="ally-img"
+                                 onerror="this.style.display='none'">
+                            <div class="ally-img-glitch"></div>
+                        </div>
+                        <div class="ally-img-ring"></div>
+                    </div>
+                    <h3 class="ally-name">TEAM JXLL</h3>
+                    <p class="ally-desc">Digital Resistance Force</p>
+                    <div class="ally-tg">
+                        <span>☠ TELEGRAM ➜</span>
+                    </div>
+                    <div class="ally-bottom-line"></div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════
+         EXPOSED
+         ═══════════════════════════════ -->
+    <section id="exposed" class="section exposed">
+        <div class="section-wrap">
+            <div class="sec-header">
+                <span class="sec-num">003</span>
+                <h2 class="sec-title glitch-title" data-text="EXPUESTOS">
+                    EXPUESTOS
+                </h2>
+                <div class="sec-line"></div>
+                <p class="sec-desc">Entidades gubernamentales comprometidas</p>
+            </div>
+
+            <div class="exposed-terminal">
+                <div class="term-bar">
+                    <div class="term-dots">
+                        <span class="td red"></span>
+                        <span class="td yellow"></span>
+                        <span class="td green"></span>
+                    </div>
+                    <span class="term-title">exposed@ironatlas:~/targets#</span>
+                </div>
+                <div class="term-body">
+                    <p class="term-line tc">
+                        > cat /targets/compromised.db
+                    </p>
+                    <table class="exp-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>TARGET</th>
+                                <th>SECTOR</th>
+                                <th>STATUS</th>
+                                <th>DATA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="exp-row">
+                                <td class="exp-id">#0001</td>
+                                <td class="exp-name">██████████ GOV</td>
+                                <td>GOBIERNO</td>
+                                <td><span class="badge-red">☠ EXPOSED</span></td>
+                                <td class="exp-data">2.4 GB</td>
+                            </tr>
+                            <tr class="exp-row">
+                                <td class="exp-id">#0002</td>
+                                <td class="exp-name">████████ MINISTRY</td>
+                                <td>MINISTERIO</td>
+                                <td><span class="badge-yellow">⚠ PENDING</span></td>
+                                <td class="exp-data">890 MB</td>
+                            </tr>
+                            <tr class="exp-row">
+                                <td class="exp-id">#0003</td>
+                                <td class="exp-name">██████ POLICE</td>
+                                <td>POLICIA</td>
+                                <td><span class="badge-red">☠ EXPOSED</span></td>
+                                <td class="exp-data">5.1 GB</td>
+                            </tr>
+                            <tr class="exp-row">
+                                <td class="exp-id">#0004</td>
+                                <td class="exp-name">████████████ BANK</td>
+                                <td>FINANCIERO</td>
+                                <td><span class="badge-red">☠ EXPOSED</span></td>
+                                <td class="exp-data">12.7 GB</td>
+                            </tr>
+                            <tr class="exp-row">
+                                <td class="exp-id">#0005</td>
+                                <td class="exp-name">██████ INTEL</td>
+                                <td>INTELIGENCIA</td>
+                                <td><span class="badge-cyan">◉ IN PROGRESS</span></td>
+                                <td class="exp-data">??? GB</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="term-line" style="margin-top:15px">
+                        > Total records compromised:
+                        <span class="tr">1,247,891</span>
+                    </p>
+                    <p class="term-line">
+                        > Full data available on
+                        <a href="https://t.me/ironatlas_organization"
+                           target="_blank" class="tc">Telegram Channel</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════
+         TELEGRAM CTA
+         ═══════════════════════════════ -->
+    <section class="section cta-section">
+        <div class="cta-wrap">
+            <div class="cta-bg-skull">☠</div>
+            <div class="cta-content">
+                <h2 class="cta-title">UNETE A LA RESISTENCIA</h2>
+                <p class="cta-desc">
+                    La informacion es poder. El poder es del pueblo.
+                </p>
+                <a href="https://t.me/ironatlas_organization" target="_blank"
+                   rel="noopener noreferrer" class="btn-main btn-large">
+                    <span class="btn-bg"></span>
+                    <span class="btn-content">
+                        <span class="btn-icon">✈</span>
+                        @ironatlas_organization
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer>
+        <div class="footer-wrap">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <span class="brand-skull">☠</span>
+                    <span class="brand-name">IRON ATLAS</span>
+                    <p>Against corruption. For the people.</p>
+                </div>
+                <div class="footer-nav">
+                    <h4>NAVIGATION</h4>
+                    <a href="#home">Inicio</a>
+                    <a href="#manifesto">Manifiesto</a>
+                    <a href="#allies">Aliados</a>
+                    <a href="#exposed">Expuestos</a>
+                    <a href="forum.html">Foro</a>
+                </div>
+                <div class="footer-nav">
+                    <h4>CHANNELS</h4>
+                    <a href="https://t.me/ironatlas_organization"
+                       target="_blank">Telegram</a>
+                    <a href="https://t.me/nullsechackers"
+                       target="_blank">Nullsec PH</a>
+                    <a href="https://t.me/MyWebBackup"
+                       target="_blank">Hack Purgatory</a>
+                    <a href="https://t.me/zconchita"
+                       target="_blank">Team JXLL</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2025 IRON ATLAS ORGANIZATION</span>
+                <span class="footer-sys" id="footerSys">
+                    SYS:ACTIVE | NODE:7291
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/security.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

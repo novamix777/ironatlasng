@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRON ATLAS ☠ Forum</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- FIREBASE (free tier) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
+
+    <style>
+        .forum-page{padding:100px 2rem 60px;min-height:100vh;position:relative;z-index:5}
+        .forum-wrap{max-width:900px;margin:0 auto}
+        .forum-header{text-align:center;margin-bottom:3rem}
+        .forum-header h1{
+            font-family:var(--font-title);font-size:2rem;
+            letter-spacing:5px;color:var(--text);margin-bottom:.5rem;
+        }
+        .forum-header p{
+            font-family:var(--font-mono);font-size:.8rem;
+            color:var(--text-dim);letter-spacing:2px;
+        }
+
+        /* Post form */
+        .forum-post-form{
+            border:1px solid var(--border);background:var(--black3);
+            padding:1.5rem;margin-bottom:2rem;
+        }
+        .form-row{margin-bottom:1rem;display:flex;gap:1rem}
+        .form-input{
+            flex:1;padding:10px 15px;
+            background:var(--black);border:1px solid var(--border);
+            color:var(--text);font-family:var(--font-mono);font-size:.85rem;
+            outline:none;transition:border-color .3s;
+        }
+        .form-input:focus{border-color:var(--blood-bright)}
+        .form-input::placeholder{color:var(--text-dark)}
+        textarea.form-input{resize:vertical;min-height:80px}
+        .form-submit{
+            padding:10px 25px;background:var(--blood);
+            border:1px solid var(--blood-bright);color:#fff;
+            font-family:var(--font-title);font-size:.7rem;
+            letter-spacing:3px;cursor:pointer;transition:all .3s;
+        }
+        .form-submit:hover{
+            background:var(--blood-bright);
+            box-shadow:var(--glow-red);
+        }
+        .form-bottom{display:flex;justify-content:space-between;align-items:center}
+        .form-rules{font-family:var(--font-mono);font-size:.65rem;color:var(--text-dark)}
+
+        /* Messages */
+        .forum-messages{list-style:none}
+        .forum-msg{
+            border:1px solid var(--border);background:var(--black3);
+            padding:1.2rem 1.5rem;margin-bottom:1rem;
+            transition:border-color .3s;position:relative;
+        }
+        .forum-msg:hover{border-color:rgba(220,20,60,.2)}
+        .msg-header{
+            display:flex;justify-content:space-between;align-items:center;
+            margin-bottom:.8rem;
+        }
+        .msg-author{
+            font-family:var(--font-title);font-size:.75rem;
+            letter-spacing:2px;color:var(--blood-bright);
+        }
+        .msg-time{
+            font-family:var(--font-mono);font-size:.65rem;
+            color:var(--text-dark);
+        }
+        .msg-body{
+            font-size:.9rem;color:var(--text);line-height:1.6;
+            word-wrap:break-word;
+        }
+        .msg-delete{
+            position:absolute;top:10px;right:10px;
+            background:none;border:1px solid rgba(220,20,60,.2);
+            color:var(--blood);font-size:.6rem;
+            padding:3px 8px;cursor:pointer;
+            font-family:var(--font-mono);letter-spacing:1px;
+            transition:all .3s;display:none;
+        }
+        .msg-delete:hover{
+            background:rgba(220,20,60,.1);
+            border-color:var(--blood-bright);
+            color:var(--blood-bright);
+        }
+        .admin-mode .msg-delete{display:block}
+
+        /* Admin panel */
+        .admin-toggle{
+            position:fixed;bottom:20px;right:20px;z-index:200;
+            width:40px;height:40px;border-radius:50%;
+            background:var(--black3);border:1px solid var(--border);
+            color:var(--text-dark);font-size:1rem;cursor:pointer;
+            display:flex;align-items:center;justify-content:center;
+            transition:all .3s;
+        }
+        .admin-toggle:hover{border-color:var(--blood);color:var(--blood-bright)}
+        .admin-toggle.active{
+            border-color:var(--blood-bright);color:var(--blood-bright);
+            box-shadow:var(--glow-red);
+        }
+
+        .admin-modal{
+            display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+            background:rgba(0,0,0,.8);z-index:300;
+            align-items:center;justify-content:center;
+        }
+        .admin-modal.show{display:flex}
+        .admin-box{
+            background:var(--black3);border:1px solid var(--border);
+            padding:2rem;max-width:400px;width:90%;text-align:center;
+        }
+        .admin-box h3{
+            font-family:var(--font-title);font-size:.9rem;
+            letter-spacing:3px;margin-bottom:1.5rem;color:var(--text);
+        }
+        .admin-box .form-input{width:100%;margin-bottom:1rem}
+
+        .no-messages{
+            text-align:center;padding:3rem;
+            font-family:var(--font-mono);font-size:.85rem;
+            color:var(--text-dark);letter-spacing:2px;
+        }
+
+        /* Back link */
+        .back-link{
+            display:inline-flex;align-items:center;gap:8px;
+            font-family:var(--font-title);font-size:.7rem;
+            letter-spacing:2px;color:var(--text-dim);
+            margin-bottom:2rem;transition:color .3s;
+        }
+        .back-link:hover{color:var(--blood-bright)}
+    </style>
+</head>
+<body>
+
+    <canvas id="matrix"></canvas>
+    <div class="scanlines"></div>
+
+    <!-- NAV -->
+    <nav id="navbar" class="scrolled">
+        <div class="nav-wrap">
+            <a href="index.html" class="nav-brand">
+                <span class="brand-skull">☠</span>
+                <span class="brand-name">IRON ATLAS</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">INICIO</a>
+                <a href="index.html#allies" class="nav-link">ALIADOS</a>
+                <a href="index.html#exposed" class="nav-link">EXPUESTOS</a>
+                <a href="forum.html" class="nav-link active">FORO</a>
+                <a href="https://t.me/ironatlas_organization" target="_blank"
+                   rel="noopener noreferrer" class="nav-link nav-tg">✈ TELEGRAM</a>
+            </div>
+            <button class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="forum-page">
+        <div class="forum-wrap">
+            <a href="index.html" class="back-link">← VOLVER AL INICIO</a>
+
+            <div class="forum-header">
+                <h1>☠ FORO DE LA <span class="accent-red">RESISTENCIA</span></h1>
+                <p>> Comunidad contra la corrupcion gubernamental</p>
+            </div>
+
+            <!-- POST FORM -->
+            <div class="forum-post-form">
+                <div class="form-row">
+                    <input type="text" class="form-input" id="postAlias"
+                           placeholder="Alias (ej: An0nym0us)" maxlength="30">
+                </div>
+                <div class="form-row">
+                    <textarea class="form-input" id="postMessage"
+                              placeholder="Tu mensaje..." maxlength="1000"></textarea>
+                </div>
+                <div class="form-bottom">
+                    <span class="form-rules">
+                        ☠ Sin links externos | Max 1000 chars | Respeta la comunidad
+                    </span>
+                    <button class="form-submit" id="postSubmit">
+                        PUBLICAR ☠
+                    </button>
+                </div>
+            </div>
+
+            <!-- MESSAGES -->
+            <ul class="forum-messages" id="forumMessages">
+                <li class="no-messages">
+                    > Cargando mensajes...<span class="blink">_</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ADMIN TOGGLE -->
+    <button class="admin-toggle" id="adminToggle" title="Admin">⚙</button>
+
+    <!-- ADMIN MODAL -->
+    <div class="admin-modal" id="adminModal">
+        <div class="admin-box">
+            <h3>☠ ADMIN ACCESS</h3>
+            <input type="password" class="form-input" id="adminPass"
+                   placeholder="Admin password">
+            <div style="display:flex;gap:1rem;justify-content:center">
+                <button class="form-submit" id="adminLogin">ACCEDER</button>
+                <button class="form-submit" id="adminCancel"
+                        style="background:transparent;border-color:var(--border)">
+                    CANCELAR
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/security.js"></script>
+    <script src="js/forum.js"></script>
+
+    <script>
+    // Matrix rain (simplified for forum)
+    var mc=document.getElementById('matrix');
+    if(mc){
+        var mx=mc.getContext('2d');
+        mc.width=window.innerWidth;mc.height=window.innerHeight;
+        window.addEventListener('resize',function(){
+            mc.width=window.innerWidth;mc.height=window.innerHeight;
+        });
+        mc.style.opacity='0.04';
+        var chars='01☠⚡'.split(''),fs=14;
+        var cols=Math.floor(mc.width/fs);
+        var drops=[];for(var i=0;i<cols;i++)drops[i]=Math.random()*mc.height/fs;
+        function draw(){
+            mx.fillStyle='rgba(10,10,10,0.05)';
+            mx.fillRect(0,0,mc.width,mc.height);
+            mx.font=fs+'px monospace';
+            mx.fillStyle='rgba(139,0,0,0.5)';
+            for(var i=0;i<drops.length;i++){
+                mx.fillText(chars[Math.floor(Math.random()*chars.length)],i*fs,drops[i]*fs);
+                if(drops[i]*fs>mc.height&&Math.random()>.975)drops[i]=0;
+                drops[i]++;
+            }
+            requestAnimationFrame(draw);
+        }
+        draw();
+    }
+
+    // Hamburger
+    var ham=document.getElementById('hamburger');
+    var nl=document.getElementById('navLinks');
+    if(ham)ham.addEventListener('click',function(){nl.classList.toggle('open')});
+    </script>
+</body>
+</html>
