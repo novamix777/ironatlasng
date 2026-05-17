@@ -3,270 +3,509 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iron Atlas New Generation - Mantenimiento</title>
+    <title>CRITICAL_BREACH_INFO_HEXN</title>
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            background-color: #050608;
-            color: #ffffff;
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            overflow: hidden;
+            background-color: #020202;
+            color: #dcdcdc;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: hidden;
+            padding-bottom: 60px;
             position: relative;
         }
 
-        /* Fondo de matriz digital roja difuminada (Estilo ciberseguridad avanzada) */
+        /* Líneas de escaneo estilo Monitor CRT Antiguo */
         body::before {
-            content: "1001010 01101001 01110010 01101111 01101110 00100000 01100001 01110100 01101100 01100001 01110011 00100000 01101110 01100101 01110111 00100000 01100111 01100101 01101110 01110011";
-            position: absolute;
-            font-family: monospace;
-            font-size: 14px;
-            line-height: 18px;
-            color: rgba(255, 0, 0, 0.03);
-            top: -10%; left: -10%; width: 120%; height: 120%;
-            word-wrap: break-word;
-            transform: rotate(-15deg);
-            z-index: 1;
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 99999;
+            background-size: 100% 3px, 6px 100%;
             pointer-events: none;
         }
 
-        /* Capa de iluminación ambiental de servidores (Luces rojas en los laterales) */
-        body::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 10% 50%, rgba(255, 0, 0, 0.08), transparent 40%),
-                        radial-gradient(circle at 90% 50%, rgba(255, 0, 0, 0.05), transparent 40%);
-            z-index: 2;
+        /* Fondo Animado de Código */
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            opacity: 0.12;
             pointer-events: none;
         }
 
-        /* Contenedor Principal: Simula la placa de metal texturizada de la imagen */
-        .metal-panel {
+        /* Contenedor de Impacto */
+        .container {
+            max-width: 950px;
+            margin: 40px auto;
+            background: rgba(6, 4, 4, 0.95);
+            border: 3px solid #ff003c;
+            box-shadow: 0 0 35px rgba(255, 0, 60, 0.4), inset 0 0 20px rgba(255, 0, 0, 0.2);
+            padding: 35px;
+            border-radius: 2px;
             position: relative;
-            z-index: 3;
-            width: 90%;
-            max-width: 800px;
-            background: linear-gradient(135deg, #15181f 0%, #0e1014 100%);
-            border: 1px solid #262933;
-            border-radius: 16px;
-            padding: 4.5rem 2rem 3rem 2rem;
+        }
+
+        /* Cabecera Estilo Comando/Alerta */
+        .profile-header {
             text-align: center;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9),
-                        inset 0 1px 2px rgba(255, 255, 255, 0.1);
+            border-bottom: 3px double #ff003c;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
         }
 
-        /* Tornillos industriales realistas en las 4 esquinas */
-        .screw {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background: linear-gradient(135deg, #4b5266, #22252e);
-            border-radius: 50%;
-            border: 1px solid #13151a;
-            box-shadow: inset 0 1px 2px rgba(255,255,255,0.2), 0 2px 4px rgba(0,0,0,0.6);
-        }
-        .screw::before {
-            content: '';
-            position: absolute;
-            top: 5px; left: 2px; width: 8px; height: 1px;
-            background: #13151a;
-            transform: rotate(45deg);
-        }
-        .top-left { top: 20px; left: 20px; }
-        .top-right { top: 20px; right: 20px; }
-        .bottom-left { bottom: 20px; left: 20px; }
-        .bottom-right { bottom: 20px; right: 20px; }
-
-        /* Emblema Metálico de la Calavera */
-        .badge-center {
-            margin-bottom: 2.5rem;
-            display: inline-block;
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 0%; /* Cuadrado militarizado */
+            border: 2px solid #ff003c;
+            object-fit: cover;
+            margin-bottom: 20px;
+            box-shadow: 0 0 25px rgba(255, 0, 60, 0.6);
+            filter: grayscale(20%) contrast(120%);
         }
 
-        .metallic-circle {
-            width: 85px;
-            height: 85px;
-            background: linear-gradient(135deg, #282d3d 0%, #111319 100%);
-            border: 2px solid #3e4457;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.6), 
-                        inset 0 2px 4px rgba(255,255,255,0.1);
-        }
-
-        /* Texto con Brillo Neón Ultra-Potente */
         h1 {
-            font-size: 2.4rem;
-            font-weight: 900;
-            text-transform: uppercase;
+            font-size: 26px;
+            color: #ff003c;
+            text-shadow: 0 0 15px rgba(255, 0, 60, 0.8);
             letter-spacing: 2px;
-            color: #ff2a2a;
-            line-height: 1.25;
-            margin-bottom: 1.8rem;
-            text-shadow: 0 0 8px rgba(255, 42, 42, 0.7),
-                         0 0 20px rgba(255, 42, 42, 0.4),
-                         0 0 40px rgba(255, 42, 42, 0.2);
-            animation: neon-glow 3s infinite ease-in-out;
+            margin-bottom: 5px;
+            font-weight: 900;
         }
 
-        /* Divisor "BY" elegante */
-        .signature-line {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
+        /* Sección Macabra de Mofa */
+        .taunt-box {
+            background: rgba(255, 0, 60, 0.05);
+            border: 2px dashed #ff003c;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: inset 0 0 15px rgba(255, 0, 60, 0.1);
         }
 
-        .line {
-            width: 80px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #3e4457, transparent);
-        }
-
-        .by-text {
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 3px;
-            color: #565f78;
-            margin: 0 15px;
-        }
-
-        /* Firma de la Organización */
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 5px;
+        .taunt-title {
             color: #ffffff;
-            margin-bottom: 4.5rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-
-        /* Consolas de Monitoreo Inferiores */
-        .dashboard-status {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-            border-top: 1px solid #1f222b;
-            padding-top: 2.5rem;
-            text-align: left;
-            font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', monospace;
-        }
-
-        .card {
-            background: rgba(5, 6, 8, 0.5);
-            border-left: 3px solid #ff2a2a;
-            border-radius: 0 6px 6px 0;
-            padding: 1rem 1.2rem;
-            font-size: 0.8rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-
-        .card-tag {
-            color: #565f78;
+            font-size: 22px;
             font-weight: bold;
-            font-size: 0.7rem;
-            margin-bottom: 0.5rem;
-            letter-spacing: 1px;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px #ff003c;
+            animation: glitch 1.5s infinite;
+            margin-bottom: 15px;
         }
 
-        .card-main-text {
-            color: #d1d7e0;
-            margin-bottom: 0.3rem;
-            font-weight: 500;
+        .sticker-container {
+            display: inline-block;
+            margin: 10px 0;
+            border: 2px solid #ff003c;
+            background-color: #000;
+            padding: 5px;
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.3);
         }
 
-        .status-badge {
-            font-size: 0.75rem;
+        .sticker-video {
+            width: 160px;
+            height: 160px;
+            display: block;
+        }
+
+        /* Paneles de Datos Estilo Consola */
+        .section {
+            margin-bottom: 25px;
+            border: 1px solid #ff003c;
+            background: rgba(10, 5, 5, 0.9);
+            box-shadow: 3px 3px 0px #ff003c;
+        }
+
+        .section h3 {
+            background: #ff003c;
+            color: #000;
+            padding: 10px 15px;
+            font-size: 15px;
+            letter-spacing: 2px;
             font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
         }
 
-        .loading {
-            color: #ff2a2a;
-            animation: pulse-text 1.5s infinite;
+        .data-value {
+            display: block;
+            padding: 18px;
+            white-space: pre-wrap;
+            font-size: 13.5px;
+            line-height: 1.7;
+            color: #00ff66; /* Verde fósforo clásico de terminal hacker */
+            font-family: 'Courier New', Courier, monospace;
         }
 
-        .active {
-            color: #2a9d8f;
+        /* Modificadores de color específicos */
+        .reasons-box {
+            color: #ff3344 !important;
+            font-weight: bold;
+            font-size: 15px;
         }
 
-        /* Animaciones CSS avanzadas */
-        @keyframes neon-glow {
-            0%, 100% { text-shadow: 0 0 8px rgba(255,42,42,0.6), 0 0 15px rgba(255,42,42,0.3); }
-            50% { text-shadow: 0 0 15px rgba(255,42,42,0.9), 0 0 30px rgba(255,42,42,0.6), 0 0 50px rgba(255,42,42,0.3); }
+        .datacredito-box {
+            color: #ffcc00 !important; /* Dorado de alerta financiera */
         }
 
-        @keyframes pulse-text {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
+        /* Imágenes de Evidencia Integradas */
+        .evidence-img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ff003c;
+            margin-top: 15px;
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.4);
+            display: block;
         }
 
-        @media (max-width: 650px) {
-            h1 { font-size: 1.7rem; }
-            h2 { font-size: 1.1rem; letter-spacing: 3px; margin-bottom: 3rem; }
-            .metal-panel { padding: 3.5rem 1.5rem 2rem 1.5rem; }
-            .dashboard-status { gap: 1rem; }
+        .media-hidden {
+            display: none;
+        }
+
+        /* Animación de Glitch Efecto de Falla */
+        @keyframes glitch {
+            0% { text-shadow: 2px 2px #ff003c, -2px -2px #00ff66; }
+            25% { text-shadow: -2px 2px #ff003c, 2px -2px #00ff66; }
+            50% { text-shadow: 2px -2px #ff003c, -2px 2px #00ff66; }
+            75% { text-shadow: -1px -1px #ff003c, 1px 1px #00ff66; }
+            100% { text-shadow: 2px 2px #ff003c, -2px -2px #00ff66; }
         }
     </style>
 </head>
 <body>
 
-    <div class="metal-panel">
-        <div class="screw top-left"></div>
-        <div class="screw top-right"></div>
-        <div class="screw bottom-left"></div>
-        <div class="screw bottom-right"></div>
+<canvas id="matrix-bg"></canvas>
 
-        <div class="badge-center">
-            <div class="metallic-circle">
-                <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#d1d7e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 14h.01M15 14h.01"/>
-                    <path d="M6 12a6 6 0 0 1 12 0c0 3.5-2 5.5-4 6.5V21a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2.5C8 17.5 6 15 6 12z"/>
-                    <path d="M10 22v-3M14 22v-3"/>
-                    <path d="M8 17h8"/>
-                </svg>
-            </div>
-        </div>
+<audio class="media-hidden" id="bg-audio" autoplay loop controls>
+    <source src="https://files.catbox.moe/pt5mc6.mp3" type="audio/mpeg">
+</audio>
 
-        <h1>Se está haciendo una<br>actualización a la web</h1>
-        
-        <div class="signature-line">
-            <div class="line"></div>
-            <span class="by-text">BY</span>
-            <div class="line"></div>
-        </div>
-        
-        <h2>Iron Atlas New Generation</h2>
+<div class="container">
+    
+    <div class="profile-header">
+        <img src="https://i.postimg.cc/ZKmC8xvc/HENXX.jpg" alt="HEXN" class="profile-img">
+        <h1> 𝙃𝙀𝙓𝙉『𝕮𝖔𝖒𝖚𝖓𝖞𝖙𝕳』- 𝐏𝐀𝐁𝐋𝐎 𝐂𝐎𝐋 ⸸ [ 𝗘𝗫𝗢𝗗 ] ⸸ </h1>
+        <p style="color: #666; font-size: 11px; margin-top: 5px;">ESTAFADOR</p>
+    </div>
 
-        <div class="dashboard-status">
-            <div class="card">
-                <div class="card-tag">[ OPTIMIZACIÓN_DE_RED ]</div>
-                <div class="card-main-text">MIGRACIÓN DE BASE DE DATOS</div>
-                <div class="status-badge loading">ESTADO: EN CURSO...</div>
-            </div>
-            <div class="card">
-                <div class="card-tag">[ ECOSISTEMA_NATIVO ]</div>
-                <div class="card-main-text">COMPILACIÓN DE INTEGRACIONES</div>
-                <div class="status-badge loading">PROCESANDO_MÓDULOS</div>
-            </div>
-            <div class="card">
-                <div class="card-tag">[ SEGURIDAD_NUCLEO ]</div>
-                <div class="card-main-text">ESTABILIZACIÓN PERIMETRAL</div>
-                <div class="status-badge active">ESTADO: ONLINE</div>
-            </div>
+    <div class="taunt-box">
+        <div class="taunt-title">¿¿¿ TU CREES QUE LA TUMBASTE, HEXN ???</div>
+        <p style="color: #fff; font-size: 15px; margin-bottom: 15px; letter-spacing: 1px;">¡¡ NO HAS TUMBADO ABSOLUTAMENTE NADA !!</p>
+        <div class="sticker-container">
+            <video class="sticker-video" autoplay loop muted playsinline>
+                <source src="https://ltd-amaranth-ctgaoib1qa.edgeone.app/stiker.mp4" type="video/mp4">
+            </video>
         </div>
     </div>
+
+    <div class="section">
+        <h3>RAZONES DEL DOXEO / MOTIVOS</h3>
+        <span class="data-value reasons-box">- TRAICIÓN                        - ACOSO
+- ESTAFA                         - TOXICIDAD
+- ROBO                           - BURLA</span>
+    </div>
+
+    <div class="section">
+        <h3>INFORMACION PERSONAL GENERAL</h3>
+        <span class="data-value">Persona ID: 47045708 
+Tipo de documento: Cédula de ciudadanía
+Número de documento: 1032404606 
+Nombre completo: MIGUEL OSWALDO ORTIZ MARIN 
+Fecha de nacimiento: 06 de febrero de 1988 
+Edad: 38 años - Signo: Acuario
+Estatura: 169 cm 
+Fecha de expedición: 2006-02-06 (CUNDINAMARCA / BOGOTA DC)
+Sexo: Hombre 
+País de nacimiento: Colombia 
+Fallecido: No</span>
+    </div>
+
+    <div class="section">
+        <h3>REGISTROS DE LOCALIZACIÓN Y TRAZABILIDAD TELEFÓNICA</h3>
+        <span class="data-value">=== DIRECCIONES MAREADAS ===
+- CL 142 D 138 A 44 BRR SAN CARLOS DE SUBA (Registro RUT)
+- CL 142D 138A 44 SAN CARLOS DE TIBABUYES / Suba - BOGOTÁ (Registro Salud)
+- CL 17 F 123 21 Bogotá (Registro Sisbén)
+- DIAG 142 B NO 137 44 CESAR (Ubicación No Confirmada)
+
+=== CENTRAL DE LÍNEAS MÓVILES ===
+1. +57 3115939955 (Movistar / Base de Datos Salud)
+2. +57 3159676757 (Movistar - Prepago - Registrada bajo CC: 159676757)
+3. +57 3159674675 (Movistar - Vinculada a cuenta Nequi)
+4. +57 3164548301 (Base de Datos RUT)
+5. +57 3024549350 (Historial de créditos)
+6. +57 3125328684 (Contacto alterno)
+7. +57 3214542219 (Contacto alterno)
+8. +57 3132317813 (Asociada a Sisbén)
+
+=== CENTRAL DE LÍNEAS FIJAS ===
+1. 6041780 
+2. 6013347666
+3. 6014889883
+4. 6014134155
+5. 6013562523
+6. 6016900631
+
+=== CORREOS ELECTRÓNICOS ASOCIADOS ===
+- miguelomarin8@gmail.com (Correo Oficial de Seguridad Social)
+- hayhexn@gmail.com (Registrado en: GitHub, Disney+)
+- smman9098@gmail.com (Registrado en: GitHub, Pinterest, Spotify, Twitter, Discord, Amazon, Adobe, WordPress, Disney+, Duolingo)</span>
+    </div>
+
+    <div class="section">
+        <h3>ESTRUCTURA FAMILIAR REGISTRADA (SISBEN)</h3>
+        <span class="data-value">Ficha de Seguridad: 110016141347600013498 
+Clasificación Socioeconómica: C12
+Fecha de Levantamiento de Encuesta: 14/12/2024
+
+VÍNCULOS EN EL NÚCLEO:
+- CC: 1018499933 -> RICO ORTIZ NATALIA  
+- CC: 1032404606 -> ORTIZ MARIN MIGUEL OSWALDO (Titular)
+- RC: 1243761460 -> ORTIZ RICO EMMA VICTORIA</span>
+    </div>
+
+    <div class="section">
+        <h3>SEGURIDAD SOCIAL Y PREVISIÓN EXTRATÉGICA</h3>
+        <span class="data-value">Administradora de Salud (EPS): FAMISANAR S.A.S.
+Régimen: Contributivo (Tipo: COTIZANTE)
+Plan de Afiliación: POS CATEGORÍA A
+Fecha de Ingreso Inicial: 04/05/2005 | Estado actual: ACTIVO
+Centro de Atención Médica: IPS CENTRO MEDICO COLSUBSIDIO FONTIBON (Cód: 110010817117)
+
+Administradora de Pensiones: 
+Régimen: Ahorro Individual con Solidaridad
+Entidad: SOCIEDAD ADMINISTRADORA DE FONDOS DE PENSIONES Y CESANTIAS PORVENIR SA
+Fecha de Vinculación: 21/06/2006 | Estado actual: ACTIVO COTIZANTE</span>
+    </div>
+
+    <div class="section">
+        <h3>SISTEMA INTEGRAL DE TRÁNSITO (RUNT & VEHÍCULO)</h3>
+        <span class="data-value">=== ESPECIFICACIONES DEL VEHÍCULO ===
+PLACA REGISTRADA: DVB11E
+Número de Licencia de Tránsito: 10011396912
+Clase de Vehículo: MOTOCICLETA
+Marca / Línea: TVS APACHE RTR 180
+Modelo: 2016 | Cilindraje: 177 cc
+Tipo de Combustible: GASOLINA | Color: BLANCO
+Número de Motor: 0E6AG2136997
+Número de Chasis: MD634KE61G2A32539
+Fecha de Matrícula Inicial: 16/03/2016
+Organismo de Tránsito: STRIA TTEyMOV CUND/EL ROSAL
+
+Historial de Seguro Obligatorio (SOAT):
+Número de Póliza: 104382456
+Aseguradora: COMPAÑIA MUNDIAL DE SEGUROS S A
+Vigencia: 17/10/2023 al 17/10/2024 | Estado actual de cobertura: INACTIVA
+
+=== REGISTRO DEL CONDUCTOR ===
+Estado General RUNT: PERSONA ACTIVA | CONDUCTOR ACTIVO
+Número de Inscripción Única: 14160027 (Desde: 28/01/2014)
+Número de Certificado Paz y Salvo de Multas: 862431640069
+
+Licencias de Conducción Concedidas:
+1. Concesión 11529613 (08/04/2014) | Categoría: A2 | Organismo: CEA LOTTUS
+2. Concesión 15081910 (16/06/2017) | Categoría: C1 | Organismo: CEA AUDIMOVIL
+
+Historial de Solicitudes y Trámites:
+- Solicitud 240747555 (29/06/2024): TRÁMITE REFRENDACIÓN LICENCIA CONDUCCIÓN (SDM Bogotá) - AUTORIZADA
+- Solicitud 240642048 (28/06/2024): CERTIFICADO APTITUD FISICA MENTAL MOTRIZ (IPS Nuestro Bogotá) - APROBADA
+- Solicitud 160644823 (11/09/2021): TRÁMITE TRASPASO DE VEHÍCULO (Identificado: TWE18E - STra Soacha) - AUTORIZADA
+- Solicitud 114815806 (13/07/2018): TRÁMITE CERTIFICADO TRADICIÓN (Identificado: DVB11E - El Rosal) - AUTORIZADA
+
+=== EVIDENCIA FOTOGRÁFICA REGISTRADA ===</span>
+        <div style="padding: 0 18px 18px 18px; text-align: center;">
+            <img src="https://i.postimg.cc/W1QmGdqT/runt.jpg" alt="Evidencia RUNT" class="evidence-img">
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>————- HISTORIAL FINANCIERO AVANZADO (DATACREDITO) —————-</h3>
+        <span class="data-value datacredito-box">IDENTIFICACIÓN DEL TITULAR: ORTIZ MARIN MIGUEL OSWALDO
+C.C.: 000001032404606 - DOCUMENTO VIGENTE
+RUT Vinculado Oficialmente: SÍ (Nro. Identificación RUT: 141037177025)
+
+=== ACTIVIDADES ECONÓMICAS REPORTADAS ===
+1) ENTE REPORTANTE: BANCO FINANDINA S.A. - NIT: 860051894
+   Fecha del último corte de balance: 2022-12-31
+
+=== EVALUACIÓN DE RIESGO DE CARTERA ===
+PUNTAJE / SCORE CREDITICIO ACTUAL: 534 PUNTOS (PERFIL DE ALTO RIESGO)
+
+=== ANÁLISIS DE CUENTAS, CRÉDITOS Y COMPORTAMIENTO ===
+1) B. FALABELLA AHORROS FALABELLA MULTIP - [Apertura: 2017-12-07]
+   Codificación: 4310-AHO-8405 | Nro. Cuenta: 750008405 | ESTADO DEL PRODUCTO: INEMBARGABLE - 0 M/L
+2) BANCO BOGOTA CUENTA AHORRO 0036 CRA 10 - [Apertura: 2012-09-12]
+   Codificación: 4310-AHO-423424 | Nro. Cuenta: 36423424 | ESTADO DEL PRODUCTO: NORMAL - 0 M/L
+3) CUENTA NEQUI BANCA DIGITAL - [Apertura: 2020-09-21]
+   Codificación: 4310-AHO-969587 | Nro. Cuenta: 45969587 | ESTADO DEL PRODUCTO: NORMAL - 0 M/L
+4) DAVIPLATA DAVIPLATA APP - [Apertura: 2018-07-12]
+   Codificación: 4310-AHO-939955 | Nro. Cuenta: 115939955 | ESTADO DEL PRODUCTO: NORMAL - 0 M/L
+5) BANCO FINANDINA SUCURSAL VIRTUAL - [Apertura: 2019-08-06]
+   Codificación: 4320-AHO-102820 | Nro. Cuenta: 900102820 | ESTADO DEL PRODUCTO: SALDADA - 0 M/L
+6) BANCO FINANDINA SUCURSAL VIRTUAL - [Apertura: 2021-04-27]
+   Codificación: 4320-AHO-494755 | Nro. Cuenta: 900494755 | ESTADO DEL PRODUCTO: SALDADA - 0 M/L
+7) BANCO BOGOTA CUENTA AHORRO 000036 - [Apertura: 2006-07-31]
+   Codificación: 4320-AHO-349504 | Nro. Cuenta: 36349504 | ESTADO DEL PRODUCTO: SALDADA - 0 M/L
+8) BANCO BOGOTA TARJETA CRÉDITO 95 LAS AMERICAS - [Apertura: 2019-10-30]
+   Codificación: 4330-TDC-668372 | Cupo/Saldo: 1915 ML | ESTADO DEL PRODUCTO: VIGENTE
+9) BANCO BOGOTA TARJETA CRÉDITO NO INFORMO - [Apertura: 2007-10-01]
+   Codificación: 4350-TDC-45387 | ESTADO DEL PRODUCTO: NO REPORTADO - 0 M/L
+10) BANCO BOGOTA TARJETA CRÉDITO NO INFORMO - [Apertura: 2008-09-01]
+   Codificación: 4350-TDC-537654 | ESTADO DEL PRODUCTO: CUENTA VOLUNTARIA - 0 M/L
+11) BCO FINANDINA TARJETA CRÉDITO - [Apertura: 2019-12-03]
+   Codificación: 4350-TDC-956 | ESTADO DEL PRODUCTO: CUENTA VENDIDA (CVTA) - 0 ML
+12) FINANDINA CONSUMO NO INFORMO - [Apertura: 2019-08-08]
+   Codificación: 4350-CAB-154175 | Nro. Crédito: 900154175 | ESTADO DEL PRODUCTO: PAGO TOTAL - 0 M/L
+13) FINCOMERCIO NO INFORMO - [Apertura: 2012-11-29]
+   Codificación: 4350-CAC-29624 | Nro. Crédito: 29624 | ESTADO DEL PRODUCTO: PAGO TOTAL - 0 M/L
+14) FINCOMERCIO NO INFORMO - [Apertura: 2013-05-30]
+   Codificación: 4350-CAC-43477 | Nro. Crédito: 43477 | ESTADO DEL PRODUCTO: PAGO TOTAL - 0 M/L
+15) FINCOMERCIO NO INFORMO - [Apertura: 2013-12-06]
+   Codificación: 4350-CAC-212833 | Nro. Crédito: 1212833 | ESTADO DEL PRODUCTO: PAGO TOTAL - 0 M/L
+16) CARTERA ETB PRINCIPAL - [Apertura: 2024-04-06]
+   Codificación: 4360-CDC-290329 | Nro. Cuenta: 55290329 | ESTADO DEL PRODUCTO: NO REPORTADO - 0 ML
+17) CARTERA ETB PRINCIPAL - [Apertura: 2025-03-21]
+   Codificación: 4360-CDC-553691 | Nro. Cuenta: 55553691 | ESTADO DEL PRODUCTO: NO REPORTADO - 0 ML
+18) COLOMBIA MOVIL PRINCIPAL - [Apertura: 2025-09-11]
+   Codificación: 4360-CTC-940552 | Nro. Obligación: 70940552 | ESTADO DEL PRODUCTO: VIGENTE - 47 ML
+19) COLOMBIA TELEC MOVIL BOGOTA, D.C. - [Apertura: 2010-10-08]
+   Codificación: 4360-CTC-940462 | Nro. Obligación: 11940462 | ESTADO DEL PRODUCTO: VIGENTE - 0 ML
+20) ADM JCAPCFG COLPATRIA_CODENSA - [Apertura: 2013-01-08]
+   Codificación: 4370-SFI-404606 | Nro. Crédito: 32404606 | ESTADO DEL PRODUCTO: CASTIGADO - 8678 ML
+21) ADM JCAPCFG COLPATRIA_CODENSA - [Apertura: 2013-01-08]
+   Codificación: 4370-SFI-541292 | Nro. Crédito: 982541292 | ESTADO DEL PRODUCTO: CASTIGADO - 3630 ML
+22) INCOMERCIO SAS ORIG FINANDINA FUERZA MOVIL - [Apertura: 2022-04-02]
+   Codificación: 4370-COC-49564 | Nro. Crédito: 601049564 | ESTADO DEL PRODUCTO: CASTIGADO - 2073 ML
+23) INCOMERCIO SAS ORIG FINANDINA APP DIGITAL - [Apertura: 2020-01-28]
+   Codificación: 4370-COC-242552 | Nro. Crédito: 900242552 | ESTADO DEL PRODUCTO: CASTIGADO - 18000 ML
+24) WOM ORIG AVANTEL - [Apertura: 2018-01-26]
+   Codificación: 4380-CDC-404606 | Nro. Crédito: 32404606 | ESTADO DEL PRODUCTO: PAGO TOTAL - 0 ML
+25) SOLUCIONES COLOMBIA SEDE PRINCIPAL - [Apertura: 2024-04-30]
+   Codificación: 4380-COC-454935 | Nro. Crédito: 302454935 | ESTADO DEL PRODUCTO: PAGO TOTAL - 0 ML
+26) COMPENSAR RP COMPENSAR - [Apertura: 2019-07-25]
+   Codificación: 4380-CSA-66057 | Nro. Crédito: 60066057 | ESTADO DEL PRODUCTO: PAGO TOTAL - 0 ML
+27) COLOMBIA TELEC MOVIL NO INFORMO - [Apertura: 2007-12-05]
+   Codificación: 4380-CTC-703235 | Nro. Obligación: 4703235 | ESTADO DEL PRODUCTO: EN MORA - 0 M/L
+28) CLARO SERV MOV - [Apertura: 2020-03-10]
+   Codificación: 4380-CTC-658603 | Nro. Obligación: 32658603 | ESTADO DEL PRODUCTO: PAGO TOTAL - 0 ML
+29) CLARO SERV MOV - [Apertura: 2023-11-20]
+   Codificación: 4380-CTC-753684 | Nro. Obligación: 59753684 | ESTADO DEL PRODUCTO: PAGO TOTAL - 0 ML
+30) CLARO SERV MOV NO INFORMO - [Apertura: 2011-05-03]
+   Codificación: 4380-CTC-50721 | Nro. Obligación: 1050721 | ESTADO DEL PRODUCTO: PAGO TOTAL - 0 M/L
+31) CLARO SERV MOV NO INFORMO - [Apertura: 2013-11-06]
+   Codificación: 4380-CTC-587176 | Nro. Obligación: 4587176 | ESTADO DEL PRODUCTO: PAGO TOTAL - 0 M/L
+32) CLARO SERV MOV NO INFORMO - [Apertura: 2014-12-24]
+   Codificación: Registro Interno R-32 | ESTADO DEL PRODUCTO: PAGO TOTAL</span>
+    </div>
+
+    <div class="section">
+        <h3>CUENTAS ASOCIADAS & INFRAESTRUCTURA EN TELEGRAM</h3>
+        <span class="data-value">Tag Principal: @HEXXN_x 
+ID Ficticio Registrado: 8202859378 
+ID Interno de Telegram: 8404892062 
+Identidad Histórica del Perfil: @Coderebel_oficial
+
+Canales de Control Monitoreados:
+- https://t.me/+BWy-P1iHsXlkMzcx 
+- t.me/banwhtsApphexn 
+- https://t.me/referencias_hexn 
+- https://t.me/hexncol
+
+Pasarelas Financieras de Recaudo:
+- Línea Nequi Activa: 3159674675
+- Identificador Digital Nequi: @NEQUIMAR745036</span>
+    </div>
+
+    <div class="section">
+        <h3>AUDITORÍA EXTRATÉGICA EN FUENTES ABIERTAS (OSINT)</h3>
+        <span class="data-value">REPOSITORIOS GITHUB VINCULADOS:
+- https://github.com/Fuentdesconocida 
+- https://github.com/HEXNCOLOMBIA/
+
+HISTORIAL DE PLATAFORMAS EN LÍNEA:
+- Academia.edu -> Vinculado bajo el alias: Sm233 
+- Wix CMS -> ID Único de Cuenta: 327412b7-ccaa-467b-bd19-7bb8b6f91351
+- Sololearn -> ID de Alumno: 34009940 | Nombre: Marin Ortiz | Perfil: https://www.sololearn.com/en/profile/34009940 
+- Plex Server -> ID: bb4261a93342ef60 | Username: sm233ma | Perfil: https://app.plex.tv/desktop/#!/u/sm233ma
+- AliExpress -> Username: Sm233Mañ | Nivel de Comprador: A1 (Básico)
+- PayPal Engine -> Nombre de Cuenta: Miguel Ortiz | ID de Usuario: tap82838
+
+MONITOREO DE SERVICIOS MICROSOFT (ONEDRIVE):
+- Cuenta de Almacenamiento creada el: 14 de febrero de 2024
+- Última actualización de metadatos detectada: 11 de abril de 2025
+- Alias falso configurado en la cuenta: "kalet joses"
+
+MONITOREO DE CUENTA GOOGLE & MAPS INTERACTIVO:
+- ID General de Google User: 102977041759889271609 | Nombre: Marin Ortiz
+- Enlace Histórico Web Archive: https://web.archive.org/web/*/plus.google.com/102977041759889271609*
+- Perfil Abierto de Reseñas: https://www.google.com/maps/contrib/102977041759889271609/reviews 
+- Geolocalización de Actividad Comercial: Hotel Cabañas Tolú (Coordenadas exactas: 9.5276337, -75.582536)
+  * Reseña Comentada: "Excelente hotel con servicio impecable. Las habitaciones son amplias, cómodas y muy limpias..."</span>
+    </div>
+
+</div>
+
+<script>
+    // Motor de Lluvia Digital en Rojo Carmesí (Matrix Terminal Theme)
+    const canvas = document.getElementById('matrix-bg');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const chars = '0123456789SYSTEM_ERROR_UNAUTHORIZED_ACCESS_BREACH_CC_1032404606_';
+    const charArray = chars.split('');
+
+    const fontSize = 12;
+    const columns = canvas.width / fontSize;
+
+    const drops = [];
+    for (let x = 0; x < columns; x++) {
+        drops[x] = window.innerHeight; 
+    }
+
+    function draw() {
+        ctx.fillStyle = 'rgba(2, 2, 2, 0.06)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = '#ff003c'; // Tono Rojo Glitch
+        ctx.font = 'bold ' + fontSize + 'px monospace';
+
+        for (let i = 0; i < drops.length; i++) {
+            const text = charArray[Math.floor(Math.random() * charArray.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.98) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+    }
+
+    setInterval(draw, 33);
+
+    window.addEventListener('click', () => {
+        const audio = document.getElementById('bg-audio');
+        if (audio.paused) {
+            audio.play().catch(e => console.log("Audio delayed until interaction"));
+        }
+    }, { once: true });
+</script>
 
 </body>
 </html>
