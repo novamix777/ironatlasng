@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actualización en Curso - Iron Atlas</title>
+    <title>Iron Atlas New Generation - Mantenimiento</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,88 +12,261 @@
         }
 
         body {
-            background-color: #0b0c10;
+            background-color: #050608;
             color: #ffffff;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow: hidden;
             position: relative;
         }
 
-        /* Fondo con ambiente de servidor / líneas de datos sutiles */
+        /* Fondo de matriz digital roja difuminada (Estilo ciberseguridad avanzada) */
         body::before {
+            content: "1001010 01101001 01110010 01101111 01101110 00100000 01100001 01110100 01101100 01100001 01110011 00100000 01101110 01100101 01110111 00100000 01100111 01100101 01101110 01110011";
+            position: absolute;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 18px;
+            color: rgba(255, 0, 0, 0.03);
+            top: -10%; left: -10%; width: 120%; height: 120%;
+            word-wrap: break-word;
+            transform: rotate(-15deg);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Capa de iluminación ambiental de servidores (Luces rojas en los laterales) */
+        body::after {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 18, 24, 0.85), rgba(11, 12, 16, 0.95)),
-                        radial-gradient(circle at 80% 20%, rgba(255, 0, 0, 0.05), transparent 40%);
-            z-index: 1;
-        }
-
-        .main-panel {
-            position: relative;
+            background: radial-gradient(circle at 10% 50%, rgba(255, 0, 0, 0.08), transparent 40%),
+                        radial-gradient(circle at 90% 50%, rgba(255, 0, 0, 0.05), transparent 40%);
             z-index: 2;
-            width: 100%;
-            max-width: 850px;
-            background: linear-gradient(145deg, #16181f, #111217);
-            border: 2px solid #222530;
-            border-radius: 12px;
-            padding: 4rem 2rem 2.5rem 2rem;
-            text-align: center;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 
-                        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            pointer-events: none;
         }
 
-        /* Decoración de tornillos industriales en las esquinas */
-        .main-panel::before, .main-panel::after {
+        /* Contenedor Principal: Simula la placa de metal texturizada de la imagen */
+        .metal-panel {
+            position: relative;
+            z-index: 3;
+            width: 90%;
+            max-width: 800px;
+            background: linear-gradient(135deg, #15181f 0%, #0e1014 100%);
+            border: 1px solid #262933;
+            border-radius: 16px;
+            padding: 4.5rem 2rem 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9),
+                        inset 0 1px 2px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Tornillos industriales realistas en las 4 esquinas */
+        .screw {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: linear-gradient(135deg, #4b5266, #22252e);
+            border-radius: 50%;
+            border: 1px solid #13151a;
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.2), 0 2px 4px rgba(0,0,0,0.6);
+        }
+        .screw::before {
             content: '';
             position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #3a3f50;
-            border-radius: 50%;
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.8);
+            top: 5px; left: 2px; width: 8px; height: 1px;
+            background: #13151a;
+            transform: rotate(45deg);
         }
-        .main-panel::before { top: 15px; left: 15px; }
-        .main-panel::after { top: 15px; right: 15px; }
+        .top-left { top: 20px; left: 20px; }
+        .top-right { top: 20px; right: 20px; }
+        .bottom-left { bottom: 20px; left: 20px; }
+        .bottom-right { bottom: 20px; right: 20px; }
 
-        /* Icono de Calavera Estilizada en Metal */
-        .logo-container {
+        /* Emblema Metálico de la Calavera */
+        .badge-center {
             margin-bottom: 2.5rem;
+            display: inline-block;
         }
 
-        .skull-icon {
-            width: 70px;
-            height: 70px;
-            background: radial-gradient(circle, #2d313f 0%, #171921 100%);
-            border: 2px solid #4a5166;
+        .metallic-circle {
+            width: 85px;
+            height: 85px;
+            background: linear-gradient(135deg, #282d3d 0%, #111319 100%);
+            border: 2px solid #3e4457;
             border-radius: 50%;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6), 
+                        inset 0 2px 4px rgba(255,255,255,0.1);
         }
 
-        /* Texto Principal - Neón Rojo Potente */
+        /* Texto con Brillo Neón Ultra-Potente */
         h1 {
-            font-size: 2.3rem;
-            font-weight: 800;
+            font-size: 2.4rem;
+            font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #ff3333;
-            text-shadow: 0 0 10px rgba(255, 51, 51, 0.6),
-                         0 0 25px rgba(255, 51, 51, 0.4),
-                         0 0 50px rgba(255, 51, 51, 0.2);
-            line-height: 1.3;
-            margin-bottom: 1.5rem;
-            animation: pulse-glow 2.5s infinite ease-in-out;
+            letter-spacing: 2px;
+            color: #ff2a2a;
+            line-height: 1.25;
+            margin-bottom: 1.8rem;
+            text-shadow: 0 0 8px rgba(255, 42, 42, 0.7),
+                         0 0 20px rgba(255, 42, 42, 0.4),
+                         0 0 40px rgba(255, 42, 42, 0.2);
+            animation: neon-glow 3s infinite ease-in-out;
         }
 
-        .divider {
-            width: 120px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #4a5166, transparent);
-            margin: 0 auto 1.5rem auto
+        /* Divisor "BY" elegante */
+        .signature-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .line {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #3e4457, transparent);
+        }
+
+        .by-text {
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: #565f78;
+            margin: 0 15px;
+        }
+
+        /* Firma de la Organización */
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: #ffffff;
+            margin-bottom: 4.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Consolas de Monitoreo Inferiores */
+        .dashboard-status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            border-top: 1px solid #1f222b;
+            padding-top: 2.5rem;
+            text-align: left;
+            font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', monospace;
+        }
+
+        .card {
+            background: rgba(5, 6, 8, 0.5);
+            border-left: 3px solid #ff2a2a;
+            border-radius: 0 6px 6px 0;
+            padding: 1rem 1.2rem;
+            font-size: 0.8rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .card-tag {
+            color: #565f78;
+            font-weight: bold;
+            font-size: 0.7rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .card-main-text {
+            color: #d1d7e0;
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+        }
+
+        .status-badge {
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .loading {
+            color: #ff2a2a;
+            animation: pulse-text 1.5s infinite;
+        }
+
+        .active {
+            color: #2a9d8f;
+        }
+
+        /* Animaciones CSS avanzadas */
+        @keyframes neon-glow {
+            0%, 100% { text-shadow: 0 0 8px rgba(255,42,42,0.6), 0 0 15px rgba(255,42,42,0.3); }
+            50% { text-shadow: 0 0 15px rgba(255,42,42,0.9), 0 0 30px rgba(255,42,42,0.6), 0 0 50px rgba(255,42,42,0.3); }
+        }
+
+        @keyframes pulse-text {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        @media (max-width: 650px) {
+            h1 { font-size: 1.7rem; }
+            h2 { font-size: 1.1rem; letter-spacing: 3px; margin-bottom: 3rem; }
+            .metal-panel { padding: 3.5rem 1.5rem 2rem 1.5rem; }
+            .dashboard-status { gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="metal-panel">
+        <div class="screw top-left"></div>
+        <div class="screw top-right"></div>
+        <div class="screw bottom-left"></div>
+        <div class="screw bottom-right"></div>
+
+        <div class="badge-center">
+            <div class="metallic-circle">
+                <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#d1d7e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 14h.01M15 14h.01"/>
+                    <path d="M6 12a6 6 0 0 1 12 0c0 3.5-2 5.5-4 6.5V21a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2.5C8 17.5 6 15 6 12z"/>
+                    <path d="M10 22v-3M14 22v-3"/>
+                    <path d="M8 17h8"/>
+                </svg>
+            </div>
+        </div>
+
+        <h1>Se está haciendo una<br>actualización a la web</h1>
+        
+        <div class="signature-line">
+            <div class="line"></div>
+            <span class="by-text">BY</span>
+            <div class="line"></div>
+        </div>
+        
+        <h2>Iron Atlas New Generation</h2>
+
+        <div class="dashboard-status">
+            <div class="card">
+                <div class="card-tag">[ OPTIMIZACIÓN_DE_RED ]</div>
+                <div class="card-main-text">MIGRACIÓN DE BASE DE DATOS</div>
+                <div class="status-badge loading">ESTADO: EN CURSO...</div>
+            </div>
+            <div class="card">
+                <div class="card-tag">[ ECOSISTEMA_NATIVO ]</div>
+                <div class="card-main-text">COMPILACIÓN DE INTEGRACIONES</div>
+                <div class="status-badge loading">PROCESANDO_MÓDULOS</div>
+            </div>
+            <div class="card">
+                <div class="card-tag">[ SEGURIDAD_NUCLEO ]</div>
+                <div class="card-main-text">ESTABILIZACIÓN PERIMETRAL</div>
+                <div class="status-badge active">ESTADO: ONLINE</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
