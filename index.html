@@ -3,545 +3,762 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HENXX Payaso</title>
+    <title>IRON ATLAS NEW GENERATION</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --bg-dark: #030000;
+            --neon-red: #ff003c;
+            --neon-dark-red: #990024;
+            --text-light: #ffd6e0;
+            --text-muted: #a08a90;
+        }
+
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
         body {
-            background-color: #05060b;
-            color: #e2e8f0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: #ffffff;
             overflow-x: hidden;
-            padding-bottom: 60px;
+            min-height: 100vh;
         }
 
-        #bg-video {
+        #bg-canvas {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -2;
-            opacity: 0.15;
-            filter: saturate(1.5) blur(2px);
-        }
-
-        .ambient-glow {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 10%, rgba(0, 242, 254, 0.05) 0%, rgba(244, 63, 94, 0.02) 50%, #05060b 100%);
-            z-index: -1;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
             pointer-events: none;
         }
 
-        .container {
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background: rgba(3, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 0, 60, 0.3);
+            box-shadow: 0 4px 30px rgba(255, 0, 60, 0.1);
+            z-index: 100;
         }
 
-        .panel {
-            background: rgba(13, 17, 30, 0.7);
-            border: 1px solid rgba(0, 242, 254, 0.15);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 24px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            animation: fadeInUp 0.8s ease forwards;
-            opacity: 0;
-            transform: translateY(20px);
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
         }
 
-        .panel:hover {
-            border-color: rgba(0, 242, 254, 0.3);
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.1);
+        .nav-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px var(--neon-red);
         }
 
-        .header-panel {
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-link {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--neon-red);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 8px var(--neon-red);
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+            text-shadow: 0 0 15px var(--neon-red);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 30px;
+            height: 3px;
+            background: var(--neon-red);
+            border-radius: 2px;
+            box-shadow: 0 0 5px var(--neon-red);
+        }
+
+        .main-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12rem 2rem 5rem 2rem;
+        }
+
+        .hero-section {
             text-align: center;
-            padding: 40px 20px;
-            border-bottom: 2px solid rgba(0, 242, 254, 0.2);
+            margin-bottom: 6rem;
+            animation: fadeIn 2s ease-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .hero-logo {
+            width: 280px;
+            height: auto;
+            margin-bottom: 2.5rem;
+            filter: drop-shadow(0 0 30px var(--neon-red));
+            animation: pulseLogo 4s infinite alternate;
+        }
+
+        @keyframes pulseLogo {
+            0% { transform: scale(1); filter: drop-shadow(0 0 20px var(--neon-red)); }
+            100% { transform: scale(1.05); filter: drop-shadow(0 0 45px var(--neon-red)); }
+        }
+
+        .hero-section h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 0, 60, 0.5), 0 0 40px rgba(255, 0, 60, 0.4), 0 0 90px var(--neon-red);
+            margin-bottom: 2rem;
+        }
+
+        .hero-quote {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            color: var(--text-light);
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.6;
+            font-style: italic;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 10px rgba(255, 0, 60, 0.4);
+            border-left: 4px solid var(--neon-red);
+            border-right: 4px solid var(--neon-red);
+            padding: 0 2rem;
+        }
+
+        .about-box {
+            background: rgba(15, 0, 5, 0.7);
+            border: 1px solid rgba(255, 0, 60, 0.3);
+            border-radius: 12px;
+            padding: 3rem;
+            max-width: 1000px;
+            width: 100%;
+            margin-bottom: 8rem;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 15px 40px rgba(255, 0, 60, 0.15), inset 0 0 20px rgba(255, 0, 60, 0.05);
+            text-align: center;
+        }
+
+        .about-box h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px var(--neon-red);
+        }
+
+        .about-box p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        .grid-container {
+            width: 100%;
+            max-width: 1400px;
+            margin-bottom: 7rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 5px;
+            margin-bottom: 3.5rem;
+            text-transform: uppercase;
+            text-align: center;
+            color: #ffffff;
+            text-shadow: 0 0 20px var(--neon-red);
+            border-bottom: 2px solid rgba(255, 0, 60, 0.3);
+            padding-bottom: 1rem;
+            width: fit-content;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            width: 100%;
+        }
+
+        .card {
+            background: rgba(15, 0, 5, 0.6);
+            border: 1px solid rgba(255, 0, 60, 0.2);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1.5rem;
+            text-decoration: none;
+            color: #ffffff;
+            backdrop-filter: blur(10px);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
         }
 
-        .avatar-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 16px;
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 60, 0.1), transparent);
+            transition: 0.6s;
         }
 
-        .profile-img {
-            width: 120px;
-            height: 120px;
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            border-color: var(--neon-red);
+            box-shadow: 0 20px 50px rgba(255, 0, 60, 0.25), inset 0 0 30px rgba(255, 0, 60, 0.15);
+            transform: translateY(-10px);
+        }
+
+        .card-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .card-img, .member-avatar {
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
-            border: 2px solid #00f2fe;
             object-fit: cover;
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
-        }
-
-        h1 {
-            font-size: clamp(20px, 4vw, 28px);
-            color: #ffffff;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-        }
-
-        .neon-accent {
-            color: #00f2fe;
-            text-shadow: 0 0 12px rgba(0, 242, 254, 0.6);
-        }
-
-        .counter-box {
-            display: inline-flex;
+            border: 3px solid rgba(255, 0, 60, 0.5);
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.3);
+            transition: all 0.5s;
+            display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 242, 254, 0.05);
-            border: 1px solid rgba(0, 242, 254, 0.3);
-            padding: 10px 20px;
-            border-radius: 30px;
-            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--neon-red);
+            background: rgba(255, 0, 60, 0.05);
+            z-index: 2;
         }
 
-        .counter-label {
-            font-size: 11px;
+        .leader-avatar {
+            width: 180px;
+            height: 180px;
+            border: 4px solid var(--neon-red);
+            box-shadow: 0 0 30px rgba(255, 0, 60, 0.5);
+        }
+
+        .card:hover .card-img, .card:hover .member-avatar {
+            transform: scale(1.1);
+            border-color: #fff;
+            box-shadow: 0 0 35px var(--neon-red);
+            color: #fff;
+            background: rgba(255, 0, 60, 0.2);
+        }
+
+        .card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .card-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+        }
+
+        .card:hover .card-name {
+            color: #ffffff;
+            text-shadow: 0 0 15px var(--neon-red);
+        }
+
+        .card-role {
+            font-size: 1.1rem;
+            color: var(--neon-red);
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: #94a3b8;
-            margin-right: 10px;
-        }
-
-        .counter-value {
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: bold;
-            color: #00f2fe;
-            font-size: 16px;
-            text-shadow: 0 0 8px rgba(0, 242, 254, 0.5);
-        }
-
-        .mock-box {
-            border: 1px solid rgba(244, 63, 94, 0.3);
-            background: rgba(244, 63, 94, 0.03);
-            text-align: center;
-        }
-
-        .mock-title {
-            color: #f43f5e;
-            font-size: clamp(16px, 3vw, 20px);
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(244, 63, 94, 0.3);
         }
 
-        .image-wrapper {
-            max-width: 400px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .evidence-img {
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-            border: 1px solid rgba(244, 63, 94, 0.2);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .grid-layout {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-        }
-
-        .panel-title {
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #00f2fe;
-            border-bottom: 1px solid rgba(0, 242, 254, 0.15);
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-            text-shadow: 0 0 8px rgba(0, 242, 254, 0.2);
-        }
-
-        .raw-data {
-            white-space: pre-wrap;
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 12.5px;
+        .card-desc {
+            font-size: 1.1rem;
+            color: var(--text-muted);
             line-height: 1.7;
-            color: #cbd5e1;
-            overflow-x: auto;
+            padding: 0 1rem;
         }
 
-        .highlight-red { color: #f43f5e; font-weight: bold; }
-        .highlight-yellow { color: #fbbf24; }
-        .highlight-green { color: #10b981; }
-
-        .media-hidden {
-            display: none;
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1rem;
         }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
+        .badge {
+            background: rgba(255, 0, 60, 0.1);
+            border: 1px solid rgba(255, 0, 60, 0.4);
+            color: var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .card:hover .badge {
+            border-color: var(--neon-red);
+            background: rgba(255, 0, 60, 0.2);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
+        }
+
+        .leader-card {
+            max-width: 900px;
+            width: 100%;
+            border-color: rgba(255, 0, 60, 0.6);
+            box-shadow: 0 0 30px rgba(255, 0, 60, 0.2);
+            transform: scale(1.02);
+            padding: 4rem 2rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: rgba(3, 0, 0, 0.98);
+                padding: 2rem 0;
+                text-align: center;
+                border-bottom: 1px solid var(--neon-red);
             }
-        }
-
-        .panel:nth-child(1) { animation-delay: 0.1s; }
-        .panel:nth-child(2) { animation-delay: 0.2s; }
-        .panel:nth-child(3) { animation-delay: 0.3s; }
-
-        @media (max-width: 768px) {
-            .container { padding: 12px; }
-            .panel { padding: 16px; margin-bottom: 16px; }
-            .grid-layout { grid-template-columns: 1fr; gap: 16px; }
+            .nav-links.active {
+                display: flex;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .hero-quote {
+                border: none;
+                padding: 0;
+            }
+            .data-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
-<video id="bg-video" autoplay loop muted playsinline>
-    <source src="https://ltd-amaranth-ctgaoib1qa.edgeone.app/stiker.mp4" type="video/mp4">
-</video>
+    <canvas id="bg-canvas"></canvas>
 
-<div class="ambient-glow"></div>
-
-<audio class="media-hidden" id="ambient-audio" autoplay loop controls>
-    <source src="https://files.catbox.moe/pt5mc6.mp3" type="audio/mpeg">
-</audio>
-
-<div class="container">
-
-    <div class="panel header-panel">
-        <div class="avatar-container">
-            <img src="https://i.postimg.cc/ZKmC8xvc/HENXX.jpg" alt="HEXN" class="profile-img">
+    <nav class="top-nav">
+        <a href="/" class="nav-brand">
+            <span class="nav-title">IRON ATLAS NG</span>
+        </a>
+        <div class="hamburger" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-        <h1><span class="neon-accent">𝐏𝐀𝐁𝐋𝐎 𝐂𝐎𝐋 ⸸ [ 𝗘𝗫𝗢𝗗 ] ⸸</span> - 𝙃𝙀𝙓𝙉『𝕮𝖔𝖒𝖚𝖓𝖞𝖙𝕳』</h1>
-        <div class="counter-box">
-            <span class="counter-label">VISITEAS EN LA WEB</span>
-            <span class="counter-value" id="visit-counter">000000</span>
+        <div class="nav-links" id="nav-links">
+            <a href="/tools/index.html" class="nav-link">Herramientas</a>
+            <a href="/expuestos/expedientes.html" class="nav-link">Expedientes</a>
+            <a href="/canales.html" class="nav-link">Canales</a>
+            <a href="/redes.html" class="nav-link">Redes Sociales</a>
         </div>
-    </div>
+    </nav>
 
-    <div class="panel mock-box">
-        <h2 class="mock-title">hexx tu creees que la tumbaste ???</h2>
-        <div class="image-wrapper">
-            <img src="https://i.postimg.cc/sD53j8Pb/HIf-F6gu-W0AAQxq.jpg" alt="System State" class="evidence-img">
-        </div>
-    </div>
+    <main class="main-content">
+        <section class="hero-section">
+            <img src="/assets/iron.png" alt="IRON ATLAS" class="hero-logo" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBkPSJNMzAgMjBMMzAgODBMNzAgNTBaIiBmaWxsPSIjZmYwMDNjIi8+PC9zdmc+'">
+            <h1>Iron Atlas</h1>
 
-    <div class="grid-layout">
-        <div class="panel">
-            <h3 class="panel-title">Razones del Doxeo</h3>
-            <pre class="raw-data highlight-red">- TRAICIÓN                        - ACOSO
-- ESTAFA                         - TOXICIDAD
-- ROBO                           - BURLA</pre>
+            <p class="hero-quote">"El sistema clasifica, oculta y controla. Nosotros extraemos, exponemos y reescribimos las reglas."</p>
+        </section>
+
+        <div class="about-box">
+            <h3>¿Qué somos?</h3>
+            <p>Somos el eco que rompe el silencio gubernamental, la sombra que digitaliza sus mentiras y las expone al mundo, hackers con una sola causa: desmantelar la corrupción del poder y las fuerzas armadas que la protegen, porque la verdad no pide permiso para ser libre.</p>
         </div>
 
-        <div class="panel">
-            <h3 class="panel-title">Información Personal</h3>
-            <pre class="raw-data">Persona ID: 47045708 
-Tipo de documento: Cédula de ciudadanía
-Número de documento: 1032404606 
-Nombre completo: MIGUEL OSWALDO ORTIZ MARIN 
-Fecha de nacimiento: 06 de febrero de 1988 
-Edad: 38 años - Signo: Acuario
-Estatura: 169 cm 
-Fecha de expedición: 2006-02-06
-Sexo: Hombre 
-País de nacimiento: Colombia 
-Régimen de afiliación: Contributivo 
-Aseguradora (EPS): FAMISANAR E.P.S. LTDA - CAFAM - COLSUBSIDIO
-País de residencia: Colombia 
-Departamento de residencia: Bogotá, D.C. 
-Municipio de residencia: Bogotá, D.C. 
-Dirección: DIAG 142 B NO 137 44 CESAR (No confirmada) 
-Padre: MIGUEL 
-Madre: ORTENCIA 
-RH: 1 
-Fallecido: No</pre>
-        </div>
-    </div>
+        <section class="grid-container">
+            <h2 class="section-title">Aliados</h2>
+            <div class="data-grid">
+                <a href="https://t.me/nullsechackers" class="card" target="_blank">
+                    <div class="card-header">
+                        <img src="https://i.postimg.cc/mPCTw51J/nullsec.jpg" class="card-img" alt="Nullsec">
+                        <div class="card-info">
+                            <span class="card-name">Nullsec Philippines</span>
+                            <span class="card-role">Exploits</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Filtración de Leaks, DDos y muchas otras más.</p>
+                    <div class="badge-container">
+                        <span class="badge">DDoS</span>
+                        <span class="badge">LEAKERS</span>
+                    </div>
+                </a>
+                <a href="https://hackpurgatory.org/" class="card" target="_blank">
+                    <div class="card-header">
+                        <img src="https://files.catbox.moe/iwurbn.jpg" class="card-img" alt="Hack Purgatory">
+                        <div class="card-info">
+                            <span class="card-name">𝐇𝐀𝐂𝐊 [𝐏𝐔𝐑𝐆𝐀𝐓𝐎𝐑𝐘]™</span>
+                            <span class="card-role">Sindicato</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">luchar contra las organizaciones ilegales dentro de ellas que promueven actos ilegales, ventas ilegales, contenido inapropiado, toxicidad y más.</p>
+                    <div class="badge-container">
+                        <span class="badge">Limpieza</span>
+                        <span class="badge">Hacking</span>
+                    </div>
+                </a>
+                <a href="https://www.jxll.org/" class="card" target="_blank">
+                    <div class="card-header">
+                        <img src="https://i.postimg.cc/3yq9xnnX/teamjxll.jpg" class="card-img" alt="Team JXLL">
+                        <div class="card-info">
+                            <span class="card-name">𝐓𝐄𝐀𝐌 𝐉𝐗𝐋𝐋</span>
+                            <span class="card-role">Hacking</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Enfocado en HACKING, Análisis de vulnerabilidadesentre otras más.</p>
+                    <div class="badge-container">
+                        <span class="badge">seguridad Ofensiva</span>
+                        <span class="badge">Red Team</span>
+                    </div>
+                </a>
+            </div>
+        </section>
 
-    <div class="grid-layout">
-        <div class="panel">
-            <h3 class="panel-title">Registro Único Tributario (RUT)</h3>
-            <pre class="raw-data"># RUT: 141037177025
-Cedula: 1032404606
-Nombre: ORTIZ MARIN MIGUEL OSWALDO
-Dirección: CL 142 D   138 A   44 BRR SAN CARLOS DE SUBA
-Celular: 3164548301</pre>
-        </div>
+        <section class="grid-container">
+            <h2 class="section-title">Líder</h2>
+            <a href="#" class="card leader-card">
+                <div class="card-header">
+                    <img src="https://i.postimg.cc/MGtF0bFV/import.jpg" class="member-avatar leader-avatar" alt="Líder">
+                    <div class="card-info">
+                        <span class="card-name"> 𝙄𝙈𝙋𝙊𝙍𝙏 𝙍𝙀𝙎𝙌𝙐𝙀𝙎𝙏</span>
+                        <span class="card-role">@import_404</span>
+                    </div>
+                </div>
+                <p class="card-desc">Enfocado en la búsqueda y explotación de Vulnerabilidades , dessarrollo de apis y automatizaciones.</p>
+                <div class="badge-container">
+                    <span class="badge">Programación</span>
+                    <span class="badge">Osint</span>
+                    <span class="badge">Cybersecurity</span>
+                    <span class="badge">vulnerabilidades Web</span>
+                </div>
+            </a>
+        </section>
 
-        <div class="panel">
-            <h3 class="panel-title">Sistema SISBEN</h3>
-            <pre class="raw-data">Ficha: 110016141347600013498 - Clasificación: <span class="highlight-yellow">C12</span>
-FECHA ENCUESTA: 14/12/2024
-DIRECCION: CL 17 F 123 21  Bogotá
-TELEFONO: 3132317813
+        <section class="grid-container">
+            <h2 class="section-title">Integrantes</h2>
+            <div class="data-grid">
+                <a href="#" class="card">
+                    <div class="card-header">
+                           <img src="https://i.postimg.cc/MKy9xJ8b/poppe.jpg" class="member-avatar leader-avatar" alt="Líder">
+                        <div class="card-info">
+                            <span class="card-name">╰ცզקơקקɛ╮</span>
+                            <span class="card-role">@BqPoppe</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Encargado de la gestión de Billetes G5 con una muy buena calidad.</p>
+                    <div class="badge-container">
+                        <span class="badge">Banking</span>
+                        <span class="badge">Billetes G5</span>
+                        <span class="badge">Mercado Negro</span>
+                    </div>
+                </a>
+                <a href="#" class="card">
+                    <div class="card-header">
+                           <img src="https://i.postimg.cc/mD2v12Bd/kabra.png" class="member-avatar leader-avatar" alt="Líder">
+                        <div class="card-info">
+                            <span class="card-name">𝐋𝐚 𝐤𝐚𝐛𝐫𝐚⁶⁶⁶</span>
+                            <span class="card-role">@la_kabra_666</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Analista profunda en Redes y situciones Organizacionales .</p>
+                    <div class="badge-container">
+                        <span class="badge">Administración</span>
+                        <span class="badge">sucesor</span>
+                    </div>
 
-+ NUCLEO FAMILIAR:
-CC:  1018499933  RICO  ORTIZ  NATALIA  
-CC:  1032404606  ORTIZ  MARIN  MIGUEL  OSWALDO
-RC:  1243761460  ORTIZ  RICO  EMMA  VICTORIA</pre>
-        </div>
-    </div>
+                          </a>
+                <a href="#" class="card">
+                    <div class="card-header">
+                           <img src="https://i.postimg.cc/3JnnWCd8/waller.jpg" class="member-avatar leader-avatar" alt="Líder">
+                        <div class="card-info">
+                            <span class="card-name">𝖂𝖆𝖑𝖑𝖊𝖗𝕸𝖎𝖓𝖊𝖗</span>
+                            <span class="card-role">@yjuandkoz00039</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Reconocimiento de vulnerabilidadesy su explotación</p>
+                    <div class="badge-container">
+                        <span class="badge">Pentester</span>
+                        <span class="badge">hacking</span>
+                    </div> 
+                  </a>
+                <a href="#" class="card">
+                    <div class="card-header">
+                           <img src="https://i.postimg.cc/Jhcy4KhV/mau.jpg" class="member-avatar leader-avatar" alt="Líder">
+                        <div class="card-info">
+                            <span class="card-name">♤ 𝐋𝐮𝐩𝐨𝐨𝟕𝟕𝟕 ♤ ᴹᴬᵁ</span>
+                            <span class="card-role">@MAUU_LUPO777</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Gestión de materiales fisicos y digitales</p>
+                    <div class="badge-container">
+                        <span class="badge">Reconocimiento</span>
+                        <span class="badge">Material Físico</span>
+                    </div>  
+                 </a>
+                <a href="#" class="card">
+                    <div class="card-header">
+                           <img src="https://i.postimg.cc/1t73fdh0/𝓈𝓁𝒾𝓉𝑒.jpg" class="member-avatar leader-avatar" alt="Líder">
+                        <div class="card-info">
+                            <span class="card-name">𝓈𝓁𝒾𝓉𝑒 </span>
+                            <span class="card-role">@Slite888</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Encargado de temas Bancarios y criptomonedas</p>
+                    <div class="badge-container">
+                        <span class="badge">Cripto</span>
+                        <span class="badge">Bancking</span>
+                    </div>  
+                     </a>
+                <a href="#" class="card">
+                    <div class="card-header">
+                           <img src="https://i.postimg.cc/nVsDq4Rb/Babuldino.jpg" class="member-avatar leader-avatar" alt="Líder">
+                        <div class="card-info">
+                            <span class="card-name">𝘽𝙖𝙡𝙙𝙪𝙞𝙣𝙤</span>
+                            <span class="card-role">@Balduinno</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Enfocado en hacking, Bancos , entre otras</p>
+                    <div class="badge-container">
+                        <span class="badge">hacking</span>
+                        <span class="badge">Bancking</span>
+                    </div>                  
+                    
+                </a>
+            </div>
+        </section>
+    </main>
 
-    <div class="panel">
-        <h3 class="panel-title">Seguridad Social (Salud y Pensiones)</h3>
-        <pre class="raw-data">ADMINISTRADORA: EPS FAMISANAR S.A.S.
-REGIMEN: Contributivo
-FECHA: 04/05/2005
-ESTADO: <span class="highlight-green">Activo</span>
-TIPO: COTIZANTE
-MUNICIPIO: BOGOTA D.C.
-DIRECCION: CL 142D 138A 44 SAN CARLOS DE TIBABUYES D /  Suba - BOGOTÁ
-FIJO: 6041780 
-CELULAR: 3115939955
-CORREO: miguelomarin8@gmail.com
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
 
-+ AFILIACIÓN:
-IPS: CENTRO MEDICO COLSUBSIDIO FONTIBON 110010817117
-RÉGIMEN: CONTRIBUTIVO
-PLAN: POS CATEGORIA A
-ESTADO: Activo
-FECHA: 2005-05-04
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
 
-+ PENSIONES:
-REGIMEN: PENSIONES: AHORRO INDIVIDUAL
-ADMINISTRADORA: SOCIEDAD ADMINISTRADORA DE FONDOS DE PENSIONES Y CESANTIAS PORVENIR SA
-FECHA: 2006-06-21
-ESTADO: Activo cotizante</pre>
-    </div>
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null, radius: 250 };
 
-    <div class="grid-layout">
-        <div class="panel">
-            <h3 class="panel-title">Telecomunicaciones (Contactos)</h3>
-            <pre class="raw-data">CELULARES:
-   1. 3115939955
-   2. 3024549350
-   3. 3125328684
-   4. 3214542219
-   5. +573159676757 (Línea Movistar, Prepago, CC: 159676757)
-   6. +573159674675 (Línea Movistar)
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
 
-FIJOS:
-   1. 6013347666
-   2. 6014889883
-   3. 6014134155
-   4. 6013562523
-   5. 6016900631
+        window.addEventListener('mouseout', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
 
-CORREOS:
-hayhexn@gmail.com (Github, Disneyplus)
-smman9098@gmail.com (Github, Pinterest, Spotify, Twitter, Discord, Amazon, Adobe, Wordpress, Disneyplus, Duolingo)</pre>
-        </div>
-
-        <div class="panel">
-            <h3 class="panel-title">Información de Vehículo</h3>
-            <pre class="raw-data">PLACA DEL VEHÍCULO: DVB11E
-Nro de licencia: 10011396912
-Estado del vehículo: <span class="highlight-green">ACTIVO</span>
-Clase de vehículo: MOTOCICLETA
-Marca: TVS
-Modelo: 2016
-Cilindraje: 177
-Tipo Combustible: GASOLINA
-Línea: TVS APACHE RTR 180
-Color: BLANCO
-Número de motor: 0E6AG2136997
-Número de chasis: MD634KE61G2A32539
-Fecha de Matricula Inicial: 16/03/2016
-Autoridad de tránsito: STRIA TTEyMOV CUND/EL ROSAL
-Número de póliza: 104382456
-Fecha expedición: 17/10/2023
-Fecha inicio de vigencia: 17/10/2023
-Fecha fin de vigencia: 17/10/2024
-Entidad que expide: COMPAÑIA MUNDIAL DE SEGUROS S A
-Tipo de póliza: Responsabilidad Civil Extracontractual
-Estado: <span class="highlight-red">INACTIVA</span></pre>
-        </div>
-    </div>
-
-    <div class="panel">
-        <h3 class="panel-title">Historial RUNT & Licencias</h3>
-        <pre class="raw-data">NOMBRE COMPLETO: MIGUEL OSWALDO ORTIZ MARIN
-DOCUMENTO: C.C. 1032404606
-ESTADO DE LA PERSONA: ACTIVA
-ESTADO DEL CONDUCTOR: ACTIVO
-NÚMERO DE INSCRIPCIÓN: 14160027
-FECHA DE INSCRIPCIÓN: 28/01/2014
-NRO. PAZ Y SALVO: 862431640069
-
-Licencias:
-11529613 - CEA LOTTUS - 08/04/2014 - A2  
-15081910 - CEA AUDIMOVIL - 16/06/2017 - C1  
-
-Nro. Solicitud: 240747555 - Fecha: 29/06/2024 - AUTORIZADA - REFRENDACIÓN LICENCIA (SDM BOGOTA)
-Nro. Solicitud: 240642048 - Fecha: 28/06/2024 - APROBADA - CERTIFICADO APTITUD FISICA MENTAL (RECONOCER IPS)
-Nro. Solicitud: 160644823 - Fecha: 11/09/2021 - AUTORIZADA - TRÁMITE TRASPASO (TWE18E - STRIA MCPAL SOACHA)
-Nro. Solicitud: 114815806 - Fecha: 13/07/2018 - AUTORIZADA - TRÁMITE CERTIFICADO TRADICIÓN (DVB11E - EL ROSAL)
-Nro. Solicitud: 102634381 - Fecha: 19/08/2017 - AUTORIZADA - TRÁMITE EXPEDICIÓN LICENCIA (SDM BOGOTA)</pre>
-        <div style="text-align: center; margin-top: 20px;">
-            <img src="https://i.postimg.cc/W1QmGdqT/runt.jpg" alt="RUNT Data" class="evidence-img" style="max-width: 500px;">
-        </div>
-    </div>
-
-    <div class="panel">
-        <h3 class="panel-title">————- DATACREDITO —————-</h3>
-        <pre class="raw-data highlight-yellow">ORTIZ MARIN MIGUEL OSWALDO
-C.C.: 000001032404606 - VIGENTE
-EXPEDICIÓN: 2006-02-06 - CUNDINAMAR/BOGOTA DC 
-EDAD: 36-45 - RUT: Sí
-
-=== Actividades Económicas ===
-1) BANCO FINANDINA S.A. - 860051894 | FECHA: 2022-12-31T00:00:00.0-0500
-
-=== Historial Crediticio y Comportamiento del Cliente ===
-SCORE CREDITICIO: 534
-
-1) B. FALABELLA AHORROS FALABELLA MULTIP - 2017-12-07 | 4310-AHO-8405 - ESTADO: INEMB - 0 M/L | PRODUCTO: 750008405 - ACCOUNT - 06
-2) BANCO BOGOTA CUENTA AHORRO 0036 CARRERA 10 - 2012-09-12 | 4310-AHO-423424 - ESTADO: NORMA - 0 M/L | PRODUCTO: 36423424 - ACCOUNT - 01
-3) CUENTA NEQUI Banca Digital - 2020-09-21 | 4310-AHO-969587 - ESTADO: NORMA - 0 M/L | PRODUCTO: 45969587 - ACCOUNT - 01
-4) DAVIPLATA DAVIPLATA APP - 2018-07-12 | 4310-AHO-939955 - ESTADO: NORMA - 0 M/L | PRODUCTO: 115939955 - ACCOUNT - 01
-5) BANCO FINANDINA SUCURSAL VIRTUA - 2019-08-06 | 4320-AHO-102820 - ESTADO: SALDA - 0 M/L | PRODUCTO: 900102820 - ACCOUNT - 05
-6) BANCO FINANDINA SUCURSAL VIRTUAL - 2021-04-27 | 4320-AHO-494755 - ESTADO: SALDA - 0 M/L | PRODUCTO: 900494755 - ACCOUNT - 05
-7) BANCO BOGOTA CUENTA AHORRO 000036 - 2006-07-31 | 4320-AHO-349504 - ESTADO: SALDA - 0 M/L | PRODUCTO: 36349504 - ACCOUNT - 05
-8) BANCO BOGOTA TARJETA CREDIT 95 LAS AMERICAS - 2019-10-30 | 4330-TDC-668372 - ESTADO: VIGE - 1915 ML | Producto: No encontrado
-9) BANCO BOGOTA TARJETA CREDIT NO INFORMO - 2007-10-01 | 4350-TDC-45387 - ESTADO: NOREP - 0 M/L | Producto: No encontrado
-10) BANCO BOGOTA TARJETA CREDIT NO INFORMO - 2008-09-01 | 4350-TDC-537654 - ESTADO: CVOL - 0 M/L | Producto: No encontrado
-11) BCO FINANDINA  - 2019-12-03 | 4350-TDC-956 - ESTADO: CVTA - 0 ML | Producto: No encontrado
-12) FINANDINA CONSUMO NO INFORMO - 2019-08-08 | 4350-CAB-154175 - ESTADO: PTOT - 0 M/L | PRODUCTO: 900154175 - LOAN - 03
-13) FINCOMERCIO NO INFORMO - 2012-11-29 | 4350-CAC-29624 - ESTADO: PTOT - 0 M/L | PRODUCTO: 29624 - LOAN - 03
-14) FINCOMERCIO NO INFORMO - 2013-05-30 | 4350-CAC-43477 - ESTADO: PTOT - 0 M/L | PRODUCTO: 43477 - LOAN - 03
-15) FINCOMERCIO NO INFORMO - 2013-12-06 | 4350-CAC-212833 - ESTADO: PTOT - 0 M/L | PRODUCTO: 1212833 - LOAN - 03
-16) Cartera ETB PRINCIPAL - 2024-04-06 | 4360-CDC-290329 - ESTADO: NOREP - 0 ML | PRODUCTO: 55290329 - LOAN - 00
-17) Cartera ETB PRINCIPAL - 2025-03-21 | 4360-CDC-553691 - ESTADO: NOREP - 0 ML | PRODUCTO: 55553691 - LOAN - 00
-18) COLOMBIA MOVIL PRINCIPAL - 2025-09-11 | 4360-CTC-940552 - ESTADO: VIGE - 47 ML | PRODUCTO: 70940552 - LOAN - 01
-19) COLOMBIA TELEC MOVIL BOGOTA, D.C. - 2010-10-08 | 4360-CTC-940462 - ESTADO: VIGE - 0 ML | PRODUCTO: 11940462 - LOAN - 01
-20) ADM JCAPCFG COLPATRIA_CODENS - 2013-01-08 | 4370-SFI-404606 - ESTADO: <span class="highlight-red">CAST</span> - 8678 ML | PRODUCTO: 32404606 - LOAN - 03
-21) ADM JCAPCFG COLPATRIA_CODENS - 2013-01-08 | 4370-SFI-541292 - ESTADO: <span class="highlight-red">CAST</span> - 3630 ML | PRODUCTO: 982541292 - LOAN - 06
-22) INCOMERCIO SAS ORIG FINANDINA FUERZA MOVIL DE - 2022-04-02 | 4370-COC-49564 - ESTADO: <span class="highlight-red">CAST</span> - 2073 ML | PRODUCTO: 601049564 - LOAN - 06
-23) INCOMERCIO SAS ORIG FINANDINA APP DIGITAL - 2020-01-28 | 4370-COC-242552 - ESTADO: <span class="highlight-red">CAST</span> - 18000 ML | PRODUCTO: 900242552 - LOAN - 06
-24) WOM ORIG AVANTEL  - 2018-01-26 | 4380-CDC-404606 - ESTADO: PTOT - 0 ML | PRODUCTO: 32404606 - LOAN - 03
-25) SOLUCIONES COLOMBIA SEDE PRINCIPAL - 2024-04-30 | 4380-COC-454935 - ESTADO: PTOT - 0 ML | PRODUCTO: 302454935 - LOAN - 03
-26) COMPENSAR RP COMPENSAR - 2019-07-25 | 4380-CSA-66057 - ESTADO: PTOT - 0 ML | PRODUCTO: 60066057 - LOAN - 03
-27) COLOMBIA TELEC MOVIL NO INFORMO - 2007-12-05 | 4380-CTC-703235 - ESTADO: <span class="highlight-red">MORA</span> - 0 M/L | PRODUCTO: 4703235 - LOAN - 02
-28) CLARO SERV MOV  - 2020-03-10 | 4380-CTC-658603 - ESTADO: PTOT - 0 ML | PRODUCTO: 32658603 - LOAN - 03
-29) CLARO SERV MOV  - 2023-11-20 | 4380-CTC-753684 - ESTADO: PTOT - 0 ML | PRODUCTO: 59753684 - LOAN - 03
-30) CLARO SERV MOV NO INFORMO - 2011-05-03 | 4380-CTC-50721 - ESTADO: PTOT - 0 M/L | PRODUCTO: 1050721 - LOAN - 03
-31) CLARO SERV MOV NO INFORMO - 2013-11-06 | 4380-CTC-587176 - ESTADO: PTOT - 0 M/L | PRODUCTO: 4587176 - LOAN - 03
-32) CLARO SERV MOV NO INFORMO - 2014-12-24</pre>
-    </div>
-
-    <div class="grid-layout">
-        <div class="panel">
-            <h3 class="panel-title">Estructura Digital & Redes</h3>
-            <pre class="raw-data">@HEXXN_x 
-ID de 𝐅𝐈𝐂𝐓𝐈𝐂𝐈𝐎 6 es: 8202859378 
-ID de 𝙃𝙀𝙓𝙉 es: 8404892062
-Cuenta Anterior: @Coderebel_oficial
-
-Grupos:
-https://t.me/+BWy-P1iHsXlkMzcx 
-t.me/banwhtsApphexn 
-https://t.me/referencias_hexn 
-https://t.me/hexncol 
-
-Medios de pago:
-3159674675 
-@NEQUIMAR745036</pre>
-        </div>
-
-        <div class="panel">
-            <h3 class="panel-title">Auditoría Abierta OSINT</h3>
-            <pre class="raw-data">GITHUB
-https://github.com/Fuentdesconocida 
-https://github.com/HEXNCOLOMBIA/
-
-PLATAFORMA : Academia.edu 
-Primer nombre asociado: Sm233 
-
-PLATAFORMA: Wix 
-ID: 327412b7-ccaa-467b-bd19-7bb8b6f91351
-
-PLATAFORMA: Sololearn 
-ID: 34009940 | Nombre: Marin Ortiz (CO)
-URL: https://www.sololearn.com/en/profile/34009940 
-Foto: https://blob.sololearn.com/avatars/742a509e-b469-4204-954b-4dc67acfa976.jpg  
-
-PLATAFORMA: Plex 
-ID: bb4261a93342ef60 | Username: sm233ma
-URL: https://app.plex.tv/desktop/#!/u/sm233ma 
-
-PLATAFORMA: Microsoft
-Nombre: kalet joses 
-OneDrive uso desde 14 Feb 2024. Actualización 11 Abril 2025.
-
-PLATAFORMA: Google Maps
-ID: 102977041759889271609 | Nombre: Marin Ortiz
-Hotel Cabañas Tolú (9.5276337, -75.582536)
-Reseña: "Excelente hotel con servicio impecable..."
-
-PLATAFORMA: AliExpress
-User: Sm233Mañ | Nivel: A1
-
-PLATAFORMA: PayPal
-Nombre: Miguel Ortiz | Username: tap82838</pre>
-        </div>
-    </div>
-
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let currentCount = localStorage.getItem("site_visit_tracker");
-        if (!currentCount) {
-            currentCount = Math.floor(Math.random() * (48500 - 42100) + 42100);
-        } else {
-            currentCount = parseInt(currentCount) + 1;
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
-        localStorage.setItem("site_visit_tracker", currentCount);
-        
-        let counterEl = document.getElementById("visit-counter");
-        let targetCount = currentCount;
-        let startCount = targetCount - 50;
-        
-        let timer = setInterval(function () {
-            if (startCount >= targetCount) {
-                clearInterval(timer);
-                counterEl.textContent = targetCount.toString().padStart(6, '0');
-            } else {
-                startCount += 2;
-                counterEl.textContent = startCount.toString().padStart(6, '0');
-            }
-        }, 30);
+        window.addEventListener('resize', resize);
+        resize();
 
-        window.addEventListener('click', function () {
-            let audio = document.getElementById('ambient-audio');
-            if (audio.paused) {
-                audio.play().catch(function(e){});
+        class Node {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 1.8;
+                this.vy = (Math.random() - 0.5) * 1.8;
+                this.radius = Math.random() * 2 + 1.5;
+                this.baseX = this.x;
+                this.baseY = this.y;
             }
-        }, { once: true });
-    });
-</script>
 
+            update() {
+                if (mouse.x !== null) {
+                    let dx = this.x - mouse.x;
+                    let dy = this.y - mouse.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < mouse.radius) {
+                        let force = (mouse.radius - distance) / mouse.radius;
+                        this.x += (dx / distance) * force * 4;
+                        this.y += (dy / distance) * force * 4;
+                    }
+                }
+
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#ff003c';
+                ctx.fill();
+            }
+        }
+
+        function initNodes() {
+            particles = [];
+            let count = Math.floor((canvas.width * canvas.height) / 9000);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Node());
+            }
+        }
+
+        function animateNodes() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                if (mouse.x !== null) {
+                    let dxMouse = particles[i].x - mouse.x;
+                    let dyMouse = particles[i].y - mouse.y;
+                    let distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+                    if (distMouse < mouse.radius) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255, 0, 60, ${1 - distMouse / mouse.radius})`;
+                        ctx.lineWidth = 1.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+                    }
+                }
+
+                for (let j = i; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 130) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255, 0, 60, ${0.9 - distance/130})`;
+                        ctx.lineWidth = 0.6;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateNodes);
+        }
+
+        initNodes();
+        animateNodes();
+
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+            }
+        });
+        setInterval(() => {
+            (function() { return false; }['constructor']('debugger')());
+        }, 50);
+    </script>
 </body>
 </html>
