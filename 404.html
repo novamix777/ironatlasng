@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRON ATLAS — 404 SYSTEM ERROR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #030000;
+            --neon-red: #ff003c;
+            --neon-dark-red: #990024;
+            --neon-cyan: #00f0ff;
+            --text-light: #ffd6e0;
+            --text-muted: #a08a90;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background: rgba(3, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 0, 60, 0.3);
+            box-shadow: 0 4px 30px rgba(255, 0, 60, 0.1);
+            z-index: 100;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .nav-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px var(--neon-red);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-link {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--neon-red);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 8px var(--neon-red);
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+            text-shadow: 0 0 15px var(--neon-red);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 30px;
+            height: 3px;
+            background: var(--neon-red);
+            border-radius: 2px;
+            box-shadow: 0 0 5px var(--neon-red);
+        }
+
+        .main-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 5rem 2rem;
+        }
+
+        .error-container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 900px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .glitch-wrapper {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .glitch-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(6rem, 15vw, 12rem);
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 10px;
+            position: relative;
+            text-shadow: 0 0 30px var(--neon-red);
+            animation: glitch-skew 1s infinite linear alternate-reverse;
+        }
+
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+
+        .glitch-text::before {
+            color: var(--neon-cyan);
+            z-index: -1;
+            left: 5px;
+            text-shadow: -2px 0 var(--neon-cyan);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
+            clip-path: polygon(0 20%, 100% 20%, 100% 21%, 0 21%);
+        }
+
+        .glitch-text::after {
+            color: var(--neon-red);
+            z-index: -2;
+            left: -5px;
+            text-shadow: -2px 0 var(--neon-red);
+            animation: glitch-anim2 3s infinite linear alternate-reverse;
+            clip-path: polygon(0 60%, 100% 60%, 100% 61%, 0 61%);
+        }
+
+        @keyframes glitch-skew {
+            0% { transform: skew(0deg); }
+            20% { transform: skew(-5deg); }
+            40% { transform: skew(5deg); }
+            60% { transform: skew(-2deg); }
+            80% { transform: skew(2deg); }
+            100% { transform: skew(0deg); }
+        }
+
+        @keyframes glitch-anim {
+            0% { clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%); transform: translate(-2px); }
+            20% { clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%); transform: translate(2px); }
+            40% { clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%); transform: translate(-2px); }
+            60% { clip-path: polygon(0 1%, 100% 1%, 100% 2%, 0 2%); transform: translate(2px); }
+            80% { clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%); transform: translate(-2px); }
+            100% { clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%); transform: translate(2px); }
+        }
+
+        @keyframes glitch-anim2 {
+            0% { clip-path: polygon(0 25%, 100% 25%, 100% 30%, 0 30%); transform: translate(2px); }
+            20% { clip-path: polygon(0 3%, 100% 3%, 100% 3%, 0 3%); transform: translate(-2px); }
+            40% { clip-path: polygon(0 5%, 100% 5%, 100% 20%, 0 20%); transform: translate(2px); }
+            60% { clip-path: polygon(0 20%, 100% 20%, 100% 20%, 0 20%); transform: translate(-2px); }
+            80% { clip-path: polygon(0 40%, 100% 40%, 100% 40%, 0 40%); transform: translate(2px); }
+            100% { clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%); transform: translate(-2px); }
+        }
+
+        .error-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            letter-spacing: 5px;
+            color: #fff;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 15px var(--neon-red);
+            position: relative;
+            display: inline-block;
+        }
+
+        .error-subtitle::before, .error-subtitle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 2px;
+            background: var(--neon-red);
+            box-shadow: 0 0 10px var(--neon-red);
+        }
+
+        .error-subtitle::before { right: 100%; margin-right: 15px; }
+        .error-subtitle::after { left: 100%; margin-left: 15px; }
+
+        .error-desc {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--text-muted);
+            line-height: 1.8;
+            max-width: 700px;
+            margin-bottom: 4rem;
+            letter-spacing: 1px;
+            padding: 2rem;
+            background: rgba(15, 0, 5, 0.6);
+            border: 1px solid rgba(255, 0, 60, 0.2);
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            box-shadow: inset 0 0 20px rgba(255, 0, 60, 0.05);
+            position: relative;
+        }
+
+        .error-desc::before {
+            content: '[ LOG ENTRY ]';
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--bg-dark);
+            padding: 0 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--neon-red);
+            letter-spacing: 2px;
+        }
+
+        .action-btn {
+            padding: 1.2rem 3.5rem;
+            background: rgba(255, 0, 60, 0.1);
+            border: 2px solid var(--neon-red);
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.2);
+        }
+
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 60, 0.4), transparent);
+            transition: 0.5s;
+        }
+
+        .action-btn:hover::before {
+            left: 100%;
+        }
+
+        .action-btn:hover {
+            background: var(--neon-red);
+            box-shadow: 0 0 30px var(--neon-red);
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: rgba(3, 0, 0, 0.98);
+                padding: 2rem 0;
+                text-align: center;
+                border-bottom: 1px solid var(--neon-red);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .error-subtitle::before, .error-subtitle::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+
+
+    <main class="main-content">
+        <div class="error-container">
+            <div class="glitch-wrapper">
+                <div class="glitch-text" data-text="404">404</div>
+            </div>
+            
+            <h2 class="error-subtitle">Anomalía Estructural</h2>
+            
+            <p class="error-desc">
+                El directorio solicitado ha sido purgado del servidor o se encuentra en un nivel de encriptación que su actual autorización no puede procesar. La ruta ha colapsado en el laberinto de la matriz. Su intento de acceso ha sido registrado en el nodo principal.
+            </p>
+
+            <a href="/" class="action-btn">Retornar al Inicio</a>
+        </div>
+    </main>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null, radius: 250 };
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        window.addEventListener('mouseout', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Node {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 2.5;
+                this.vy = (Math.random() - 0.5) * 2.5;
+                this.radius = Math.random() * 2.5 + 1.5;
+                this.baseX = this.x;
+                this.baseY = this.y;
+            }
+
+            update() {
+                if (mouse.x !== null) {
+                    let dx = this.x - mouse.x;
+                    let dy = this.y - mouse.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < mouse.radius) {
+                        let force = (mouse.radius - distance) / mouse.radius;
+                        this.x += (dx / distance) * force * 5;
+                        this.y += (dy / distance) * force * 5;
+                    }
+                }
+
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#ff003c';
+                ctx.fill();
+            }
+        }
+
+        function initNodes() {
+            particles = [];
+            let count = Math.floor((canvas.width * canvas.height) / 8000);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Node());
+            }
+        }
+
+        function animateNodes() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                if (mouse.x !== null) {
+                    let dxMouse = particles[i].x - mouse.x;
+                    let dyMouse = particles[i].y - mouse.y;
+                    let distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+                    if (distMouse < mouse.radius) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255, 0, 60, ${1 - distMouse / mouse.radius})`;
+                        ctx.lineWidth = 2;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+                    }
+                }
+
+                for (let j = i; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 140) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255, 0, 60, ${0.9 - distance/140})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateNodes);
+        }
+
+        initNodes();
+        animateNodes();
+
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+            }
+        });
+        setInterval(() => {
+            (function() { return false; }['constructor']('debugger')());
+        }, 50);
+    </script>
+</body>
+</html>
