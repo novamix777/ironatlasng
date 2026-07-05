@@ -1,0 +1,551 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap');
+
+    :root {
+        --bg-color: #050508;
+        --neon-primary: #00f2fe;
+        --neon-secondary: #f43f5e;
+        --neon-accent: #9d00ff;
+        --glass-bg: rgba(13, 17, 30, 0.75);
+        --border-neon: rgba(0, 242, 254, 0.25);
+        --text-main: #e2e8f0;
+        --muted: #94a3b8;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        font-family: 'Rajdhani', -apple-system, sans-serif;
+        overflow-x: hidden;
+        min-height: 100vh;
+        background-image: radial-gradient(circle at 50% 0%, #110d26 0%, #050508 70%);
+        background-attachment: fixed;
+    }
+
+    .bg-fx {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background: repeating-linear-gradient(
+            0deg,
+            rgba(0, 242, 254, 0.03) 0px,
+            rgba(0, 242, 254, 0.03) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+        pointer-events: none;
+        animation: scanline 10s linear infinite;
+    }
+
+    @keyframes scanline {
+        0% { background-position: 0 0; }
+        100% { background-position: 0 100vh; }
+    }
+
+    .container {
+        max-width: 950px;
+        margin: 40px auto;
+        padding: 20px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .header-id {
+        text-align: center;
+        font-size: 1.8rem;
+        color: #fff;
+        text-shadow: 0 0 10px var(--neon-accent), 0 0 20px var(--neon-accent);
+        margin-bottom: 25px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        animation: pulseText 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseText {
+        0% { text-shadow: 0 0 10px var(--neon-accent); }
+        100% { text-shadow: 0 0 25px var(--neon-accent), 0 0 10px #fff; }
+    }
+
+    .main-img {
+        display: block;
+        width: 220px;
+        height: 220px;
+        margin: 0 auto 30px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--neon-primary);
+        box-shadow: 0 0 20px var(--neon-primary), inset 0 0 20px var(--neon-primary);
+        animation: neonPulse 2.5s infinite alternate, floatAvatar 4s ease-in-out infinite;
+    }
+
+    @keyframes neonPulse {
+        0% { box-shadow: 0 0 10px var(--neon-primary); border-color: var(--neon-primary); }
+        100% { box-shadow: 0 0 35px var(--neon-accent), 0 0 15px var(--neon-primary); border-color: var(--neon-accent); }
+    }
+
+    @keyframes floatAvatar {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+    }
+
+    .main-title {
+        text-align: center;
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: #fff;
+        text-shadow: 0 0 15px var(--neon-primary);
+        margin-bottom: 40px;
+        letter-spacing: 2px;
+    }
+
+    .usernames {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 40px;
+    }
+
+    .tag {
+        background: rgba(0, 242, 254, 0.05);
+        border: 1px solid var(--neon-primary);
+        padding: 10px 20px;
+        border-radius: 25px;
+        color: #fff;
+        font-weight: 600;
+        font-size: 1.1rem;
+        box-shadow: 0 0 10px rgba(0, 242, 254, 0.1);
+        transition: all 0.3s ease;
+        animation: slideUpTag 0.5s ease backwards;
+    }
+
+    .tag:nth-child(1) { animation-delay: 0.1s; }
+    .tag:nth-child(2) { animation-delay: 0.2s; }
+    .tag:nth-child(3) { animation-delay: 0.3s; }
+    .tag:nth-child(4) { animation-delay: 0.4s; }
+    .tag:nth-child(5) { animation-delay: 0.5s; }
+    .tag:nth-child(6) { animation-delay: 0.6s; }
+
+    @keyframes slideUpTag {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .tag:hover {
+        background: rgba(157, 0, 255, 0.2);
+        border-color: var(--neon-accent);
+        box-shadow: 0 0 20px rgba(157, 0, 255, 0.4);
+        transform: scale(1.05) translateY(-3px);
+    }
+
+    .card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid var(--border-neon);
+        border-radius: 16px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        transition: all 0.4s ease;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .card:nth-child(4) { animation-delay: 0.2s; }
+    .card:nth-child(5) { animation-delay: 0.4s; }
+    .card:nth-child(6) { animation-delay: 0.6s; }
+
+    @keyframes fadeInUp {
+        to { opacity: 1; transform: translateY(0); }
+        from { opacity: 0; transform: translateY(30px); }
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        border-color: var(--neon-accent);
+        box-shadow: 0 10px 40px rgba(157, 0, 255, 0.2), inset 0 0 15px rgba(0, 242, 254, 0.05);
+    }
+
+    .card-primary {
+        border: 2px solid var(--neon-primary);
+        box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card-primary::before {
+        content: '';
+        position: absolute;
+        top: -50%; left: -50%;
+        width: 200%; height: 200%;
+        background: conic-gradient(transparent, rgba(0, 242, 254, 0.1), transparent 30%);
+        animation: rotateGlow 5s linear infinite;
+        z-index: -1;
+    }
+
+    @keyframes rotateGlow {
+        100% { transform: rotate(360deg); }
+    }
+
+    .card h2 {
+        color: var(--neon-primary);
+        border-bottom: 1px solid rgba(0, 242, 254, 0.3);
+        padding-bottom: 10px;
+        margin-top: 0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .card-primary h2 {
+        color: var(--neon-accent);
+        border-bottom: 1px solid rgba(157, 0, 255, 0.3);
+    }
+
+    .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .data-row {
+        margin-bottom: 10px;
+        font-size: 1.15rem;
+        background: rgba(255, 255, 255, 0.02);
+        padding: 10px 14px;
+        border-radius: 8px;
+        border-left: 3px solid transparent;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        word-wrap: break-word;
+    }
+
+    .data-row:hover {
+        border-left: 3px solid var(--neon-primary);
+        background: rgba(0, 242, 254, 0.08);
+        transform: translateX(5px);
+    }
+
+    .data-row span.label {
+        color: var(--neon-primary);
+        font-weight: 600;
+        display: inline-block;
+        min-width: 140px;
+    }
+
+    .data-row span.label-alt {
+        color: var(--neon-accent);
+    }
+
+    .btn-download {
+        display: block;
+        text-align: center;
+        background: linear-gradient(45deg, var(--neon-accent), #5a0099);
+        color: white;
+        padding: 15px 30px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        box-shadow: 0 0 20px rgba(157, 0, 255, 0.4);
+        transition: all 0.3s ease;
+        margin: 20px 0;
+        border: 1px solid var(--neon-accent);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-download::after {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%;
+        width: 50%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+        100% { left: 200%; }
+    }
+
+    .btn-download:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 0 30px rgba(157, 0, 255, 0.8);
+        letter-spacing: 3px;
+    }
+
+    @media (max-width: 768px) {
+        .container { padding: 15px; margin: 20px auto; }
+        .grid-2 { grid-template-columns: 1fr; }
+        .main-img { width: 160px; height: 160px; }
+        .main-title { font-size: 2rem; }
+    }
+</style>
+
+<div class="bg-fx"></div>
+
+<div class="container">
+    
+    <div class="header-id">ID: 8015752253</div>
+
+    <img src="https://i.postimg.cc/8FnYF8fN/image.jpg" alt="Avatar Principal" class="main-img" onerror="this.src='https://postimg.cc/8FnYF8fN/download'">
+
+    <div class="main-title">💻𝙄𝙣𝙜. 𝘼𝙢𝙖𝙯𝙤𝙣🤑</div>
+
+    <div class="usernames">
+        <div class="tag">@Bogotp</div>
+        <div class="tag">@Tumarido1</div>
+        <div class="tag">@ElpropioAmaz</div>
+        <div class="tag">𝕰𝖑 𝖚𝖑𝖙𝖎𝖒𝖔 𝖊𝖓 𝖕𝖎𝖊 👣</div>
+        <div class="tag">💻tumarido1🤑</div>
+        <div class="tag">💻𝙄𝙣𝙜. 𝘼𝙢𝙖𝙯𝙤𝙣🤑</div>
+    </div>
+    
+<div class="card card-primary">
+            <h2>🎯 PERFIL PRINCIPAL: FARID ENRIQUE HUELVA MENDOZA</h2>
+            
+            <a href="https://www.mediafire.com/file/rcqtumlgf81zzi3/FARID.pdf/file" target="_blank" class="btn-download">
+                📥 DESCARGAR HOJA DE VIDA (PDF)
+            </a>
+
+            <div class="grid-2">
+                <div>
+                    <div class="data-row"><span class="label label-alt">👤 Identidad:</span> FARID ENRIQUE HUELVA MENDOZA</div>
+                    <div class="data-row"><span class="label label-alt">🪪 Cédula/Doc:</span> 1079934184 de Pivijay, Magdalena</div>
+                    <div class="data-row"><span class="label label-alt">🔑 Serial:</span> 0022594245</div>
+                    <div class="data-row"><span class="label label-alt">🆔 NUIP:</span> 90110971663</div>
+                    <div class="data-row"><span class="label label-alt">📆 Nacimiento:</span> 09 de noviembre de 1990</div>
+                    <div class="data-row"><span class="label label-alt">🌎 Nacionalidad:</span> Colombiano</div>
+                    <div class="data-row"><span class="label label-alt">💍 Estado Civil:</span> Unión libre</div>
+                </div>
+                <div>
+                    <div class="data-row"><span class="label label-alt">🗂️ Lugar Nac.:</span> Pivijay, Magdalena</div>
+                    <div class="data-row"><span class="label label-alt">🧬 Rh:</span> 1 / O+</div>
+                    <div class="data-row"><span class="label label-alt">〰️ Estatura:</span> 162 cm</div>
+                    <div class="data-row"><span class="label label-alt">📱 Celular:</span> 3147725407</div>
+                    <div class="data-row"><span class="label label-alt">📧 Correo:</span> fanohupa@gmail.com</div>
+                    <div class="data-row"><span class="label label-alt">👨 Padre:</span> HUELVA ALEJANDRO FIDEL</div>
+                    <div class="data-row"><span class="label label-alt">👩‍🦱 Madre:</span> MENDOZA MANUELA ISABEL</div>
+                    <div class="data-row"><span class="label label-alt">🏘 Domicilio:</span> CI 94 # 2D-25</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📋 REGISTROS GUBERNAMENTALES</h2>
+            <div class="grid-2">
+                <div>
+                    <h3 style="color: var(--neon-primary); margin-bottom: 15px; border-bottom: 1px solid #333;">🚗 REGISTRO RUNT</h3>
+                    <div class="data-row"><span class="label">Estado RUNT:</span> <span style="color: #10b981; font-weight: bold;">ACTIVA</span></div>
+                    <div class="data-row"><span class="label">Licencia Nro:</span> 1079934184</div>
+                    <div class="data-row"><span class="label">Categoría:</span> A2</div>
+                    <div class="data-row"><span class="label">Organismo:</span> U TEC CONT/VIG/ REG TTOyTTE SANTA MARTA</div>
+                </div>
+                <div>
+                    <h3 style="color: var(--neon-secondary); margin-bottom: 15px; border-bottom: 1px solid #333;">📊 REGISTRO SISBÉN</h3>
+                    <div class="data-row"><span class="label">Grupo Sisbén:</span> <span style="color: #10b981; font-weight: bold;">C12</span></div>
+                    <div class="data-row"><span class="label">Ficha Hogar:</span> 08001232305400007813</div>
+                    <div class="data-row"><span class="label">Encuesta Vigente:</span> 01/09/2021</div>
+                    <div class="data-row"><span class="label">Actualización DNP:</span> 07/09/2021</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h3 style="color: #fff; margin-bottom: 15px; border-bottom: 1px solid #333;">📑 HISTORIAL DE TRÁMITES RUNT (6)</h3>
+                <div class="grid-2" style="gap: 15px;">
+                    <div class="cv-item" style="padding: 10px; margin-bottom: 0;">
+                        <span style="color: var(--neon-primary); font-weight: bold;">2014-01-09</span><br>
+                        Trámite expedición licencia conducción<br>
+                        <span style="font-size: 0.8rem; color: #888;">U TEC CONT/VIG/ REG TTOyTTE SANTA MARTA</span>
+                    </div>
+                    <div class="cv-item" style="padding: 10px; margin-bottom: 0;">
+                        <span style="color: var(--neon-primary); font-weight: bold;">2014-01-08</span><br>
+                        Trámite certificado aptitud física<br>
+                        <span style="font-size: 0.8rem; color: #888;">CENTRO DE RECONOCIMIENTO DE CONDUCTORES</span>
+                    </div>
+                    <div class="cv-item" style="padding: 10px; margin-bottom: 0;">
+                        <span style="color: var(--neon-primary); font-weight: bold;">2013-12-04</span><br>
+                        Trámite certificado aptitud en conducción<br>
+                        <span style="font-size: 0.8rem; color: #888;">CENTRO DE ENSEÑANZA AUTOMOVILÍSTICA</span>
+                    </div>
+                    <div class="cv-item" style="padding: 10px; margin-bottom: 0;">
+                        <span style="color: var(--neon-primary); font-weight: bold;">2013-08-01</span><br>
+                        Trámite matrícula inicial<br>
+                        <span style="font-size: 0.8rem; color: #888;">U TEC CONT/VIG/ REG TTOyTTE SANTA MARTA</span>
+                    </div>
+                    <div class="cv-item" style="padding: 10px; margin-bottom: 0;">
+                        <span style="color: var(--neon-primary); font-weight: bold;">2013-08-01</span><br>
+                        Trámite inscripción alerta<br>
+                        <span style="font-size: 0.8rem; color: #888;">U TEC CONT/VIG/ REG TTOyTTE SANTA MARTA</span>
+                    </div>
+                    <div class="cv-item" style="padding: 10px; margin-bottom: 0;">
+                        <span style="color: var(--neon-primary); font-weight: bold;">2013-07-31</span><br>
+                        Trámite preasignación placa contingencia<br>
+                        <span style="font-size: 0.8rem; color: #888;">U TEC CONT/VIG/ REG TTOyTTE SANTA MARTA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>💖 PERFIL VINCULADO (NOVIA): NORAINE ANDREA</h2>
+            <div class="grid-2">
+                <div>
+                    <div class="data-row"><span class="label">🪪 Cédula:</span> 1004120959</div>
+                    <div class="data-row"><span class="label">🔑 Serial:</span> 0002728995</div>
+                    <div class="data-row"><span class="label">🆔 NUIP:</span> 1004120959</div>
+                    <div class="data-row"><span class="label">👤 Nombres:</span> NORAINE ANDREA</div>
+                    <div class="data-row"><span class="label">👤 Apellidos:</span> PALLARES MERIÑO</div>
+                    <div class="data-row"><span class="label">📆 Nacimiento:</span> 28-09-2000</div>
+                    <div class="data-row"><span class="label">📆 Expedición:</span> 2018-10-03</div>
+                    <div class="data-row"><span class="label">⚧️ Sexo:</span> FEMENINO</div>
+                </div>
+                <div>
+                    <div class="data-row"><span class="label">🗂️ Lugar Nac.:</span> COLOMBIA, MAGDALENA, PIVIJAY</div>
+                    <div class="data-row"><span class="label">🧬 Rh:</span> B+</div>
+                    <div class="data-row"><span class="label">📱 Número:</span> 3024526705</div>
+                    <div class="data-row"><span class="label">👨 Padre:</span> HAIDER ANTONIO PALLARES CADENA</div>
+                    <div class="data-row"><span class="label">🫆 Doc. Padre:</span> 9875379</div>
+                    <div class="data-row"><span class="label">👩‍🦱 Madre:</span> LUZ MARINA MERIÑO MARTINEZ</div>
+                    <div class="data-row"><span class="label">🏘 Dirección:</span> CARRERA 4C NRO 24B 55</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📄 EXPEDIENTE PROFESIONAL COMPLETO</h2>
+            <p style="color: #ccc; line-height: 1.6; font-style: italic; background: rgba(0,0,0,0.3); padding: 15px; border-left: 3px solid var(--neon-primary); margin-bottom: 20px;">
+                "Persona dinámica, responsable, creativo, dispuesto a entregar mis conocimientos adquiridos en el área a desempeñar... Planificador, dinámico, serio honesto, responsable, con aptitud de liderazgo... ingeniero de sistemas con manejo en ensamble, mantenimiento correctivo y preventivo de software y hardware... configuración de cuenta de correo Outlook y utilización de herramientas de acceso remoto; instalación, configuración y actualización en Windows, Linux y demás aplicaciones... manejo de impresoras marcas xeron Epson hp ricoh entre otras, técnico analista y programador en software con conocimientos en visual Basic estudio, visual FoxPro, c++, HTML, PHP, SQL Server, Oracle, módulos ccna, asp, operador de sistemas con experiencia avanzada sobre el paquete de office."
+            </p>
+            
+            <div class="grid-2 cv-section">
+                <div>
+                    <h3 style="color: var(--neon-primary); margin-bottom: 15px; border-bottom: 1px solid #333;">🎓 FORMACIÓN ACADÉMICA</h3>
+                    <div class="cv-item">
+                        <h4 style="margin-bottom: 5px;">Secundaria</h4>
+                        <p style="margin: 0; color: #ddd;">Institución técnica San Judas Tadeo - Bachiller Académico</p>
+                        <p style="font-size:0.8rem; color:#888; margin: 0;">Bachiller Técnico Agropecuario - 2007</p>
+                    </div>
+                    <div class="cv-item">
+                        <h4 style="margin-bottom: 5px;">Universitario</h4>
+                        <p style="margin: 0; color: #ddd;">Universidad Nacional Abierta y a Distancia (UNAD)</p>
+                        <p style="margin: 0; color: #ddd;">Ingeniero de Sistemas (Hardware y Software)</p>
+                        <p style="font-size:0.8rem; color:#888; margin: 0;">Fecha Titulación: 26 de Octubre de 2014</p>
+                    </div>
+                    <div class="cv-item">
+                        <h4 style="margin-bottom: 5px;">Otros Estudios</h4>
+                        <p style="margin: 0; color: #ddd;">UNEWEB (programación en línea)</p>
+                        <p style="margin: 0; color: #ddd;">Lenguajes HTML, PHP, Javas, visual BASIC, visual</p>
+                        <p style="font-size:0.8rem; color:#888; margin: 0;">Diplomado de Programación en línea (240 Horas) - Julio 2016</p>
+                    </div>
+                    <div class="cv-item">
+                        <h4 style="margin-bottom: 5px;">Seminarios & Certificaciones</h4>
+                        <p style="margin: 0; color: #ddd;">Desarrollo de páginas web PHP y MYSQL</p>
+                        <p style="margin: 0; color: #ddd;">Especializado en licenciamientos (MICROSOFT)</p>
+                        <p style="margin: 0; color: #ddd;">Especialista en seguridad informática</p>
+                        <p style="font-size:0.8rem; color:#888; margin: 0;">Univ. Piloto de Colombia - Bogotá, 25 Ago 2016</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--neon-secondary); margin-bottom: 15px; border-bottom: 1px solid #333;">💼 EXPERIENCIA LABORAL</h3>
+                    <div class="cv-item">
+                        <h4 style="margin-bottom: 5px;">ATLANTIC BPO <span style="font-size:0.8rem; color:#aaa; font-weight: normal;">(Jun 2020 - Jun 10 2021)</span></h4>
+                        <p style="color: var(--neon-primary); margin: 5px 0;">Soporte Vip y líder de tecnología</p>
+                        <p style="font-size: 0.9rem; color: #bbb; margin: 0;">Coordinación y soporte, mantenimiento de equipos, formateos... Diseño y administración de páginas web...</p>
+                    </div>
+                    <div class="cv-item">
+                        <h4 style="margin-bottom: 5px;">INDRA SISTEMAS <span style="font-size:0.8rem; color:#aaa; font-weight: normal;">(Oct 2018 - Jun 2019)</span></h4>
+                        <p style="color: var(--neon-primary); margin: 5px 0;">Soporte técnico hardware y software</p>
+                        <p style="font-size: 0.9rem; color: #bbb; margin: 0;">Reporta a: HECTOR RIOS. Diseño y administración de aplicativos. Pedidos de Partes hardware...</p>
+                    </div>
+                    <div class="cv-item">
+                        <h4 style="margin-bottom: 5px;">ACTIVOS S.A <span style="font-size:0.8rem; color:#aaa; font-weight: normal;">(Nov 2017 - Sep 2018)</span></h4>
+                        <p style="color: var(--neon-primary); margin: 5px 0;">Soporte técnico hardware y software</p>
+                        <p style="font-size: 0.9rem; color: #bbb; margin: 0;">Reporta a: SENA. Administración de servidores y bases de datos. Capacitación del personal...</p>
+                    </div>
+                    <div class="cv-item">
+                        <h4 style="margin-bottom: 5px;">CREZCAMOS S.A <span style="font-size:0.8rem; color:#aaa; font-weight: normal;">(Abr 2015 - Nov 2016)</span></h4>
+                        <p style="color: var(--neon-primary); margin: 5px 0;">Ingeniero Y líder de Tecnología</p>
+                        <p style="font-size: 0.9rem; color: #bbb; margin: 0;">Reporta a: DANIEL GOMEZ. Construcción de infraestructura a través de varios lenguajes full stack...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2 cv-section" style="margin-top: 20px;">
+                <div>
+                    <h3 style="color: var(--neon-primary); margin-bottom: 15px; border-bottom: 1px solid #333;">🤝 REFERENCIAS PERSONALES</h3>
+                    <div class="data-row"><b>EDIGAR TORRES</b> - Técnico de Redes<br><span style="color: #aaa;">Tel: 301-685-89-09</span></div>
+                    <div class="data-row"><b>JUAN CARLOS MARTINEZ</b> - Técnico electrónico<br><span style="color: #aaa;">Tel: 304-210-46-50</span></div>
+                    <div class="data-row"><b>LILIBETH MONTAÑEZ PITRE</b> - Contadora<br><span style="color: #aaa;">Tel: 304-553-98-33</span></div>
+                </div>
+                <div>
+                    <h3 style="color: var(--neon-secondary); margin-bottom: 15px; border-bottom: 1px solid #333;">📜 DIPLOMAS Y ACREDITACIONES</h3>
+                    <div class="data-row"><span class="label">Microsoft Active Prof:</span> Promoción 2014 (Marzo 2014)</div>
+                    <div class="data-row"><span class="label">Microsoft Virtual Academy:</span> SQL Server 2008 R2 (12 Dic 2020)</div>
+                    <div class="data-row"><span class="label">Microsoft Office Spec:</span> Office Excel 2010 (Nov 13, 2012)</div>
+                    <div class="data-row"><span class="label">ExcelFull:</span> Experto en Microsoft Excel (Enero 2020)</div>
+                    <div class="data-row"><span class="label">Open English:</span> Level 8 English proficiency (3 Ago 2015)</div>
+                    <div class="data-row"><span class="label">COPNIA:</span> Matrícula No. 68255141625STD (25/06/2016)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🏅 CERTIFICACIONES SENA</h2>
+            <div class="grid-2">
+                <div class="cv-item">
+                    <h4 style="margin-bottom: 5px; color: var(--neon-primary);">COSTOS EN PROCESOS DE PREIMPRESION</h4>
+                    <p style="margin: 0; font-size: 0.9rem; color: #ddd;">Tipo: Certificado Aprobación</p>
+                    <p style="margin: 0; font-size: 0.85rem; color: #888; font-family: monospace;">Reg: 9208002381303CC1079934184C</p>
+                    <p style="margin: 5px 0; font-size: 0.8rem; color: #aaa;">Fecha: 25 / 26 Agosto, 2021</p>
+                    <a href="https://certificados.sena.edu.co/CertificadoDigital/com.sena.guardar?var1=9208002381303CC1079934184C" target="_blank" style="color: var(--neon-accent); text-decoration: none; font-size: 0.9rem;">🔗 Descargar Documento</a>
+                </div>
+                <div class="cv-item">
+                    <h4 style="margin-bottom: 5px; color: var(--neon-primary);">COSTOS EN PROCESOS DE PREIMPRESION</h4>
+                    <p style="margin: 0; font-size: 0.9rem; color: #ddd;">Tipo: Certificado de Notas</p>
+                    <p style="margin: 0; font-size: 0.85rem; color: #888; font-family: monospace;">Reg: 9208002381303CC1079934184E</p>
+                    <p style="margin: 5px 0; font-size: 0.8rem; color: #aaa;">Fecha: 25 / 26 Agosto, 2021</p>
+                    <a href="https://certificados.sena.edu.co/CertificadoDigital/com.sena.guardar?var1=9208002381303CC1079934184E" target="_blank" style="color: var(--neon-accent); text-decoration: none; font-size: 0.9rem;">🔗 Descargar Notas</a>
+                </div>
+                <div class="cv-item">
+                    <h4 style="margin-bottom: 5px; color: var(--neon-secondary);">BIOSEGURIDAD</h4>
+                    <p style="margin: 0; font-size: 0.9rem; color: #ddd;">Tipo: Título</p>
+                    <p style="margin: 0; font-size: 0.85rem; color: #888; font-family: monospace;">Reg: 920800207728CC1079934184C</p>
+                    <p style="margin: 5px 0; font-size: 0.8rem; color: #aaa;">Fecha: 02 / 06 Septiembre, 2021</p>
+                    <a href="https://certificados.sena.edu.co/CertificadoDigital/com.sena.guardar?var1=920800207728CC1079934184C" target="_blank" style="color: var(--neon-accent); text-decoration: none; font-size: 0.9rem;">🔗 Descargar Título</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📺 REGISTROS MULTIMEDIA (VINCULADOS)</h2>
+            <div class="grid-2">
+                <div>
+                    <h3 style="color: #fff; margin-bottom: 5px; font-size: 1.1rem;">🎵 Luna sanjuanera en guitarra</h3>
+                    <p style="color: #888; font-size: 0.9rem; margin-top: 0;">Autor: Noraine Andrea Pallares Meriño</p>
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; margin-top: 10px;">
+                        <iframe src="https://www.youtube.com/embed/t48BFMktxxk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #fff; margin-bottom: 5px; font-size: 1.1rem;">📲 Hack WhatsApp (OSINT)</h3>
+                    <p style="color: #888; font-size: 0.9rem; margin-top: 0;">Autor: Noraine Andrea Pallares Meriño</p>
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; margin-top: 10px;">
+                        <iframe src="https://www.youtube.com/embed/e7nS41nAch4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>

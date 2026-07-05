@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXPEDIENTE | YEILER SMITH ALVAREZ ROMERO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root { --r: #39ff14; --c: #00f0ff; --y: #ffea00; --b: #050505; --p: #0d0d0d; --brd: #1a1a1a; --t: #d0d0d0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--b); color: var(--t); font-family: 'Inter', sans-serif; line-height: 1.4; }
+        .container { max-width: 1000px; margin: auto; padding: 20px; }
+
+        .status-banner { background: rgba(57, 255, 20, 0.1); border: 1px solid var(--r); color: var(--r); padding: 12px; text-align: center; font-family: 'Share Tech Mono'; margin-bottom: 20px; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px; }
+
+        .header-box { display: flex; gap: 30px; background: var(--p); border: 1px solid var(--brd); padding: 30px; border-left: 6px solid var(--r); margin-bottom: 25px; align-items: center; flex-wrap: wrap; }
+        .profile-img { width: 180px; height: 180px; object-fit: cover; border: 1px solid #333; }
+        .header-content h1 { color: #fff; font-size: 1.6rem; text-transform: uppercase; margin-bottom: 5px; }
+        .id-label { font-family: 'Share Tech Mono'; color: var(--c); font-size: 1rem; display: block; margin-bottom: 10px;}
+        
+        .section { background: var(--p); border: 1px solid var(--brd); margin-bottom: 20px; }
+        .section-h { background: #121212; padding: 12px 20px; border-bottom: 1px solid var(--brd); }
+        .section-h h3 { font-family: 'Share Tech Mono'; color: var(--c); font-size: 0.85rem; letter-spacing: 1px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; padding: 20px; }
+        .block { border-bottom: 1px solid #151515; padding-bottom: 10px; }
+        .lbl { display: block; font-size: 0.65rem; color: #555; text-transform: uppercase; margin-bottom: 4px; font-weight: 700; }
+        .val { color: #fff; font-family: 'Share Tech Mono'; font-size: 0.9rem; word-break: break-all; }
+        .val a { color: var(--c); text-decoration: none; border-bottom: 1px dashed var(--c); }
+        .wide { grid-column: 1 / -1; }
+
+        .score-row { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 0.9rem;}
+        .score-bar-bg { flex-grow: 1; background: #222; height: 10px; border-radius: 5px; overflow: hidden; }
+        .score-bar-fill { background: var(--r); height: 100%; }
+
+        .sena-list { padding: 0 20px 20px 20px; display: flex; flex-direction: column; gap: 8px; }
+        .sena-item { background: rgba(0, 240, 255, 0.03); border-left: 2px solid var(--c); padding: 8px 12px; font-family: 'Share Tech Mono'; font-size: 0.8rem; color: #ccc; }
+        .sena-id { color: #fff; font-weight: bold; }
+
+        .tag-red { display: inline-block; background: rgba(255,0,0,0.1); color: #ff4444; border: 1px solid #ff4444; padding: 4px 10px; font-size: 0.8rem; font-weight: bold; margin-top: 10px; font-family: 'Share Tech Mono';}
+
+        .profile-row { display: flex; gap: 20px; padding: 20px; border-bottom: 1px solid #1a1a1a; flex-wrap: wrap; }
+        .profile-row img { width: 140px; height: 140px; object-fit: cover; border: 1px solid var(--brd); }
+        .profile-data { flex-grow: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+
+        @media (max-width: 600px) {
+            .header-box { justify-content: center; text-align: center; }
+            .profile-row { justify-content: center; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="status-banner">HA SIDO EXPUESTO POR TOXICIDAD HACIA LA COMUNIDAD.</div>
+
+    <header class="header-box">
+        <img src="https://i.postimg.cc/kGsNF2g5/yeiler.jpg" alt="PERFIL" class="profile-img">
+        <div class="header-content">
+            <span class="id-label">EXPEDIENTE 1043679565</span>
+            <h1>YEILER SMITH ALVAREZ ROMERO</h1>
+            <span class="tag-red">ESTADO ADMISIÓN UNIVERSIDAD DEL ATLÁNTICO: NO ADMITIDO</span>
+        </div>
+    </header>
+
+    <div class="section">
+        <div class="section-h"><h3>01. REGISTRO CIVIL E IDENTIDAD DEL OBJETIVO</h3></div>
+        <div class="grid">
+            <div class="block"><span class="lbl">Tipo / Número Documento</span><span class="val">Tarjeta de Identidad | 1043679565</span></div>
+            <div class="block"><span class="lbl">Sexo</span><span class="val">MASCULINO</span></div>
+            <div class="block"><span class="lbl">Fecha de Nacimiento</span><span class="val">25 Julio 2008</span></div>
+            <div class="block"><span class="lbl">F. Expedición T.I.</span><span class="val">13 Septiembre 2017</span></div>
+            <div class="block wide"><span class="lbl">Dirección Principal Registrada</span><span class="val">CL 92 # 2 D - 16 - Atlántico, Barranquilla</span></div>
+            <div class="block"><span class="lbl">Serial Registro Civil</span><span class="val">0043680013</span></div>
+            <div class="block"><span class="lbl">F. Inscripción Registro</span><span class="val">10 DE JUNIO DE 2009</span></div>
+            <div class="block wide"><span class="lbl">Oficina de Registro</span><span class="val">NOTARIA 8 BARRANQUILLA - ATLANTICO</span></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-h"><h3>02. HUELLA DIGITAL Y CONTACTOS</h3></div>
+        <div class="grid">
+            <div class="block"><span class="lbl">Teléfono</span><span class="val">573132200325</span></div>
+            <div class="block"><span class="lbl">Correo Electrónico</span><span class="val">yeilersmithromero@gmail.com</span></div>
+            <div class="block wide"><span class="lbl">Contraseña Encriptada</span><span class="val" style="color: var(--r);">7db42f48def9ce4b897b826628cef2c5ebd3cec9267860c90ece6b54ba9d9a43</span></div>
+            <div class="block"><span class="lbl">Fecha de Registro</span><span class="val">2023-07-14 20:38:57</span></div>
+            <div class="block"><span class="lbl">IP de Conexión</span><span class="val">191.156.250.170</span></div>
+            <div class="block wide"><span class="lbl">Perfil de Facebook</span><span class="val"><a href="https://www.facebook.com/yeilersmith.alvarezromero" target="_blank">facebook.com/yeilersmith.alvarezromero</a></span></div>
+            
+            <div class="block wide" style="border-top: 1px solid #1a1a1a; margin-top: 10px; padding-top: 15px;">
+                <span class="lbl" style="color: var(--c);">>> NODOS TELEGRAM VINCULADOS</span>
+            </div>
+            <div class="block" style="background: rgba(0, 240, 255, 0.02); padding: 10px; border-left: 2px solid var(--c);">
+                <span class="lbl">NODO PRINCIPAL - ID: 8551203026</span>
+                <span class="val">User: @yei777moneyyy<br>Aliases:<br>├ 2026-05-06 ➜ 🇨🇴Yei777🍀</span>
+            </div>
+            <div class="block" style="background: rgba(0, 240, 255, 0.02); padding: 10px; border-left: 2px solid var(--c);">
+                <span class="lbl">NODO SECUNDARIO - ID: 8187626505</span>
+                <span class="val">User: @yei777moneyy<br>Aliases:<br>├ 2025-02-11 ➜ 🇨🇴Yei777🍀<br>├ 2025-02-11 ➜ Yei777</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-h"><h3>03. SISTEMA ADMINISTRATIVO Y SALUD</h3></div>
+        <div class="grid">
+            <div class="block wide"><span class="lbl" style="color: var(--y);">ESTADO SISBEN: B1 (POBREZA MODERADA)</span></div>
+            <div class="block"><span class="lbl">Ficha Sisben</span><span class="val">08001062548000000085</span></div>
+            <div class="block"><span class="lbl">Fecha Consulta</span><span class="val">07/05/2026</span></div>
+            <div class="block"><span class="lbl">Encuesta Vigente</span><span class="val">20/08/2019</span></div>
+            <div class="block"><span class="lbl">Últ. Act. Ciudadano</span><span class="val">19/12/2025</span></div>
+            <div class="block wide"><span class="lbl">Últ. Act. Reg. Administrativos</span><span class="val">29/01/2025</span></div>
+
+            <div class="block wide" style="border-top: 1px solid #1a1a1a; margin-top: 10px; padding-top: 15px;">
+                <span class="lbl" style="color: var(--c);">>> AFILIACIÓN EPS</span>
+            </div>
+            <div class="block wide"><span class="lbl">Entidad</span><span class="val">ASOCIACION MUTUAL SER EMPRESA SOLIDARIA DE SALUD ENTIDAD PROMOTORA DE SALUD - MUTUAL SER EPS</span></div>
+            <div class="block"><span class="lbl">Régimen</span><span class="val">SUBSIDIADO</span></div>
+            <div class="block"><span class="lbl">Tipo Afiliado</span><span class="val">BENEFICIARIO</span></div>
+            <div class="block"><span class="lbl">Estado</span><span class="val" style="color: var(--r);">ACTIVO</span></div>
+            <div class="block wide"><span class="lbl">Periodo de Afiliación Efectiva</span><span class="val">01/11/2024 - 31/12/2999</span></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-h"><h3>04. RESULTADOS ICFES SABER 11</h3></div>
+        <div class="grid">
+            <div class="block"><span class="lbl">Número de Registro</span><span class="val">AC202431459247</span></div>
+            <div class="block"><span class="lbl">Código DANE</span><span class="val">308758800002</span></div>
+            <div class="block"><span class="lbl">Aplicación / Publicación</span><span class="val">18/08/2024 - 01/11/2024</span></div>
+            <div class="block wide"><span class="lbl">Establecimiento Educativo</span><span class="val">Instituto Para La Capacitación Simón Rodríguez - Sede Principa</span></div>
+            <div class="block wide"><span class="lbl">Puntaje Global</span><span class="val" style="color: var(--r); font-size: 1.6rem;">264 / 500</span></div>
+        </div>
+        <div style="padding: 0 20px 20px 20px;">
+            <div class="score-row"><span style="width: 170px;">Lectura Crítica</span><div class="score-bar-bg"><div class="score-bar-fill" style="width: 57%;"></div></div><span>57/100 (Perc: 67)</span></div>
+            <div class="score-row"><span style="width: 170px;">Matemáticas</span><div class="score-bar-bg"><div class="score-bar-fill" style="width: 58%;"></div></div><span>58/100 (Perc: 49)</span></div>
+            <div class="score-row"><span style="width: 170px;">Sociales y Ciudadanas</span><div class="score-bar-bg"><div class="score-bar-fill" style="width: 48%;"></div></div><span>48/100 (Perc: 40)</span></div>
+            <div class="score-row"><span style="width: 170px;">Ciencias Naturales</span><div class="score-bar-bg"><div class="score-bar-fill" style="width: 47%;"></div></div><span>47/100 (Perc: 71)</span></div>
+            <div class="score-row"><span style="width: 170px;">Inglés</span><div class="score-bar-bg"><div class="score-bar-fill" style="width: 57%;"></div></div><span>57/100</span></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-h"><h3>05. CERTIFICACIONES ACADÉMICAS SENA</h3></div>
+        <div style="padding: 20px;">
+            <img src="https://i.postimg.cc/FHBmRGmq/Captura-de-pantalla-2026-05-07-012633.png" style="width: 100%; border: 1px solid #333; margin-bottom: 15px;">
+        </div>
+        <div class="sena-list">
+            <div class="sena-item"><span class="sena-id">9302003330182TI1043679565E</span> | Certificado de Notas: FORTALECIMIENTO EN CIENCIAS NATURALES PARA ARTICULACION CON LA MEDIA (07 Nov, 2025 - 10 Nov, 2025)</div>
+            <div class="sena-item"><span class="sena-id">9302003330182TI1043679565C</span> | Certificado Aprobación: FORTALECIMIENTO EN CIENCIAS NATURALES PARA ARTICULACION CON LA MEDIA (07 Nov, 2025 - 10 Nov, 2025)</div>
+            <div class="sena-item"><span class="sena-id">9302003384548TI1043679565C</span> | Certificado Aprobación: FORTALECIMIENTO EN LECTURA CRITICA PARA ARTICULACION CON LA MEDIA (24 Dic, 2025 - 27 Dic, 2025)</div>
+            <div class="sena-item"><span class="sena-id">9302003384555TI1043679565E</span> | Certificado de Notas: REDACCION Y ORTOGRAFIA (24 Dic, 2025 - 27 Dic, 2025)</div>
+            <div class="sena-item"><span class="sena-id">9302003384555TI1043679565C</span> | Certificado Aprobación: REDACCION Y ORTOGRAFIA (24 Dic, 2025 - 27 Dic, 2025)</div>
+            <div class="sena-item"><span class="sena-id">9302003384548TI1043679565E</span> | Certificado de Notas: FORTALECIMIENTO EN LECTURA CRITICA PARA ARTICULACION CON LA MEDIA (24 Dic, 2025 - 27 Dic, 2025)</div>
+        </div>
+    </div>
+
+
+
+    <div class="section">
+        <div class="section-h"><h3>06. PADRE</h3></div>
+        <div style="background: #0a0a0a; border: 1px solid #1a1a1a; margin: 20px; padding: 20px; position: relative; border-left: 4px solid var(--c);">
+            <span style="position: absolute; top: 10px; right: 15px; font-size: 0.7rem; color: var(--c); font-family: 'Share Tech Mono';">ESTADO: VERIFICADO ✔</span>
+            <div class="profile-row" style="padding: 0; border: none;">
+                <img src="https://i.postimg.cc/brFBqVfb/papa.jpg" alt="PADRE" style="box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);">
+                <div class="profile-data">
+                    <div class="block wide"><span class="lbl">Nombres y Apellidos Completos</span><span class="val" style="color: var(--c); font-size: 1.1rem;">LERBIS BLADIMIR ALVAREZ LLAMAS</span></div>
+                    <div class="block"><span class="lbl">Cédula de Ciudadanía</span><span class="val">1047215104</span></div>
+                    <div class="block"><span class="lbl">Perfil Biológico</span><span class="val">MASCULINO | RH: O+ (2) | 169 cm</span></div>
+                    <div class="block"><span class="lbl">Fecha de Nacimiento</span><span class="val">1986-04-06</span></div>
+                    <div class="block"><span class="lbl">F. y Sede de Expedición</span><span class="val">2004-05-12 (GALAPA - ATLANTICO)</span></div>
+                    <div class="block"><span class="lbl">Origen</span><span class="val">BARRANQUILLA - ATLANTICO</span></div>
+                    <div class="block"><span class="lbl">Reg. Electoral (Ubicación)</span><span class="val">Mesa Asignada: 24403013000</span></div>
+                    <div class="block wide"><span class="lbl">Dirección Compartida (Match: 100%)</span><span class="val">CL 92 # 2 D - 16 - Atlántico, Barranquilla</span></div>
+                    <div class="block wide"><span class="lbl">Huella Social (Facebook)</span><span class="val"><a href="https://www.facebook.com/profile.php?id=100009240371863" target="_blank">Perfil Facebook ID: 100009240371863</a></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-h"><h3>07. MADRE</h3></div>
+        <div style="background: #0a0a0a; border: 1px solid #1a1a1a; margin: 20px; padding: 20px; position: relative; border-left: 4px solid #ff00ff;">
+            <span style="position: absolute; top: 10px; right: 15px; font-size: 0.7rem; color: #ff00ff; font-family: 'Share Tech Mono';">ESTADO: VERIFICADO ✔</span>
+            <div class="profile-row" style="padding: 0; border: none;">
+                <img src="https://i.postimg.cc/13HnYkGK/mama.jpg" alt="MADRE" style="box-shadow: 0 0 10px rgba(255, 0, 255, 0.2);">
+                <div class="profile-data">
+                    <div class="block wide"><span class="lbl">Nombres y Apellidos Completos</span><span class="val" style="color: #ff00ff; font-size: 1.1rem;">NELCY YURANIS ROMERO GARCIA</span></div>
+                    <div class="block"><span class="lbl">Cédula de Ciudadanía</span><span class="val">1.045.712.927</span></div>
+                    <div class="block"><span class="lbl">Perfil Biológico</span><span class="val">FEMENINO | Edad Actual: 33 Años</span></div>
+                    <div class="block"><span class="lbl">Fecha de Nacimiento</span><span class="val">1993-02-18</span></div>
+                    <div class="block"><span class="lbl">Fecha de Expedición</span><span class="val">2011-03-30</span></div>
+                    <div class="block"><span class="lbl">Nivel de Actividad Digital</span><span class="val">ALTA (Redes Activas)</span></div>
+                    <div class="block wide"><span class="lbl">Dirección Compartida (Match: 100%)</span><span class="val">CL 92 # 2 D - 16 - Atlántico, Barranquilla</span></div>
+                    <div class="block wide"><span class="lbl">Huella Social (Facebook)</span><span class="val"><a href="https://www.facebook.com/yurainis.romero.944" target="_blank">facebook.com/yurainis.romero.944</a></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-h"><h3>08. HERMANA</h3></div>
+        <div style="background: rgba(255, 234, 0, 0.05); border: 1px dashed var(--y); margin: 20px; padding: 20px; position: relative; border-left: 4px solid var(--y);">
+            <span style="position: absolute; top: 10px; right: 15px; font-size: 0.7rem; color: var(--y); font-family: 'Share Tech Mono';">ESTADO: ACCESO RESTRINGIDO 🔒</span>
+            <div class="profile-row" style="padding: 0; border: none;">
+                <img src="https://i.postimg.cc/K8YdnNWN/474662077-3932207833763857-5986834711355110211-n.jpg" alt="HERMANA" style="filter: grayscale(0.5); opacity: 0.8;">
+                <div class="profile-data">
+                    <div class="block wide"><span class="lbl" style="color: var(--y);">>> ALERTA: PROTECCIÓN DE DATOS DE MENOR ACTIVA</span></div>
+                    <div class="block"><span class="lbl">Nombres Completos</span><span class="val">BEILYS YELIETH</span></div>
+                    <div class="block"><span class="lbl">Apellidos Completos</span><span class="val">ALVAREZ ROMERO</span></div>
+                    <div class="block wide"><span class="lbl">Documento (Tarjeta de Identidad)</span><span class="val" style="letter-spacing: 2px;">10437035<span style="color: #ff4444;">**</span> (Censurado por Ley)</span></div>
+                    <div class="block wide"><span class="lbl">Nivel de Afinidad</span><span class="val">VÍNCULO SANGUÍNEO DIRECTO (Hermana)</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-h"><h3>09. ABUELA MATERNA</h3></div>
+        <div style="background: #050505; border: 1px dashed #333; margin: 20px; padding: 20px; position: relative; border-left: 4px solid #ff4444;">
+            <span style="position: absolute; top: 10px; right: 15px; font-size: 0.7rem; color: #ff4444; font-family: 'Share Tech Mono';">ESTADO: VERIFICADO</span>
+            
+            <div class="grid" style="padding: 0; border: none; margin-top: 15px;">
+                <div class="block wide"><span class="lbl" style="color: #ff4444;"DATOS EXTRAIDOS</span></div>
+                
+                <div class="block wide"><span class="lbl">Nombres y Apellidos Completos</span><span class="val" style="color: #fff; font-size: 1.1rem;">NELCY DEL CARMEN GARCIA MERCADO</span></div>
+                <div class="block"><span class="lbl">Documento (CC)</span><span class="val">32.657.293</span></div>
+                <div class="block"><span class="lbl">Perfil </span><span class="val">FEMENINO | RH: S/D | Estatura: S/D</span></div>
+                
+                <div class="block"><span class="lbl">Fecha de Nacimiento</span><span class="val">1957-12-13</span></div>
+                <div class="block"><span class="lbl">Origen Local</span><span class="val">MAGANGUE - BOLIVAR</span></div>
+                
+                <div class="block"><span class="lbl">Fecha de Expedición Documento</span><span class="val">1980-10-06</span></div>
+                <div class="block"><span class="lbl">Sede de Expedición</span><span class="val">BARRANQUILLA - ATLANTICO</span></div>
+                
+                <div class="block wide"><span class="lbl">Residencia Actual / Contacto</span><span class="val" style="color: #ff4444; font-weight: bold; background: rgba(255,0,0,0.1); padding: 2px 8px; border: 1px solid #ff4444; display: inline-block;">DESCONOCIDO (Sin Registro Reciente)</span></div>
+                
+                <div class="block"><span class="lbl">Vínculos Parentales (Ancestría)</span><span class="val" style="color: #888;">Padre: No Registrado<br>Madre: No Registrada</span></div>
+                <div class="block"><span class="lbl">Registro Electoral (CNE)</span><span class="val" style="color: #888;">Zona: N/A<br>Puesto: N/A<br>Ubicación: Ninguna</span></div>
+                
+                <div class="block wide"><span class="lbl">Fórmula Dactilar (Biometría AFIS)</span><span class="val" style="letter-spacing: 2px; font-family: monospace; color: var(--c);">Mano DER: 0-0-0 | Mano IZQ: 0-0-0</span></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+

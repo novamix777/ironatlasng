@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>EXPEDIENTE FAMILIAR BARAJAS PINZON</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root { --r: #ff0033; --c: #00f0ff; --b: #050505; --p: #0d0d0d; --brd: #1a1a1a; --t: #d0d0d0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; max-width: 100%; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--b); color: var(--t); font-family: 'Inter', sans-serif; line-height: 1.4; user-select: none; }
+        .container { max-width: 1000px; margin: auto; padding: clamp(10px, 4vw, 30px); }
+        
+        .header-box {
+            display: flex; gap: 30px; background: var(--p); border: 1px solid var(--brd);
+            padding: 30px; border-left: 6px solid var(--c); margin-bottom: 25px; align-items: center;
+        }
+        .profile-img { width: 180px; height: 180px; object-fit: cover; border: 1px solid #222; flex-shrink: 0; filter: grayscale(0.3); }
+        .header-content h1 { color: #fff; font-size: clamp(1.2rem, 5vw, 1.8rem); margin-bottom: 5px; text-transform: uppercase; }
+        .id-label { font-family: 'Share Tech Mono'; color: var(--c); font-size: 1rem; display: block; margin-bottom: 10px; }
+        
+        .section { background: var(--p); border: 1px solid var(--brd); margin-bottom: 20px; }
+        .section-h { background: #121212; padding: 12px 20px; border-bottom: 1px solid var(--brd); }
+        .section-h h3 { font-family: 'Share Tech Mono'; color: var(--c); font-size: 0.85rem; letter-spacing: 1px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 20px; }
+        .block { border-bottom: 1px solid #151515; padding-bottom: 10px; }
+        .lbl { display: block; font-size: 0.65rem; color: #555; text-transform: uppercase; margin-bottom: 4px; font-weight: 700; }
+        .val { color: #fff; font-family: 'Share Tech Mono'; font-size: 0.95rem; word-break: break-all; }
+        .wide { grid-column: 1 / -1; }
+
+        .entry { border-left: 2px solid var(--c); padding: 5px 15px; margin: 15px 20px; background: rgba(0,240,255,0.02); }
+        .entry-t { color: var(--c); font-weight: bold; font-size: 0.8rem; margin-bottom: 5px; display: block; text-transform: uppercase; }
+        .entry-d { display: block; font-size: 0.85rem; color: #888; margin-bottom: 3px; }
+
+        .status-active { color: #00ff00; font-family: 'Share Tech Mono'; font-weight: bold; }
+        .nav-back { padding-bottom: 15px; }
+        .nav-back a { color: #444; text-decoration: none; font-size: 0.75rem; font-family: 'Share Tech Mono'; }
+
+        @media (max-width: 768px) {
+            .header-box { flex-direction: column; text-align: center; padding: 20px; gap: 15px; }
+            .grid { grid-template-columns: 1fr; padding: 15px; }
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+<div class="container">
+    <nav class="nav-back"><a href="#">DATABASE NÚCLEO FAMILIAR</a></nav>
+
+    <header class="header-box">
+        <img src="https://i.postimg.cc/ZnTx4Q5c/Captura-de-pantalla-2026-04-08-004755.png" alt="TARGET" class="profile-img">
+        <div class="header-content">
+            <span class="id-label">REGISTRO LOCAL</span>
+            <h1>FAMILIA BARAJAS PINZÓN</h1>
+            <p style="font-size: 0.9rem; color: #777;">ID Grupal: BOG-FONT-2026</p>
+        </div>
+    </header>
+
+    <div class="section">
+        <div class="section-h"><h3>01. PERFIL: NELSON ESTIVEN BARAJAS PINZON</h3></div>
+        <div class="grid">
+            <div class="block"><span class="lbl">ID Sistema</span><span class="val">1028867220</span></div>
+            <div class="block"><span class="lbl">Tipo Documento</span><span class="val">TARJETA DE IDENTIDAD</span></div>
+            <div class="block"><span class="lbl">Sexo / Género</span><span class="val">HOMBRE / MASCULINO</span></div>
+            <div class="block"><span class="lbl">Nacimiento</span><span class="val">2009-06-02</span></div>
+            <div class="block"><span class="lbl">Origen</span><span class="val">COLOMBIA - BOGOTÁ, D.C.</span></div>
+            <div class="block"><span class="lbl">Residencia</span><span class="val">BOGOTÁ, D.C. - FONTIBON</span></div>
+            <div class="block"><span class="lbl">Dirección</span><span class="val">KR 104A 16H20</span></div>
+            <div class="block"><span class="lbl">Celular</span><span class="val">3143203987</span></div>
+            <div class="block wide"><span class="lbl">Email</span><span class="val">NELSONESTIVENBARAJASPINZON.209@GMAIL.COM</span></div>
+            <div class="block wide"><span class="lbl">EPS</span><span class="val">FAMISANAR E.P.S. LTDA - CAFAM - COLSUBSIDIO</span></div>
+            <div class="block"><span class="lbl">Cuidador</span><span class="val">ALBA YANETH PINZON GOMEZ (MADRE)</span></div>
+            <div class="block"><span class="lbl">Estudia</span><span class="val">YES</span></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-h"><h3>02. ALBA YANETH PINZON GOMEZ</h3></div>
+        <div class="grid">
+            <div class="block"><span class="lbl">Cédula</span><span class="val">28259014</span></div>
+            <div class="block"><span class="lbl">Estado CC</span><span class="status-active">ACTIVA</span></div>
+            <div class="block"><span class="lbl">Nacimiento</span><span class="val">1971-06-16 (MOLAGAVITA)</span></div>
+            <div class="block"><span class="lbl">Expedición CC</span><span class="val">1989-08-11</span></div>
+            <div class="block"><span class="lbl">Físico</span><span class="val">155 cm / RH: 2 / F</span></div>
+            <div class="block"><span class="lbl">Email</span><span class="val">YANA192PINB@HOTMAIL.COM</span></div>
+            <div class="block"><span class="lbl">Teléfono</span><span class="val">3143203987</span></div>
+            <div class="block"><span class="lbl">Orientación</span><span class="val">HETEROSEXUAL</span></div>
+        </div>
+        <div class="entry">
+            <span class="entry-t">LICENCIA No: 10832563 (CAT C1)</span>
+            <span class="entry-d">Organismo: FUNZA | 2013-03-27: Expedición</span>
+            <span class="entry-d">2013-03-26: Certificado Aptitud | 2012-11-27: Evaluación Médica</span>
+            <span class="entry-d status-active">SIN ASUNTOS PENDIENTES (31/01/2026)</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-h"><h3>03. PROFILE: EDILFONSO BARAJAS HERNANDEZ</h3></div>
+        <div class="grid">
+            <div class="block"><span class="lbl">Cédula</span><span class="val">5691873 - 5</span></div>
+            <div class="block"><span class="lbl">Matrícula CCB</span><span class="val">2818479 (ACTIVA - Renovación 2025)</span></div>
+            <div class="block"><span class="lbl">Padres</span><span class="val">JOSE BARAJAS / LIBIA HERNANDEZ</span></div>
+            <div class="block"><span class="lbl">Huellas</span><span class="val">03- U / 11- W</span></div>
+            <div class="block"><span class="lbl">Nacimiento</span><span class="val">1969-06-23 (MOLAGAVITA)</span></div>
+            <div class="block"><span class="lbl">Dirección Trabajo</span><span class="val">Calle 18 96h B 47, Fontibon</span></div>
+            <div class="block wide"><span class="lbl">Email</span><span class="val">ADBARAJAS49@MISENA.EDU.CO</span></div>
+        </div>
+        <div class="entry">
+            <span class="entry-t">HISTORIAL RUNT Y LICENCIAS</span>
+            <span class="entry-d">Categorías: C2, B2, C1</span>
+            <span class="entry-d">Trámites en: Bogotá, Piedecuesta, Mosquera, Pacho</span>
+            <span class="entry-d">2019-12-20: Duplicado Licencia | 2018-12-26: Traspaso</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-h"><h3>04. PROFILE: LUZ MYREYA PINZON GOMEZ (TÍA)</h3></div>
+        <div class="grid">
+            <div class="block"><span class="lbl">NUIP / Documento</span><span class="val">63394049</span></div>
+            <div class="block"><span class="lbl">Padre / Madre</span><span class="val">TOMAS PINZON / MARIA DAVEY GOMEZ</span></div>
+            <div class="block"><span class="lbl">Dactilar</span><span class="val">01- U / 09- C</span></div>
+            <div class="block"><span class="lbl">Dirección</span><span class="val">CALLE 6Nª3-32 CENTRO</span></div>
+            <div class="block"><span class="lbl">Teléfono</span><span class="val">3124597391</span></div>
+            <div class="block"><span class="lbl">Red Social</span><span class="val">facebook.com/luz.m.gomez.718</span></div>
+        </div>
+        <div class="entry">
+            <span class="entry-t">NOTAS DE CAMPO</span>
+            <span class="entry-d">Vinculación directa al núcleo Pinzon Gomez. Verificado v3.1</span>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener('keydown', function(e) {
+        if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85)) {
+            e.preventDefault(); return false;
+        }
+    });
+    document.querySelectorAll('img').forEach(img => { img.onmousedown = () => false; });
+</script>
+
+</body>
+</html>
