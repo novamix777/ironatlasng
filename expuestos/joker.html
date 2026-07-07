@@ -1,4 +1,52 @@
-</style>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>EXPEDIENTE 1082864777</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root { --r: #39ff14; --c: #00f0ff; --b: #050505; --p: #0d0d0d; --brd: #1a1a1a; --t: #d0d0d0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; max-width: 100%; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--b); color: var(--t); font-family: 'Inter', sans-serif; line-height: 1.4; user-select: none; }
+        .container { max-width: 1000px; margin: auto; padding: clamp(10px, 4vw, 30px); }
+        
+        .header-box {
+            display: flex; gap: 30px; background: var(--p); border: 1px solid var(--brd);
+            padding: 30px; border-left: 6px solid var(--r); margin-bottom: 25px; align-items: center;
+        }
+        .profile-img { width: 180px; height: 180px; object-fit: cover; border: 1px solid #222; flex-shrink: 0; filter: grayscale(0.3); }
+        .header-content h1 { color: #fff; font-size: clamp(1.2rem, 5vw, 1.8rem); margin-bottom: 5px; text-transform: uppercase; }
+        .id-label { font-family: 'Share Tech Mono'; color: var(--c); font-size: 1rem; display: block; margin-bottom: 10px; }
+        
+        .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+        .tag { background: #020; color: var(--r); padding: 3px 10px; font-size: 0.7rem; font-weight: bold; border: 1px solid #040; }
+
+        .section { background: var(--p); border: 1px solid var(--brd); margin-bottom: 20px; }
+        .section-h { background: #121212; padding: 12px 20px; border-bottom: 1px solid var(--brd); display: flex; justify-content: space-between; }
+        .section-h h3 { font-family: 'Share Tech Mono'; color: var(--c); font-size: 0.85rem; letter-spacing: 1px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 20px; }
+        .block { border-bottom: 1px solid #151515; padding-bottom: 10px; }
+        .lbl { display: block; font-size: 0.65rem; color: #555; text-transform: uppercase; margin-bottom: 4px; font-weight: 700; }
+        .val { color: #fff; font-family: 'Share Tech Mono'; font-size: 0.95rem; word-break: break-all; }
+        .wide { grid-column: 1 / -1; }
+
+        .entry { border-left: 2px solid var(--c); padding: 5px 15px; margin: 15px 20px; background: rgba(0,240,255,0.02); }
+        .entry-t { color: var(--c); font-weight: bold; font-size: 0.8rem; margin-bottom: 5px; display: block; text-transform: uppercase; }
+        .entry-d { display: block; font-size: 0.85rem; color: #888; margin-bottom: 3px; }
+
+        .nav-back { padding-bottom: 15px; }
+        .nav-back a { color: #444; text-decoration: none; font-size: 0.75rem; font-family: 'Share Tech Mono'; transition: 0.3s; }
+        .nav-back a:hover { color: var(--r); }
+
+        @media (max-width: 768px) {
+            .header-box { flex-direction: column; text-align: center; padding: 20px; gap: 15px; }
+            .profile-img { width: 150px; height: 150px; }
+            .grid { grid-template-columns: 1fr; padding: 15px; gap: 15px; }
+            .section-h { padding: 10px 15px; }
+        }
+    </style>
 </head>
 <body oncontextmenu="return false;">
 
