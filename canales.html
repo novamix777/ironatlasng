@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRON ATLAS — CANALES</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #030000;
+            --neon-red: #ff003c;
+            --text-light: #ffd6e0;
+            --text-muted: #a08a90;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background: rgba(3, 0, 0, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 0, 60, 0.3);
+            box-shadow: 0 4px 30px rgba(255, 0, 60, 0.1);
+            z-index: 100;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .nav-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px var(--neon-red);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-link {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--neon-red);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 8px var(--neon-red);
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+            text-shadow: 0 0 15px var(--neon-red);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 30px;
+            height: 3px;
+            background: var(--neon-red);
+            border-radius: 2px;
+            box-shadow: 0 0 5px var(--neon-red);
+        }
+
+        .main-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8rem 2rem 3rem 2rem;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1000px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero-logo {
+            width: 180px;
+            height: auto;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 20px var(--neon-red));
+            animation: pulseLogo 3s infinite alternate;
+        }
+
+        @keyframes pulseLogo {
+            0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255, 0, 60, 0.6)); }
+            100% { transform: scale(1.05); filter: drop-shadow(0 0 35px var(--neon-red)); }
+        }
+
+        .hero-section h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 4.5rem);
+            font-weight: 900;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 0, 60, 0.5), 0 0 30px rgba(255, 0, 60, 0.4), 0 0 60px var(--neon-red);
+            margin-bottom: 1rem;
+        }
+
+        .hero-quote {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+            font-style: italic;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 8px rgba(255, 0, 60, 0.4);
+            border-left: 3px solid var(--neon-red);
+            border-right: 3px solid var(--neon-red);
+            padding: 0 1.5rem;
+            position: relative;
+        }
+
+        .hero-quote::before, .hero-quote::after {
+            content: '///';
+            position: absolute;
+            color: var(--neon-red);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            font-style: normal;
+            opacity: 0.5;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .hero-quote::before { left: -30px; }
+        .hero-quote::after { right: -30px; }
+
+        .grid-container {
+            width: 100%;
+            max-width: 1400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .card {
+            background: linear-gradient(145deg, rgba(15, 0, 5, 0.8), rgba(3, 0, 0, 0.95));
+            border: 1px solid rgba(255, 0, 60, 0.2);
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: #ffffff;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUpFade 0.6s ease forwards;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; border-color: rgba(255, 0, 60, 0.6); box-shadow: 0 0 15px rgba(255, 0, 60, 0.15); }
+        .card:nth-child(2) { animation-delay: 0.15s; }
+        .card:nth-child(3) { animation-delay: 0.2s; }
+        .card:nth-child(4) { animation-delay: 0.25s; }
+        .card:nth-child(5) { animation-delay: 0.3s; }
+
+        @keyframes slideUpFade {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 60, 0.15), transparent);
+            transition: 0.5s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            border-color: var(--neon-red);
+            box-shadow: 0 15px 35px rgba(255, 0, 60, 0.3), inset 0 0 20px rgba(255, 0, 60, 0.15);
+            transform: translateY(-8px) scale(1.02);
+            z-index: 10;
+        }
+
+        .card-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .channel-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 0, 60, 0.4);
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--neon-red);
+            background: rgba(255, 0, 60, 0.05);
+            z-index: 2;
+            text-shadow: 0 0 10px var(--neon-red);
+        }
+
+        .card:nth-child(1) .channel-icon {
+            border-color: var(--neon-red);
+            box-shadow: 0 0 25px rgba(255, 0, 60, 0.4);
+            background: rgba(255, 0, 60, 0.1);
+        }
+
+        .card:hover .channel-icon {
+            transform: scale(1.1) rotate(5deg);
+            border-color: #fff;
+            box-shadow: 0 0 30px var(--neon-red);
+            color: #fff;
+            background: rgba(255, 0, 60, 0.25);
+            text-shadow: 0 0 20px #fff;
+        }
+
+        .card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .card-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+            text-transform: uppercase;
+        }
+
+        .card:hover .card-name {
+            color: #ffffff;
+            text-shadow: 0 0 15px var(--neon-red);
+        }
+
+        .card-role {
+            font-size: 0.85rem;
+            color: var(--neon-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            padding: 0 0.5rem;
+        }
+
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .badge {
+            background: rgba(255, 0, 60, 0.05);
+            border: 1px solid rgba(255, 0, 60, 0.3);
+            color: var(--text-light);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .card:hover .badge {
+            border-color: var(--neon-red);
+            background: rgba(255, 0, 60, 0.2);
+            color: #fff;
+            box-shadow: 0 0 10px rgba(255, 0, 60, 0.4);
+        }
+
+        .action-btn {
+            margin-top: 1rem;
+            padding: 0.8rem 2rem;
+            background: transparent;
+            border: 2px solid var(--neon-red);
+            color: var(--neon-red);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .card:hover .action-btn {
+            background: var(--neon-red);
+            color: #fff;
+            box-shadow: 0 0 20px var(--neon-red);
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: rgba(3, 0, 0, 0.98);
+                padding: 2rem 0;
+                text-align: center;
+                border-bottom: 1px solid var(--neon-red);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .hero-quote {
+                border: none;
+                padding: 0;
+            }
+            .hero-quote::before, .hero-quote::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <nav class="top-nav">
+        <a href="/" class="nav-brand">
+            <span class="nav-title">IRON ATLAS NG</span>
+        </a>
+        <div class="hamburger" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links" id="nav-links">
+            <a href="/tools/index.html" class="nav-link">Herramientas</a>
+            <a href="/expuestos/expedientes.html" class="nav-link">Expedientes</a>
+            <a href="/canales.html" class="nav-link" style="color: #fff; text-shadow: 0 0 15px var(--neon-red);">Canales</a>
+            <a href="/redes.html" class="nav-link">REDES SOCIALES</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="hero-section">
+            <img src="/assets/iron.png" alt="IRON ATLAS" class="hero-logo" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBkPSJNMzAgMjBMMzAgODBMNzAgNTBaIiBmaWxsPSIjZmYwMDNjIi8+PC9zdmc+'">
+            <h1>Canales Telegram</h1>
+            <p class="hero-quote">Somos una legion que cambiará el mundo.</p>
+        </section>
+
+        <section class="grid-container">
+            <div class="data-grid">
+                
+                <a href="https://t.me/+-dgGPQBAmghmZTY5" target="_blank" class="card">
+                    <div class="card-header">
+                        <img src="https://i.postimg.cc/mrmBXTW2/Logo-iron-atlas.jpg" class="channel-icon" alt="Main Hub" style="object-fit: cover;">
+                        <div class="card-info">
+                            <span class="card-name">IRON ATLAS</span>
+                            <span class="card-role">NEW GENERATION</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Accede al canal principal de la Organización ɪʀᴏɴ ᴀᴛʟᴀꜱ ɴᴇᴡ ɢᴇɴᴇʀᴀᴛɪᴏɴ , Accede a la verdad, estamos dispuestos a ayudar a todos nuestros integrantes y promover una mejor comunidad</p>
+                    <div class="badge-container">
+                        <span class="badge">HACKING</span>
+                        <span class="badge">VULNS</span>
+                    </div>
+                    <div class="action-btn">UNIRME</div>
+                </a>
+
+                <a href="https://t.me/HackPurgatory" target="_blank" class="card">
+                    <div class="card-header">
+                        <img src="https://i.postimg.cc/MG69DQSm/hackpurgatory.jpg" class="channel-icon" alt="Main Hub" style="object-fit: cover;">
+                        <div class="card-info">
+                            <span class="card-name">𝐇𝐀𝐂𝐊 [𝐏𝐔𝐑𝐆𝐀𝐓𝐎𝐑𝐘]™</span>
+                            <span class="card-role">ALIADO</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Accede al canal de 𝐇𝐀𝐂𝐊 [𝐏𝐔𝐑𝐆𝐀𝐓𝐎𝐑𝐘]™ una organización enfocada en la lucha contra actividades ilegales </p>
+                    <div class="badge-container">
+                        <span class="badge">HACKING</span>
+                        <span class="badge">LIMPIEZA</span>
+                    </div>
+                    <div class="action-btn">UNIRME</div>
+                </a>
+                
+                 <a href="https://t.me/team_jxll_chat" target="_blank" class="card">
+                    <div class="card-header">
+                        <img src="https://i.postimg.cc/m2cfYKwF/TEAM-JXLL.jpg" class="channel-icon" alt="Main Hub" style="object-fit: cover;">
+                        <div class="card-info">
+                            <span class="card-name">𝐓𝐄𝐀𝐌 𝐉𝐗𝐋𝐋</span>
+                            <span class="card-role">ALIADO</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Accede al canal de 𝐓𝐄𝐀𝐌 𝐉𝐗𝐋𝐋 una organización enfocada en el hacking con fines éticos, para promover una comunidad más segura. </p>
+                    <div class="badge-container">
+                        <span class="badge">HACKING</span>
+                        <span class="badge">LIMPIEZA</span>
+                    </div>
+                    <div class="action-btn">UNIRME</div>
+                </a>
+                
+                 <a href="https://t.me/nullsechackers" target="_blank" class="card">
+                    <div class="card-header">
+                        <img src="https://i.postimg.cc/DfLY7FBb/nullsec.jpg" class="channel-icon" alt="Main Hub" style="object-fit: cover;">
+                        <div class="card-info">
+                            <span class="card-name">Nullsec Philippines</span>
+                            <span class="card-role">ALIADO</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Accede al canal de Nullsec Philippines una organización enfocada en el Hacking, Exploits, Brechas, Defacement </p>
+                    <div class="badge-container">
+                        <span class="badge">HACKING</span>
+                        <span class="badge">LIMPIEZA</span>
+                    </div>
+                    <div class="action-btn">UNIRME</div>
+                </a>
+
+                 <a href="https://t.me/+Nv7FxJLk6NQ5NmYx" target="_blank" class="card">
+                    <div class="card-header">
+                        <img src="https://i.postimg.cc/SNt95YCr/Captura-de-pantalla-2026-05-27-215341.png" class="channel-icon" alt="Main Hub" style="object-fit: cover;">
+                        <div class="card-info">
+                            <span class="card-name"> 𝗠𝗲𝗿𝗰𝗮𝗡𝗲𝗴𝗿𝗼𝗖𝗢𝗟 </span>
+                            <span class="card-role">ALIADO</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Accede al canal de + 𝗠𝗲𝗿𝗰𝗮𝗡𝗲𝗴𝗿𝗼𝗖𝗢𝗟 + un grupo enfocada en el Hacking, Exploits, Brechas, Ventas , G5 entre otras </p>
+                    <div class="badge-container">
+                        <span class="badge">VENTAS</span>
+                        <span class="badge">MERCADO NEGRO</span>
+                    </div>
+                    <div class="action-btn">UNIRME</div>
+                </a>
+
+                 <a href="https://t.me/FusaUrbanoOficial" target="_blank" class="card">
+                    <div class="card-header">
+                        <img src="https://i.postimg.cc/t4k4fLLw/FUSA.jpg" class="channel-icon" alt="Main Hub" style="object-fit: cover;">
+                        <div class="card-info">
+                            <span class="card-name">FusaUrbano</span>
+                            <span class="card-role">ALIADO</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Accede al canal de FusaUrbano una Comunidad enfocada a la filtración de Música de artistas reconocidos </p>
+                    <div class="badge-container">
+                        <span class="badge">LEAKS MUSIC</span>
+                        <span class="badge">MUSIC</span>
+                    </div>
+                    <div class="action-btn">UNIRME</div>
+                </a>
+
+            <a href="https://t.me/+s-O-Mbb4-KY1Y2Yx" target="_blank" class="card">
+                    <div class="card-header">
+                        <img src="https://i.postimg.cc/cJGB98Gz/Flood.jpg" class="channel-icon" alt="Main Hub" style="object-fit: cover;">
+                        <div class="card-info">
+                            <span class="card-name">FloodHacking</span>
+                            <span class="card-role">Organization</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Accede al canal de FloodHacking una organización enfocada a la limpieza de grupos , cuentas y canales de Telegram en colaboración con Soporte </p>
+                    <div class="badge-container">
+                        <span class="badge">HACKING</span>
+                        <span class="badge">LIMPIEZA</span>
+                    </div>
+                    <div class="action-btn">UNIRME</div>
+                </a>
+
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null, radius: 200 };
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        window.addEventListener('mouseout', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Node {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 1.5;
+                this.vy = (Math.random() - 0.5) * 1.5;
+                this.radius = Math.random() * 1.5 + 1;
+                this.baseX = this.x;
+                this.baseY = this.y;
+            }
+
+            update() {
+                if (mouse.x !== null) {
+                    let dx = this.x - mouse.x;
+                    let dy = this.y - mouse.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < mouse.radius) {
+                        let force = (mouse.radius - distance) / mouse.radius;
+                        this.x += (dx / distance) * force * 3;
+                        this.y += (dy / distance) * force * 3;
+                    }
+                }
+
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#ff003c';
+                ctx.fill();
+            }
+        }
+
+        function initNodes() {
+            particles = [];
+            let count = Math.floor((canvas.width * canvas.height) / 10000);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Node());
+            }
+        }
+
+        function animateNodes() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                if (mouse.x !== null) {
+                    let dxMouse = particles[i].x - mouse.x;
+                    let dyMouse = particles[i].y - mouse.y;
+                    let distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+                    if (distMouse < mouse.radius) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255, 0, 60, ${1 - distMouse / mouse.radius})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+                    }
+                }
+
+                for (let j = i; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 110) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255, 0, 60, ${0.7 - distance/110})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateNodes);
+        }
+
+        initNodes();
+        animateNodes();
+
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+            }
+        });
+        setInterval(() => {
+            (function() { return false; }['constructor']('debugger')());
+        }, 50);
+    </script>
+</body>
+</html>
