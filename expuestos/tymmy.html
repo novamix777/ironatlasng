@@ -10,7 +10,47 @@
         * { margin: 0; padding: 0; box-sizing: border-box; max-width: 100%; -webkit-tap-highlight-color: transparent; }
         body { background: var(--b); color: var(--t); font-family: 'Inter', sans-serif; line-height: 1.4; user-select: none; }
         .container { max-width: 1000px; margin: auto; padding: clamp(10px, 4vw, 30px); }
-       
+      
+        /* LOGOS UNIDOS */
+        .logos-unidos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            padding: 18px 25px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            border-left: 4px solid var(--c);
+        }
+        .logos-unidos .logo-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+        .logos-unidos .logo-item img {
+            height: 36px;
+            width: auto;
+            display: block;
+            filter: drop-shadow(0 0 4px rgba(0,240,255,0.2));
+        }
+        .logos-unidos .separador {
+            color: #333;
+            font-size: 1.4rem;
+            font-weight: 100;
+        }
+        @media (max-width: 600px) {
+            .logos-unidos { gap: 6px; padding: 12px 15px; }
+            .logos-unidos .logo-item { font-size: 0.85rem; }
+            .logos-unidos .logo-item img { height: 28px; }
+            .logos-unidos .separador { font-size: 1rem; }
+        }
+
         .header-box {
             display: flex; gap: 30px; background: var(--p); border: 1px solid var(--brd);
             padding: 30px; border-left: 6px solid var(--r); margin-bottom: 25px; align-items: center;
@@ -18,7 +58,7 @@
         .profile-img { width: 180px; height: 180px; object-fit: cover; border: 1px solid #222; flex-shrink: 0; filter: grayscale(0.3); }
         .header-content h1 { color: #fff; font-size: clamp(1.2rem, 5vw, 1.8rem); margin-bottom: 5px; text-transform: uppercase; }
         .id-label { font-family: 'Share Tech Mono'; color: var(--c); font-size: 1rem; display: block; margin-bottom: 10px; }
-       
+      
         .tags { display: flex; gap: 8px; flex-wrap: wrap; }
         .tag { background: #020; color: var(--r); padding: 3px 10px; font-size: 0.7rem; font-weight: bold; border: 1px solid #040; }
         .section { background: var(--p); border: 1px solid var(--brd); margin-bottom: 20px; }
@@ -45,12 +85,62 @@
             .image-gallery { justify-content: center; }
         }
     </style>
-    <div class="block"><span class="lbl">Resultado Inscripción</span><span class="val">Normal</span></div>
+</head>
+<body>
+<div class="container">
+
+    <!-- LOGOS UNIDOS: Hackpurgatory + Iron Atlas -->
+    <div class="logos-unidos">
+        <span class="logo-item">
+            <img src="https://i.postimg.cc/15Fg6x7k/hackpurgatory.jpg" alt="Hackpurgatory">
+            hackpurgatory
+        </span>
+        <span class="separador">✦</span>
+        <span class="logo-item">
+            <img src="https://i.postimg.cc/KY04Fm4G/Logo-iron-atlas.jpg" alt="Iron Atlas">
+            Iron Atlas
+        </span>
+    </div>
+
+    <!-- ENCABEZADO / PERFIL -->
+    <div class="header-box">
+        <img src="https://i.ibb.co/YTZbH1Px/mantenimiento-de-equipos-de-computo-AC4-B967-CDAEA4373thumbnail.jpg" alt="Foto perfil" class="profile-img">
+        <div class="header-content">
+            <span class="id-label">EXPEDIENTE 1033779975</span>
+            <h1>HOLMAN ALEXANDER CARDENAS VARGAS</h1>
+            <div class="tags">
+                <span class="tag">CC 1033779975</span>
+                <span class="tag">FECHA EXP: 20/12/2019</span>
+                <span class="tag">LUGAR EXP: BOGOTÁ</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 01: DATOS PERSONALES -->
+    <div class="section">
+        <div class="section-h"><h3>01. DATOS PERSONALES</h3></div>
+        <div class="grid">
+            <div class="block"><span class="lbl">Nombres</span><span class="val">HOLMAN ALEXANDER</span></div>
+            <div class="block"><span class="lbl">Apellidos</span><span class="val">CARDENAS VARGAS</span></div>
+            <div class="block"><span class="lbl">Documento</span><span class="val">CC 1033779975</span></div>
+            <div class="block"><span class="lbl">Fecha de Nacimiento</span><span class="val">10 DE OCTUBRE DE 1979</span></div>
+            <div class="block"><span class="lbl">Lugar de Nacimiento</span><span class="val">BOGOTÁ D.C.</span></div>
+            <div class="block wide"><span class="lbl">Nombre Completo</span><span class="val">HOLMAN ALEXANDER CARDENAS VARGAS</span></div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 02: INSCRIPCIÓN -->
+    <div class="section">
+        <div class="section-h"><h3>02. INSCRIPCIÓN</h3></div>
+        <div class="grid">
+            <div class="block"><span class="lbl">Resultado Inscripción</span><span class="val">Normal</span></div>
             <div class="block"><span class="lbl">Distrito</span><span class="val">052 - Bogotá, D.C. - 01 Localidad - Usaquén</span></div>
             <div class="block wide"><span class="lbl">Fecha de Inscripción</span><span class="val">09 DE OCTUBRE DE 1995</span></div>
             <div class="block wide"><span class="lbl">Fecha de Impresión</span><span class="val">2015-05-25 01:15:12</span></div>
         </div>
     </div>
+
+    <!-- SECCIÓN 03: CONTACTO -->
     <div class="section">
         <div class="section-h"><h3>03. INFORMACIÓN DE CONTACTO</h3></div>
         <div class="grid">
@@ -62,6 +152,8 @@
             <div class="block wide"><span class="lbl">Ubicación GPS</span><span class="val">4.612486, -74.0661454</span></div>
         </div>
     </div>
+
+    <!-- SECCIÓN 04: PROFESIÓN Y EDUCATIVO -->
     <div class="section">
         <div class="section-h"><h3>04. INFORMACIÓN PROFESIONAL Y EDUCATIVA</h3></div>
         <div class="grid">
@@ -71,6 +163,8 @@
             <div class="block wide"><span class="lbl">Duolingo Perfil</span><span class="val">https://www.duolingo.com/profile/holman363364</span></div>
         </div>
     </div>
+
+    <!-- SECCIÓN 05: REGISTROS LEGALES -->
     <div class="section">
         <div class="section-h"><h3>05. REGISTROS LEGALES</h3></div>
         <div class="grid">
@@ -80,6 +174,8 @@
             <div class="block wide"><span class="lbl">Miembro CGD Penal/3-44</span><span class="val">Registrado</span></div>
         </div>
     </div>
+
+    <!-- SECCIÓN 06: GALERÍA -->
     <div class="section">
         <div class="section-h"><h3>06. FOTOGRAFÍAS</h3></div>
         <div class="image-gallery">
@@ -88,6 +184,8 @@
             <img src="https://i.ibb.co/YTZbH1Px/mantenimiento-de-equipos-de-computo-AC4-B967-CDAEA4373thumbnail.jpg" alt="FOTO PERFIL" class="gallery-img">
         </div>
     </div>
+
+    <!-- SECCIÓN 07: NOTAS FINALES -->
     <div class="section">
         <div class="section-h"><h3>07. NOTAS FINALES</h3></div>
         <div class="entry">
@@ -103,7 +201,9 @@
             <span class="entry-d">Perfil activo en plataformas educativas y redes sociales con múltiples alias</span>
         </div>
     </div>
+
 </div>
+
 <script>
     document.addEventListener('keydown', function(e) {
         if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || (e.ctrlKey && e.keyCode == 85)) {
