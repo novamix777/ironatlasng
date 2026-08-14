@@ -11,7 +11,7 @@
         body { background: var(--b); color: var(--t); font-family: 'Inter', sans-serif; line-height: 1.4; user-select: none; }
         .container { max-width: 1000px; margin: auto; padding: clamp(10px, 4vw, 30px); }
       
-        /* LOGOS UNIDOS */
+        /* LOGOS UNIDOS (HACKPURGATORY + IRON ATLAS) */
         .logos-unidos {
             display: flex;
             align-items: center;
@@ -75,7 +75,7 @@
         .nav-back { padding-bottom: 15px; }
         .nav-back a { color: #444; text-decoration: none; font-size: 0.75rem; font-family: 'Share Tech Mono'; transition: 0.3s; }
         .nav-back a:hover { color: var(--r); }
-        .image-gallery { display: flex; gap: 15px; padding: 20px; flex-wrap: wrap; }
+        .image-gallery { display: flex; gap: 15px; padding: 20px; flex-wrap: wrap; justify-content: center; }
         .gallery-img { width: 200px; height: 200px; object-fit: cover; border: 1px solid #222; border-radius: 4px; }
         @media (max-width: 768px) {
             .header-box { flex-direction: column; text-align: center; padding: 20px; gap: 15px; }
@@ -86,10 +86,10 @@
         }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 <div class="container">
 
-    <!-- LOGOS UNIDOS: Hackpurgatory + Iron Atlas -->
+    <!-- ===== LOGOS UNIDOS: HACKPURGATORY + IRON ATLAS ===== -->
     <div class="logos-unidos">
         <span class="logo-item">
             <img src="https://i.postimg.cc/15Fg6x7k/hackpurgatory.jpg" alt="Hackpurgatory">
@@ -102,47 +102,49 @@
         </span>
     </div>
 
-    <!-- ENCABEZADO / PERFIL -->
-    <div class="header-box">
-        <img src="https://i.ibb.co/YTZbH1Px/mantenimiento-de-equipos-de-computo-AC4-B967-CDAEA4373thumbnail.jpg" alt="Foto perfil" class="profile-img">
+    <!-- ===== ENCABEZADO / PERFIL ===== -->
+    <header class="header-box">
+        <img src="https://i.ibb.co/YTZbH1Px/mantenimiento-de-equipos-de-computo-AC4-B967-CDAEA4373thumbnail.jpg" alt="FOTO PERFIL" class="profile-img">
         <div class="header-content">
-            <span class="id-label">EXPEDIENTE 1033779975</span>
-            <h1>HOLMAN ALEXANDER CARDENAS VARGAS</h1>
+            <span class="id-label">EXPEDIENTE: 1033779975</span>
+            <h1>HOLLMAN HERNAN CARDENAS ALBARRACIN</h1>
+            <p style="font-size: 0.9rem; color: #777; margin-bottom: 10px;">Alias: Timmyx117 · Timmy117990 · holman363364</p>
             <div class="tags">
                 <span class="tag">CC 1033779975</span>
-                <span class="tag">FECHA EXP: 20/12/2019</span>
-                <span class="tag">LUGAR EXP: BOGOTÁ</span>
+                <span class="tag">RESERVISTA 2DA</span>
+                <span class="tag">MANTENIMIENTO PC</span>
+                <span class="tag">BOGOTÁ D.C.</span>
+                <span class="tag">@Timmyx117</span>
             </div>
         </div>
-    </div>
+    </header>
 
-    <!-- SECCIÓN 01: DATOS PERSONALES -->
+    <!-- ===== SECCIÓN 01: IDENTIDAD COMPLETA ===== -->
     <div class="section">
-        <div class="section-h"><h3>01. DATOS PERSONALES</h3></div>
+        <div class="section-h"><h3>01. IDENTIDAD COMPLETA</h3></div>
         <div class="grid">
-            <div class="block"><span class="lbl">Nombres</span><span class="val">HOLMAN ALEXANDER</span></div>
-            <div class="block"><span class="lbl">Apellidos</span><span class="val">CARDENAS VARGAS</span></div>
-            <div class="block"><span class="lbl">Documento</span><span class="val">CC 1033779975</span></div>
-            <div class="block"><span class="lbl">Fecha de Nacimiento</span><span class="val">10 DE OCTUBRE DE 1979</span></div>
-            <div class="block"><span class="lbl">Lugar de Nacimiento</span><span class="val">BOGOTÁ D.C.</span></div>
-            <div class="block wide"><span class="lbl">Nombre Completo</span><span class="val">HOLMAN ALEXANDER CARDENAS VARGAS</span></div>
+            <div class="block"><span class="lbl">Cédula</span><span class="val">1.033.779.975</span></div>
+            <div class="block"><span class="lbl">Serial RC</span><span class="val">0019486635</span></div>
+            <div class="block"><span class="lbl">Nombres</span><span class="val">HOLLMAN HERNAN</span></div>
+            <div class="block"><span class="lbl">Apellidos</span><span class="val">CARDENAS ALBARRACIN</span></div>
+            <div class="block"><span class="lbl">Fecha Nacimiento</span><span class="val">1995-09-10</span></div>
+            <div class="block"><span class="lbl">Fecha Expedición</span><span class="val">2013-09-16</span></div>
+            <div class="block"><span class="lbl">Lugar Nacimiento</span><span class="val">BOGOTA DC - CUNDINAMARCA</span></div>
+            <div class="block"><span class="lbl">Edad</span><span class="val">30 años</span></div>
+            <div class="block"><span class="lbl">Género</span><span class="val">MASCULINO</span></div>
+            <div class="block wide"><span class="lbl">Oficina Registro</span><span class="val">NOTARIA 24 BOGOTA DC - CUNDINAMARCA</span></div>
+            <div class="block wide"><span class="lbl">Fecha Inscripción</span><span class="val">09 DE OCTUBRE DE 1995</span></div>
+            <div class="block wide"><span class="lbl">Estado Libreta</span><span class="val">Reservista 2da Clase</span></div>
+            <div class="block wide"><span class="lbl">Resultado Inscripción</span><span class="val">Normal</span></div>
+            <div class="block wide"><span class="lbl">Distrito</span><span class="val">052 - Bogotá, D.C. - 01 Localidad - Usaquén</span></div>
+            <div class="block wide"><span class="lbl">Fecha Impresión</span><span class="val">2015-05-25 01:15:12</span></div>
+            <div class="block wide"><span class="lbl">Miembro CGD Penal/3-44</span><span class="val">Registrado</span></div>
         </div>
     </div>
 
-    <!-- SECCIÓN 02: INSCRIPCIÓN -->
+    <!-- ===== SECCIÓN 02: CONTACTO Y TELEGRAM ===== -->
     <div class="section">
-        <div class="section-h"><h3>02. INSCRIPCIÓN</h3></div>
-        <div class="grid">
-            <div class="block"><span class="lbl">Resultado Inscripción</span><span class="val">Normal</span></div>
-            <div class="block"><span class="lbl">Distrito</span><span class="val">052 - Bogotá, D.C. - 01 Localidad - Usaquén</span></div>
-            <div class="block wide"><span class="lbl">Fecha de Inscripción</span><span class="val">09 DE OCTUBRE DE 1995</span></div>
-            <div class="block wide"><span class="lbl">Fecha de Impresión</span><span class="val">2015-05-25 01:15:12</span></div>
-        </div>
-    </div>
-
-    <!-- SECCIÓN 03: CONTACTO -->
-    <div class="section">
-        <div class="section-h"><h3>03. INFORMACIÓN DE CONTACTO</h3></div>
+        <div class="section-h"><h3>02. CONTACTO Y TELEGRAM</h3></div>
         <div class="grid">
             <div class="block"><span class="lbl">Número Principal</span><span class="val">+57 324 748 4662</span></div>
             <div class="block"><span class="lbl">Telegram Username</span><span class="val">@Timmyx117</span></div>
@@ -153,9 +155,9 @@
         </div>
     </div>
 
-    <!-- SECCIÓN 04: PROFESIÓN Y EDUCATIVO -->
+    <!-- ===== SECCIÓN 03: PROFESIÓN Y EDUCATIVO ===== -->
     <div class="section">
-        <div class="section-h"><h3>04. INFORMACIÓN PROFESIONAL Y EDUCATIVA</h3></div>
+        <div class="section-h"><h3>03. PROFESIÓN Y PLATAFORMAS</h3></div>
         <div class="grid">
             <div class="block wide"><span class="lbl">Profesión</span><span class="val">Mantenimiento de equipos de cómputo</span></div>
             <div class="block wide"><span class="lbl">Duolingo ID</span><span class="val">446742366</span></div>
@@ -164,20 +166,20 @@
         </div>
     </div>
 
-    <!-- SECCIÓN 05: REGISTROS LEGALES -->
+    <!-- ===== SECCIÓN 04: REGISTROS LEGALES ===== -->
     <div class="section">
-        <div class="section-h"><h3>05. REGISTROS LEGALES</h3></div>
+        <div class="section-h"><h3>04. REGISTROS LEGALES</h3></div>
         <div class="grid">
             <div class="block wide"><span class="lbl">Radicado CUI</span><span class="val">11001220400020240008001</span></div>
             <div class="block wide"><span class="lbl">Radicado Corte</span><span class="val">136417</span></div>
             <div class="block wide"><span class="lbl">Departamento</span><span class="val">BOGOTA D.C.</span></div>
-            <div class="block wide"><span class="lbl">Miembro CGD Penal/3-44</span><span class="val">Registrado</span></div>
+            <div class="block wide"><span class="lbl">EPS</span><span class="val">No registra</span></div>
         </div>
     </div>
 
-    <!-- SECCIÓN 06: GALERÍA -->
+    <!-- ===== SECCIÓN 05: FOTOGRAFÍAS (GALERÍA) ===== -->
     <div class="section">
-        <div class="section-h"><h3>06. FOTOGRAFÍAS</h3></div>
+        <div class="section-h"><h3>05. FOTOGRAFÍAS</h3></div>
         <div class="image-gallery">
             <img src="https://i.postimg.cc/Nf2sV110/RUTTYT.jpg" alt="RUT" class="gallery-img">
             <img src="https://i.postimg.cc/fRxwWDqZ/PASSPORTEE.jpg" alt="PASAPORTE" class="gallery-img">
@@ -185,9 +187,9 @@
         </div>
     </div>
 
-    <!-- SECCIÓN 07: NOTAS FINALES -->
+    <!-- ===== SECCIÓN 06: NOTAS FINALES ===== -->
     <div class="section">
-        <div class="section-h"><h3>07. NOTAS FINALES</h3></div>
+        <div class="section-h"><h3>06. NOTAS FINALES</h3></div>
         <div class="entry">
             <span class="entry-t" style="color:#ff4444;">INFORMACIÓN EXTRAÍDA POR HACKPURGATORY</span>
             <span class="entry-d">Datos de identificación y registros legales obtenidos mediante técnicas de extracción avanzada</span>
