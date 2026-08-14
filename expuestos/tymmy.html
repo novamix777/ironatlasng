@@ -11,7 +11,7 @@
         body { background: var(--b); color: var(--t); font-family: 'Inter', sans-serif; line-height: 1.4; user-select: none; }
         .container { max-width: 1000px; margin: auto; padding: clamp(10px, 4vw, 30px); }
       
-
+        /* LOGOS UNIDOS (HACKPURGATORY + IRON ATLAS) */
         .logos-unidos {
             display: flex;
             align-items: center;
@@ -75,36 +75,100 @@
         .nav-back { padding-bottom: 15px; }
         .nav-back a { color: #444; text-decoration: none; font-size: 0.75rem; font-family: 'Share Tech Mono'; transition: 0.3s; }
         .nav-back a:hover { color: var(--r); }
-        .image-gallery { display: flex; gap: 15px; padding: 20px; flex-wrap: wrap; justify-content: center; }
-        .gallery-img { width: 200px; height: 200px; object-fit: cover; border: 1px solid #222; border-radius: 4px; }
+
+        /* ===== GALERÍA MEJORADA: FOTOS GRANDES Y RESPONSIVE ===== */
+        .image-gallery {
+            display: flex;
+            gap: 25px;
+            padding: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .gallery-img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            aspect-ratio: 4 / 3;
+            object-fit: contain;
+            border: 2px solid #222;
+            border-radius: 8px;
+            background: #0a0a0a;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            box-shadow: 0 0 20px rgba(0,0,0,0.6);
+        }
+        .gallery-img:hover {
+            transform: scale(1.02);
+            border-color: var(--c);
+            box-shadow: 0 0 30px rgba(0,240,255,0.15);
+        }
+
+        /* ===== DETECCIÓN DE DISPOSITIVO: MÓVIL ===== */
         @media (max-width: 768px) {
             .header-box { flex-direction: column; text-align: center; padding: 20px; gap: 15px; }
             .profile-img { width: 150px; height: 150px; }
             .grid { grid-template-columns: 1fr; padding: 15px; gap: 15px; }
             .section-h { padding: 10px 15px; }
-            .image-gallery { justify-content: center; }
+            .image-gallery { padding: 15px; gap: 15px; }
+            .gallery-img {
+                max-width: 100%;
+                aspect-ratio: 4 / 3;
+                object-fit: contain;
+            }
+        }
+
+        /* ===== DETECCIÓN DE DISPOSITIVO: TABLET / ESCRITORIO ===== */
+        @media (min-width: 769px) and (max-width: 1200px) {
+            .gallery-img {
+                max-width: 420px;
+            }
+        }
+
+        @media (min-width: 1201px) {
+            .gallery-img {
+                max-width: 550px;
+            }
+        }
+
+        /* ===== DETECCIÓN DE DISPOSITIVO: PANTALLAS MUY GRANDES ===== */
+        @media (min-width: 1600px) {
+            .gallery-img {
+                max-width: 650px;
+            }
+        }
+
+        /* ===== FOOTER / NOTAS FINALES ===== */
+        .entry-t {
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+        .entry {
+            border-left: 4px solid #ff4444;
+            margin: 15px 25px;
+            padding: 12px 20px;
+            background: rgba(255,0,0,0.05);
         }
     </style>
 </head>
 <body oncontextmenu="return false;">
 <div class="container">
 
-
+    <!-- ===== LOGOS UNIDOS: HACKPURGATORY + IRON ATLAS ===== -->
     <div class="logos-unidos">
         <span class="logo-item">
             <img src="https://i.postimg.cc/15Fg6x7k/hackpurgatory.jpg" alt="Hackpurgatory">
-            𝐇𝐀𝐂𝐊 [𝐏𝐔𝐑𝐆𝐀𝐓𝐎𝐑𝐘]™
+            hackpurgatory
         </span>
-        <span class="separador">メ</span>
+        <span class="separador">✦</span>
         <span class="logo-item">
             <img src="https://i.postimg.cc/KY04Fm4G/Logo-iron-atlas.jpg" alt="Iron Atlas">
-            ɪʀᴏɴ ᴀᴛʟᴀꜱ ɴᴇᴡ ɢᴇɴᴇʀᴀᴛɪᴏɴ
+            Iron Atlas
         </span>
     </div>
 
-
+    <!-- ===== ENCABEZADO / PERFIL ===== -->
     <header class="header-box">
-        <img src="https://i.postimg.cc/Vvmf26c5/DW.png" alt="FOTO PERFIL" class="profile-img">
+        <img src="https://i.ibb.co/YTZbH1Px/mantenimiento-de-equipos-de-computo-AC4-B967-CDAEA4373thumbnail.jpg" alt="FOTO PERFIL" class="profile-img">
         <div class="header-content">
             <span class="id-label">EXPEDIENTE: 1033779975</span>
             <h1>HOLLMAN HERNAN CARDENAS ALBARRACIN</h1>
@@ -119,7 +183,7 @@
         </div>
     </header>
 
-
+    <!-- ===== SECCIÓN 01: IDENTIDAD COMPLETA ===== -->
     <div class="section">
         <div class="section-h"><h3>01. IDENTIDAD COMPLETA</h3></div>
         <div class="grid">
@@ -142,7 +206,7 @@
         </div>
     </div>
 
-
+    <!-- ===== SECCIÓN 02: CONTACTO Y TELEGRAM ===== -->
     <div class="section">
         <div class="section-h"><h3>02. CONTACTO Y TELEGRAM</h3></div>
         <div class="grid">
@@ -155,7 +219,7 @@
         </div>
     </div>
 
-
+    <!-- ===== SECCIÓN 03: PROFESIÓN Y PLATAFORMAS ===== -->
     <div class="section">
         <div class="section-h"><h3>03. PROFESIÓN Y PLATAFORMAS</h3></div>
         <div class="grid">
@@ -166,7 +230,7 @@
         </div>
     </div>
 
-
+    <!-- ===== SECCIÓN 04: REGISTROS LEGALES ===== -->
     <div class="section">
         <div class="section-h"><h3>04. REGISTROS LEGALES</h3></div>
         <div class="grid">
@@ -177,30 +241,30 @@
         </div>
     </div>
 
-
+    <!-- ===== SECCIÓN 05: RUT (FOTO GRANDE) ===== -->
     <div class="section">
-        <div class="section-h"><h3>RUT</h3></div>
+        <div class="section-h"><h3>05. RUT</h3></div>
         <div class="image-gallery">
             <img src="https://i.postimg.cc/Nf2sV110/RUTTYT.jpg" alt="RUT" class="gallery-img">
-           
         </div>
     </div>
-    
-        <div class="section">
-        <div class="section-h"><h3>PASAPORTE</h3></div>
+
+    <!-- ===== SECCIÓN 06: PASAPORTE (FOTO GRANDE) ===== -->
+    <div class="section">
+        <div class="section-h"><h3>06. PASAPORTE</h3></div>
         <div class="image-gallery">
             <img src="https://i.postimg.cc/fRxwWDqZ/PASSPORTEE.jpg" alt="PASAPORTE" class="gallery-img">
         </div>
     </div>
 
+    <!-- ===== SECCIÓN 07: NOTAS FINALES ===== -->
     <div class="section">
-        <div class="section-h"><h3>06. NOTAS FINALES</h3></div>
+        <div class="section-h"><h3>07. NOTAS FINALES</h3></div>
         <div class="entry">
             <span class="entry-t" style="color:#ff4444;">INFORMACIÓN EXTRAÍDA POR HACKPURGATORY E IRON ATLAS NEW GENERATION</span>
         </div>
         <div class="entry">
             <span class="entry-t" style="color:#ff4444;">SOMOS UNA FUERZA IRROMPIBLE PARA EL BIEN DE NUESTRA COMUNIDAD</span>
-
         </div>
     </div>
 
