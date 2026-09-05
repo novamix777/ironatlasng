@@ -8,34 +8,84 @@
     <style>
         :root { --r: #39ff14; --c: #00f0ff; --b: #050505; --p: #0d0d0d; --brd: #1a1a1a; --t: #d0d0d0; }
         * { margin: 0; padding: 0; box-sizing: border-box; max-width: 100%; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--b); color: var(--t); font-family: 'Inter', sans-serif; line-height: 1.4; user-select: none; }
-        .container { max-width: 1000px; margin: auto; padding: clamp(10px, 4vw, 30px); }
-       
-        .header-box {
-            display: flex; gap: 30px; background: var(--p); border: 1px solid var(--brd);
-            padding: 30px; border-left: 6px solid var(--r); margin-bottom: 25px; align-items: center;
-        }
-        .profile-img { width: 180px; height: 180px; object-fit: cover; border: 1px solid #222; flex-shrink: 0; filter: grayscale(0.3); }
-        .header-content h1 { color: #fff; font-size: clamp(1.2rem, 5vw, 1.8rem); margin-bottom: 5px; text-transform: uppercase; }
-        .id-label { font-family: 'Share Tech Mono'; color: var(--c); font-size: 1rem; display: block; margin-bottom: 10px; }
-       
+        body { background: var(--b); color: var(--t); font-family: 'Inter', sans-serif; line-height: 1.4; user-select: none; overflow-x: hidden; min-height: 100vh; position: relative; }
+        
+        #matrix-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.15; }
+        #glow-effect { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(57,255,20,0.08) 0%, rgba(0,240,255,0.04) 30%, transparent 70%); transition: all 0.1s ease-out; }
+        #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        
+        .container { max-width: 1000px; margin: auto; padding: clamp(10px, 4vw, 30px); position: relative; z-index: 1; }
+        
+        .header-box { display: flex; gap: 30px; background: var(--p); border: 1px solid var(--brd); padding: 30px; border-left: 6px solid var(--r); margin-bottom: 25px; align-items: center; transform: translateY(0); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease; cursor: default; position: relative; overflow: hidden; }
+        .header-box::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 0deg, transparent, rgba(57,255,20,0.03), transparent, rgba(0,240,255,0.03), transparent); animation: rotateGlow 10s linear infinite; pointer-events: none; }
+        @keyframes rotateGlow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .header-box:hover { transform: translateY(-3px) scale(1.005); box-shadow: 0 10px 40px rgba(57,255,20,0.1); border-color: var(--r); }
+        
+        .profile-img { width: 180px; height: 180px; object-fit: cover; border: 1px solid #222; flex-shrink: 0; filter: grayscale(0.3); transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; z-index: 1; }
+        .profile-img:hover { filter: grayscale(0) drop-shadow(0 0 20px rgba(57,255,20,0.3)); transform: scale(1.05) rotate(-2deg); border-color: var(--r); }
+        
+        .header-content h1 { color: #fff; font-size: clamp(1.2rem, 5vw, 1.8rem); margin-bottom: 5px; text-transform: uppercase; transition: all 0.3s ease; }
+        .header-content h1:hover { color: var(--r); text-shadow: 0 0 30px rgba(57,255,20,0.2); }
+        .id-label { font-family: 'Share Tech Mono'; color: var(--c); font-size: 1rem; display: block; margin-bottom: 10px; transition: all 0.3s ease; }
+        .id-label:hover { color: #fff; text-shadow: 0 0 20px rgba(0,240,255,0.3); }
+        
         .tags { display: flex; gap: 8px; flex-wrap: wrap; }
-        .tag { background: #020; color: var(--r); padding: 3px 10px; font-size: 0.7rem; font-weight: bold; border: 1px solid #040; }
-        .section { background: var(--p); border: 1px solid var(--brd); margin-bottom: 20px; }
-        .section-h { background: #121212; padding: 12px 20px; border-bottom: 1px solid var(--brd); display: flex; justify-content: space-between; }
-        .section-h h3 { font-family: 'Share Tech Mono'; color: var(--c); font-size: 0.85rem; letter-spacing: 1px; }
+        .tag { background: #020; color: var(--r); padding: 3px 10px; font-size: 0.7rem; font-weight: bold; border: 1px solid #040; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: default; position: relative; overflow: hidden; }
+        .tag::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(57,255,20,0.1), transparent); transition: left 0.5s ease; }
+        .tag:hover { transform: translateY(-2px) scale(1.05); border-color: var(--r); box-shadow: 0 0 20px rgba(57,255,20,0.15); }
+        .tag:hover::before { left: 100%; }
+        
+        .section { background: var(--p); border: 1px solid var(--brd); margin-bottom: 20px; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; overflow: hidden; }
+        .section::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--c), transparent); transform: scaleX(0); transform-origin: left; transition: transform 0.6s ease; }
+        .section:hover { border-color: var(--c); box-shadow: 0 5px 30px rgba(0,240,255,0.05); }
+        .section:hover::after { transform: scaleX(1); }
+        
+        .section-h { background: #121212; padding: 12px 20px; border-bottom: 1px solid var(--brd); display: flex; justify-content: space-between; transition: all 0.3s ease; }
+        .section-h h3 { font-family: 'Share Tech Mono'; color: var(--c); font-size: 0.85rem; letter-spacing: 1px; transition: all 0.3s ease; }
+        .section:hover .section-h h3 { color: #fff; text-shadow: 0 0 20px rgba(0,240,255,0.2); }
+        
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 20px; }
-        .block { border-bottom: 1px solid #151515; padding-bottom: 10px; }
-        .lbl { display: block; font-size: 0.65rem; color: #555; text-transform: uppercase; margin-bottom: 4px; font-weight: 700; }
-        .val { color: #fff; font-family: 'Share Tech Mono'; font-size: 0.95rem; word-break: break-all; }
+        .block { border-bottom: 1px solid #151515; padding-bottom: 10px; transition: all 0.3s ease; position: relative; }
+        .block::before { content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1px; background: linear-gradient(90deg, var(--r), transparent); transition: width 0.4s ease; }
+        .block:hover { padding-left: 10px; border-bottom-color: var(--c); }
+        .block:hover::before { width: 100%; }
+        
+        .lbl { display: block; font-size: 0.65rem; color: #555; text-transform: uppercase; margin-bottom: 4px; font-weight: 700; transition: all 0.3s ease; }
+        .block:hover .lbl { color: var(--c); }
+        .val { color: #fff; font-family: 'Share Tech Mono'; font-size: 0.95rem; word-break: break-all; transition: all 0.3s ease; }
+        .block:hover .val { color: var(--r); }
         .wide { grid-column: 1 / -1; }
-        .entry { border-left: 2px solid var(--c); padding: 5px 15px; margin: 15px 20px; background: rgba(0,240,255,0.02); }
-        .entry-t { color: var(--c); font-weight: bold; font-size: 0.8rem; margin-bottom: 5px; display: block; text-transform: uppercase; }
-        .entry-d { display: block; font-size: 0.85rem; color: #888; margin-bottom: 3px; }
-        .nav-back { padding-bottom: 15px; }
-        .nav-back a { color: #444; text-decoration: none; font-size: 0.75rem; font-family: 'Share Tech Mono'; transition: 0.3s; }
-        .nav-back a:hover { color: var(--r); }
-        .badge { background: #111; color: #39ff14; padding: 2px 8px; border-radius: 3px; font-size: 0.7rem; border: 1px solid #2a2a2a; }
+        
+        .entry { border-left: 2px solid var(--c); padding: 5px 15px; margin: 15px 20px; background: rgba(0,240,255,0.02); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; overflow: hidden; }
+        .entry::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(0,240,255,0.05), transparent); transform: translateX(-100%); transition: transform 0.5s ease; }
+        .entry:hover { border-left-color: var(--r); background: rgba(57,255,20,0.05); transform: translateX(5px); box-shadow: 0 0 30px rgba(57,255,20,0.05); }
+        .entry:hover::before { transform: translateX(0); }
+        
+        .entry-t { color: var(--c); font-weight: bold; font-size: 0.8rem; margin-bottom: 5px; display: block; text-transform: uppercase; transition: all 0.3s ease; }
+        .entry:hover .entry-t { color: var(--r); }
+        .entry-d { display: block; font-size: 0.85rem; color: #888; margin-bottom: 3px; transition: all 0.3s ease; }
+        .entry:hover .entry-d { color: #fff; }
+        
+        .nav-back { padding-bottom: 15px; position: relative; z-index: 1; }
+        .nav-back a { color: #444; text-decoration: none; font-size: 0.75rem; font-family: 'Share Tech Mono'; transition: all 0.3s ease; display: inline-block; }
+        .nav-back a:hover { color: var(--r); transform: translateX(-5px); text-shadow: 0 0 20px rgba(57,255,20,0.2); }
+        
+        .badge { background: #111; color: #39ff14; padding: 2px 8px; border-radius: 3px; font-size: 0.7rem; border: 1px solid #2a2a2a; transition: all 0.3s ease; display: inline-block; }
+        .badge:hover { background: #39ff14; color: #000; border-color: #39ff14; box-shadow: 0 0 20px rgba(57,255,20,0.3); transform: scale(1.05); }
+        
+        .val a { color: var(--c); text-decoration: none; transition: all 0.3s ease; }
+        .val a:hover { color: var(--r); text-shadow: 0 0 20px rgba(57,255,20,0.3); }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
         @media (max-width: 768px) {
             .header-box { flex-direction: column; text-align: center; padding: 20px; gap: 15px; }
             .profile-img { width: 150px; height: 150px; }
@@ -45,147 +95,292 @@
     </style>
 </head>
 <body oncontextmenu="return false;">
-<div class="container">
-    <nav class="nav-back"><a href="../expedientes.html">← VOLVER A EXPEDIENTES</a></nav>
-<header class="header-box">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW9mdQYy4M6JgG406hX9eFPzIcG0TZvVfpt9zLcIRpf38DZ37LJ1aM16U&s=10" alt="TARGET" class="profile-img">
-        <div class="header-content">
-            <span class="id-label">EXPEDIENTE: 1026267299</span>
-            <h1>ANDRES CASTIBLANCO RODRIGUEZ</h1>
-            <p style="font-size: 0.9rem; color: #777; margin-bottom: 10px;">Alias: KING VIP | @KING7ADX</p>
-            <div class="tags">
-                <span class="tag">@KING7ADX</span>
-                <span class="tag">TELEGRAM</span>
-                <span class="tag">KING VIP</span>
-                <span class="tag">BOGOTÁ D.C.</span>
-                <span class="tag">EPS COMPENSAR</span>
+    <canvas id="matrix-bg"></canvas>
+    <div id="glow-effect"></div>
+    <canvas id="particles"></canvas>
+    
+    <div class="container">
+        <nav class="nav-back"><a href="../expedientes.html">← VOLVER A EXPEDIENTES</a></nav>
+        <header class="header-box">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW9mdQYy4M6JgG406hX9eFPzIcG0TZvVfpt9zLcIRpf38DZ37LJ1aM16U&s=10" alt="TARGET" class="profile-img">
+            <div class="header-content">
+                <span class="id-label">EXPEDIENTE: 1026267299</span>
+                <h1>ANDRES CASTIBLANCO RODRIGUEZ</h1>
+                <p style="font-size: 0.9rem; color: #777; margin-bottom: 10px;">Alias: KING VIP | @KING7ADX</p>
+                <div class="tags">
+                    <span class="tag">@KING7ADX</span>
+                    <span class="tag">TELEGRAM</span>
+                    <span class="tag">KING VIP</span>
+                    <span class="tag">BOGOTÁ D.C.</span>
+                    <span class="tag">EPS COMPENSAR</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="section">
+            <div class="section-h"><h3>01. IDENTIDAD COMPLETA</h3></div>
+            <div class="grid">
+                <div class="block"><span class="lbl">Cédula de Ciudadanía</span><span class="val">1026267299</span></div>
+                <div class="block"><span class="lbl">Nombres</span><span class="val">ANDRES</span></div>
+                <div class="block"><span class="lbl">Apellidos</span><span class="val">CASTIBLANCO RODRIGUEZ</span></div>
+                <div class="block"><span class="lbl">Fecha de Nacimiento</span><span class="val">03/02/1990</span></div>
+                <div class="block"><span class="lbl">Edad</span><span class="val">36 años</span></div>
+                <div class="block"><span class="lbl">Sexo</span><span class="val">MASCULINO</span></div>
+                <div class="block"><span class="lbl">Estatura</span><span class="val">168 cm</span></div>
+                <div class="block wide"><span class="lbl">Dirección</span><span class="val">KR 107 C # 71 A - 75, BOGOTÁ D.C.</span></div>
+                <div class="block"><span class="lbl">Fecha Expedición CC</span><span class="val">05/02/2008</span></div>
+                <div class="block"><span class="lbl">Lugar Expedición</span><span class="val">NOTARIA 5 BOGOTA DC - CUNDINAMARCA</span></div>
             </div>
         </div>
-    </header>
 
+        <div class="section">
+            <div class="section-h"><h3>02. SALUD Y EPS</h3></div>
+            <div class="grid">
+                <div class="block wide"><span class="lbl">Entidad Prestadora (EPS)</span><span class="val">CAJA DE COMPENSACIÓN FAMILIAR COMPENSAR</span></div>
+                <div class="block"><span class="lbl">Afiliación</span><span class="val">AC EN COMPENSAR MUNICIPIO BOGOTÁ D.C.</span></div>
+                <div class="block"><span class="lbl">Estado</span><span class="val">ACTIVO</span></div>
+                <div class="block"><span class="lbl">Régimen</span><span class="val">CONTRIBUTIVO</span></div>
+                <div class="block"><span class="lbl">Tipo Afiliado</span><span class="val">COTIZANTE</span></div>
+            </div>
+        </div>
 
-    <div class="section">
-        <div class="section-h"><h3>01. IDENTIDAD COMPLETA</h3></div>
-        <div class="grid">
-            <div class="block"><span class="lbl">Cédula de Ciudadanía</span><span class="val">1026267299</span></div>
-            <div class="block"><span class="lbl">Nombres</span><span class="val">ANDRES</span></div>
-            <div class="block"><span class="lbl">Apellidos</span><span class="val">CASTIBLANCO RODRIGUEZ</span></div>
-            <div class="block"><span class="lbl">Fecha de Nacimiento</span><span class="val">03/02/1990</span></div>
-            <div class="block"><span class="lbl">Edad</span><span class="val">36 años</span></div>
-            <div class="block"><span class="lbl">Sexo</span><span class="val">MASCULINO</span></div>
-            <div class="block"><span class="lbl">Estatura</span><span class="val">168 cm</span></div>
-            <div class="block wide"><span class="lbl">Dirección</span><span class="val">KR 107 C # 71 A - 75, BOGOTÁ D.C.</span></div>
-            <div class="block"><span class="lbl">Fecha Expedición CC</span><span class="val">05/02/2008</span></div>
-            <div class="block"><span class="lbl">Lugar Expedición</span><span class="val">NOTARIA 5 BOGOTA DC - CUNDINAMARCA</span></div>
+        <div class="section">
+            <div class="section-h"><h3>03. INFORMACIÓN TELEFÓNICA Y TELEGRAM</h3></div>
+            <div class="grid">
+                <div class="block"><span class="lbl">Número Principal</span><span class="val">310 215 5505</span></div>
+                <div class="block"><span class="lbl">Número Secundario</span><span class="val">300 738 9183</span></div>
+                <div class="block"><span class="lbl">Operador</span><span class="val">TIGO</span></div>
+                <div class="block"><span class="lbl">Telegram Username</span><span class="val">@KING7ADX</span></div>
+                <div class="block"><span class="lbl">Telegram ID</span><span class="val">1959256229</span></div>
+                <div class="block wide"><span class="lbl">Nombre en Telegram</span><span class="val">KING VIP</span></div>
+                <div class="block"><span class="lbl">WhatsApp</span><span class="val"><a href="https://wa.me/573007389183" target="_blank">wa.me/573007389183</a></span></div>
+                <div class="block"><span class="lbl">Tiene Nequi</span><span class="val">✅ SI</span></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-h"><h3>04. INFORMACIÓN MILITAR / RESERVISTA</h3></div>
+            <div class="grid">
+                <div class="block"><span class="lbl">Clase</span><span class="val">2da Clase</span></div>
+                <div class="block"><span class="lbl">SERIAL RC</span><span class="val">0014930117</span></div>
+                <div class="block"><span class="lbl">Fecha Inscripción</span><span class="val">03/03/1990</span></div>
+                <div class="block wide"><span class="lbl">Instalaciones</span><span class="val">Escuela de Artillería 123 (Bogotá, D.C. - Usaquén)</span></div>
+                <div class="block wide"><span class="lbl">Oficina de Registro</span><span class="val">NOTARIA 5 BOGOTA DC - CUNDINAMARCA</span></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-h"><h3>05. CONTACTOS Y REDES</h3></div>
+            <div class="grid">
+                <div class="block"><span class="lbl">Email Principal</span><span class="val">castiandres@hotmail.com</span></div>
+                <div class="block"><span class="lbl">Estado del Correo</span><span class="val"><span class="badge">LOCALIZADO</span></span></div>
+                <div class="block wide"><span class="lbl">GitHub</span><span class="val">@andriux7</span></div>
+                <div class="block wide"><span class="lbl">NUIP</span><span class="val">90020351364</span></div>
+                <div class="block"><span class="lbl">Tipo Cuenta</span><span class="val">CATS</span></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-h"><h3>06. PERFIL Y ACTIVIDAD</h3></div>
+            <div class="grid">
+                <div class="block wide"><span class="lbl">Periodo Activo</span><span class="val">12/10/2024 - 7/9/2026</span></div>
+                <div class="block"><span class="lbl">Volumen de Mensajes</span><span class="val">633 msgs en 15 grupos</span></div>
+                <div class="block"><span class="lbl">Interacción</span><span class="val">16.59% replies | 8.69% media</span></div>
+                <div class="block"><span class="lbl">Multimedia</span><span class="val">Circles 0, Voice 14</span></div>
+                <div class="block wide"><span class="lbl">Favorito</span><span class="val">"Were looking fоr: 1"</span></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-h"><h3>07. FILTRACIONES / BREACHES</h3></div>
+            <div class="grid">
+                <div class="block"><span class="lbl">Zoosk.com</span><span class="val">Usuario: cefey_plus</span></div>
+                <div class="block"><span class="lbl">Tunngle.net</span><span class="val">Usuario: ANDRIUX007 | IP: 186.80.134.29</span></div>
+                <div class="block"><span class="lbl">Collection1</span><span class="val">Contraseña: MORTAL</span></div>
+                <div class="block"><span class="lbl">Taringa.net</span><span class="val">Usuario: ANDRIUXXX</span></div>
+                <div class="block"><span class="lbl">Wattpad.com</span><span class="val">Usuario: ANDRIUX7 | IP: 186.82.197.219</span></div>
+                <div class="block"><span class="lbl">AdultFriendFinder</span><span class="val">Usuario: rm_JEFE1815822</span></div>
+                <div class="block"><span class="lbl">AdultFriendFinder</span><span class="val">Usuario: ANDRIUXXXXX | Pass: ANDRESITO</span></div>
+                <div class="block"><span class="lbl">Deezer.com</span><span class="val">Usuario: fanny (Femenino)</span></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-h"><h3>08. NOTAS FINALES</h3></div>
+            <div class="entry">
+                <span class="entry-t" style="color:#ff4444;">PERFIL TELEGRAM</span>
+                <span class="entry-d">KING VIP • Activo en Telegram • ID: 1959256229</span>
+            </div>
+            <div class="entry">
+                <span class="entry-t" style="color:#ff4444;">EXTRAÍDO POR IRON ATLAS NEW GENERATION</span>
+                <span class="entry-d">BY: @IMPORT_404</span>
+            </div>
+            <div class="entry">
+                <span class="entry-t" style="color:#ff4444;">😈 EVIL DARK - EVIL DARK</span>
+                <span class="entry-d">Información recopilada de múltiples fuentes OSINT.</span>
+            </div>
         </div>
     </div>
 
-    <!-- SECCIÓN 02: SALUD Y EPS -->
-    <div class="section">
-        <div class="section-h"><h3>02. SALUD Y EPS</h3></div>
-        <div class="grid">
-            <div class="block wide"><span class="lbl">Entidad Prestadora (EPS)</span><span class="val">CAJA DE COMPENSACIÓN FAMILIAR COMPENSAR</span></div>
-            <div class="block"><span class="lbl">Afiliación</span><span class="val">AC EN COMPENSAR MUNICIPIO BOGOTÁ D.C.</span></div>
-            <div class="block"><span class="lbl">Estado</span><span class="val">ACTIVO</span></div>
-            <div class="block"><span class="lbl">Régimen</span><span class="val">CONTRIBUTIVO</span></div>
-            <div class="block"><span class="lbl">Tipo Afiliado</span><span class="val">COTIZANTE</span></div>
-        </div>
-    </div>
-
-    
-    <div class="section">
-        <div class="section-h"><h3>03. INFORMACIÓN TELEFÓNICA Y TELEGRAM</h3></div>
-        <div class="grid">
-            <div class="block"><span class="lbl">Número Principal</span><span class="val">310 215 5505</span></div>
-            <div class="block"><span class="lbl">Número Secundario</span><span class="val">300 738 9183</span></div>
-            <div class="block"><span class="lbl">Operador</span><span class="val">TIGO</span></div>
-            <div class="block"><span class="lbl">Telegram Username</span><span class="val">@KING7ADX</span></div>
-            <div class="block"><span class="lbl">Telegram ID</span><span class="val">1959256229</span></div>
-            <div class="block wide"><span class="lbl">Nombre en Telegram</span><span class="val">KING VIP</span></div>
-            <div class="block"><span class="lbl">WhatsApp</span><span class="val"><a href="https://wa.me/573007389183" style="color:var(--c); text-decoration:none;" target="_blank">wa.me/573007389183</a></span></div>
-            <div class="block"><span class="lbl">Tiene Nequi</span><span class="val">✅ SI</span></div>
-        </div>
-    </div>
-
-
-    <div class="section">
-        <div class="section-h"><h3>04. INFORMACIÓN MILITAR / RESERVISTA</h3></div>
-        <div class="grid">
-            <div class="block"><span class="lbl">Clase</span><span class="val">2da Clase</span></div>
-            <div class="block"><span class="lbl">SERIAL RC</span><span class="val">0014930117</span></div>
-            <div class="block"><span class="lbl">Fecha Inscripción</span><span class="val">03/03/1990</span></div>
-            <div class="block wide"><span class="lbl">Instalaciones</span><span class="val">Escuela de Artillería 123 (Bogotá, D.C. - Usaquén)</span></div>
-            <div class="block wide"><span class="lbl">Oficina de Registro</span><span class="val">NOTARIA 5 BOGOTA DC - CUNDINAMARCA</span></div>
-        </div>
-    </div>
-
-
-    <div class="section">
-        <div class="section-h"><h3>05. CONTACTOS Y REDES</h3></div>
-        <div class="grid">
-            <div class="block"><span class="lbl">Email Principal</span><span class="val">castiandres@hotmail.com</span></div>
-            <div class="block"><span class="lbl">Estado del Correo</span><span class="val"><span class="badge">LOCALIZADO</span></span></div>
-            <div class="block wide"><span class="lbl">GitHub</span><span class="val">@andriux7</span></div>
-            <div class="block wide"><span class="lbl">NUIP</span><span class="val">90020351364</span></div>
-            <div class="block"><span class="lbl">Tipo Cuenta</span><span class="val">CATS</span></div>
-        </div>
-    </div>
-
-
-    <div class="section">
-        <div class="section-h"><h3>06. PERFIL Y ACTIVIDAD</h3></div>
-        <div class="grid">
-            <div class="block wide"><span class="lbl">Periodo Activo</span><span class="val">12/10/2024 - 7/9/2026</span></div>
-            <div class="block"><span class="lbl">Volumen de Mensajes</span><span class="val">633 msgs en 15 grupos</span></div>
-            <div class="block"><span class="lbl">Interacción</span><span class="val">16.59% replies | 8.69% media</span></div>
-            <div class="block"><span class="lbl">Multimedia</span><span class="val">Circles 0, Voice 14</span></div>
-            <div class="block wide"><span class="lbl">Favorito</span><span class="val">"Were looking fоr: 1"</span></div>
-        </div>
-    </div>
-
-
-    <div class="section">
-        <div class="section-h"><h3>07. FILTRACIONES / BREACHES</h3></div>
-        <div class="grid">
-            <div class="block"><span class="lbl">Zoosk.com</span><span class="val">Usuario: cefey_plus</span></div>
-            <div class="block"><span class="lbl">Tunngle.net</span><span class="val">Usuario: ANDRIUX007 | IP: 186.80.134.29</span></div>
-            <div class="block"><span class="lbl">Collection1</span><span class="val">Contraseña: MORTAL</span></div>
-            <div class="block"><span class="lbl">Taringa.net</span><span class="val">Usuario: ANDRIUXXX</span></div>
-            <div class="block"><span class="lbl">Wattpad.com</span><span class="val">Usuario: ANDRIUX7 | IP: 186.82.197.219</span></div>
-            <div class="block"><span class="lbl">AdultFriendFinder</span><span class="val">Usuario: rm_JEFE1815822</span></div>
-            <div class="block"><span class="lbl">AdultFriendFinder</span><span class="val">Usuario: ANDRIUXXXXX | Pass: ANDRESITO</span></div>
-            <div class="block"><span class="lbl">Deezer.com</span><span class="val">Usuario: fanny (Femenino)</span></div>
-        </div>
-    </div>
-
- 
-    <div class="section">
-        <div class="section-h"><h3> FINALES</h3></div>
-        <div class="entry">
-            <span class="entry-t" style="color:#ff4444;">PERFIL TELEGRAM</span>
-            <span class="entry-d">KING VIP • Activo en Telegram • ID: 1959256229</span>
-        </div>
-        <div class="entry">
-            <span class="entry-t" style="color:#ff4444;">EXTRAÍDO POR IRON ATLAS NEW GENERATION</span>
-            <span class="entry-d">BY: @IMPORT_404</span>
-        </div>
-        <div class="entry">
-            <span class="entry-t" style="color:#ff4444;">😈 EVIL DARK - EVIL DARK</span>
-            <span class="entry-d">Información recopilada de múltiples fuentes OSINT.</span>
-        </div>
-    </div>
-</div>
-
-<script>
-    document.addEventListener('keydown', function(e) {
-        if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || (e.ctrlKey && e.keyCode == 85)) {
+    <script>
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || (e.ctrlKey && e.keyCode == 85)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+        document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
-            return false;
+        });
+
+        const glow = document.getElementById('glow-effect');
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            glow.style.setProperty('--mx', x + '%');
+            glow.style.setProperty('--my', y + '%');
+        });
+
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouseX = 0, mouseY = 0;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
-    });
-    document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-    });
-</script>
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.1;
+                this.color = Math.random() > 0.5 ? '#39ff14' : '#00f0ff';
+            }
+
+            update() {
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 200) {
+                    const force = (200 - distance) / 200;
+                    this.x -= dx * force * 0.02;
+                    this.y -= dy * force * 0.02;
+                }
+
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.fill();
+
+                if (this.size > 1.5) {
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = this.color;
+                }
+            }
+        }
+
+        for (let i = 0; i < 80; i++) {
+            particles.push(new Particle());
+        }
+
+        function drawLines() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = '#39ff14';
+                        ctx.globalAlpha = (1 - distance / 150) * 0.1;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            
+            drawLines();
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        const matrixCanvas = document.getElementById('matrix-bg');
+        const matrixCtx = matrixCanvas.getContext('2d');
+        
+        function resizeMatrix() {
+            matrixCanvas.width = window.innerWidth;
+            matrixCanvas.height = window.innerHeight;
+        }
+        resizeMatrix();
+        window.addEventListener('resize', resizeMatrix);
+
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*';
+        const columns = Math.floor(matrixCanvas.width / 14);
+        const drops = [];
+
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.random() * -100;
+        }
+
+        function drawMatrix() {
+            matrixCtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+
+            matrixCtx.fillStyle = '#39ff14';
+            matrixCtx.font = '14px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const char = chars[Math.floor(Math.random() * chars.length)];
+                const x = i * 14;
+                const y = drops[i] * 14;
+
+                if (y > 0 && y < matrixCanvas.height) {
+                    matrixCtx.globalAlpha = 0.1 + Math.random() * 0.1;
+                    matrixCtx.fillText(char, x, y);
+                }
+
+                if (drops[i] * 14 > matrixCanvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+            requestAnimationFrame(drawMatrix);
+        }
+        drawMatrix();
+    </script>
 </body>
 </html>
