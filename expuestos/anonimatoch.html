@@ -83,6 +83,85 @@
             .tags{justify-content:center}
             .header-content h1{font-size:1.2rem}
         }
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 30vw, 350px), 1fr));
+    gap: clamp(20px, 2.5vw, 30px);
+    padding: clamp(15px, 2vw, 25px);
+}
+
+.photo-item {
+    background: #0a0a0a;
+    border: 2px solid var(--brd);
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.photo-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent 50%, rgba(255,23,68,0.05));
+    pointer-events: none;
+    z-index: 1;
+}
+
+.photo-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--c);
+    box-shadow: 0 15px 50px rgba(255,109,0,0.15);
+}
+
+.photo-item .image-wrapper {
+    width: 100%;
+    padding-top: 75%;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+
+.photo-item .image-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #0a0a0a;
+    transition: all 0.6s ease;
+}
+
+.photo-item:hover .image-wrapper img {
+    transform: scale(1.05);
+}
+
+.photo-label {
+    padding: clamp(10px, 1.2vw, 14px);
+    background: var(--p);
+    font-size: clamp(0.7rem, 0.8vw, 0.8rem);
+    color: #888;
+    text-align: center;
+    transition: all 0.4s ease;
+    border-top: 2px solid var(--brd);
+    font-weight: 600;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+}
+
+.photo-item:hover .photo-label {
+    color: #fff;
+    background: #111;
+    border-top-color: var(--c);
+}
+        
         @media(max-width:480px){
             .profile-img{width:110px;height:110px}
             .container{padding:6px}
@@ -278,15 +357,19 @@
             </div>
         </div>
 
-        <div class="section">
-            <div class="section-h"><h3>11. EVIDENCIAS</h3></div>
-                </div>
-                <div class="photo-item">
-                    <img src="https://i.postimg.cc/ydwx12gp/Captura-de-pantalla-2026-09-08-005716.png" alt="Foto Pasaporte" loading="lazy">
-                    <div class="photo-label">📸 FOTO PASAPORTE</div>
-                </div>
-            </div>
+<div class="section">
+    <div class="section-h"><h3>11. EVIDENCIAS</h3></div>
+    <div class="photo-grid">
+        <div class="photo-item">
+            <img src="https://i.postimg.cc/1zmNbxwB/anonimato.jpg" alt="Foto Perfil Telegram" loading="lazy">
+            <div class="photo-label">📸 FOTO PERFIL TELEGRAM</div>
         </div>
+        <div class="photo-item">
+            <img src="https://i.postimg.cc/ydwx12gp/Captura-de-pantalla-2026-09-08-005716.png" alt="Foto Pasaporte" loading="lazy">
+            <div class="photo-label">📸 FOTO PASAPORTE</div>
+        </div>
+    </div>
+</div>
 
         <div class="section">
             <div class="section-h"><h3>12. NOTAS FINALES</h3></div>
