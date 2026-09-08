@@ -9,8 +9,8 @@
         :root{--r:#ff1744;--c:#ff6d00;--b:#0a0a0a;--p:#111111;--brd:#1a1a1a;--t:#d0d0d0}
         *{margin:0;padding:0;box-sizing:border-box;max-width:100%;-webkit-tap-highlight-color:transparent}
         body{background:var(--b);color:var(--t);font-family:'Inter',sans-serif;line-height:1.4;user-select:none;overflow-x:hidden;min-height:100vh;position:relative}
-        #matrix-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.1}
-        #glow-effect{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,23,68,0.1) 0%,rgba(255,109,0,0.05) 40%,transparent 70%);transition:all 0.05s ease-out}
+        #matrix-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.08}
+        #glow-effect{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,23,68,0.12) 0%,rgba(255,109,0,0.06) 40%,transparent 70%);transition:all 0.05s ease-out}
         #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
         .container{max-width:1200px;margin:auto;padding:clamp(8px,3vw,25px);position:relative;z-index:1}
         .header-box{display:flex;gap:25px;background:var(--p);border:1px solid var(--brd);padding:clamp(15px,3vw,30px);border-left:6px solid var(--r);margin-bottom:20px;align-items:center;transform:translateY(0);transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);cursor:default;position:relative;overflow:hidden;animation:headerPulse 4s ease-in-out infinite}
@@ -67,15 +67,12 @@
         .photo-item{background:#0a0a0a;border:1px solid var(--brd);overflow:hidden;transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1);border-radius:6px;position:relative}
         .photo-item::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,transparent 50%,rgba(255,23,68,0.05));pointer-events:none}
         .photo-item:hover{transform:translateY(-8px) scale(1.02);border-color:var(--c);box-shadow:0 15px 50px rgba(255,109,0,0.15)}
-        .photo-item img{width:100%;height:clamp(160px,25vw,220px);object-fit:cover;display:block;transition:all 0.6s ease;filter:grayscale(0.3)}
+        .photo-item img{width:100%;height:clamp(180px,25vw,240px);object-fit:cover;display:block;transition:all 0.6s ease;filter:grayscale(0.2)}
         .photo-item:hover img{filter:grayscale(0) scale(1.05);box-shadow:inset 0 0 50px rgba(255,109,0,0.1)}
         .photo-label{padding:clamp(8px,1vw,12px);background:var(--p);font-size:clamp(0.65rem,0.8vw,0.75rem);color:#888;text-align:center;transition:all 0.4s ease;border-top:1px solid var(--brd);font-weight:600;letter-spacing:1px}
         .photo-item:hover .photo-label{color:#fff;background:#111;border-top-color:var(--c)}
-        .specs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(clamp(150px,18vw,200px),1fr));gap:8px;padding:5px 0}
-        .spec-item{background:#0a0a0a;padding:6px 10px;border:1px solid #151515;transition:all 0.4s ease;border-radius:3px}
-        .spec-item:hover{border-color:var(--c);background:#111;transform:scale(1.02)}
-        .spec-label{font-size:clamp(0.5rem,0.6vw,0.6rem);color:#555;text-transform:uppercase;letter-spacing:1px}
-        .spec-value{color:#fff;font-family:'Share Tech Mono';font-size:clamp(0.7rem,0.8vw,0.85rem)}
+        .placa-animada{font-size:clamp(1.4rem,2.5vw,2rem);color:var(--r);animation:placaPulse 2s ease-in-out infinite;display:inline-block;letter-spacing:3px;font-weight:700;text-shadow:0 0 20px rgba(255,23,68,0.3)}
+        @keyframes placaPulse{0%,100%{transform:scale(1);text-shadow:0 0 20px rgba(255,23,68,0.3)}50%{transform:scale(1.05);text-shadow:0 0 40px rgba(255,23,68,0.6)}}
         @media(max-width:768px){
             .header-box{flex-direction:column;text-align:center;padding:18px;gap:12px}
             .profile-img{width:140px;height:140px}
@@ -92,7 +89,7 @@
             .grid{padding:8px;gap:8px}
             .block{padding-bottom:6px}
             .section{margin-bottom:12px}
-            .photo-item img{height:140px}
+            .photo-item img{height:160px}
         }
     </style>
 </head>
@@ -156,7 +153,7 @@
                 <div class="block"><span class="lbl">Telegram ID</span><span class="val">277131989</span></div>
                 <div class="block"><span class="lbl">Telegram Username 1</span><span class="val">@D_4n0n1m4T0</span></div>
                 <div class="block"><span class="lbl">Telegram Username 2</span><span class="val">@Moskku</span></div>
-                <div class="block wide"><span class="lbl">Nombres en Telegram</span><span class="val">/)@\/3 (2025-09-28) | 4n0n1m4t0_ (2025-09-28) | C@RD3/\@$ (2025-04-10)</span></div>
+                <div class="block wide"><span class="lbl">Nombres en Telegram</span><span class="val">/)@\/3 (28/09/2025) | 4n0n1m4t0_ (28/09/2025) | C@RD3/\@$ (10/04/2025)</span></div>
                 <div class="block"><span class="lbl">WhatsApp</span><span class="val"><a href="https://wa.me/573143411521" target="_blank">wa.me/573143411521</a></span></div>
             </div>
         </div>
@@ -190,19 +187,23 @@
         <div class="section">
             <div class="section-h"><h3>06. VEHÍCULO - YAMAHA YZF-R15</h3></div>
             <div class="grid">
-                <div class="block wide"><span class="lbl">Placa</span><span class="val" style="font-size:clamp(1.2rem,2vw,1.6rem);color:var(--r);animation:placaPulse 2s ease-in-out infinite">QXB52E</span></div>
+                <div class="block wide"><span class="lbl">Placa</span><span class="placa-animada">QXB52E</span></div>
                 <div class="block"><span class="lbl">Marca</span><span class="val">YAMAHA</span></div>
                 <div class="block"><span class="lbl">Línea</span><span class="val">YZF-R15</span></div>
                 <div class="block"><span class="lbl">Modelo</span><span class="val">2018</span></div>
                 <div class="block"><span class="lbl">Clase</span><span class="val">MOTOCICLETA</span></div>
+                <div class="block"><span class="lbl">Carrocería</span><span class="val">SIN CARROCERIA</span></div>
                 <div class="block"><span class="lbl">Color</span><span class="val">GRIS NARANJA</span></div>
                 <div class="block"><span class="lbl">Cilindraje</span><span class="val">150 CC</span></div>
                 <div class="block"><span class="lbl">Combustible</span><span class="val">GASOLINA</span></div>
                 <div class="block"><span class="lbl">Servicio</span><span class="val">PARTICULAR</span></div>
+                <div class="block"><span class="lbl">Modalidad</span><span class="val">******</span></div>
                 <div class="block"><span class="lbl">Estado</span><span class="val"><span class="badge">ACTIVO</span></span></div>
                 <div class="block"><span class="lbl">Importado</span><span class="val">NO</span></div>
                 <div class="block wide"><span class="lbl">VIN / Chasis</span><span class="val">9FKRG2016J2012542</span></div>
                 <div class="block wide"><span class="lbl">Motor</span><span class="val">G3E1E0012542</span></div>
+                <div class="block"><span class="lbl">Serie</span><span class="val">******</span></div>
+                <div class="block wide"><span class="lbl">Locatario</span><span class="val">STRIA MCPAL DE SOACHA</span></div>
             </div>
         </div>
 
@@ -212,10 +213,12 @@
                 <div class="block wide"><span class="lbl">Propietario</span><span class="val">HECTOR DAVID ROJAS GAMEZ - CC 1020747217</span></div>
                 <div class="block"><span class="lbl">Tipo Propiedad</span><span class="val">PROPIO</span></div>
                 <div class="block"><span class="lbl">Inicio Propiedad</span><span class="val">01/02/2020 08:39:09</span></div>
+                <div class="block"><span class="lbl">Fin Propiedad</span><span class="val">ACTUAL</span></div>
                 <div class="block"><span class="lbl">N° Licencia Tránsito</span><span class="val">10020183091</span></div>
                 <div class="block"><span class="lbl">Estado Licencia</span><span class="val"><span class="badge">ACTIVO</span></span></div>
                 <div class="block"><span class="lbl">Fecha Matrícula</span><span class="val">01/02/2020 08:39:09</span></div>
                 <div class="block wide"><span class="lbl">Autoridad</span><span class="val">STRIA MCPAL DE SOACHA</span></div>
+                <div class="block wide"><span class="lbl">ID Vehículo</span><span class="val">224207415</span></div>
             </div>
         </div>
 
@@ -225,8 +228,9 @@
                 <div class="block wide"><span class="lbl" style="color:var(--r);font-size:clamp(0.9rem,1.2vw,1.1rem);">✅ SOAT VIGENTE</span></div>
                 <div class="block"><span class="lbl">Póliza</span><span class="val">4334613000</span></div>
                 <div class="block"><span class="lbl">Entidad</span><span class="val">AXA COLPATRIA SEGUROS SA</span></div>
-                <div class="block"><span class="lbl">Inicio</span><span class="val">08/12/2025</span></div>
-                <div class="block"><span class="lbl">Fin</span><span class="val">07/12/2026</span></div>
+                <div class="block"><span class="lbl">Fecha Expedición</span><span class="val">29/11/2025</span></div>
+                <div class="block"><span class="lbl">Fecha Vigencia</span><span class="val">08/12/2025</span></div>
+                <div class="block"><span class="lbl">Fecha Vencimiento</span><span class="val">07/12/2026</span></div>
                 <div class="block"><span class="lbl">NIT Entidad</span><span class="val">860002184</span></div>
                 
                 <div class="block wide"><span class="lbl" style="color:var(--c);font-size:clamp(0.9rem,1.2vw,1.1rem);">✅ RTM VIGENTE</span></div>
@@ -235,6 +239,7 @@
                 <div class="block"><span class="lbl">Fecha Expedición</span><span class="val">09/12/2025</span></div>
                 <div class="block"><span class="lbl">Fecha Vigencia</span><span class="val">09/12/2026</span></div>
                 <div class="block wide"><span class="lbl">CDA Expide</span><span class="val">CDA TU REVISION CORABASTOS S.A.S</span></div>
+                <div class="block"><span class="lbl">Estado</span><span class="val"><span class="badge">VIGENTE</span></span></div>
             </div>
         </div>
 
@@ -256,7 +261,7 @@
             <div class="grid">
                 <div class="block"><span class="lbl">NIT</span><span class="val">141270484446</span></div>
                 <div class="block"><span class="lbl">DV</span><span class="val">1</span></div>
-                <div class="block"><span class="lbl">Tipo de Persona</span><span class="val">PERSONA NATURAL</span></div>
+                <div class="block"><span class="lbl">Tipo de Persona</span><span class="val">PERSONA NATURAL O SUCESIÓN ILÍQUIDA</span></div>
                 <div class="block"><span class="lbl">Tipo de Identificación</span><span class="val">CÉDULA DE CIUDADANÍA</span></div>
                 <div class="block"><span class="lbl">País</span><span class="val">COLOMBIA</span></div>
                 <div class="block"><span class="lbl">Departamento</span><span class="val">BOGOTÁ D.C.</span></div>
@@ -267,4 +272,210 @@
                 <div class="block"><span class="lbl">Teléfono 2</span><span class="val">3143411521</span></div>
                 <div class="block"><span class="lbl">Código Postal</span><span class="val">471120260715</span></div>
                 <div class="block"><span class="lbl">Obligado a Contabilidad</span><span class="val">SI</span></div>
-                <div class="block"><span class="lbl">No Responsable de IVA</span><span class="val">SI
+                <div class="block"><span class="lbl">No Responsable de IVA</span><span class="val">SI</span></div>
+                <div class="block wide"><span class="lbl">Impuesto</span><span class="val">05 - IMPUESTO DE RENTA Y COMPLEMENTARIOS - RÉGIMEN ORDINARIO</span></div>
+                <div class="block"><span class="lbl">Fecha Generación</span><span class="val">08/09/2026 12:02:09 AM</span></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-h"><h3>11. FOTOS Y EVIDENCIAS</h3></div>
+            <div class="photo-grid">
+                <div class="photo-item">
+                    <img src="https://i.postimg.cc/1zmNbxwB/anonimato.jpg" alt="Foto Perfil Telegram" loading="lazy">
+                    <div class="photo-label">📸 FOTO PERFIL TELEGRAM</div>
+                </div>
+                <div class="photo-item">
+                    <img src="https://i.postimg.cc/ydwx12gp/Captura-de-pantalla-2026-09-08-005716.png" alt="Foto Pasaporte" loading="lazy">
+                    <div class="photo-label">📸 FOTO PASAPORTE</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-h"><h3>12. NOTAS FINALES</h3></div>
+            <div class="entry">
+                <span class="entry-t" style="color:#ff4444;">PERFIL TELEGRAM</span>
+                <span class="entry-d">@D_4n0n1m4T0 • @Moskku • Activo desde 2017 • ID: 277131989</span>
+            </div>
+            <div class="entry">
+                <span class="entry-t" style="color:#ff4444;">VEHÍCULO REGISTRADO</span>
+                <span class="entry-d">YAMAHA YZF-R15 • Placa: QXB52E • SOAT y RTM Vigentes</span>
+            </div>
+            <div class="entry">
+                <span class="entry-t" style="color:#ff4444;">CONTACTOS ASOCIADOS</span>
+                <span class="entry-d">+573164484111 • +573012970274 • +573144664151</span>
+            </div>
+            <div class="entry">
+                <span class="entry-t" style="color:#ff4444;">EXTRAÍDO POR IRON ATLAS NEW GENERATION</span>
+                <span class="entry-d">BY: @IMPORT_404</span>
+            </div>
+            <div class="entry">
+                <span class="entry-t" style="color:#ff4444;">😈 EVIL DARK - EVIL DARK</span>
+                <span class="entry-d">Información recopilada de múltiples fuentes OSINT.</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || (e.ctrlKey && e.keyCode == 85)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        const glow = document.getElementById('glow-effect');
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            glow.style.setProperty('--mx', x + '%');
+            glow.style.setProperty('--my', y + '%');
+        });
+
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouseX = 0, mouseY = 0;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.5 + 0.1;
+                this.color = Math.random() > 0.5 ? '#ff1744' : '#ff6d00';
+            }
+
+            update() {
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 200) {
+                    const force = (200 - distance) / 200;
+                    this.x -= dx * force * 0.025;
+                    this.y -= dy * force * 0.025;
+                }
+
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.fill();
+
+                if (this.size > 1.5) {
+                    ctx.shadowBlur = 12;
+                    ctx.shadowColor = this.color;
+                }
+            }
+        }
+
+        for (let i = 0; i < 90; i++) {
+            particles.push(new Particle());
+        }
+
+        function drawLines() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = '#ff1744';
+                        ctx.globalAlpha = (1 - distance / 150) * 0.08;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            
+            drawLines();
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        const matrixCanvas = document.getElementById('matrix-bg');
+        const matrixCtx = matrixCanvas.getContext('2d');
+        
+        function resizeMatrix() {
+            matrixCanvas.width = window.innerWidth;
+            matrixCanvas.height = window.innerHeight;
+        }
+        resizeMatrix();
+        window.addEventListener('resize', resizeMatrix);
+
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*';
+        const columns = Math.floor(matrixCanvas.width / 14);
+        const drops = [];
+
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.random() * -100;
+        }
+
+        function drawMatrix() {
+            matrixCtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+
+            matrixCtx.fillStyle = '#ff1744';
+            matrixCtx.font = '14px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const char = chars[Math.floor(Math.random() * chars.length)];
+                const x = i * 14;
+                const y = drops[i] * 14;
+
+                if (y > 0 && y < matrixCanvas.height) {
+                    matrixCtx.globalAlpha = 0.08 + Math.random() * 0.08;
+                    matrixCtx.fillText(char, x, y);
+                }
+
+                if (drops[i] * 14 > matrixCanvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+            requestAnimationFrame(drawMatrix);
+        }
+        drawMatrix();
+    </script>
+</body>
+</html>
