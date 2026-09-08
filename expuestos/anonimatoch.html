@@ -6,94 +6,93 @@
     <title>EXPEDIENTE 1020747217</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
-        :root { --r: #ff4444; --c: #ff6b00; --b: #0a0a0a; --p: #111111; --brd: #1a1a1a; --t: #d0d0d0; }
-        * { margin: 0; padding: 0; box-sizing: border-box; max-width: 100%; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--b); color: var(--t); font-family: 'Inter', sans-serif; line-height: 1.4; user-select: none; overflow-x: hidden; min-height: 100vh; position: relative; }
-        
-        #matrix-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.12; }
-        #glow-effect { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,68,68,0.08) 0%, rgba(255,107,0,0.04) 30%, transparent 70%); transition: all 0.1s ease-out; }
-        #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-        
-        .container { max-width: 1200px; margin: auto; padding: clamp(10px, 4vw, 30px); position: relative; z-index: 1; }
-        
-        .header-box { display: flex; gap: 30px; background: var(--p); border: 1px solid var(--brd); padding: 30px; border-left: 6px solid var(--r); margin-bottom: 25px; align-items: center; transform: translateY(0); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: default; position: relative; overflow: hidden; }
-        .header-box::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 0deg, transparent, rgba(255,68,68,0.03), transparent, rgba(255,107,0,0.03), transparent); animation: rotateGlow 10s linear infinite; pointer-events: none; }
-        @keyframes rotateGlow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .header-box:hover { transform: translateY(-3px) scale(1.005); box-shadow: 0 10px 40px rgba(255,68,68,0.1); border-color: var(--r); }
-        
-        .profile-img { width: 180px; height: 180px; object-fit: cover; border: 1px solid #222; flex-shrink: 0; filter: grayscale(0.3); transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; z-index: 1; border-radius: 4px; }
-        .profile-img:hover { filter: grayscale(0) drop-shadow(0 0 20px rgba(255,68,68,0.3)); transform: scale(1.05) rotate(-2deg); border-color: var(--r); }
-        
-        .header-content h1 { color: #fff; font-size: clamp(1.2rem, 5vw, 1.8rem); margin-bottom: 5px; text-transform: uppercase; transition: all 0.3s ease; }
-        .header-content h1:hover { color: var(--r); text-shadow: 0 0 30px rgba(255,68,68,0.2); }
-        .id-label { font-family: 'Share Tech Mono'; color: var(--c); font-size: 1rem; display: block; margin-bottom: 10px; transition: all 0.3s ease; }
-        .id-label:hover { color: #fff; text-shadow: 0 0 20px rgba(255,107,0,0.3); }
-        
-        .tags { display: flex; gap: 8px; flex-wrap: wrap; }
-        .tag { background: #110000; color: var(--r); padding: 3px 10px; font-size: 0.7rem; font-weight: bold; border: 1px solid #2a0000; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: default; position: relative; overflow: hidden; }
-        .tag::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,68,68,0.1), transparent); transition: left 0.5s ease; }
-        .tag:hover { transform: translateY(-2px) scale(1.05); border-color: var(--r); box-shadow: 0 0 20px rgba(255,68,68,0.15); }
-        .tag:hover::before { left: 100%; }
-        
-        .section { background: var(--p); border: 1px solid var(--brd); margin-bottom: 20px; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; overflow: hidden; }
-        .section::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--c), transparent); transform: scaleX(0); transform-origin: left; transition: transform 0.6s ease; }
-        .section:hover { border-color: var(--c); box-shadow: 0 5px 30px rgba(255,107,0,0.05); }
-        .section:hover::after { transform: scaleX(1); }
-        
-        .section-h { background: #121212; padding: 12px 20px; border-bottom: 1px solid var(--brd); display: flex; justify-content: space-between; transition: all 0.3s ease; }
-        .section-h h3 { font-family: 'Share Tech Mono'; color: var(--c); font-size: 0.85rem; letter-spacing: 1px; transition: all 0.3s ease; }
-        .section:hover .section-h h3 { color: #fff; text-shadow: 0 0 20px rgba(255,107,0,0.2); }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 20px; }
-        .block { border-bottom: 1px solid #151515; padding-bottom: 10px; transition: all 0.3s ease; position: relative; }
-        .block::before { content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1px; background: linear-gradient(90deg, var(--r), transparent); transition: width 0.4s ease; }
-        .block:hover { padding-left: 10px; border-bottom-color: var(--c); }
-        .block:hover::before { width: 100%; }
-        
-        .lbl { display: block; font-size: 0.65rem; color: #555; text-transform: uppercase; margin-bottom: 4px; font-weight: 700; transition: all 0.3s ease; }
-        .block:hover .lbl { color: var(--c); }
-        .val { color: #fff; font-family: 'Share Tech Mono'; font-size: 0.95rem; word-break: break-all; transition: all 0.3s ease; }
-        .block:hover .val { color: var(--r); }
-        .wide { grid-column: 1 / -1; }
-        
-        .entry { border-left: 2px solid var(--c); padding: 5px 15px; margin: 15px 20px; background: rgba(255,107,0,0.02); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; overflow: hidden; }
-        .entry::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(255,107,0,0.05), transparent); transform: translateX(-100%); transition: transform 0.5s ease; }
-        .entry:hover { border-left-color: var(--r); background: rgba(255,68,68,0.05); transform: translateX(5px); box-shadow: 0 0 30px rgba(255,68,68,0.05); }
-        .entry:hover::before { transform: translateX(0); }
-        
-        .entry-t { color: var(--c); font-weight: bold; font-size: 0.8rem; margin-bottom: 5px; display: block; text-transform: uppercase; transition: all 0.3s ease; }
-        .entry:hover .entry-t { color: var(--r); }
-        .entry-d { display: block; font-size: 0.85rem; color: #888; margin-bottom: 3px; transition: all 0.3s ease; }
-        .entry:hover .entry-d { color: #fff; }
-        
-        .nav-back { padding-bottom: 15px; position: relative; z-index: 1; }
-        .nav-back a { color: #444; text-decoration: none; font-size: 0.75rem; font-family: 'Share Tech Mono'; transition: all 0.3s ease; display: inline-block; }
-        .nav-back a:hover { color: var(--r); transform: translateX(-5px); text-shadow: 0 0 20px rgba(255,68,68,0.2); }
-        
-        .badge { background: #111; color: #ff4444; padding: 2px 8px; border-radius: 3px; font-size: 0.7rem; border: 1px solid #2a0000; transition: all 0.3s ease; display: inline-block; }
-        .badge:hover { background: #ff4444; color: #000; border-color: #ff4444; box-shadow: 0 0 20px rgba(255,68,68,0.3); transform: scale(1.05); }
-        
-        .val a { color: var(--c); text-decoration: none; transition: all 0.3s ease; }
-        .val a:hover { color: var(--r); text-shadow: 0 0 20px rgba(255,68,68,0.3); }
-        
-        .vehicle-specs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; padding: 10px 0; }
-        .spec-item { background: #0a0a0a; padding: 8px 12px; border: 1px solid #1a1a1a; transition: all 0.3s ease; }
-        .spec-item:hover { border-color: var(--c); background: #111; }
-        .spec-label { font-size: 0.6rem; color: #555; text-transform: uppercase; }
-        .spec-value { color: #fff; font-family: 'Share Tech Mono'; font-size: 0.85rem; }
-        
-        .photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; padding: 15px 20px; }
-        .photo-item { border: 1px solid var(--brd); overflow: hidden; transition: all 0.3s ease; }
-        .photo-item:hover { border-color: var(--c); transform: scale(1.02); box-shadow: 0 0 30px rgba(255,107,0,0.1); }
-        .photo-item img { width: 100%; height: 150px; object-fit: cover; display: block; }
-        .photo-item .photo-label { padding: 8px 12px; background: #0a0a0a; font-size: 0.7rem; color: #888; text-align: center; }
-        
-        @media (max-width: 768px) {
-            .header-box { flex-direction: column; text-align: center; padding: 20px; gap: 15px; }
-            .profile-img { width: 150px; height: 150px; }
-            .grid { grid-template-columns: 1fr; padding: 15px; gap: 15px; }
-            .section-h { padding: 10px 15px; }
-            .photo-grid { grid-template-columns: 1fr; }
+        :root{--r:#ff1744;--c:#ff6d00;--b:#0a0a0a;--p:#111111;--brd:#1a1a1a;--t:#d0d0d0}
+        *{margin:0;padding:0;box-sizing:border-box;max-width:100%;-webkit-tap-highlight-color:transparent}
+        body{background:var(--b);color:var(--t);font-family:'Inter',sans-serif;line-height:1.4;user-select:none;overflow-x:hidden;min-height:100vh;position:relative}
+        #matrix-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.1}
+        #glow-effect{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,23,68,0.1) 0%,rgba(255,109,0,0.05) 40%,transparent 70%);transition:all 0.05s ease-out}
+        #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+        .container{max-width:1200px;margin:auto;padding:clamp(8px,3vw,25px);position:relative;z-index:1}
+        .header-box{display:flex;gap:25px;background:var(--p);border:1px solid var(--brd);padding:clamp(15px,3vw,30px);border-left:6px solid var(--r);margin-bottom:20px;align-items:center;transform:translateY(0);transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);cursor:default;position:relative;overflow:hidden;animation:headerPulse 4s ease-in-out infinite}
+        @keyframes headerPulse{0%,100%{box-shadow:0 0 20px rgba(255,23,68,0.05)}50%{box-shadow:0 0 40px rgba(255,23,68,0.15)}}
+        .header-box::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent,rgba(255,23,68,0.05),transparent,rgba(255,109,0,0.05),transparent);animation:rotateGlow 8s linear infinite;pointer-events:none}
+        @keyframes rotateGlow{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+        .header-box:hover{transform:translateY(-5px) scale(1.008);box-shadow:0 15px 50px rgba(255,23,68,0.2);border-color:var(--r)}
+        .profile-img{width:clamp(120px,18vw,180px);height:clamp(120px,18vw,180px);object-fit:cover;border:2px solid #222;flex-shrink:0;filter:grayscale(0.4);transition:all 0.6s cubic-bezier(0.34,1.56,0.64,1);position:relative;z-index:1;border-radius:8px;animation:imgFloat 6s ease-in-out infinite}
+        @keyframes imgFloat{0%,100%{transform:translateY(0px)}50%{transform:translateY(-8px)}}
+        .profile-img:hover{filter:grayscale(0) drop-shadow(0 0 30px rgba(255,23,68,0.4));transform:scale(1.08) rotate(-3deg);border-color:var(--r)}
+        .header-content{flex:1}
+        .header-content h1{color:#fff;font-size:clamp(1rem,4vw,1.8rem);margin-bottom:5px;text-transform:uppercase;transition:all 0.4s ease;letter-spacing:1px}
+        .header-content h1:hover{color:var(--r);text-shadow:0 0 40px rgba(255,23,68,0.3);transform:scale(1.02)}
+        .id-label{font-family:'Share Tech Mono';color:var(--c);font-size:clamp(0.7rem,1.2vw,1rem);display:block;margin-bottom:8px;transition:all 0.4s ease;letter-spacing:2px}
+        .id-label:hover{color:#fff;text-shadow:0 0 30px rgba(255,109,0,0.4);letter-spacing:4px}
+        .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:5px}
+        .tag{background:#110000;color:var(--r);padding:4px 12px;font-size:clamp(0.6rem,0.8vw,0.7rem);font-weight:700;border:1px solid #2a0000;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);cursor:default;position:relative;overflow:hidden;border-radius:3px}
+        .tag::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,23,68,0.15),transparent);transition:left 0.6s ease}
+        .tag:hover{transform:translateY(-3px) scale(1.08);border-color:var(--r);box-shadow:0 0 30px rgba(255,23,68,0.2);color:#fff}
+        .tag:hover::before{left:100%}
+        .section{background:var(--p);border:1px solid var(--brd);margin-bottom:18px;transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1);position:relative;overflow:hidden;border-radius:4px}
+        .section::after{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--c),transparent);transform:scaleX(0);transform-origin:left;transition:transform 0.8s ease}
+        .section:hover{transform:translateY(-3px);border-color:var(--c);box-shadow:0 8px 40px rgba(255,109,0,0.08)}
+        .section:hover::after{transform:scaleX(1)}
+        .section-h{background:#121212;padding:clamp(8px,1.2vw,14px) clamp(12px,2vw,20px);border-bottom:1px solid var(--brd);display:flex;justify-content:space-between;transition:all 0.4s ease}
+        .section-h h3{font-family:'Share Tech Mono';color:var(--c);font-size:clamp(0.7rem,1vw,0.85rem);letter-spacing:2px;transition:all 0.4s ease}
+        .section:hover .section-h h3{color:#fff;text-shadow:0 0 30px rgba(255,109,0,0.3);letter-spacing:4px}
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(clamp(220px,25vw,280px),1fr));gap:clamp(12px,1.5vw,20px);padding:clamp(12px,1.5vw,20px)}
+        .block{border-bottom:1px solid #151515;padding-bottom:10px;transition:all 0.4s ease;position:relative}
+        .block::before{content:'';position:absolute;left:0;bottom:0;width:0;height:2px;background:linear-gradient(90deg,var(--r),var(--c));transition:width 0.5s ease}
+        .block:hover{padding-left:12px;border-bottom-color:var(--c);transform:translateX(4px)}
+        .block:hover::before{width:100%}
+        .lbl{display:block;font-size:clamp(0.55rem,0.7vw,0.65rem);color:#555;text-transform:uppercase;margin-bottom:4px;font-weight:700;transition:all 0.4s ease;letter-spacing:1px}
+        .block:hover .lbl{color:var(--c);letter-spacing:2px}
+        .val{color:#fff;font-family:'Share Tech Mono';font-size:clamp(0.8rem,1vw,0.95rem);word-break:break-all;transition:all 0.4s ease}
+        .block:hover .val{color:var(--r);transform:scale(1.02)}
+        .wide{grid-column:1/-1}
+        .entry{border-left:3px solid var(--c);padding:8px 18px;margin:12px 18px;background:rgba(255,109,0,0.03);transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1);position:relative;overflow:hidden;border-radius:0 4px 4px 0}
+        .entry::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(90deg,rgba(255,109,0,0.06),transparent);transform:translateX(-100%);transition:transform 0.6s ease}
+        .entry:hover{transform:translateX(8px) scale(1.01);background:rgba(255,23,68,0.06);box-shadow:0 0 40px rgba(255,23,68,0.08);border-left-color:var(--r)}
+        .entry:hover::before{transform:translateX(0)}
+        .entry-t{color:var(--c);font-weight:700;font-size:clamp(0.7rem,0.9vw,0.8rem);margin-bottom:4px;display:block;text-transform:uppercase;transition:all 0.4s ease;letter-spacing:1px}
+        .entry:hover .entry-t{color:var(--r);letter-spacing:2px}
+        .entry-d{display:block;font-size:clamp(0.75rem,0.9vw,0.85rem);color:#888;margin-bottom:2px;transition:all 0.4s ease}
+        .entry:hover .entry-d{color:#fff}
+        .nav-back{padding-bottom:12px;position:relative;z-index:1}
+        .nav-back a{color:#444;text-decoration:none;font-size:clamp(0.65rem,0.8vw,0.75rem);font-family:'Share Tech Mono';transition:all 0.4s ease;display:inline-block;padding:4px 0}
+        .nav-back a:hover{color:var(--r);transform:translateX(-8px);text-shadow:0 0 30px rgba(255,23,68,0.3);letter-spacing:2px}
+        .badge{background:#110000;color:#ff1744;padding:3px 10px;border-radius:4px;font-size:clamp(0.6rem,0.7vw,0.7rem);border:1px solid #2a0000;transition:all 0.4s ease;display:inline-block;font-weight:700}
+        .badge:hover{background:#ff1744;color:#000;border-color:#ff1744;box-shadow:0 0 30px rgba(255,23,68,0.4);transform:scale(1.08) rotate(-2deg)}
+        .val a{color:var(--c);text-decoration:none;transition:all 0.4s ease;border-bottom:1px solid transparent}
+        .val a:hover{color:var(--r);text-shadow:0 0 30px rgba(255,23,68,0.3);border-bottom-color:var(--r)}
+        .photo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(clamp(200px,25vw,300px),1fr));gap:clamp(15px,2vw,25px);padding:clamp(12px,1.5vw,20px)}
+        .photo-item{background:#0a0a0a;border:1px solid var(--brd);overflow:hidden;transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1);border-radius:6px;position:relative}
+        .photo-item::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,transparent 50%,rgba(255,23,68,0.05));pointer-events:none}
+        .photo-item:hover{transform:translateY(-8px) scale(1.02);border-color:var(--c);box-shadow:0 15px 50px rgba(255,109,0,0.15)}
+        .photo-item img{width:100%;height:clamp(160px,25vw,220px);object-fit:cover;display:block;transition:all 0.6s ease;filter:grayscale(0.3)}
+        .photo-item:hover img{filter:grayscale(0) scale(1.05);box-shadow:inset 0 0 50px rgba(255,109,0,0.1)}
+        .photo-label{padding:clamp(8px,1vw,12px);background:var(--p);font-size:clamp(0.65rem,0.8vw,0.75rem);color:#888;text-align:center;transition:all 0.4s ease;border-top:1px solid var(--brd);font-weight:600;letter-spacing:1px}
+        .photo-item:hover .photo-label{color:#fff;background:#111;border-top-color:var(--c)}
+        .specs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(clamp(150px,18vw,200px),1fr));gap:8px;padding:5px 0}
+        .spec-item{background:#0a0a0a;padding:6px 10px;border:1px solid #151515;transition:all 0.4s ease;border-radius:3px}
+        .spec-item:hover{border-color:var(--c);background:#111;transform:scale(1.02)}
+        .spec-label{font-size:clamp(0.5rem,0.6vw,0.6rem);color:#555;text-transform:uppercase;letter-spacing:1px}
+        .spec-value{color:#fff;font-family:'Share Tech Mono';font-size:clamp(0.7rem,0.8vw,0.85rem)}
+        @media(max-width:768px){
+            .header-box{flex-direction:column;text-align:center;padding:18px;gap:12px}
+            .profile-img{width:140px;height:140px}
+            .grid{grid-template-columns:1fr;padding:12px;gap:12px}
+            .section-h{padding:8px 12px}
+            .photo-grid{grid-template-columns:1fr;padding:12px}
+            .entry{margin:8px 10px;padding:6px 12px}
+            .tags{justify-content:center}
+            .header-content h1{font-size:1.2rem}
+        }
+        @media(max-width:480px){
+            .profile-img{width:110px;height:110px}
+            .container{padding:6px}
+            .grid{padding:8px;gap:8px}
+            .block{padding-bottom:6px}
+            .section{margin-bottom:12px}
+            .photo-item img{height:140px}
         }
     </style>
 </head>
@@ -105,11 +104,11 @@
     <div class="container">
         <nav class="nav-back"><a href="../expedientes.html">← VOLVER A EXPEDIENTES</a></nav>
         <header class="header-box">
-            <img src="https://i.postimg.cc/1zmNbxwB/anonimato.jpg" alt="TARGET" class="profile-img">
+            <img src="https://i.postimg.cc/1zmNbxwB/anonimato.jpg" alt="TARGET" class="profile-img" loading="lazy">
             <div class="header-content">
                 <span class="id-label">EXPEDIENTE: 1020747217</span>
                 <h1>HECTOR DAVID ROJAS GAMEZ</h1>
-                <p style="font-size: 0.9rem; color: #777; margin-bottom: 10px;">Alias: @D_4n0n1m4T0 | @Moskku</p>
+                <p style="font-size:clamp(0.75rem,1vw,0.9rem);color:#777;margin-bottom:8px;">Alias: @D_4n0n1m4T0 | @Moskku</p>
                 <div class="tags">
                     <span class="tag">@D_4n0n1m4T0</span>
                     <span class="tag">@Moskku</span>
@@ -140,7 +139,7 @@
             <div class="grid">
                 <div class="block wide"><span class="lbl">Entidad Prestadora (EPS)</span><span class="val">CAJA DE COMPENSACIÓN FAMILIAR COMPENSAR</span></div>
                 <div class="block"><span class="lbl">Afiliación</span><span class="val">AC EN COMPENSAR MUNICIPIO BOGOTÁ D.C.</span></div>
-                <div class="block"><span class="lbl">Estado</span><span class="val">ACTIVO</span></div>
+                <div class="block"><span class="lbl">Estado</span><span class="val"><span class="badge">ACTIVO</span></span></div>
                 <div class="block"><span class="lbl">Régimen</span><span class="val">CONTRIBUTIVO</span></div>
                 <div class="block"><span class="lbl">Tipo Afiliado</span><span class="val">BENEFICIARIO</span></div>
                 <div class="block"><span class="lbl">Fecha Afiliación Efectiva</span><span class="val">01/06/2007</span></div>
@@ -191,7 +190,7 @@
         <div class="section">
             <div class="section-h"><h3>06. VEHÍCULO - YAMAHA YZF-R15</h3></div>
             <div class="grid">
-                <div class="block wide"><span class="lbl">Placa</span><span class="val" style="font-size:1.4rem; color: var(--r);">QXB52E</span></div>
+                <div class="block wide"><span class="lbl">Placa</span><span class="val" style="font-size:clamp(1.2rem,2vw,1.6rem);color:var(--r);animation:placaPulse 2s ease-in-out infinite">QXB52E</span></div>
                 <div class="block"><span class="lbl">Marca</span><span class="val">YAMAHA</span></div>
                 <div class="block"><span class="lbl">Línea</span><span class="val">YZF-R15</span></div>
                 <div class="block"><span class="lbl">Modelo</span><span class="val">2018</span></div>
@@ -223,14 +222,14 @@
         <div class="section">
             <div class="section-h"><h3>08. SOAT Y RTM VIGENTES</h3></div>
             <div class="grid">
-                <div class="block wide"><span class="lbl" style="color: var(--r);">✅ SOAT VIGENTE</span></div>
+                <div class="block wide"><span class="lbl" style="color:var(--r);font-size:clamp(0.9rem,1.2vw,1.1rem);">✅ SOAT VIGENTE</span></div>
                 <div class="block"><span class="lbl">Póliza</span><span class="val">4334613000</span></div>
                 <div class="block"><span class="lbl">Entidad</span><span class="val">AXA COLPATRIA SEGUROS SA</span></div>
                 <div class="block"><span class="lbl">Inicio</span><span class="val">08/12/2025</span></div>
                 <div class="block"><span class="lbl">Fin</span><span class="val">07/12/2026</span></div>
                 <div class="block"><span class="lbl">NIT Entidad</span><span class="val">860002184</span></div>
                 
-                <div class="block wide"><span class="lbl" style="color: var(--c);">✅ RTM VIGENTE</span></div>
+                <div class="block wide"><span class="lbl" style="color:var(--c);font-size:clamp(0.9rem,1.2vw,1.1rem);">✅ RTM VIGENTE</span></div>
                 <div class="block"><span class="lbl">Número RTM</span><span class="val">185899533</span></div>
                 <div class="block"><span class="lbl">Tipo</span><span class="val">REVISION TECNICO-MECANICO</span></div>
                 <div class="block"><span class="lbl">Fecha Expedición</span><span class="val">09/12/2025</span></div>
@@ -268,64 +267,4 @@
                 <div class="block"><span class="lbl">Teléfono 2</span><span class="val">3143411521</span></div>
                 <div class="block"><span class="lbl">Código Postal</span><span class="val">471120260715</span></div>
                 <div class="block"><span class="lbl">Obligado a Contabilidad</span><span class="val">SI</span></div>
-                <div class="block"><span class="lbl">No Responsable de IVA</span><span class="val">SI</span></div>
-                <div class="block wide"><span class="lbl">Impuesto</span><span class="val">IMPUESTO DE RENTA Y COMPLEMENTARIOS - RÉGIMEN ORDINARIO</span></div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-h"><h3>11. FOTOS Y EVIDENCIAS</h3></div>
-            <div class="photo-grid">
-                <div class="photo-item">
-                    <img src="https://i.postimg.cc/1zmNbxwB/anonimato.jpg" alt="Foto Perfil Telegram">
-                    <div class="photo-label">📸 Foto Perfil Telegram</div>
-                </div>
-                <div class="photo-item">
-                    <img src="https://i.postimg.cc/ydwx12gp/Captura-de-pantalla-2026-09-08-005716.png" alt="Foto Pasaporte">
-                    <div class="photo-label">📸 Foto Pasaporte</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-h"><h3>12. NOTAS FINALES</h3></div>
-            <div class="entry">
-                <span class="entry-t" style="color:#ff4444;">PERFIL TELEGRAM</span>
-                <span class="entry-d">@D_4n0n1m4T0 • @Moskku • Activo desde 2017 • ID: 277131989</span>
-            </div>
-            <div class="entry">
-                <span class="entry-t" style="color:#ff4444;">VEHÍCULO REGISTRADO</span>
-                <span class="entry-d">YAMAHA YZF-R15 • Placa: QXB52E • SOAT y RTM Vigentes</span>
-            </div>
-            <div class="entry">
-                <span class="entry-t" style="color:#ff4444;">EXTRAÍDO POR IRON ATLAS NEW GENERATION</span>
-                <span class="entry-d">BY: @IMPORT_404</span>
-            </div>
-            <div class="entry">
-                <span class="entry-t" style="color:#ff4444;">😈 EVIL DARK - EVIL DARK</span>
-                <span class="entry-d">Información recopilada de múltiples fuentes OSINT.</span>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('keydown', function(e) {
-            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || (e.ctrlKey && e.keyCode == 85)) {
-                e.preventDefault();
-                return false;
-            }
-        });
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-
-        const glow = document.getElementById('glow-effect');
-        document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth) * 100;
-            const y = (e.clientY / window.innerHeight) * 100;
-            glow.style.setProperty('--mx', x + '%');
-            glow.style.setProperty('--my', y + '%');
-        });
-
-        const canvas = document.getElementById('particles');
-        const ctx = canvas.getContext
+                <div class="block"><span class="lbl">No Responsable de IVA</span><span class="val">SI
