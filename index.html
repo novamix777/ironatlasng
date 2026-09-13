@@ -7,7 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
-    
     <style>
         :root {
             --bg-dark: #030000;
@@ -15,6 +14,7 @@
             --neon-dark-red: #990024;
             --text-light: #ffd6e0;
             --text-muted: #a08a90;
+            --glow: 0 0 20px rgba(255, 0, 60, 0.6);
         }
 
         * {
@@ -31,6 +31,7 @@
             color: #ffffff;
             overflow-x: hidden;
             min-height: 100vh;
+            scroll-behavior: smooth;
         }
 
         #bg-canvas {
@@ -51,13 +52,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 3rem;
-            background: rgba(3, 0, 0, 0.7);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            padding: 1.2rem 3rem;
+            background: rgba(3, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 0, 60, 0.3);
-            box-shadow: 0 4px 30px rgba(255, 0, 60, 0.1);
+            box-shadow: 0 4px 30px rgba(255, 0, 60, 0.15);
             z-index: 100;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .top-nav:hover {
+            box-shadow: 0 8px 40px rgba(255, 0, 60, 0.3);
+            border-bottom-color: var(--neon-red);
         }
 
         .nav-brand {
@@ -65,6 +72,11 @@
             align-items: center;
             gap: 1rem;
             text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .nav-brand:hover {
+            transform: scale(1.05);
         }
 
         .nav-title {
@@ -73,7 +85,13 @@
             font-weight: 900;
             color: #fff;
             letter-spacing: 3px;
-            text-shadow: 0 0 10px var(--neon-red);
+            text-shadow: 0 0 10px var(--neon-red), 0 0 30px var(--neon-red);
+            animation: flicker 3s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0%, 100% { text-shadow: 0 0 10px var(--neon-red), 0 0 30px var(--neon-red); }
+            50% { text-shadow: 0 0 20px #fff, 0 0 50px var(--neon-red), 0 0 80px var(--neon-red); }
         }
 
         .nav-links {
@@ -85,33 +103,38 @@
             font-family: 'Orbitron', sans-serif;
             color: var(--text-light);
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
             position: relative;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            padding: 0.3rem 0;
         }
 
-        .nav-link::after {
+        .nav-link::before {
             content: '';
             position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
-            background-color: var(--neon-red);
-            transition: width 0.3s ease;
-            box-shadow: 0 0 8px var(--neon-red);
+            width: 100%;
+            height: 2px;
+            background: var(--neon-red);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 10px var(--neon-red);
         }
 
         .nav-link:hover {
-            color: #ffffff;
-            text-shadow: 0 0 15px var(--neon-red);
+            color: #fff;
+            text-shadow: 0 0 15px var(--neon-red), 0 0 30px var(--neon-red);
+            transform: translateY(-2px);
         }
 
-        .nav-link:hover::after {
-            width: 100%;
+        .nav-link:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
         }
 
         .hamburger {
@@ -119,6 +142,11 @@
             flex-direction: column;
             gap: 6px;
             cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .hamburger:hover {
+            transform: rotate(90deg);
         }
 
         .hamburger span {
@@ -126,7 +154,8 @@
             height: 3px;
             background: var(--neon-red);
             border-radius: 2px;
-            box-shadow: 0 0 5px var(--neon-red);
+            box-shadow: 0 0 8px var(--neon-red);
+            transition: all 0.3s;
         }
 
         .main-content {
@@ -143,7 +172,7 @@
         .hero-section {
             text-align: center;
             margin-bottom: 6rem;
-            animation: fadeIn 2s ease-out;
+            animation: fadeInUp 1.5s ease-out;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -156,12 +185,17 @@
             height: auto;
             margin-bottom: 2.5rem;
             filter: drop-shadow(0 0 30px var(--neon-red));
-            animation: pulseLogo 4s infinite alternate;
+            animation: float 6s ease-in-out infinite, pulseLogo 4s infinite alternate;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
 
         @keyframes pulseLogo {
             0% { transform: scale(1); filter: drop-shadow(0 0 20px var(--neon-red)); }
-            100% { transform: scale(1.05); filter: drop-shadow(0 0 45px var(--neon-red)); }
+            100% { transform: scale(1.08); filter: drop-shadow(0 0 55px var(--neon-red)); }
         }
 
         .hero-section h1 {
@@ -171,8 +205,21 @@
             letter-spacing: 6px;
             text-transform: uppercase;
             color: #ffffff;
-            text-shadow: 0 0 20px rgba(255, 0, 60, 0.5), 0 0 40px rgba(255, 0, 60, 0.4), 0 0 90px var(--neon-red);
+            text-shadow: 0 0 20px rgba(255, 0, 60, 0.6), 0 0 40px rgba(255, 0, 60, 0.5), 0 0 90px var(--neon-red);
             margin-bottom: 2rem;
+            animation: glitch 5s infinite;
+            position: relative;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            2% { transform: translate(-3px, 2px); }
+            4% { transform: translate(3px, -2px); }
+            6% { transform: translate(0); }
+            92% { transform: translate(0); }
+            94% { transform: translate(3px, 2px); }
+            96% { transform: translate(-3px, -2px); }
+            98% { transform: translate(0); }
         }
 
         .hero-quote {
@@ -183,23 +230,36 @@
             line-height: 1.6;
             font-style: italic;
             letter-spacing: 1.5px;
-            text-shadow: 0 0 10px rgba(255, 0, 60, 0.4);
+            text-shadow: 0 0 10px rgba(255, 0, 60, 0.5);
             border-left: 4px solid var(--neon-red);
             border-right: 4px solid var(--neon-red);
             padding: 0 2rem;
+            animation: borderPulse 3s infinite alternate;
+        }
+
+        @keyframes borderPulse {
+            0% { border-color: rgba(255, 0, 60, 0.4); }
+            100% { border-color: var(--neon-red); }
         }
 
         .about-box {
             background: rgba(15, 0, 5, 0.7);
             border: 1px solid rgba(255, 0, 60, 0.3);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 3rem;
             max-width: 1000px;
             width: 100%;
             margin-bottom: 8rem;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 15px 40px rgba(255, 0, 60, 0.15), inset 0 0 20px rgba(255, 0, 60, 0.05);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 50px rgba(255, 0, 60, 0.2), inset 0 0 30px rgba(255, 0, 60, 0.05);
             text-align: center;
+            animation: fadeInUp 1.5s ease-out 0.3s both;
+            transition: transform 0.5s, box-shadow 0.5s;
+        }
+
+        .about-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 60px rgba(255, 0, 60, 0.35), inset 0 0 40px rgba(255, 0, 60, 0.1);
         }
 
         .about-box h3 {
@@ -209,7 +269,7 @@
             margin-bottom: 1.5rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            text-shadow: 0 0 10px var(--neon-red);
+            text-shadow: 0 0 15px var(--neon-red);
         }
 
         .about-box p {
@@ -236,10 +296,28 @@
             text-transform: uppercase;
             text-align: center;
             color: #ffffff;
-            text-shadow: 0 0 20px var(--neon-red);
+            text-shadow: 0 0 25px var(--neon-red);
             border-bottom: 2px solid rgba(255, 0, 60, 0.3);
             padding-bottom: 1rem;
             width: fit-content;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-red), transparent);
+            animation: slideLine 3s infinite;
+        }
+
+        @keyframes slideLine {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
         .data-grid {
@@ -252,7 +330,7 @@
         .card {
             background: rgba(15, 0, 5, 0.6);
             border: 1px solid rgba(255, 0, 60, 0.2);
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 3rem 2rem;
             display: flex;
             flex-direction: column;
@@ -261,11 +339,21 @@
             gap: 1.5rem;
             text-decoration: none;
             color: #ffffff;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            animation: fadeInUp 1s ease-out both;
         }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
 
         .card::before {
             content: '';
@@ -274,8 +362,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 0, 60, 0.1), transparent);
-            transition: 0.6s;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 60, 0.15), transparent);
+            transition: 0.8s;
         }
 
         .card:hover::before {
@@ -284,8 +372,8 @@
 
         .card:hover {
             border-color: var(--neon-red);
-            box-shadow: 0 20px 50px rgba(255, 0, 60, 0.25), inset 0 0 30px rgba(255, 0, 60, 0.15);
-            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(255, 0, 60, 0.35), inset 0 0 40px rgba(255, 0, 60, 0.15);
+            transform: translateY(-15px) rotateX(5deg) rotateY(-5deg) scale(1.02);
         }
 
         .card-header {
@@ -294,6 +382,7 @@
             align-items: center;
             gap: 1.5rem;
             width: 100%;
+            transform: translateZ(30px);
         }
 
         .card-img, .member-avatar {
@@ -302,8 +391,8 @@
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid rgba(255, 0, 60, 0.5);
-            box-shadow: 0 0 20px rgba(255, 0, 60, 0.3);
-            transition: all 0.5s;
+            box-shadow: 0 0 25px rgba(255, 0, 60, 0.4);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -313,21 +402,27 @@
             color: var(--neon-red);
             background: rgba(255, 0, 60, 0.05);
             z-index: 2;
+            animation: avatarPulse 4s infinite alternate;
+        }
+
+        @keyframes avatarPulse {
+            0% { box-shadow: 0 0 20px rgba(255, 0, 60, 0.3); }
+            100% { box-shadow: 0 0 45px rgba(255, 0, 60, 0.7); }
         }
 
         .leader-avatar {
             width: 180px;
             height: 180px;
             border: 4px solid var(--neon-red);
-            box-shadow: 0 0 30px rgba(255, 0, 60, 0.5);
+            box-shadow: 0 0 40px rgba(255, 0, 60, 0.6);
         }
 
         .card:hover .card-img, .card:hover .member-avatar {
-            transform: scale(1.1);
+            transform: scale(1.15) rotate(5deg);
             border-color: #fff;
-            box-shadow: 0 0 35px var(--neon-red);
+            box-shadow: 0 0 55px var(--neon-red), 0 0 100px rgba(255, 0, 60, 0.5);
             color: #fff;
-            background: rgba(255, 0, 60, 0.2);
+            background: rgba(255, 0, 60, 0.25);
         }
 
         .card-info {
@@ -341,12 +436,13 @@
             font-size: 1.6rem;
             font-weight: 700;
             letter-spacing: 2px;
-            transition: color 0.3s;
+            transition: all 0.3s;
         }
 
         .card:hover .card-name {
             color: #ffffff;
-            text-shadow: 0 0 15px var(--neon-red);
+            text-shadow: 0 0 20px var(--neon-red), 0 0 40px var(--neon-red);
+            transform: scale(1.05);
         }
 
         .card-role {
@@ -355,6 +451,12 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .card:hover .card-role {
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon-red);
         }
 
         .card-desc {
@@ -362,6 +464,11 @@
             color: var(--text-muted);
             line-height: 1.7;
             padding: 0 1rem;
+            transition: color 0.3s;
+        }
+
+        .card:hover .card-desc {
+            color: var(--text-light);
         }
 
         .badge-container {
@@ -382,27 +489,38 @@
             font-size: 0.8rem;
             letter-spacing: 1px;
             text-transform: uppercase;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .card:hover .badge {
             border-color: var(--neon-red);
-            background: rgba(255, 0, 60, 0.2);
+            background: rgba(255, 0, 60, 0.25);
             color: #fff;
-            box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.6);
+            transform: translateY(-3px) scale(1.05);
         }
 
         .leader-card {
             max-width: 900px;
             width: 100%;
             border-color: rgba(255, 0, 60, 0.6);
-            box-shadow: 0 0 30px rgba(255, 0, 60, 0.2);
+            box-shadow: 0 0 40px rgba(255, 0, 60, 0.3);
             transform: scale(1.02);
             padding: 4rem 2rem;
+            animation: leaderGlow 3s infinite alternate;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        @keyframes leaderGlow {
+            0% { box-shadow: 0 0 30px rgba(255, 0, 60, 0.2); }
+            100% { box-shadow: 0 0 70px rgba(255, 0, 60, 0.5); }
+        }
+
+        .leader-card:hover {
+            transform: scale(1.05) rotateX(3deg) rotateY(-3deg);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -418,6 +536,7 @@
                 padding: 2rem 0;
                 text-align: center;
                 border-bottom: 1px solid var(--neon-red);
+                animation: slideDown 0.4s ease-out;
             }
             .nav-links.active {
                 display: flex;
@@ -432,6 +551,11 @@
             .data-grid {
                 grid-template-columns: 1fr;
             }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -458,9 +582,8 @@
 
     <main class="main-content">
         <section class="hero-section">
-            <img src="/assets/iron.png" alt="IRON ATLAS" class="hero-logo" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBkPSJNMzAgMjBMMzAgODBMNzAgNTBaIiBmaWxsPSIjZmYwMDNjIi8+PC9zdmc+'">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBkPSJNMzAgMjBMMzAgODBMNzAgNTBaIiBmaWxsPSIjZmYwMDNjIi8+PC9zdmc+" alt="IRON ATLAS" class="hero-logo">
             <h1>Iron Atlas</h1>
-
             <p class="hero-quote">"El sistema clasifica, oculta y controla. Nosotros extraemos, exponemos y reescribimos las reglas."</p>
         </section>
 
@@ -472,7 +595,7 @@
         <section class="grid-container">
             <h2 class="section-title">Aliados</h2>
             <div class="data-grid">
-                <a href="https://t.me/nullsechackers" class="card" target="_blank">
+                <a href="https://t.me/nullsechackers" class="card" target="_blank" rel="noopener noreferrer">
                     <div class="card-header">
                         <img src="https://i.postimg.cc/mPCTw51J/nullsec.jpg" class="card-img" alt="Nullsec">
                         <div class="card-info">
@@ -486,7 +609,7 @@
                         <span class="badge">LEAKERS</span>
                     </div>
                 </a>
-                <a href="https://hackpurgatory.org/" class="card" target="_blank">
+                <a href="https://hackpurgatory.org/" class="card" target="_blank" rel="noopener noreferrer">
                     <div class="card-header">
                         <img src="https://files.catbox.moe/iwurbn.jpg" class="card-img" alt="Hack Purgatory">
                         <div class="card-info">
@@ -500,7 +623,7 @@
                         <span class="badge">Hacking</span>
                     </div>
                 </a>
-                <a href="https://www.jxll.org/" class="card" target="_blank">
+                <a href="https://www.jxll.org/" class="card" target="_blank" rel="noopener noreferrer">
                     <div class="card-header">
                         <img src="https://i.postimg.cc/3yq9xnnX/teamjxll.jpg" class="card-img" alt="Team JXLL">
                         <div class="card-info">
@@ -542,7 +665,7 @@
             <div class="data-grid">
                 <a href="#" class="card">
                     <div class="card-header">
-                           <img src="https://i.postimg.cc/MKy9xJ8b/poppe.jpg" class="member-avatar leader-avatar" alt="Líder">
+                        <img src="https://i.postimg.cc/MKy9xJ8b/poppe.jpg" class="member-avatar leader-avatar" alt="Poppe">
                         <div class="card-info">
                             <span class="card-name">╰ცզקơקקɛ╮</span>
                             <span class="card-role">@BqPoppe</span>
@@ -557,7 +680,7 @@
                 </a>
                 <a href="#" class="card">
                     <div class="card-header">
-                           <img src="https://i.postimg.cc/mD2v12Bd/kabra.png" class="member-avatar leader-avatar" alt="Líder">
+                        <img src="https://i.postimg.cc/mD2v12Bd/kabra.png" class="member-avatar leader-avatar" alt="Kabra">
                         <div class="card-info">
                             <span class="card-name">𝐋𝐚 𝐤𝐚𝐛𝐫𝐚⁶⁶⁶</span>
                             <span class="card-role">@la_kabra_666</span>
@@ -568,11 +691,10 @@
                         <span class="badge">Administración</span>
                         <span class="badge">sucesor</span>
                     </div>
-
-                          </a>
+                </a>
                 <a href="#" class="card">
                     <div class="card-header">
-                           <img src="https://i.postimg.cc/3JnnWCd8/waller.jpg" class="member-avatar leader-avatar" alt="Líder">
+                        <img src="https://i.postimg.cc/3JnnWCd8/waller.jpg" class="member-avatar leader-avatar" alt="WallerMiner">
                         <div class="card-info">
                             <span class="card-name">𝖂𝖆𝖑𝖑𝖊𝖗𝕸𝖎𝖓𝖊𝖗</span>
                             <span class="card-role">@yjuandkoz00039</span>
@@ -582,11 +704,11 @@
                     <div class="badge-container">
                         <span class="badge">Pentester</span>
                         <span class="badge">hacking</span>
-                    </div> 
-                  </a>
+                    </div>
+                </a>
                 <a href="#" class="card">
                     <div class="card-header">
-                           <img src="https://i.postimg.cc/Jhcy4KhV/mau.jpg" class="member-avatar leader-avatar" alt="Líder">
+                        <img src="https://i.postimg.cc/Jhcy4KhV/mau.jpg" class="member-avatar leader-avatar" alt="Lupo">
                         <div class="card-info">
                             <span class="card-name">♤ 𝐋𝐮𝐩𝐨𝐨𝟕𝟕𝟕 ♤ ᴹᴬᵁ</span>
                             <span class="card-role">@MAUU_LUPO777</span>
@@ -596,11 +718,11 @@
                     <div class="badge-container">
                         <span class="badge">Reconocimiento</span>
                         <span class="badge">Material Físico</span>
-                    </div>  
-                 </a>
+                    </div>
+                </a>
                 <a href="#" class="card">
                     <div class="card-header">
-                           <img src="https://i.postimg.cc/1t73fdh0/𝓈𝓁𝒾𝓉𝑒.jpg" class="member-avatar leader-avatar" alt="Líder">
+                        <img src="https://i.postimg.cc/1t73fdh0/𝓈𝓁𝒾𝓉𝑒.jpg" class="member-avatar leader-avatar" alt="Slite">
                         <div class="card-info">
                             <span class="card-name">𝓈𝓁𝒾𝓉𝑒 </span>
                             <span class="card-role">@Slite888</span>
@@ -610,11 +732,11 @@
                     <div class="badge-container">
                         <span class="badge">Cripto</span>
                         <span class="badge">Bancking</span>
-                    </div>  
-                     </a>
+                    </div>
+                </a>
                 <a href="#" class="card">
                     <div class="card-header">
-                           <img src="https://i.postimg.cc/nVsDq4Rb/Babuldino.jpg" class="member-avatar leader-avatar" alt="Líder">
+                        <img src="https://i.postimg.cc/nVsDq4Rb/Babuldino.jpg" class="member-avatar leader-avatar" alt="Balduino">
                         <div class="card-info">
                             <span class="card-name">𝘽𝙖𝙡𝙙𝙪𝙞𝙣𝙤</span>
                             <span class="card-role">@Balduinno</span>
@@ -624,8 +746,7 @@
                     <div class="badge-container">
                         <span class="badge">hacking</span>
                         <span class="badge">Bancking</span>
-                    </div>                  
-                    
+                    </div>
                 </a>
             </div>
         </section>
@@ -642,7 +763,7 @@
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        let mouse = { x: null, y: null, radius: 250 };
+        let mouse = { x: null, y: null, radius: 300 };
 
         window.addEventListener('mousemove', (e) => {
             mouse.x = e.clientX;
@@ -665,14 +786,20 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 1.8;
-                this.vy = (Math.random() - 0.5) * 1.8;
-                this.radius = Math.random() * 2 + 1.5;
+                this.vx = (Math.random() - 0.5) * 2.5;
+                this.vy = (Math.random() - 0.5) * 2.5;
+                this.radius = Math.random() * 2.5 + 1.5;
                 this.baseX = this.x;
                 this.baseY = this.y;
+                this.angle = Math.random() * Math.PI * 2;
+                this.speed = Math.random() * 0.02 + 0.01;
             }
 
             update() {
+                this.angle += this.speed;
+                this.x += this.vx + Math.cos(this.angle) * 0.5;
+                this.y += this.vy + Math.sin(this.angle) * 0.5;
+
                 if (mouse.x !== null) {
                     let dx = this.x - mouse.x;
                     let dy = this.y - mouse.y;
@@ -680,13 +807,10 @@
                     
                     if (distance < mouse.radius) {
                         let force = (mouse.radius - distance) / mouse.radius;
-                        this.x += (dx / distance) * force * 4;
-                        this.y += (dy / distance) * force * 4;
+                        this.x += (dx / distance) * force * 6;
+                        this.y += (dy / distance) * force * 6;
                     }
                 }
-
-                this.x += this.vx;
-                this.y += this.vy;
 
                 if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
                 if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
@@ -697,12 +821,14 @@
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
                 ctx.fillStyle = '#ff003c';
                 ctx.fill();
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = '#ff003c';
             }
         }
 
         function initNodes() {
             particles = [];
-            let count = Math.floor((canvas.width * canvas.height) / 9000);
+            let count = Math.floor((canvas.width * canvas.height) / 8000);
             for (let i = 0; i < count; i++) {
                 particles.push(new Node());
             }
@@ -710,6 +836,7 @@
 
         function animateNodes() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.shadowBlur = 0;
             
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
@@ -722,22 +849,22 @@
                     if (distMouse < mouse.radius) {
                         ctx.beginPath();
                         ctx.strokeStyle = `rgba(255, 0, 60, ${1 - distMouse / mouse.radius})`;
-                        ctx.lineWidth = 1.5;
+                        ctx.lineWidth = 2;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(mouse.x, mouse.y);
                         ctx.stroke();
                     }
                 }
 
-                for (let j = i; j < particles.length; j++) {
+                for (let j = i + 1; j < particles.length; j++) {
                     let dx = particles[i].x - particles[j].x;
                     let dy = particles[i].y - particles[j].y;
                     let distance = Math.sqrt(dx * dx + dy * dy);
                     
-                    if (distance < 130) {
+                    if (distance < 150) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(255, 0, 60, ${0.9 - distance/130})`;
-                        ctx.lineWidth = 0.6;
+                        ctx.strokeStyle = `rgba(255, 0, 60, ${0.8 - distance/150})`;
+                        ctx.lineWidth = 0.8;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
                         ctx.stroke();
@@ -756,9 +883,6 @@
                 e.preventDefault();
             }
         });
-        setInterval(() => {
-            (function() { return false; }['constructor']('debugger')());
-        }, 50);
     </script>
 </body>
 </html>
