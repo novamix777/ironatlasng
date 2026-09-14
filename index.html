@@ -17,7 +17,7 @@
   --neon-dark-red:#990024;
   --text-light:#ffd6e0;
   --text-muted:#a08a90;
-  --card-bg:rgba(15,0,5,0.65);
+  --card-bg:rgba(15,0,5,0.7);
   --pad:clamp(1rem,3vw,3rem);
   --radius:clamp(14px,1.6vw,22px);
 }
@@ -32,6 +32,18 @@ body{
   line-height:1.5;
 }
 img{max-width:100%;height:auto;display:block;}
+
+.scroll-progress{
+  position:fixed;
+  top:0;left:0;
+  height:3px;
+  width:0%;
+  background:linear-gradient(90deg,var(--neon-dark-red),var(--neon-red),#fff);
+  box-shadow:0 0 12px var(--neon-red),0 0 24px var(--neon-red);
+  z-index:200;
+  transition:width .1s linear;
+  will-change:width;
+}
 
 #bg-canvas{
   position:fixed;
@@ -48,24 +60,17 @@ img{max-width:100%;height:auto;display:block;}
   z-index:0;
   pointer-events:none;
   background:
-    radial-gradient(circle at 20% 30%,rgba(255,0,60,0.18),transparent 55%),
-    radial-gradient(circle at 80% 70%,rgba(255,0,60,0.12),transparent 55%),
-    radial-gradient(circle at 50% 50%,rgba(255,0,60,0.06),transparent 70%);
-  animation:hueDrift 12s ease-in-out infinite alternate;
-}
-@keyframes hueDrift{
-  0%{filter:hue-rotate(0deg);}
-  100%{filter:hue-rotate(20deg);}
+    radial-gradient(circle at 20% 30%,rgba(255,0,60,0.15),transparent 55%),
+    radial-gradient(circle at 80% 70%,rgba(255,0,60,0.1),transparent 55%);
 }
 .scanlines{
   position:fixed;
   inset:0;
   z-index:1;
   pointer-events:none;
-  background:repeating-linear-gradient(0deg,rgba(255,0,60,0.04) 0px,rgba(255,0,60,0.04) 1px,transparent 1px,transparent 3px);
+  background:repeating-linear-gradient(0deg,rgba(255,0,60,0.035) 0px,rgba(255,0,60,0.035) 1px,transparent 1px,transparent 3px);
   mix-blend-mode:overlay;
-  will-change:background-position;
-  animation:scanShift 10s linear infinite;
+  animation:scanShift 12s linear infinite;
 }
 @keyframes scanShift{
   0%{background-position:0 0;}
@@ -78,22 +83,6 @@ img{max-width:100%;height:auto;display:block;}
   pointer-events:none;
   background:radial-gradient(ellipse at center,transparent 0%,transparent 45%,rgba(3,0,0,0.8) 100%);
 }
-.scan-beam{
-  position:fixed;
-  left:0;
-  width:100%;
-  height:140px;
-  z-index:1;
-  pointer-events:none;
-  background:linear-gradient(180deg,transparent,rgba(255,0,60,0.08) 45%,rgba(255,0,60,0.2) 50%,rgba(255,0,60,0.08) 55%,transparent);
-  animation:beam 8s linear infinite;
-  mix-blend-mode:screen;
-  will-change:transform;
-}
-@keyframes beam{
-  0%{transform:translate3d(0,-200px,0);}
-  100%{transform:translate3d(0,100vh,0);}
-}
 
 .top-nav{
   position:fixed;
@@ -102,7 +91,7 @@ img{max-width:100%;height:auto;display:block;}
   justify-content:space-between;
   align-items:center;
   padding:clamp(0.6rem,1.6vw,1.1rem) clamp(0.8rem,3vw,3rem);
-  background:rgba(3,0,0,0.7);
+  background:rgba(3,0,0,0.72);
   backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px);
   border-bottom:1px solid rgba(255,0,60,0.25);
@@ -113,7 +102,7 @@ img{max-width:100%;height:auto;display:block;}
 .top-nav.scrolled{
   padding-top:calc(clamp(0.4rem,1.2vw,0.7rem) + env(safe-area-inset-top,0px));
   padding-bottom:clamp(0.4rem,1.2vw,0.7rem);
-  background:rgba(3,0,0,0.92);
+  background:rgba(3,0,0,0.94);
   box-shadow:0 6px 30px rgba(255,0,60,0.35);
 }
 .nav-brand{
@@ -134,13 +123,10 @@ img{max-width:100%;height:auto;display:block;}
 @keyframes flicker{
   0%,100%{opacity:1;}
   48%{opacity:1;}
-  50%{opacity:.7;text-shadow:0 0 25px #fff,0 0 60px var(--neon-red);}
+  50%{opacity:.72;text-shadow:0 0 25px #fff,0 0 60px var(--neon-red);}
   52%{opacity:1;}
 }
-.nav-links{
-  display:flex;
-  gap:clamp(1rem,2.4vw,3rem);
-}
+.nav-links{display:flex;gap:clamp(1rem,2.4vw,3rem);}
 .nav-link{
   font-family:'Orbitron',sans-serif;
   color:var(--text-light);
@@ -194,7 +180,7 @@ img{max-width:100%;height:auto;display:block;}
   width:100%;
   max-width:1400px;
   margin:0 auto;
-  padding:clamp(6.5rem,12vw,11rem) clamp(1rem,3vw,2rem) 5rem;
+  padding:clamp(6.5rem,12vw,11rem) clamp(1rem,3vw,2rem) 6rem;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -305,6 +291,7 @@ img{max-width:100%;height:auto;display:block;}
   text-align:center;
   position:relative;
   overflow:hidden;
+  contain:layout paint;
   transition:box-shadow .5s;
 }
 .about-box::before{
@@ -347,6 +334,8 @@ img{max-width:100%;height:auto;display:block;}
   display:flex;
   flex-direction:column;
   align-items:center;
+  content-visibility:auto;
+  contain-intrinsic-size:1px 800px;
 }
 .section-title{
   font-family:'Orbitron',sans-serif;
@@ -399,7 +388,8 @@ img{max-width:100%;height:auto;display:block;}
   position:relative;
   overflow:hidden;
   box-shadow:0 10px 30px rgba(255,0,60,.12);
-  will-change:transform;
+  contain:layout paint;
+  transform:translateZ(0);
 }
 .card::before{
   content:'';
@@ -411,6 +401,23 @@ img{max-width:100%;height:auto;display:block;}
   pointer-events:none;
 }
 .card:hover::before{left:100%;}
+.card::after{
+  content:'';
+  position:absolute;
+  inset:-2px;
+  border-radius:inherit;
+  background:conic-gradient(from var(--angle,0deg),transparent 0deg,rgba(255,0,60,.5) 90deg,transparent 180deg,rgba(255,0,60,.5) 270deg,transparent 360deg);
+  opacity:0;
+  transition:opacity .5s;
+  z-index:-1;
+  animation:rotateBorder 4s linear infinite;
+  pointer-events:none;
+}
+@property --angle{syntax:'<angle>';initial-value:0deg;inherits:false;}
+@keyframes rotateBorder{
+  to{--angle:360deg;}
+}
+.card:hover::after{opacity:1;}
 .card:hover{
   border-color:var(--neon-red);
   box-shadow:0 22px 55px rgba(255,0,60,.35),inset 0 0 40px rgba(255,0,60,.15);
@@ -433,6 +440,7 @@ img{max-width:100%;height:auto;display:block;}
   transition:transform .5s cubic-bezier(.2,.9,.3,1.4),box-shadow .5s,border-color .5s;
   background:rgba(255,0,60,.05);
   animation:avatarPulse 4.5s infinite alternate;
+  will-change:transform;
 }
 @keyframes avatarPulse{
   0%{box-shadow:0 0 18px rgba(255,0,60,.28);}
@@ -450,11 +458,7 @@ img{max-width:100%;height:auto;display:block;}
   border-color:#fff;
   box-shadow:0 0 50px var(--neon-red);
 }
-.card-info{
-  display:flex;
-  flex-direction:column;
-  gap:.35rem;
-}
+.card-info{display:flex;flex-direction:column;gap:.35rem;}
 .card-name{
   font-family:'Orbitron',sans-serif;
   font-size:clamp(1rem,2vw,1.45rem);
@@ -521,13 +525,106 @@ img{max-width:100%;height:auto;display:block;}
 
 .reveal{
   opacity:0;
-  transform:translate3d(0,50px,0);
+  transform:translate3d(0,60px,0) scale(.94);
   transition:opacity .9s cubic-bezier(.2,.9,.3,1.2),transform .9s cubic-bezier(.2,.9,.3,1.2);
   will-change:opacity,transform;
 }
 .reveal.visible{
   opacity:1;
-  transform:translate3d(0,0,0);
+  transform:translate3d(0,0,0) scale(1);
+}
+
+.telegram-fab{
+  position:fixed;
+  left:clamp(1rem,2.5vw,1.8rem);
+  bottom:calc(clamp(1rem,2.5vw,1.8rem) + env(safe-area-inset-bottom,0px));
+  z-index:150;
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+  padding:.7rem 1.1rem .7rem .7rem;
+  background:linear-gradient(135deg,#0088cc,#00b3ff);
+  border:2px solid rgba(255,255,255,.35);
+  border-radius:50px;
+  color:#fff;
+  font-family:'Orbitron',sans-serif;
+  font-weight:700;
+  font-size:clamp(.75rem,1.4vw,.95rem);
+  letter-spacing:1px;
+  text-transform:uppercase;
+  text-decoration:none;
+  cursor:pointer;
+  box-shadow:0 8px 30px rgba(0,136,204,.5),0 0 60px rgba(0,179,255,.35);
+  transition:transform .4s cubic-bezier(.2,.9,.3,1.4),box-shadow .4s,background .4s;
+  animation:fabPulse 3s ease-in-out infinite;
+  will-change:transform;
+}
+@keyframes fabPulse{
+  0%,100%{transform:translateY(0) scale(1);}
+  50%{transform:translateY(-6px) scale(1.03);}
+}
+.telegram-fab::before{
+  content:'';
+  position:absolute;
+  inset:-6px;
+  border-radius:50px;
+  border:2px solid rgba(0,179,255,.6);
+  animation:fabRing 2.4s ease-out infinite;
+  pointer-events:none;
+}
+@keyframes fabRing{
+  0%{transform:scale(.9);opacity:1;}
+  100%{transform:scale(1.25);opacity:0;}
+}
+.telegram-fab::after{
+  content:'Unirse al canal';
+  position:absolute;
+  left:calc(100% + 12px);
+  top:50%;
+  transform:translateY(-50%) translateX(-8px);
+  background:rgba(3,0,0,.95);
+  color:var(--text-light);
+  padding:.5rem .9rem;
+  border-radius:8px;
+  border:1px solid var(--neon-red);
+  font-size:.75rem;
+  letter-spacing:1px;
+  white-space:nowrap;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s,transform .3s;
+  box-shadow:0 0 20px rgba(255,0,60,.4);
+}
+.telegram-fab:hover::after{opacity:1;transform:translateY(-50%) translateX(0);}
+.telegram-fab:hover{
+  transform:translateY(-4px) scale(1.06);
+  box-shadow:0 12px 45px rgba(0,136,204,.7),0 0 90px rgba(0,179,255,.5);
+}
+.telegram-fab:active{transform:translateY(-2px) scale(1.02);}
+.telegram-fab .tg-icon{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 0 15px rgba(0,179,255,.7);
+}
+.telegram-fab .tg-icon svg{
+  width:22px;
+  height:22px;
+  fill:#0088cc;
+}
+.telegram-fab .tg-label{
+  display:inline-block;
+  text-shadow:0 0 8px rgba(0,0,0,.4);
+}
+@media (max-width:520px){
+  .telegram-fab{padding:.6rem;border-radius:50%;}
+  .telegram-fab .tg-label{display:none;}
+  .telegram-fab::after{left:auto;right:calc(100% + 12px);}
 }
 
 .ripple{
@@ -538,11 +635,12 @@ img{max-width:100%;height:auto;display:block;}
   z-index:9999;
   box-shadow:0 0 20px var(--neon-red);
   animation:rippleOut .8s ease-out forwards;
-  will-change:width,height,opacity,transform;
+  will-change:transform,opacity;
+  transform:translate(-50%,-50%);
 }
 @keyframes rippleOut{
-  0%{width:0;height:0;opacity:1;transform:translate(-50%,-50%) scale(0);}
-  100%{width:320px;height:320px;opacity:0;transform:translate(-50%,-50%) scale(1);}
+  0%{width:0;height:0;opacity:1;}
+  100%{width:320px;height:320px;opacity:0;}
 }
 
 .to-top{
@@ -609,7 +707,8 @@ img{max-width:100%;height:auto;display:block;}
     border-bottom:1px solid rgba(255,0,60,.15);
   }
   .hamburger{display:flex;}
-  .to-top{width:42px;height:42px;right:1rem;bottom:calc(1rem + env(safe-area-inset-bottom,0px));}
+  .to-top{width:42px;height:42px;right:1rem;bottom:calc(5.5rem + env(safe-area-inset-bottom,0px));}
+  .telegram-fab{bottom:calc(1rem + env(safe-area-inset-bottom,0px));}
 }
 
 @media (max-width:480px){
@@ -618,6 +717,7 @@ img{max-width:100%;height:auto;display:block;}
   .data-grid{gap:1rem;}
   .card{padding:1.4rem 1rem;}
   .badge{font-size:.6rem;padding:.3rem .6rem;}
+  .scanlines{display:none;}
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -627,17 +727,17 @@ img{max-width:100%;height:auto;display:block;}
     transition-duration:.01ms !important;
     scroll-behavior:auto !important;
   }
-  .scanlines,.scan-beam,.bg-fallback{animation:none !important;}
+  .scanlines,.telegram-fab{animation:none !important;}
   #bg-canvas{display:none;}
 }
 </style>
 </head>
 <body>
 
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
 <div class="bg-fallback" aria-hidden="true"></div>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <div class="scanlines" aria-hidden="true"></div>
-<div class="scan-beam" aria-hidden="true"></div>
 <div class="vignette" aria-hidden="true"></div>
 
 <nav class="top-nav" id="top-nav">
@@ -654,6 +754,15 @@ img{max-width:100%;height:auto;display:block;}
     <a href="/redes.html" class="nav-link">Redes Sociales</a>
   </div>
 </nav>
+
+<a href="https://t.me/+ju-GBV9i4QUwZjNh" class="telegram-fab" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" aria-label="Unirse al canal de Telegram">
+  <span class="tg-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/>
+    </svg>
+  </span>
+  <span class="tg-label">Join Telegram</span>
+</a>
 
 <main class="main-content" id="main-content">
   <section class="hero-section">
@@ -674,7 +783,7 @@ img{max-width:100%;height:auto;display:block;}
     <div class="data-grid">
       <a href="https://t.me/nullsechackers" class="card reveal" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">
         <div class="card-header">
-          <img src="https://i.postimg.cc/mPCTw51J/nullsec.jpg" class="card-img" alt="Nullsec" loading="lazy" decoding="async" width="140" height="140">
+          <img src="https://i.postimg.cc/mPCTw51J/nullsec.jpg" class="card-img" alt="Nullsec" loading="lazy" decoding="async" width="140" height="140" fetchpriority="low">
           <div class="card-info">
             <span class="card-name">Nullsec Philippines</span>
             <span class="card-role">Exploits</span>
@@ -688,7 +797,7 @@ img{max-width:100%;height:auto;display:block;}
       </a>
       <a href="https://hackpurgatory.org/" class="card reveal" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">
         <div class="card-header">
-          <img src="https://files.catbox.moe/iwurbn.jpg" class="card-img" alt="Hack Purgatory" loading="lazy" decoding="async" width="140" height="140">
+          <img src="https://files.catbox.moe/iwurbn.jpg" class="card-img" alt="Hack Purgatory" loading="lazy" decoding="async" width="140" height="140" fetchpriority="low">
           <div class="card-info">
             <span class="card-name">𝐇𝐀𝐂𝐊 [𝐏𝐔𝐑𝐆𝐀𝐓𝐎𝐑𝐘]™</span>
             <span class="card-role">Sindicato</span>
@@ -702,7 +811,7 @@ img{max-width:100%;height:auto;display:block;}
       </a>
       <a href="https://www.jxll.org/" class="card reveal" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">
         <div class="card-header">
-          <img src="https://i.postimg.cc/3yq9xnnX/teamjxll.jpg" class="card-img" alt="Team JXLL" loading="lazy" decoding="async" width="140" height="140">
+          <img src="https://i.postimg.cc/3yq9xnnX/teamjxll.jpg" class="card-img" alt="Team JXLL" loading="lazy" decoding="async" width="140" height="140" fetchpriority="low">
           <div class="card-info">
             <span class="card-name">𝐓𝐄𝐀𝐌 𝐉𝐗𝐋𝐋</span>
             <span class="card-role">Hacking</span>
@@ -721,7 +830,7 @@ img{max-width:100%;height:auto;display:block;}
     <h2 class="section-title reveal">Líder</h2>
     <a href="#" class="card leader-card reveal">
       <div class="card-header">
-        <img src="https://i.postimg.cc/MGtF0bFV/import.jpg" class="member-avatar leader-avatar" alt="Líder" loading="lazy" decoding="async" width="180" height="180">
+        <img src="https://i.postimg.cc/MGtF0bFV/import.jpg" class="member-avatar leader-avatar" alt="Líder" loading="lazy" decoding="async" width="180" height="180" fetchpriority="low">
         <div class="card-info">
           <span class="card-name"> 𝙄𝙈𝙋𝙊𝙍𝙏 𝙍𝙀𝙎𝙌𝙐𝙀𝙎𝙏</span>
           <span class="card-role">@import_404</span>
@@ -742,7 +851,7 @@ img{max-width:100%;height:auto;display:block;}
     <div class="data-grid">
       <a href="#" class="card reveal">
         <div class="card-header">
-          <img src="https://i.postimg.cc/MKy9xJ8b/poppe.jpg" class="member-avatar leader-avatar" alt="Poppe" loading="lazy" decoding="async" width="180" height="180">
+          <img src="https://i.postimg.cc/MKy9xJ8b/poppe.jpg" class="member-avatar leader-avatar" alt="Poppe" loading="lazy" decoding="async" width="180" height="180" fetchpriority="low">
           <div class="card-info">
             <span class="card-name">╰ცզקơקקɛ╮</span>
             <span class="card-role">@BqPoppe</span>
@@ -757,7 +866,7 @@ img{max-width:100%;height:auto;display:block;}
       </a>
       <a href="#" class="card reveal">
         <div class="card-header">
-          <img src="https://i.postimg.cc/mD2v12Bd/kabra.png" class="member-avatar leader-avatar" alt="Kabra" loading="lazy" decoding="async" width="180" height="180">
+          <img src="https://i.postimg.cc/mD2v12Bd/kabra.png" class="member-avatar leader-avatar" alt="Kabra" loading="lazy" decoding="async" width="180" height="180" fetchpriority="low">
           <div class="card-info">
             <span class="card-name">𝐋𝐚 𝐤𝐚𝐛𝐫𝐚⁶⁶⁶</span>
             <span class="card-role">@la_kabra_666</span>
@@ -771,7 +880,7 @@ img{max-width:100%;height:auto;display:block;}
       </a>
       <a href="#" class="card reveal">
         <div class="card-header">
-          <img src="https://i.postimg.cc/3JnnWCd8/waller.jpg" class="member-avatar leader-avatar" alt="WallerMiner" loading="lazy" decoding="async" width="180" height="180">
+          <img src="https://i.postimg.cc/3JnnWCd8/waller.jpg" class="member-avatar leader-avatar" alt="WallerMiner" loading="lazy" decoding="async" width="180" height="180" fetchpriority="low">
           <div class="card-info">
             <span class="card-name">𝖂𝖆𝖑𝖑𝖊𝖗𝕸𝖎𝖓𝖊𝖗</span>
             <span class="card-role">@yjuandkoz00039</span>
@@ -785,7 +894,7 @@ img{max-width:100%;height:auto;display:block;}
       </a>
       <a href="#" class="card reveal">
         <div class="card-header">
-          <img src="https://i.postimg.cc/Jhcy4KhV/mau.jpg" class="member-avatar leader-avatar" alt="Lupo" loading="lazy" decoding="async" width="180" height="180">
+          <img src="https://i.postimg.cc/Jhcy4KhV/mau.jpg" class="member-avatar leader-avatar" alt="Lupo" loading="lazy" decoding="async" width="180" height="180" fetchpriority="low">
           <div class="card-info">
             <span class="card-name">♤ 𝐋𝐮𝐩𝐨𝐨𝟕𝟕𝟕 ♤ ᴹᴬᵁ</span>
             <span class="card-role">@MAUU_LUPO777</span>
@@ -799,7 +908,7 @@ img{max-width:100%;height:auto;display:block;}
       </a>
       <a href="#" class="card reveal">
         <div class="card-header">
-          <img src="https://i.postimg.cc/1t73fdh0/𝓈𝓁𝒾𝓉𝑒.jpg" class="member-avatar leader-avatar" alt="Slite" loading="lazy" decoding="async" width="180" height="180">
+          <img src="https://i.postimg.cc/1t73fdh0/𝓈𝓁𝒾𝓉𝑒.jpg" class="member-avatar leader-avatar" alt="Slite" loading="lazy" decoding="async" width="180" height="180" fetchpriority="low">
           <div class="card-info">
             <span class="card-name">𝓈𝓁𝒾𝓉𝑒 </span>
             <span class="card-role">@Slite888</span>
@@ -813,7 +922,7 @@ img{max-width:100%;height:auto;display:block;}
       </a>
       <a href="#" class="card reveal">
         <div class="card-header">
-          <img src="https://i.postimg.cc/nVsDq4Rb/Babuldino.jpg" class="member-avatar leader-avatar" alt="Balduino" loading="lazy" decoding="async" width="180" height="180">
+          <img src="https://i.postimg.cc/nVsDq4Rb/Babuldino.jpg" class="member-avatar leader-avatar" alt="Balduino" loading="lazy" decoding="async" width="180" height="180" fetchpriority="low">
           <div class="card-info">
             <span class="card-name">𝘽𝙖𝙡𝙙𝙪𝙞𝙣𝙤</span>
             <span class="card-role">@Balduinno</span>
@@ -881,19 +990,24 @@ img{max-width:100%;height:auto;display:block;}
 
   const topNav = document.getElementById('top-nav');
   const toTop = document.getElementById('to-top');
-  let scrollTicking = false;
+  const scrollProgress = document.getElementById('scroll-progress');
+  let ticking = false;
   function onScroll() {
-    if (!scrollTicking) {
-      scrollTicking = true;
+    if (!ticking) {
+      ticking = true;
       requestAnimationFrame(function () {
         const y = window.scrollY;
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = max > 0 ? (y / max) * 100 : 0;
+        if (scrollProgress) scrollProgress.style.width = pct + '%';
         if (topNav) topNav.classList.toggle('scrolled', y > 40);
         if (toTop) toTop.classList.toggle('show', y > 600);
-        scrollTicking = false;
+        ticking = false;
       });
     }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
   if (toTop) toTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
   const revealEls = document.querySelectorAll('.reveal');
@@ -905,14 +1019,14 @@ img{max-width:100%;height:auto;display:block;}
           obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
     revealEls.forEach(function (el) { obs.observe(el); });
   } else {
     revealEls.forEach(function (el) { el.classList.add('visible'); });
   }
 
-  const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   if (supportsHover && !prefersReduced) {
     document.querySelectorAll('.card').forEach(function (card) {
       let raf = 0;
@@ -940,7 +1054,7 @@ img{max-width:100%;height:auto;display:block;}
   if (!prefersReduced) {
     document.addEventListener('click', function (e) {
       const t = e.target;
-      if (t.closest('a, button')) return;
+      if (t.closest('a, button, .telegram-fab')) return;
       const ripple = document.createElement('div');
       ripple.className = 'ripple';
       ripple.style.left = e.clientX + 'px';
@@ -970,9 +1084,8 @@ img{max-width:100%;height:auto;display:block;}
   const cores = navigator.hardwareConcurrency || 2;
   const mem = navigator.deviceMemory || 4;
   const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth < 768;
-  const lowEnd = cores <= 4 || mem <= 2 || isMobile;
+  const lowEnd = cores <= 4 || mem <= 3 || isMobile;
 
-  let dpr = Math.min(window.devicePixelRatio || 1, lowEnd ? 1.25 : 2);
   let W = 0, H = 0;
   let particles = [];
   let running = true;
@@ -980,13 +1093,13 @@ img{max-width:100%;height:auto;display:block;}
   let mouse = { x: -9999, y: -9999, active: false };
 
   const CONFIG = lowEnd
-    ? { count: 28, maxDist: 110, speed: 0.35, linkWidth: 0.6, dotMin: 0.8, dotMax: 1.8, radius: 160 }
-    : { count: 70, maxDist: 150, speed: 0.5, linkWidth: 0.8, dotMin: 1, dotMax: 2.4, radius: 200 };
+    ? { count: 18, maxDist: 100, speed: 0.32, linkWidth: 0.5, dotMin: 0.8, dotMax: 1.6, radius: 130 }
+    : { count: 60, maxDist: 145, speed: 0.48, linkWidth: 0.8, dotMin: 1, dotMax: 2.4, radius: 190 };
 
   function resize() {
-    dpr = Math.min(window.devicePixelRatio || 1, lowEnd ? 1.25 : 2);
     W = window.innerWidth;
     H = window.innerHeight;
+    const dpr = Math.min(window.devicePixelRatio || 1, lowEnd ? 1 : 1.75);
     canvas.width = Math.floor(W * dpr);
     canvas.height = Math.floor(H * dpr);
     canvas.style.width = W + 'px';
@@ -996,7 +1109,7 @@ img{max-width:100%;height:auto;display:block;}
   }
 
   function initParticles() {
-    const target = lowEnd ? CONFIG.count : Math.min(CONFIG.count, Math.floor((W * H) / 22000));
+    const target = lowEnd ? CONFIG.count : Math.min(CONFIG.count, Math.floor((W * H) / 24000));
     particles = [];
     for (let i = 0; i < target; i++) {
       particles.push({
@@ -1029,8 +1142,8 @@ img{max-width:100%;height:auto;display:block;}
         if (d2 < r2 && d2 > 0.0001) {
           const d = Math.sqrt(d2);
           const f = (CONFIG.radius - d) / CONFIG.radius;
-          p.x += (dx / d) * f * 1.4 * dt;
-          p.y += (dy / d) * f * 1.4 * dt;
+          p.x += (dx / d) * f * 1.2 * dt;
+          p.y += (dy / d) * f * 1.2 * dt;
         }
       }
 
@@ -1060,10 +1173,10 @@ img{max-width:100%;height:auto;display:block;}
       }
     }
 
+    ctx.fillStyle = 'rgba(255,0,60,0.85)';
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
       ctx.beginPath();
-      ctx.fillStyle = 'rgba(255,0,60,0.85)';
       ctx.arc(p.x, p.y, p.r, 0, 6.28318);
       ctx.fill();
     }
@@ -1074,7 +1187,7 @@ img{max-width:100%;height:auto;display:block;}
   let resizeTimer;
   window.addEventListener('resize', function () {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(resize, 180);
+    resizeTimer = setTimeout(resize, 200);
   }, { passive: true });
 
   window.addEventListener('mousemove', function (e) {
