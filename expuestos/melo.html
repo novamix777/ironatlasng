@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>EXPEDIENTE 1075231526</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+--r:#39ff14;--c:#00f0ff;--b:#050505;--p:#0d0d0d;--brd:#1a1a1a;--t:#d0d0d0;
+--red:#ff2d2d;--gold:#ffc400;--purple:#b26bff;
+}
+*{margin:0;padding:0;box-sizing:border-box;max-width:100%;-webkit-tap-highlight-color:transparent}
+html,body{overflow-x:hidden}
+body{background:var(--b);color:var(--t);font-family:'Inter',sans-serif;line-height:1.45;user-select:none;
+background-image:radial-gradient(circle at 15% 10%,rgba(0,240,255,.06),transparent 45%),radial-gradient(circle at 85% 90%,rgba(178,107,255,.06),transparent 45%);
+background-attachment:fixed}
+.container{max-width:1100px;margin:auto;padding:clamp(10px,4vw,30px)}
+
+.logos-unidos{display:flex;align-items:center;justify-content:center;gap:12px;background:linear-gradient(90deg,#0a0a0a,#111,#0a0a0a);border:1px solid #1a1a1a;padding:18px 25px;margin-bottom:22px;flex-wrap:wrap;border-left:4px solid var(--c);border-right:4px solid var(--red);border-radius:6px;box-shadow:0 0 25px rgba(0,240,255,.08)}
+.logos-unidos .logo-item{display:flex;align-items:center;gap:8px;font-family:'Share Tech Mono',monospace;font-size:1.1rem;letter-spacing:1px;color:#fff}
+.logos-unidos .logo-item img{height:38px;width:auto;display:block;filter:drop-shadow(0 0 5px rgba(0,240,255,.25))}
+.logos-unidos .separador{color:#333;font-size:1.4rem;font-weight:100}
+
+.hero{position:relative;display:flex;gap:30px;background:linear-gradient(135deg,#0d0d0d,#141414);border:1px solid var(--brd);padding:30px;border-left:6px solid var(--r);margin-bottom:22px;align-items:center;border-radius:8px;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent,rgba(57,255,20,.04),transparent);pointer-events:none}
+.hero::after{content:'';position:absolute;top:-50%;right:-20%;width:340px;height:340px;background:radial-gradient(circle,rgba(0,240,255,.12),transparent 70%);pointer-events:none}
+.profile-img{width:190px;height:190px;object-fit:cover;border:2px solid #222;flex-shrink:0;border-radius:10px;filter:grayscale(.25) contrast(1.05);box-shadow:0 0 25px rgba(0,0,0,.7);transition:.3s}
+.profile-img:hover{filter:grayscale(0);border-color:var(--r);box-shadow:0 0 30px rgba(57,255,20,.2)}
+.hero-content h1{color:#fff;font-size:clamp(1.15rem,4.5vw,1.9rem);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;font-weight:800}
+.id-label{font-family:'Share Tech Mono';color:var(--c);font-size:1rem;display:block;margin-bottom:8px;text-shadow:0 0 8px rgba(0,240,255,.4)}
+.sub-alias{font-size:.88rem;color:#777;margin-bottom:12px;font-family:'Share Tech Mono'}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{background:#020;color:var(--r);padding:4px 11px;font-size:.68rem;font-weight:700;border:1px solid #040;border-radius:4px;font-family:'Share Tech Mono';letter-spacing:.5px}
+.tag.blue{background:#001a1e;color:var(--c);border-color:#003840}
+.tag.red{background:#1a0000;color:var(--red);border-color:#400}
+.tag.gold{background:#1a1400;color:var(--gold);border-color:#403000}
+.tag.purple{background:#12001a;color:var(--purple);border-color:#300040}
+
+.section{background:var(--p);border:1px solid var(--brd);margin-bottom:20px;border-radius:8px;overflow:hidden}
+.section-h{background:linear-gradient(90deg,#121212,#181818);padding:13px 20px;border-bottom:1px solid var(--brd);display:flex;justify-content:space-between;align-items:center}
+.section-h h3{font-family:'Share Tech Mono';color:var(--c);font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase}
+.section-h .dot{width:8px;height:8px;border-radius:50%;background:var(--r);box-shadow:0 0 8px var(--r);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;padding:20px}
+.block{border-bottom:1px solid #151515;padding-bottom:10px;transition:.2s}
+.block:hover{border-bottom-color:var(--c)}
+.lbl{display:block;font-size:.63rem;color:#555;text-transform:uppercase;margin-bottom:5px;font-weight:700;letter-spacing:.8px}
+.val{color:#fff;font-family:'Share Tech Mono';font-size:.95rem;word-break:break-all}
+.val.accent{color:var(--r)}
+.val.blue{color:var(--c)}
+.wide{grid-column:1/-1}
+
+.entry{border-left:3px solid var(--c);padding:10px 18px;margin:14px 20px;background:rgba(0,240,255,.03);border-radius:0 6px 6px 0;transition:.25s}
+.entry:hover{background:rgba(0,240,255,.07);transform:translateX(4px)}
+.entry.red{border-left-color:var(--red);background:rgba(255,45,45,.04)}
+.entry.red:hover{background:rgba(255,45,45,.08)}
+.entry-t{color:var(--c);font-weight:700;font-size:.82rem;margin-bottom:5px;display:block;text-transform:uppercase;letter-spacing:.6px}
+.entry.red .entry-t{color:var(--red)}
+.entry-d{display:block;font-size:.85rem;color:#888;margin-bottom:3px;font-family:'Share Tech Mono'}
+.entry-d b{color:#ccc;font-weight:600}
+
+.timeline{position:relative;margin:18px 25px;padding-left:25px;border-left:2px solid #1f1f1f}
+.timeline-item{position:relative;padding:8px 0 8px 15px}
+.timeline-item::before{content:'';position:absolute;left:-32px;top:14px;width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c)}
+.timeline-item .tl-date{font-family:'Share Tech Mono';color:var(--r);font-size:.75rem;font-weight:700}
+.timeline-item .tl-name{color:#fff;font-size:.95rem;font-weight:600}
+
+.image-gallery{display:flex;gap:25px;padding:25px;flex-wrap:wrap;justify-content:center;align-items:center}
+.gallery-img{width:100%;max-width:520px;height:auto;aspect-ratio:4/3;object-fit:contain;border:2px solid #222;border-radius:10px;background:#0a0a0a;transition:.3s;box-shadow:0 0 25px rgba(0,0,0,.7)}
+.gallery-img:hover{transform:scale(1.02);border-color:var(--c);box-shadow:0 0 35px rgba(0,240,255,.2)}
+
+.badge-row{display:flex;gap:12px;flex-wrap:wrap;padding:18px 22px}
+.badge{flex:1;min-width:140px;background:linear-gradient(135deg,#111,#181818);border:1px solid #1f1f1f;border-radius:8px;padding:14px 16px;text-align:center;transition:.25s}
+.badge:hover{border-color:var(--c);transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,240,255,.1)}
+.badge .b-num{font-family:'Share Tech Mono';font-size:1.5rem;color:var(--r);font-weight:700;display:block;text-shadow:0 0 10px rgba(57,255,20,.3)}
+.badge .b-lbl{font-size:.68rem;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px;display:block}
+
+.family-card{display:flex;gap:22px;padding:22px;background:linear-gradient(135deg,rgba(178,107,255,.05),rgba(0,240,255,.03));border-radius:8px;margin:18px 22px;border:1px solid rgba(178,107,255,.15);align-items:center;flex-wrap:wrap}
+.family-card .fam-info{flex:1;min-width:200px}
+.family-card .fam-info h2{color:var(--purple);font-family:'Share Tech Mono';letter-spacing:2px;font-size:1.05rem;text-shadow:0 0 10px rgba(178,107,255,.4);margin-bottom:6px}
+.family-card .fam-info p{font-size:.85rem;color:#aaa;font-family:'Share Tech Mono';margin-bottom:3px}
+
+.section-footer{background:linear-gradient(135deg,#0a0a0a,#111);border:1px solid var(--brd);border-radius:8px;padding:22px;margin-bottom:20px;text-align:center;position:relative;overflow:hidden}
+.section-footer::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(57,255,20,.05),transparent);animation:shine 4s infinite}
+@keyframes shine{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.section-footer .f-t{font-family:'Share Tech Mono';color:var(--r);font-size:.95rem;letter-spacing:2px;text-transform:uppercase;position:relative;z-index:1;margin-bottom:6px}
+.section-footer .f-s{font-family:'Share Tech Mono';color:var(--c);font-size:.8rem;letter-spacing:1px;position:relative;z-index:1}
+
+@media (max-width:768px){
+.hero{flex-direction:column;text-align:center;padding:22px;gap:16px}
+.profile-img{width:155px;height:155px}
+.grid{grid-template-columns:1fr;padding:15px;gap:14px}
+.section-h{padding:11px 15px}
+.image-gallery{padding:15px;gap:15px}
+.gallery-img{max-width:100%}
+.entry{margin:12px 14px;padding:9px 14px}
+.family-card{flex-direction:column;text-align:center;padding:18px;margin:14px}
+.timeline{margin:14px 18px}
+.logos-unidos{gap:6px;padding:12px 14px}
+.logos-unidos .logo-item{font-size:.85rem}
+.logos-unidos .logo-item img{height:28px}
+.logos-unidos .separador{font-size:1rem}
+.badge{min-width:110px;padding:11px 12px}
+.badge .b-num{font-size:1.2rem}
+}
+@media (min-width:769px) and (max-width:1200px){
+.gallery-img{max-width:440px}
+}
+@media (min-width:1201px){
+.gallery-img{max-width:560px}
+}
+@media (min-width:1600px){
+.gallery-img{max-width:660px}
+}
+</style>
+</head>
+<body oncontextmenu="return false;">
+<div class="container">
+
+<div class="logos-unidos">
+<span class="logo-item"><img src="https://i.postimg.cc/15Fg6x7k/hackpurgatory.jpg" alt="Hackpurgatory"> hackpurgatory</span>
+<span class="separador">✦</span>
+<span class="logo-item"><img src="https://i.postimg.cc/KY04Fm4G/Logo-iron-atlas.jpg" alt="Iron Atlas"> Iron Atlas</span>
+</div>
+
+<header class="hero">
+<img src="https://postimg.cc/TLFdpVqw" alt="TARGET" class="profile-img" onerror="this.src='https://i.ibb.co/YTZbH1Px/mantenimiento-de-equipos-de-computo-AC4-B967-CDAEA4373thumbnail.jpg'">
+<div class="hero-content">
+<span class="id-label">EXPEDIENTE: 1075231526</span>
+<h1>JHON DAIRO CABRERA OLAYA</h1>
+<p class="sub-alias">Alias: ꧁༺Melo༻꧂ · MALOCOLL · Melo</p>
+<div class="tags">
+<span class="tag blue">@MALOCOLL</span>
+<span class="tag purple">TELEGRAM</span>
+<span class="tag red">NEQUI FREE</span>
+<span class="tag gold">NEIVA - HUILA</span>
+<span class="tag">ID 8386551172</span>
+</div>
+</div>
+</header>
+
+<div class="section">
+<div class="section-h"><h3>01. IDENTIDAD COMPLETA</h3><span class="dot"></span></div>
+<div class="grid">
+<div class="block"><span class="lbl">Documento</span><span class="val accent">1075231526</span></div>
+<div class="block"><span class="lbl">Nombres RUI</span><span class="val">JOHN DAIRO CABRERA OLAYA</span></div>
+<div class="block"><span class="lbl">Sexo</span><span class="val">MASCULINO</span></div>
+<div class="block"><span class="lbl">Edad</span><span class="val">37 años</span></div>
+<div class="block"><span class="lbl">Estatura</span><span class="val">170 cm</span></div>
+<div class="block"><span class="lbl">Origen</span><span class="val blue">NEIVA - HUILA</span></div>
+<div class="block"><span class="lbl">F. Nacimiento</span><span class="val">1988-10-02</span></div>
+<div class="block"><span class="lbl">F. Expedición</span><span class="val">2006-10-03</span></div>
+<div class="block wide"><span class="lbl">Ubicación RUI</span><span class="val">NEIVA, HUILA</span></div>
+<div class="block wide"><span class="lbl">Afiliación</span><span class="val">AC EN NUEVA EPS MUNICIPIO NEIVA · SUBSIDIADO</span></div>
+<div class="block wide"><span class="lbl">Dirección</span><span class="val">ASENTAMIENTO BRISAS DE PANORAMA LT 82</span></div>
+<div class="block wide"><span class="lbl">Dirección 2</span><span class="val">CL 6 # Sur - 21-63, NEIVA, HUILA</span></div>
+<div class="block wide"><span class="lbl">IPS Asignada</span><span class="val">SUBSIDIADO-ESE CARMEN EMILIA OSPINA</span></div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>02. CONTACTO Y CORREOS</h3><span class="dot"></span></div>
+<div class="grid">
+<div class="block wide"><span class="lbl">Correo Principal</span><span class="val blue">sarahyyygarciaaa@gmail.com</span></div>
+<div class="block wide"><span class="lbl">Correo Secundario</span><span class="val">dariocabrera0125@gmail.com</span></div>
+<div class="block wide"><span class="lbl">Correo Adicional</span><span class="val">cabreraolayajhondayron@gmail.com</span></div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>03. TELEGRAM</h3><span class="dot"></span></div>
+<div class="badge-row">
+<div class="badge"><span class="b-num">10.522</span><span class="b-lbl">Mensajes</span></div>
+<div class="badge"><span class="b-num">61</span><span class="b-lbl">Grupos</span></div>
+<div class="badge"><span class="b-num">63.4%</span><span class="b-lbl">Diversidad</span></div>
+<div class="badge"><span class="b-num">21.77%</span><span class="b-lbl">Respuestas</span></div>
+<div class="badge"><span class="b-num">4</span><span class="b-lbl">Admin</span></div>
+<div class="badge"><span class="b-num">2</span><span class="b-lbl">Buscando</span></div>
+</div>
+<div class="grid" style="padding-top:0">
+<div class="block"><span class="lbl">Telegram Username</span><span class="val accent">@MALOCOLL</span></div>
+<div class="block"><span class="lbl">Telegram ID</span><span class="val">8386551172</span></div>
+<div class="block"><span class="lbl">Período Activo</span><span class="val">2/3/2026 → 9/23/2026</span></div>
+<div class="block"><span class="lbl">Grupo Favorito</span><span class="val blue">Nequi Free</span></div>
+<div class="block"><span class="lbl">Media</span><span class="val">3.74%</span></div>
+<div class="block"><span class="lbl">Circles / Voice</span><span class="val">0 / 5</span></div>
+<div class="block wide"><span class="lbl">Canal</span><span class="val">𝕽𝖊𝖋𝖊𝖘 𝕴𝖑𝖚𝖒𝖎𝖓𝖆𝖙𝖎 — t.me/ILUMINATISSS</span></div>
+</div>
+<div class="entry">
+<span class="entry-t">HISTORIAL DE NOMBRES EN TELEGRAM</span>
+<span class="entry-d">├ 2026-09-24 ➜ ꧁༺Melo༻꧂</span>
+<span class="entry-d">├ MALOCOLL · Melo</span>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>04. MADRE — SANDRA ESTELA OLAYA RIVERA</h3><span class="dot"></span></div>
+<div class="family-card">
+<div class="fam-info">
+<h2>SANDRA ESTELA OLAYA RIVERA</h2>
+<p>DOC: 55157020 (Cédula de Ciudadanía)</p>
+<p>EMAIL: sandrasteyaolaya@gmail.com</p>
+<p>SEXO: F | RH: 1 | ESTATURA: 156 cm</p>
+</div>
+</div>
+<div class="grid" style="margin-top:-5px">
+<div class="block"><span class="lbl">Edad</span><span class="val">57 años</span></div>
+<div class="block"><span class="lbl">Origen</span><span class="val blue">GIGANTE - HUILA</span></div>
+<div class="block"><span class="lbl">F. Nacimiento</span><span class="val">1969-04-04</span></div>
+<div class="block"><span class="lbl">F. Expedición</span><span class="val">1988-07-25</span></div>
+<div class="block wide"><span class="lbl">Dirección</span><span class="val">DIAGONAL 6 SUR 15 22</span></div>
+<div class="block wide"><span class="lbl">Residencia</span><span class="val">DESCONOCIDO</span></div>
+<div class="block wide"><span class="lbl">Afiliación</span><span class="val">AC EN FAMISANAR MUNICIPIO NEIVA</span></div>
+<div class="block wide"><span class="lbl">Sede Expedición</span><span class="val">NEIVA - HUILA</span></div>
+<div class="block wide"><span class="lbl">Sede Preparación</span><span class="val">NEIVA - HUILA</span></div>
+<div class="block"><span class="lbl">Padre</span><span class="val">ULDARICO OLAYA</span></div>
+<div class="block"><span class="lbl">Madre</span><span class="val">TERESA RIVERA</span></div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>05. PADRE — ISMAEL CABRERA</h3><span class="dot"></span></div>
+<div class="grid">
+<div class="block wide"><span class="lbl">Nombre</span><span class="val accent">ISMAEL CABRERA</span></div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>06. NÚMEROS ASOCIADOS</h3><span class="dot"></span></div>
+<div class="grid">
+<div class="block"><span class="lbl">Línea 1</span><span class="val">3044389714</span></div>
+<div class="block"><span class="lbl">Línea 2</span><span class="val">3103376846</span></div>
+<div class="block"><span class="lbl">Línea 3</span><span class="val">3112387935</span></div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>07. FOTOGRAFÍA</h3><span class="dot"></span></div>
+<div class="image-gallery">
+<img src="https://postimg.cc/TLFdpVqw" alt="TARGET" class="gallery-img" onerror="this.src='https://i.ibb.co/YTZbH1Px/mantenimiento-de-equipos-de-computo-AC4-B967-CDAEA4373thumbnail.jpg'">
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>08. NOTAS FINALES</h3><span class="dot"></span></div>
+<div class="entry red">
+<span class="entry-t">INFORMACIÓN EXTRAÍDA POR HACKPURGATORY E IRON ATLAS NEW GENERATION</span>
+</div>
+<div class="entry red">
+<span class="entry-t">SOMOS UNA FUERZA IRROMPIBLE PARA EL BIEN DE NUESTRA COMUNIDAD</span>
+</div>
+</div>
+
+</div>
+
+<script>
+document.addEventListener('keydown',function(e){
+if(e.keyCode==123||(e.ctrlKey&&e.shiftKey&&(e.keyCode==73||e.keyCode==74||e.keyCode==67))||(e.ctrlKey&&e.keyCode==85)){
+e.preventDefault();return false;
+}
+});
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+</script>
+</body>
+</html>
