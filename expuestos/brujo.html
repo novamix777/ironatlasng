@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>EXPEDIENTE 1053859548</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--r:#00e5ff;--c:#7c4dff;--b:#0a0a0a;--p:#111111;--brd:#1a1a1a;--t:#d0d0d0;--gold:#ffd700;--danger:#ff1744}
+*{margin:0;padding:0;box-sizing:border-box;max-width:100%;-webkit-tap-highlight-color:transparent}
+body{background:var(--b);color:var(--t);font-family:'Inter',sans-serif;line-height:1.4;user-select:none;overflow-x:hidden;min-height:100vh;position:relative}
+#matrix-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.1}
+#glow-effect{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(0,229,255,0.12) 0%,rgba(124,77,255,0.06) 40%,transparent 70%);transition:all 0.05s ease-out}
+#particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.container{max-width:1200px;margin:auto;padding:clamp(8px,3vw,25px);position:relative;z-index:1}
+.header-box{display:flex;gap:25px;background:var(--p);border:1px solid var(--brd);padding:clamp(15px,3vw,30px);border-left:6px solid var(--r);margin-bottom:20px;align-items:center;transform:translateY(0);transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);cursor:default;position:relative;overflow:hidden;animation:headerPulse 4s ease-in-out infinite}
+@keyframes headerPulse{0%,100%{box-shadow:0 0 20px rgba(0,229,255,0.05)}50%{box-shadow:0 0 40px rgba(0,229,255,0.15)}}
+.header-box::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent,rgba(0,229,255,0.05),transparent,rgba(124,77,255,0.05),transparent);animation:rotateGlow 8s linear infinite;pointer-events:none}
+@keyframes rotateGlow{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.header-box:hover{transform:translateY(-5px) scale(1.008);box-shadow:0 15px 50px rgba(0,229,255,0.2);border-color:var(--r)}
+.profile-img{width:clamp(120px,18vw,180px);height:clamp(120px,18vw,180px);object-fit:cover;border:2px solid #222;flex-shrink:0;filter:grayscale(0.4);transition:all 0.6s cubic-bezier(0.34,1.56,0.64,1);position:relative;z-index:1;border-radius:8px;animation:imgFloat 6s ease-in-out infinite}
+@keyframes imgFloat{0%,100%{transform:translateY(0px)}50%{transform:translateY(-8px)}}
+.profile-img:hover{filter:grayscale(0) drop-shadow(0 0 30px rgba(0,229,255,0.4));transform:scale(1.08) rotate(-3deg);border-color:var(--r)}
+.header-content{flex:1}
+.header-content h1{color:#fff;font-size:clamp(1rem,4vw,1.8rem);margin-bottom:5px;text-transform:uppercase;transition:all 0.4s ease;letter-spacing:1px}
+.header-content h1:hover{color:var(--r);text-shadow:0 0 40px rgba(0,229,255,0.3);transform:scale(1.02)}
+.id-label{font-family:'Share Tech Mono';color:var(--c);font-size:clamp(0.7rem,1.2vw,1rem);display:block;margin-bottom:8px;transition:all 0.4s ease;letter-spacing:2px}
+.id-label:hover{color:#fff;text-shadow:0 0 30px rgba(124,77,255,0.4);letter-spacing:4px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:5px}
+.tag{background:#001a1a;color:var(--r);padding:4px 12px;font-size:clamp(0.6rem,0.8vw,0.7rem);font-weight:700;border:1px solid #003333;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);cursor:default;position:relative;overflow:hidden;border-radius:3px}
+.tag::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(0,229,255,0.15),transparent);transition:left 0.6s ease}
+.tag:hover{transform:translateY(-3px) scale(1.08);border-color:var(--r);box-shadow:0 0 30px rgba(0,229,255,0.2);color:#fff}
+.tag:hover::before{left:100%}
+.tag-purple{background:#1a0033;color:#b388ff;border-color:#330066}
+.tag-purple:hover{border-color:#b388ff;box-shadow:0 0 30px rgba(179,136,255,0.2)}
+.tag-pink{background:#1a001a;color:#ff4d8d;border-color:#330033}
+.tag-pink:hover{border-color:#ff4d8d;box-shadow:0 0 30px rgba(255,77,141,0.2)}
+.section{background:var(--p);border:1px solid var(--brd);margin-bottom:18px;transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1);position:relative;overflow:hidden;border-radius:4px}
+.section::after{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--c),transparent);transform:scaleX(0);transform-origin:left;transition:transform 0.8s ease}
+.section:hover{transform:translateY(-3px);border-color:var(--c);box-shadow:0 8px 40px rgba(124,77,255,0.08)}
+.section:hover::after{transform:scaleX(1)}
+.section-h{background:#121212;padding:clamp(8px,1.2vw,14px) clamp(12px,2vw,20px);border-bottom:1px solid var(--brd);display:flex;justify-content:space-between;transition:all 0.4s ease}
+.section-h h3{font-family:'Share Tech Mono';color:var(--c);font-size:clamp(0.7rem,1vw,0.85rem);letter-spacing:2px;transition:all 0.4s ease}
+.section:hover .section-h h3{color:#fff;text-shadow:0 0 30px rgba(124,77,255,0.3);letter-spacing:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(clamp(220px,25vw,280px),1fr));gap:clamp(12px,1.5vw,20px);padding:clamp(12px,1.5vw,20px)}
+.block{border-bottom:1px solid #151515;padding-bottom:10px;transition:all 0.4s ease;position:relative}
+.block::before{content:'';position:absolute;left:0;bottom:0;width:0;height:2px;background:linear-gradient(90deg,var(--r),var(--c));transition:width 0.5s ease}
+.block:hover{padding-left:12px;border-bottom-color:var(--c);transform:translateX(4px)}
+.block:hover::before{width:100%}
+.lbl{display:block;font-size:clamp(0.55rem,0.7vw,0.65rem);color:#555;text-transform:uppercase;margin-bottom:4px;font-weight:700;transition:all 0.4s ease;letter-spacing:1px}
+.block:hover .lbl{color:var(--c);letter-spacing:2px}
+.val{color:#fff;font-family:'Share Tech Mono';font-size:clamp(0.8rem,1vw,0.95rem);word-break:break-all;transition:all 0.4s ease}
+.block:hover .val{color:var(--r);transform:scale(1.02)}
+.wide{grid-column:1/-1}
+.entry{border-left:3px solid var(--c);padding:8px 18px;margin:12px 18px;background:rgba(124,77,255,0.03);transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1);position:relative;overflow:hidden;border-radius:0 4px 4px 0}
+.entry::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(90deg,rgba(124,77,255,0.06),transparent);transform:translateX(-100%);transition:transform 0.6s ease}
+.entry:hover{transform:translateX(8px) scale(1.01);background:rgba(0,229,255,0.06);box-shadow:0 0 40px rgba(0,229,255,0.08);border-left-color:var(--r)}
+.entry:hover::before{transform:translateX(0)}
+.entry-t{color:var(--c);font-weight:700;font-size:clamp(0.7rem,0.9vw,0.8rem);margin-bottom:4px;display:block;text-transform:uppercase;transition:all 0.4s ease;letter-spacing:1px}
+.entry:hover .entry-t{color:var(--r);letter-spacing:2px}
+.entry-d{display:block;font-size:clamp(0.75rem,0.9vw,0.85rem);color:#888;margin-bottom:2px;transition:all 0.4s ease}
+.entry:hover .entry-d{color:#fff}
+.nav-back{padding-bottom:12px;position:relative;z-index:1}
+.nav-back a{color:#444;text-decoration:none;font-size:clamp(0.65rem,0.8vw,0.75rem);font-family:'Share Tech Mono';transition:all 0.4s ease;display:inline-block;padding:4px 0}
+.nav-back a:hover{color:var(--r);transform:translateX(-8px);text-shadow:0 0 30px rgba(0,229,255,0.3);letter-spacing:2px}
+.badge{background:#001a1a;color:#00e5ff;padding:3px 10px;border-radius:4px;font-size:clamp(0.6rem,0.7vw,0.7rem);border:1px solid #003333;transition:all 0.4s ease;display:inline-block;font-weight:700}
+.badge:hover{background:#00e5ff;color:#000;border-color:#00e5ff;box-shadow:0 0 30px rgba(0,229,255,0.4);transform:scale(1.08) rotate(-2deg)}
+.badge-danger{background:#1a0000;color:#ff1744;border-color:#330000}
+.badge-danger:hover{background:#ff1744;color:#000;border-color:#ff1744;box-shadow:0 0 30px rgba(255,23,68,0.4)}
+.badge-purple{background:#1a0033;color:#b388ff;border-color:#330066}
+.badge-purple:hover{background:#b388ff;color:#000;border-color:#b388ff;box-shadow:0 0 30px rgba(179,136,255,0.4)}
+.badge-gold{background:#1a1500;color:#ffd700;border-color:#332a00}
+.badge-gold:hover{background:#ffd700;color:#000;border-color:#ffd700;box-shadow:0 0 30px rgba(255,215,0,0.4)}
+.badge-pink{background:#1a001a;color:#ff4d8d;border-color:#330033}
+.badge-pink:hover{background:#ff4d8d;color:#000;border-color:#ff4d8d;box-shadow:0 0 30px rgba(255,77,141,0.4)}
+.val a{color:var(--c);text-decoration:none;transition:all 0.4s ease;border-bottom:1px solid transparent}
+.val a:hover{color:var(--r);text-shadow:0 0 30px rgba(0,229,255,0.3);border-bottom-color:var(--r)}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(clamp(250px,30vw,350px),1fr));gap:clamp(20px,2.5vw,30px);padding:clamp(15px,2vw,25px)}
+.photo-item{background:#0a0a0a;border:2px solid var(--brd);overflow:hidden;transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1);border-radius:8px;position:relative;display:flex;flex-direction:column}
+.photo-item::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,transparent 50%,rgba(0,229,255,0.05));pointer-events:none;z-index:1}
+.photo-item:hover{transform:translateY(-8px) scale(1.02);border-color:var(--c);box-shadow:0 15px 50px rgba(124,77,255,0.15)}
+.photo-item .image-wrapper{width:100%;padding-top:75%;position:relative;overflow:hidden;background:#000}
+.photo-item .image-wrapper img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;background:#0a0a0a;transition:all 0.6s ease}
+.photo-item:hover .image-wrapper img{transform:scale(1.05)}
+.photo-label{padding:clamp(10px,1.2vw,14px);background:var(--p);font-size:clamp(0.7rem,0.8vw,0.8rem);color:#888;text-align:center;transition:all 0.4s ease;border-top:2px solid var(--brd);font-weight:600;letter-spacing:1px;flex-shrink:0}
+.photo-item:hover .photo-label{color:#fff;background:#111;border-top-color:var(--c)}
+.tg-card{background:#0d0d0d;border:1px solid #1a1a1a;border-radius:6px;padding:15px;margin:10px 0;transition:all 0.4s ease;position:relative;overflow:hidden}
+.tg-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--r),var(--c))}
+.tg-card:hover{border-color:var(--r);box-shadow:0 0 30px rgba(0,229,255,0.1);transform:translateX(5px)}
+.tg-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #1a1a1a;flex-wrap:wrap;gap:8px}
+.tg-name{color:#fff;font-weight:700;font-size:clamp(0.85rem,1.1vw,1rem);letter-spacing:1px}
+.tg-id{font-family:'Share Tech Mono';color:var(--c);font-size:clamp(0.7rem,0.8vw,0.8rem)}
+.tg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.tg-item{font-size:clamp(0.7rem,0.8vw,0.8rem)}
+.tg-item .lbl{font-size:clamp(0.5rem,0.6vw,0.6rem)}
+.tg-item .val{font-size:clamp(0.7rem,0.8vw,0.85rem)}
+.stat-bar{display:flex;align-items:center;gap:10px;margin:5px 0}
+.stat-label{font-size:clamp(0.6rem,0.7vw,0.7rem);color:#666;min-width:80px}
+.stat-track{flex:1;height:6px;background:#1a1a1a;border-radius:3px;overflow:hidden;position:relative}
+.stat-fill{height:100%;border-radius:3px;transition:width 1.5s cubic-bezier(0.34,1.56,0.64,1);position:relative;overflow:hidden}
+.stat-fill::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);animation:shimmer 2s infinite}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.stat-value{font-family:'Share Tech Mono';font-size:clamp(0.7rem,0.8vw,0.8rem);color:var(--r);min-width:50px;text-align:right}
+.fill-cyan{background:linear-gradient(90deg,#00e5ff,#00b0ff)}
+.fill-purple{background:linear-gradient(90deg,#7c4dff,#b388ff)}
+.fill-green{background:linear-gradient(90deg,#00e676,#00c853)}
+.fill-gold{background:linear-gradient(90deg,#ffd700,#ffab00)}
+.fill-red{background:linear-gradient(90deg,#ff1744,#d50000)}
+.fill-pink{background:linear-gradient(90deg,#ff4d8d,#e91e63)}
+.bank-card{background:linear-gradient(135deg,#0d0d0d,#111);border:1px solid #1a1a1a;border-radius:8px;padding:15px;margin:10px 0;transition:all 0.4s ease;position:relative;overflow:hidden}
+.bank-card::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(0,229,255,0.03),transparent 70%);pointer-events:none}
+.bank-card:hover{border-color:var(--r);box-shadow:0 0 30px rgba(0,229,255,0.1);transform:translateY(-3px)}
+.bank-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px}
+.bank-name{color:#fff;font-weight:700;font-size:clamp(0.9rem,1.1vw,1.05rem)}
+.bank-status{padding:3px 12px;border-radius:20px;font-size:clamp(0.6rem,0.7vw,0.7rem);font-weight:700;letter-spacing:1px}
+.status-active{background:rgba(0,230,118,0.15);color:#00e676;border:1px solid rgba(0,230,118,0.3)}
+.status-inactive{background:rgba(255,23,68,0.15);color:#ff1744;border:1px solid rgba(255,23,68,0.3)}
+.bank-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.bank-item .lbl{font-size:clamp(0.5rem,0.6vw,0.6rem)}
+.bank-item .val{font-size:clamp(0.75rem,0.85vw,0.9rem)}
+.social-card{background:linear-gradient(135deg,#0d0d0d,#111);border:1px solid #1a1a1a;border-radius:8px;padding:15px;margin:10px 0;transition:all 0.4s ease;position:relative;overflow:hidden;display:flex;align-items:center;gap:15px;flex-wrap:wrap}
+.social-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--c),var(--r))}
+.social-card:hover{border-color:var(--c);box-shadow:0 0 30px rgba(124,77,255,0.1);transform:translateX(5px)}
+.social-icon{width:45px;height:45px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;transition:all 0.4s ease}
+.social-card:hover .social-icon{transform:scale(1.1) rotate(-5deg)}
+.icon-fb{background:linear-gradient(135deg,#1877f2,#0d5bbd);box-shadow:0 0 20px rgba(24,119,242,0.3)}
+.icon-ig{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);box-shadow:0 0 20px rgba(253,29,29,0.3)}
+.icon-tg{background:linear-gradient(135deg,#0088cc,#006699);box-shadow:0 0 20px rgba(0,136,204,0.3)}
+.icon-wa{background:linear-gradient(135deg,#25d366,#128c7e);box-shadow:0 0 20px rgba(37,211,102,0.3)}
+.social-info{flex:1;min-width:200px}
+.social-name{color:#fff;font-weight:700;font-size:clamp(0.85rem,1vw,1rem);margin-bottom:3px;letter-spacing:1px}
+.social-handle{font-family:'Share Tech Mono';color:var(--c);font-size:clamp(0.7rem,0.8vw,0.8rem);word-break:break-all;transition:all 0.4s ease}
+.social-card:hover .social-handle{color:var(--r)}
+@media(max-width:768px){
+.header-box{flex-direction:column;text-align:center;padding:18px;gap:12px}
+.profile-img{width:140px;height:140px}
+.grid{grid-template-columns:1fr;padding:12px;gap:12px}
+.section-h{padding:8px 12px}
+.photo-grid{grid-template-columns:1fr;padding:12px}
+.entry{margin:8px 10px;padding:6px 12px}
+.tags{justify-content:center}
+.header-content h1{font-size:1.2rem}
+.tg-grid{grid-template-columns:1fr}
+.bank-grid{grid-template-columns:1fr}
+.social-card{flex-direction:column;text-align:center}
+.social-info{min-width:auto}
+}
+@media(max-width:480px){
+.profile-img{width:110px;height:110px}
+.container{padding:6px}
+.grid{padding:8px;gap:8px}
+.block{padding-bottom:6px}
+.section{margin-bottom:12px}
+.photo-item .image-wrapper{padding-top:100%}
+.social-icon{width:40px;height:40px;font-size:1.1rem}
+}
+</style>
+</head>
+<body oncontextmenu="return false;">
+<canvas id="matrix-bg"></canvas>
+<div id="glow-effect"></div>
+<canvas id="particles"></canvas>
+
+<div class="container">
+<nav class="nav-back"><a href="../expedientes.html">← VOLVER A EXPEDIENTES</a></nav>
+<header class="header-box">
+<img src="https://ii.ct-stc.com/1/logos/candidates/2023/07/13/152612thumbnail.jpeg" alt="TARGET" class="profile-img" loading="lazy" onerror="this.src='https://via.placeholder.com/300x300/111/00e5ff?text=ALIAS+EL+BRUJO'">
+<div class="header-content">
+<span class="id-label">EXPEDIENTE: 1053859548</span>
+<h1>LUIS ALEJANDRO ALBA SALAZAR</h1>
+<p style="font-size:clamp(0.75rem,1vw,0.9rem);color:#777;margin-bottom:8px;">Alias: El Brujo | AxonDev | Zebra | Alejo Salazar</p>
+<div class="tags">
+<span class="tag">@Mraxi0</span>
+<span class="tag">@Axon_bre</span>
+<span class="tag">@Serviciosnequi</span>
+<span class="tag">@Mateo109d</span>
+<span class="tag tag-purple">AXONDEV</span>
+<span class="tag tag-pink">EL BRUJO</span>
+</div>
+</div>
+</header>
+
+<div class="section">
+<div class="section-h"><h3>01. IDENTIDAD COMPLETA</h3></div>
+<div class="grid">
+<div class="block"><span class="lbl">Tipo Documento</span><span class="val">CÉDULA DE CIUDADANÍA</span></div>
+<div class="block"><span class="lbl">Número Documento</span><span class="val">1053859548</span></div>
+<div class="block"><span class="lbl">Primer Nombre</span><span class="val">LUIS</span></div>
+<div class="block"><span class="lbl">Segundo Nombre</span><span class="val">ALEJANDRO</span></div>
+<div class="block"><span class="lbl">Primer Apellido</span><span class="val">ALBA</span></div>
+<div class="block"><span class="lbl">Segundo Apellido</span><span class="val">SALAZAR</span></div>
+<div class="block wide"><span class="lbl">Nombre Completo</span><span class="val">LUIS ALEJANDRO ALBA SALAZAR</span></div>
+<div class="block"><span class="lbl">Sexo</span><span class="val">MASCULINO</span></div>
+<div class="block"><span class="lbl">Fecha Nacimiento</span><span class="val">02/09/1997</span></div>
+<div class="block"><span class="lbl">Fecha Expedición</span><span class="val">18/09/2015</span></div>
+<div class="block"><span class="lbl">Departamento Expedición</span><span class="val">CALDAS</span></div>
+<div class="block"><span class="lbl">Municipio Expedición</span><span class="val">MANIZALES</span></div>
+<div class="block"><span class="lbl">Estado Civil</span><span class="val"><span class="badge badge-pink">SOLTERO</span></span></div>
+<div class="block"><span class="lbl">Activo</span><span class="val"><span class="badge badge-danger">NO</span></span></div>
+<div class="block"><span class="lbl">Persona en SISBEN</span><span class="val"><span class="badge badge-danger">NO</span></span></div>
+<div class="block"><span class="lbl">Licencia</span><span class="val">B1</span></div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>02. FORMACIÓN ACADÉMICA</h3></div>
+<div class="grid">
+<div class="block wide"><span class="lbl">Institución Educativa</span><span class="val">LICEO JOSÉ MARÍA BERNAL (JOMABER)</span></div>
+<div class="block"><span class="lbl">Departamento</span><span class="val">CALDAS</span></div>
+<div class="block"><span class="lbl">Municipio</span><span class="val">MANIZALES / ANTIOQUIA</span></div>
+<div class="block wide"><span class="lbl">Facebook Institucional</span><span class="val"><a href="https://www.facebook.com/profile.php?id=100054800250423" target="_blank">facebook.com/LiceoJOMABER</a></span></div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>03. INFORMACIÓN FINANCIERA - DAVIPLATA</h3></div>
+<div class="grid" style="grid-template-columns:1fr">
+<div class="bank-card">
+<div class="bank-header">
+<span class="bank-name">💳 DAVIPLATA</span>
+<span class="bank-status status-active">● ACTIVA</span>
+</div>
+<div class="bank-grid">
+<div class="bank-item"><span class="lbl">Llave</span><span class="val">1053859548</span></div>
+<div class="bank-item"><span class="lbl">Key Type</span><span class="val">4</span></div>
+<div class="bank-item"><span class="lbl">Nombre</span><span class="val">LUIS ALBA</span></div>
+<div class="bank-item"><span class="lbl">Documento</span><span class="val">1053859548</span></div>
+<div class="bank-item"><span class="lbl">Banco</span><span class="val">DAVIPLATA</span></div>
+<div class="bank-item"><span class="lbl">Bank ID</span><span class="val">0860</span></div>
+<div class="bank-item"><span class="lbl">Estado</span><span class="val"><span class="badge">ACTIVA</span></span></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>04. INFORMACIÓN DE CONTACTO Y TELEFONÍA</h3></div>
+<div class="grid">
+<div class="block"><span class="lbl">Número Principal</span><span class="val">313 604 6117</span></div>
+<div class="block"><span class="lbl">Operador</span><span class="val">CLARO</span></div>
+<div class="block"><span class="lbl">País</span><span class="val">COLOMBIA 🇨🇴</span></div>
+<div class="block wide"><span class="lbl">WhatsApp</span><span class="val"><a href="https://wa.me/573136046117" target="_blank">wa.me/573136046117</a></span></div>
+<div class="block"><span class="lbl">Email</span><span class="val">salazaralejo346@gmail.com</span></div>
+<div class="block"><span class="lbl">Nombre en Addi</span><span class="val">ALEJO SALAZAR</span></div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>05. REDES SOCIALES</h3></div>
+<div class="grid" style="grid-template-columns:1fr">
+<div class="social-card">
+<div class="social-icon icon-ig">📷</div>
+<div class="social-info">
+<div class="social-name">INSTAGRAM</div>
+<div class="social-handle"><a href="https://www.instagram.com/alejandrosalazar____/tagged/" target="_blank">@alejandrosalazar____</a></div>
+</div>
+</div>
+<div class="social-card">
+<div class="social-icon icon-fb">📘</div>
+<div class="social-info">
+<div class="social-name">FACEBOOK - LICEO JOMABER</div>
+<div class="social-handle"><a href="https://www.facebook.com/profile.php?id=100054800250423" target="_blank">facebook.com/LiceoJOMABER</a></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>06. PERFIL TELEGRAM - AXONDEV 2 MANO</h3></div>
+<div class="grid" style="grid-template-columns:1fr">
+<div class="tg-card">
+<div class="tg-header">
+<span class="tg-name">𝑨𝑿𝑶𝑵𝑫𝑬𝑽 𝟐 𝑴𝒂𝒏𝒐</span>
+<span class="tg-id">ID: 8343472857</span>
+</div>
+<div class="tg-grid">
+<div class="tg-item"><span class="lbl">Username 1</span><span class="val">@Mraxi0</span></div>
+<div class="tg-item"><span class="lbl">Username 2</span><span class="val">@Axon_bre</span></div>
+<div class="tg-item"><span class="lbl">Username 3</span><span class="val">@Serviciosnequi</span></div>
+<div class="tg-item wide"><span class="lbl">Link</span><span class="val"><a href="https://t.me/Mraxi0" target="_blank">t.me/Mraxi0</a></span></div>
+<div class="tg-item wide"><span class="lbl">Canal</span><span class="val"><a href="https://t.me/oficialstream" target="_blank">Referencias Axon Сheck</a></span></div>
+<div class="tg-item wide"><span class="lbl">Nombres Usados</span><span class="val">Usuario no encontrado (18/08/2026) • 𝑨𝑿𝑶𝑵𝑫𝑬𝑽 𝟐 𝑴𝒂𝒏𝒐 (18/08/2026) • 𝐒𝐞𝐛𝐚𝐬𝐭𝐢𝐚𝐧𝗧𝘀 𝗨𝗜 『тѕσявιт』 (06/08/2026)</span></div>
+</div>
+</div>
+</div>
+<div class="grid">
+<div class="block"><span class="lbl">Periodo Activo</span><span class="val">02/02/2026 - 18/08/2026</span></div>
+<div class="block"><span class="lbl">Volumen Mensajes</span><span class="val">1,716 msgs en 14 grupos</span></div>
+<div class="block"><span class="lbl">Interacción</span><span class="val">16.26% replies | 39.16% media</span></div>
+<div class="block"><span class="lbl">Multimedia</span><span class="val">Circles 0, Voice 1</span></div>
+<div class="block"><span class="lbl">Diversidad Mensajes</span><span class="val">63.09%</span></div>
+<div class="block"><span class="lbl">Grupo Favorito</span><span class="val">No registrado</span></div>
+</div>
+<div class="grid" style="padding-top:0">
+<div class="stat-bar wide">
+<span class="stat-label">Diversidad</span>
+<div class="stat-track"><div class="stat-fill fill-cyan" style="width:63.09%"></div></div>
+<span class="stat-value">63.09%</span>
+</div>
+<div class="stat-bar wide">
+<span class="stat-label">Replies</span>
+<div class="stat-track"><div class="stat-fill fill-purple" style="width:16.26%"></div></div>
+<span class="stat-value">16.26%</span>
+</div>
+<div class="stat-bar wide">
+<span class="stat-label">Media</span>
+<div class="stat-track"><div class="stat-fill fill-gold" style="width:39.16%"></div></div>
+<span class="stat-value">39.16%</span>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>07. PERFIL TELEGRAM - ZEBRA</h3></div>
+<div class="grid" style="grid-template-columns:1fr">
+<div class="tg-card">
+<div class="tg-header">
+<span class="tg-name">🦓 Zebra</span>
+<span class="tg-id">ID: 7381754580</span>
+</div>
+<div class="tg-grid">
+<div class="tg-item"><span class="lbl">Username</span><span class="val">@Mateo109d</span></div>
+<div class="tg-item"><span class="lbl">Link</span><span class="val"><a href="https://t.me/Mateo109d" target="_blank">t.me/Mateo109d</a></span></div>
+<div class="tg-item wide"><span class="lbl">Nombres Usados</span><span class="val">Zebra🤑 (31/05/2026) • ꪖꪀꪻ꠸ ᦓꪖρꪮᦓ (31/05/2026) • 𝓙𝓾𝓪𝓷 𝓭𝔃 𝓪𝓹𝓴🌀 (10/03/2026)</span></div>
+</div>
+</div>
+</div>
+<div class="grid">
+<div class="block"><span class="lbl">Periodo Activo</span><span class="val">26/08/2025 - 17/06/2026</span></div>
+<div class="block"><span class="lbl">Volumen Mensajes</span><span class="val">491 msgs en 14 grupos</span></div>
+<div class="block"><span class="lbl">Interacción</span><span class="val">25.66% replies | 14.05% media</span></div>
+<div class="block"><span class="lbl">Multimedia</span><span class="val">Circles 0, Voice 0</span></div>
+<div class="block"><span class="lbl">Diversidad Mensajes</span><span class="val">92.02%</span></div>
+<div class="block"><span class="lbl">Admin en Grupos</span><span class="val">1</span></div>
+</div>
+<div class="grid" style="padding-top:0">
+<div class="stat-bar wide">
+<span class="stat-label">Diversidad</span>
+<div class="stat-track"><div class="stat-fill fill-green" style="width:92.02%"></div></div>
+<span class="stat-value">92.02%</span>
+</div>
+<div class="stat-bar wide">
+<span class="stat-label">Replies</span>
+<div class="stat-track"><div class="stat-fill fill-cyan" style="width:25.66%"></div></div>
+<span class="stat-value">25.66%</span>
+</div>
+<div class="stat-bar wide">
+<span class="stat-label">Media</span>
+<div class="stat-track"><div class="stat-fill fill-purple" style="width:14.05%"></div></div>
+<span class="stat-value">14.05%</span>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>08. FOTOS Y EVIDENCIAS</h3></div>
+<div class="photo-grid">
+<div class="photo-item">
+<div class="image-wrapper">
+<img src="https://ii.ct-stc.com/1/logos/candidates/2023/07/13/152612thumbnail.jpeg" alt="Foto Perfil" loading="lazy" onerror="this.src='https://via.placeholder.com/400x400/111/00e5ff?text=FOTO+PERFIL'">
+</div>
+<div class="photo-label">📸 FOTO PERFIL / ADDI</div>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>09. NOTAS FINALES</h3></div>
+<div class="entry">
+<span class="entry-t" style="color:#ff4d8d;">ALIAS PRINCIPAL</span>
+<span class="entry-d">El Brujo • AxonDev • Zebra • Alejo Salazar</span>
+</div>
+<div class="entry">
+<span class="entry-t" style="color:#00e5ff;">PERFIL TELEGRAM PRINCIPAL</span>
+<span class="entry-d">𝑨𝑿𝑶𝑵𝑫𝑬𝑽 𝟐 𝑴𝒂𝒏𝒐 • @Mraxi0 • ID: 8343472857</span>
+</div>
+<div class="entry">
+<span class="entry-t" style="color:#00e5ff;">PERFIL TELEGRAM SECUNDARIO</span>
+<span class="entry-d">🦓 Zebra • @Mateo109d • ID: 7381754580</span>
+</div>
+<div class="entry">
+<span class="entry-t" style="color:#7c4dff;">FORMACIÓN ACADÉMICA</span>
+<span class="entry-d">Liceo José María Bernal (JOMABER) • Caldas, Antioquia</span>
+</div>
+<div class="entry">
+<span class="entry-t" style="color:#ff4d8d;">INSTAGRAM</span>
+<span class="entry-d">@alejandrosalazar____ • instagram.com/alejandrosalazar____/tagged/</span>
+</div>
+<div class="entry">
+<span class="entry-t" style="color:#00e676;">INFORMACIÓN FINANCIERA</span>
+<span class="entry-d">Daviplata activa • Llave: 1053859548 • Bank ID: 0860</span>
+</div>
+<div class="entry">
+<span class="entry-t" style="color:#ffd700;">😈 EVIL DARK - EVIL DARK</span>
+<span class="entry-d">Información recopilada de múltiples fuentes OSINT.</span>
+</div>
+</div>
+</div>
+
+<script>
+document.addEventListener('keydown', function(e) {
+if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || (e.ctrlKey && e.keyCode == 85)) {
+e.preventDefault();
+return false;
+}
+});
+document.addEventListener('contextmenu', function(e) {
+e.preventDefault();
+});
+
+const glow = document.getElementById('glow-effect');
+document.addEventListener('mousemove', (e) => {
+const x = (e.clientX / window.innerWidth) * 100;
+const y = (e.clientY / window.innerHeight) * 100;
+glow.style.setProperty('--mx', x + '%');
+glow.style.setProperty('--my', y + '%');
+});
+
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let mouseX = 0, mouseY = 0;
+
+function resizeCanvas() {
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+document.addEventListener('mousemove', (e) => {
+mouseX = e.clientX;
+mouseY = e.clientY;
+});
+
+class Particle {
+constructor() {
+this.x = Math.random() * canvas.width;
+this.y = Math.random() * canvas.height;
+this.size = Math.random() * 2.5 + 0.5;
+this.speedX = (Math.random() - 0.5) * 0.4;
+this.speedY = (Math.random() - 0.5) * 0.4;
+this.opacity = Math.random() * 0.5 + 0.1;
+this.color = Math.random() > 0.5 ? '#00e5ff' : '#7c4dff';
+}
+
+update() {
+const dx = mouseX - this.x;
+const dy = mouseY - this.y;
+const distance = Math.sqrt(dx * dx + dy * dy);
+
+if (distance < 200) {
+const force = (200 - distance) / 200;
+this.x -= dx * force * 0.025;
+this.y -= dy * force * 0.025;
+}
+
+this.x += this.speedX;
+this.y += this.speedY;
+
+if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+}
+
+draw() {
+ctx.beginPath();
+ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+ctx.fillStyle = this.color;
+ctx.globalAlpha = this.opacity;
+ctx.fill();
+
+if (this.size > 1.5) {
+ctx.shadowBlur = 12;
+ctx.shadowColor = this.color;
+}
+}
+}
+
+for (let i = 0; i < 90; i++) {
+particles.push(new Particle());
+}
+
+function drawLines() {
+for (let i = 0; i < particles.length; i++) {
+for (let j = i + 1; j < particles.length; j++) {
+const dx = particles[i].x - particles[j].x;
+const dy = particles[i].y - particles[j].y;
+const distance = Math.sqrt(dx * dx + dy * dy);
+
+if (distance < 150) {
+ctx.beginPath();
+ctx.strokeStyle = '#00e5ff';
+ctx.globalAlpha = (1 - distance / 150) * 0.08;
+ctx.lineWidth = 0.5;
+ctx.moveTo(particles[i].x, particles[i].y);
+ctx.lineTo(particles[j].x, particles[j].y);
+ctx.stroke();
+}
+}
+}
+}
+
+function animateParticles() {
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+particles.forEach(p => {
+p.update();
+p.draw();
+});
+
+drawLines();
+requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+const matrixCanvas = document.getElementById('matrix-bg');
+const matrixCtx = matrixCanvas.getContext('2d');
+
+function resizeMatrix() {
+matrixCanvas.width = window.innerWidth;
+matrixCanvas.height = window.innerHeight;
+}
+resizeMatrix();
+window.addEventListener('resize', resizeMatrix);
+
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*';
+const columns = Math.floor(matrixCanvas.width / 14);
+const drops = [];
+
+for (let i = 0; i < columns; i++) {
+drops[i] = Math.random() * -100;
+}
+
+function drawMatrix() {
+matrixCtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+
+matrixCtx.fillStyle = '#00e5ff';
+matrixCtx.font = '14px monospace';
+
+for (let i = 0; i < drops.length; i++) {
+const char = chars[Math.floor(Math.random() * chars.length)];
+const x = i * 14;
+const y = drops[i] * 14;
+
+if (y > 0 && y < matrixCanvas.height) {
+matrixCtx.globalAlpha = 0.08 + Math.random() * 0.08;
+matrixCtx.fillText(char, x, y);
+}
+
+if (drops[i] * 14 > matrixCanvas.height && Math.random() > 0.975) {
+drops[i] = 0;
+}
+drops[i]++;
+}
+requestAnimationFrame(drawMatrix);
+}
+drawMatrix();
+</script>
+</body>
+</html>
