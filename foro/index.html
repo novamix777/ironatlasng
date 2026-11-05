@@ -3,18 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://*.supabase.co wss://*.supabase.co; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://*.supabase.co wss://*.supabase.co; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-src 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
-<title>Salón Carmesí</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Work+Sans:wght@400;500&display=swap">
+<title>foro</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Work+Sans:wght@400;500&display=swap">
 <link rel="stylesheet" href="style.css">
+<script src="guard.js"></script>
 </head>
 <body>
+<div class="aurora" aria-hidden="true"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+
 <main id="auth">
-  <h1 class="brand">Salón<br>Carmesí</h1>
+  <h1 class="brand"><span class="w"><span>Salón</span></span><span class="w"><span>Carmesí</span></span></h1>
+  <p class="tag">Un lugar privado para hablar en línea.</p>
   <form id="authForm" autocomplete="on">
     <div class="tabs"><button type="button" id="tabLogin" class="on">Entrar</button><button type="button" id="tabSignup">Crear cuenta</button></div>
-    <input id="username" placeholder="Usuario (3-20: letras, números, _)" maxlength="20" autocomplete="username" hidden>
+    <input id="username" placeholder="Usuario (letras, números, _)" maxlength="20" autocomplete="username" hidden>
     <input id="email" type="email" placeholder="Correo" required autocomplete="email">
     <input id="password" type="password" placeholder="Contraseña (mín. 10)" minlength="10" required autocomplete="current-password">
     <button class="primary" id="authBtn">Entrar</button>
@@ -24,7 +29,7 @@
 
 <div id="app" hidden>
   <header>
-    <span class="logo">Salón Carmesí</span>
+    <span class="logo">foro</span>
     <span id="who"></span>
     <button id="adminBtn" hidden>Administración</button>
     <button id="logout">Salir</button>
@@ -42,6 +47,16 @@
     <h3>Secciones</h3><div id="chList"></div>
     <h3>Usuarios</h3><div id="userList"></div>
   </section>
+</div>
+
+<div id="gate" class="gate" hidden>
+  <form id="gateForm">
+    <h2>Zona de administración</h2>
+    <p>Confirma tu contraseña para continuar.</p>
+    <input id="gatePass" type="password" placeholder="Tu contraseña" autocomplete="current-password" required>
+    <p id="gateMsg" role="alert"></p>
+    <div class="row"><button type="button" id="gateCancel">Cancelar</button><button class="primary">Confirmar</button></div>
+  </form>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
