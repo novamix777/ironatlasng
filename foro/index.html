@@ -3,12 +3,102 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://*.supabase.co wss://*.supabase.co; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-src 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src https://cdn.jsdelivr.net 'sha256-XFjI5pLP+lXvHVL13zozKrcfp32hFN2xLyI1m009TNQ=' 'sha256-gJhwuOkTt43lj5E8bWwGJ/vnrA/wTuDLOxS1pSZe3wY='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://*.supabase.co wss://*.supabase.co; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-src 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <title>Salón Carmesí</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Work+Sans:wght@400;500&display=swap">
-<link rel="stylesheet" href="style.css">
-<script src="guard.js"></script>
+<style>
+@property --a{syntax:'<angle>';initial-value:0deg;inherits:false}
+:root{--bg:#1f0207;--panel:rgba(26,3,8,.62);--line:rgba(255,214,200,.16);--txt:#f6e9e2;--dim:#c99f95;--acc:#f0b9a4;--btn:#a3162c;color-scheme:dark}
+*{box-sizing:border-box}
+html{height:100%;background:var(--bg)}
+html:not(.ok) body{display:none}
+body{height:100%;margin:0;font:400 16px/1.5 'Work Sans',system-ui,sans-serif;color:var(--txt);background:var(--bg);overflow:hidden}
+h1,h2,h3,.logo{font-family:'Cormorant Garamond',Georgia,serif}
+button,input{font:inherit;color:inherit}
+input:not([type=checkbox]){background:rgba(0,0,0,.38);border:1px solid var(--line);border-radius:8px;padding:.7rem .85rem;width:100%;transition:border-color .2s,box-shadow .2s}
+input:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(240,185,164,.15);outline:0}
+button{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:8px;padding:.55rem 1rem;cursor:pointer;transition:transform .15s,border-color .2s,background .2s,box-shadow .2s}
+button:hover{border-color:var(--acc);transform:translateY(-1px)}
+button:active{transform:none}
+button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+button.primary{background:linear-gradient(135deg,#c01a35,var(--btn));border-color:transparent}
+button.primary:hover{box-shadow:0 6px 22px rgba(224,40,70,.45)}
+button:disabled{opacity:.5;cursor:wait}
+[hidden]{display:none!important}
+
+/* fondo vivo */
+.aurora,#fx{position:fixed;inset:0;pointer-events:none}
+.aurora{z-index:0;overflow:hidden}
+.aurora::before,.aurora::after{content:"";position:absolute;width:70vmax;height:70vmax;border-radius:50%;filter:blur(90px);opacity:.55;animation:drift 22s ease-in-out infinite alternate}
+.aurora::before{background:radial-gradient(circle,#9c1226,transparent 65%);top:-25vmax;left:-15vmax}
+.aurora::after{background:radial-gradient(circle,#5e0713,transparent 65%);bottom:-30vmax;right:-20vmax;animation-duration:28s;animation-delay:-8s}
+@keyframes drift{to{transform:translate(18vmax,12vmax) scale(1.25)}}
+#fx{z-index:1;width:100%;height:100%}
+
+/* acceso */
+#auth,#app{position:relative;z-index:2}
+#auth{height:100%;display:grid;place-content:center;justify-items:start;gap:1.2rem;padding:2rem;grid-template-columns:minmax(0,23rem);overflow:auto}
+.brand{font-size:clamp(3.6rem,15vw,6.6rem);line-height:.88;font-weight:700;margin:0;letter-spacing:-.025em}
+.brand .w{display:block;overflow:hidden;padding-bottom:.08em}
+.brand .w span{display:block;transform:translateY(105%);animation:up 1.1s cubic-bezier(.2,.8,.2,1) forwards}
+.brand .w:nth-child(2) span{animation-delay:.18s;font-style:italic;font-weight:500;color:var(--acc)}
+@keyframes up{to{transform:none}}
+.tag{margin:0;color:var(--dim);opacity:0;animation:fade 1s .9s forwards}
+@keyframes fade{to{opacity:1}}
+#authForm{width:100%;display:grid;gap:.75rem;padding:1.3rem;border-radius:14px;border:1px solid transparent;
+  background:linear-gradient(var(--panel),var(--panel)) padding-box,conic-gradient(from var(--a),transparent 65%,var(--acc),transparent) border-box;
+  backdrop-filter:blur(14px);animation:spin 7s linear infinite,fade 1s 1.1s backwards}
+@keyframes spin{to{--a:360deg}}
+.tabs{display:flex;gap:.5rem}.tabs button{flex:1}.tabs .on{border-color:var(--acc);color:var(--acc)}
+#authMsg,#gateMsg{margin:0;min-height:1.3em;color:var(--acc);font-size:.9rem}
+
+/* app */
+#app{height:100%;display:grid;grid-template-columns:15rem 1fr;grid-template-rows:auto minmax(0,1fr);animation:fade .6s}
+header{grid-column:1/-1;display:flex;gap:.7rem;align-items:center;padding:.7rem 1.2rem;border-bottom:1px solid var(--line);background:var(--panel);backdrop-filter:blur(12px)}
+.logo{font-size:1.6rem;font-weight:700;margin-right:auto}
+#who{color:var(--dim)}
+aside{border-right:1px solid var(--line);background:var(--panel);backdrop-filter:blur(12px);overflow:auto;padding:.8rem}
+#channels button{display:block;width:100%;text-align:left;border:0;background:none;border-radius:8px;padding:.6rem .8rem;color:var(--dim);transition:padding .2s,background .2s,color .2s}
+#channels button:hover{padding-left:1.1rem;transform:none;color:var(--txt)}
+#channels button.on{background:linear-gradient(90deg,rgba(224,40,70,.28),transparent);color:var(--txt);box-shadow:inset 3px 0 var(--acc)}
+#chat,#admin{display:flex;flex-direction:column;min-height:0;min-width:0;background:rgba(10,1,3,.22)}
+#admin{grid-column:2;padding:1rem 1.4rem;overflow:auto;display:block}
+#admin:not([hidden]),#chat:not([hidden]){animation:fade .35s}
+.chead{padding:.8rem 1.4rem;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:1rem}
+#admin .chead{padding:0 0 .8rem;justify-content:space-between}
+.chead h2{margin:0;font-size:1.8rem}.chead p{margin:0;color:var(--dim);font-size:.9rem}
+h3{font-size:1.3rem;margin:1.4rem 0 .5rem;color:var(--acc)}
+#msgs{flex:1;overflow:auto;padding:1rem 1.4rem;display:flex;flex-direction:column;gap:.5rem}
+.m{padding:.55rem .9rem;border-radius:10px;max-width:46rem;animation:rise .4s cubic-bezier(.2,.8,.2,1)}
+.m:hover{background:rgba(255,255,255,.04)}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}}
+.m b{color:var(--acc);font-weight:500}.m time{color:var(--dim);font-size:.78rem;margin-left:.5rem}
+.m p{margin:.1rem 0 0;overflow-wrap:anywhere;white-space:pre-wrap}
+.m .del{float:right;padding:.05rem .5rem;font-size:.78rem;color:var(--dim);opacity:0}
+.m:hover .del{opacity:1}
+#sendForm{display:flex;gap:.6rem;padding:.9rem 1.4rem;border-top:1px solid var(--line);background:var(--panel)}
+.row,.item{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-bottom:.5rem}
+.row input:not([type=checkbox]){flex:1;min-width:9rem;width:auto}
+.item{padding:.55rem 0;border-bottom:1px solid var(--line)}.item span{margin-right:auto}
+
+/* confirmación admin */
+.gate{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:rgba(10,0,2,.7);backdrop-filter:blur(6px);animation:fade .25s}
+.gate form{width:min(24rem,92vw);padding:1.5rem;border-radius:14px;border:1px solid var(--line);background:#2a050c;display:grid;gap:.7rem;animation:rise .35s}
+.gate h2{margin:0;font-size:1.7rem}.gate p{margin:0;color:var(--dim)}
+.gate .row{justify-content:flex-end;margin:0}
+
+@media(max-width:700px){#app{grid-template-columns:1fr;grid-template-rows:auto auto minmax(0,1fr)}aside{border:0;border-bottom:1px solid var(--line)}#channels{display:flex;gap:.3rem;overflow:auto}#channels button{width:auto;white-space:nowrap}#admin{grid-column:1}.m .del{opacity:1}}
+@media(prefers-reduced-motion:reduce){*,::before,::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition:none!important}.brand .w span{transform:none}}
+
+</style>
+<script>// Anti-clickjacking: la página solo se muestra si NO está dentro de un iframe.
+// (GitHub Pages no permite cabeceras X-Frame-Options, así que se hace por código.)
+(function () {
+  if (window.top === window.self) { document.documentElement.classList.add('ok'); return; }
+  try { window.top.location = window.self.location; } catch (e) {}
+})();
+</script>
 </head>
 <body>
 <div class="aurora" aria-hidden="true"></div>
@@ -60,6 +150,204 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="app.js"></script>
+<script>// 1) Pega aquí los datos de tu proyecto Supabase (Settings > API).
+// La "anon key" es PÚBLICA por diseño: la seguridad real la ponen las políticas RLS de setup.sql.
+// NUNCA pegues aquí la "service_role key".
+const SUPABASE_URL = 'https://rzhdlvkleupmymufnwwv.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_750k-616GDN3t5r8nwiQeg_dB-g9VQf';
+
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const $ = s => document.querySelector(s);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+let me = null, current = null, sub = null, signup = false;
+
+const authMsg = t => { $('#authMsg').textContent = t || ''; };
+
+// ---------- Acceso ----------
+function setMode(s) {
+  signup = s;
+  $('#tabLogin').classList.toggle('on', !s); $('#tabSignup').classList.toggle('on', s);
+  $('#username').hidden = !s; $('#username').required = s;
+  $('#authBtn').textContent = s ? 'Crear cuenta' : 'Entrar';
+  $('#password').autocomplete = s ? 'new-password' : 'current-password';
+  authMsg();
+}
+$('#tabLogin').onclick = () => setMode(false);
+$('#tabSignup').onclick = () => setMode(true);
+
+$('#authForm').addEventListener('submit', async e => {
+  e.preventDefault(); authMsg();
+  const email = $('#email').value.trim(), password = $('#password').value, username = $('#username').value.trim();
+  $('#authBtn').disabled = true;
+  try {
+    if (signup) {
+      if (!/^[A-Za-z0-9_]{3,20}$/.test(username)) return authMsg('Usuario: 3-20 caracteres (letras, números o _).');
+      const { data, error } = await db.auth.signUp({ email, password, options: { data: { username } } });
+      if (error) return authMsg('No se pudo crear la cuenta. Revisa los datos o prueba otro usuario.');
+      if (!data.session) return authMsg('Cuenta creada. Confirma tu correo y luego entra.');
+    } else {
+      const { error } = await db.auth.signInWithPassword({ email, password });
+      if (error) return authMsg('Correo o contraseña incorrectos.');
+    }
+    await start();
+  } finally { $('#authBtn').disabled = false; }
+});
+
+$('#logout').onclick = async () => { await db.auth.signOut(); location.reload(); };
+
+async function start() {
+  const { data: { session } } = await db.auth.getSession();
+  if (!session) return;
+  const { data, error } = await db.from('profiles').select('id,username,role,banned').eq('id', session.user.id).single();
+  if (error || !data || data.banned) {
+    await db.auth.signOut();
+    return authMsg(data && data.banned ? 'Tu cuenta está suspendida.' : 'No se pudo cargar tu perfil.');
+  }
+  me = data;
+  $('#auth').hidden = true; $('#app').hidden = false;
+  $('#who').textContent = me.username + (me.role === 'admin' ? ' (admin)' : '');
+  $('#adminBtn').hidden = me.role !== 'admin';
+  await loadChannels();
+}
+
+// ---------- Secciones y chat ----------
+async function loadChannels() {
+  const { data } = await db.from('channels').select('*').order('id');
+  const nav = $('#channels'); nav.replaceChildren();
+  (data || []).forEach(c => {
+    const b = el('button', current && current.id === c.id ? 'on' : '', '# ' + c.name);
+    b.onclick = () => { showChat(); openChannel(c); };
+    nav.append(b);
+  });
+  if (!current && data && data[0]) openChannel(data[0]);
+  return data || [];
+}
+
+function renderMsg(m) {
+  const box = el('div', 'm'); box.dataset.id = m.id;
+  const head = el('div');
+  head.append(el('b', '', m.profiles ? m.profiles.username : '?'), el('time', '', new Date(m.created_at).toLocaleString('es', { dateStyle: 'short', timeStyle: 'short' })));
+  if (me && (m.user_id === me.id || me.role === 'admin')) {
+    const d = el('button', 'del', 'Borrar');
+    d.onclick = () => db.from('messages').delete().eq('id', m.id);
+    head.append(d);
+  }
+  box.append(head, el('p', '', m.content)); // textContent: el contenido nunca se interpreta como HTML
+  return box;
+}
+
+async function openChannel(c) {
+  current = c;
+  $('#ctitle').textContent = '# ' + c.name; $('#cdesc').textContent = c.description || '';
+  $('#sendForm').hidden = c.admin_only && me.role !== 'admin';
+  [...$('#channels').children].forEach(b => b.classList.toggle('on', b.textContent === '# ' + c.name));
+  const list = $('#msgs'); list.replaceChildren();
+  const { data } = await db.from('messages').select('id,user_id,content,created_at,profiles(username)')
+    .eq('channel_id', c.id).order('created_at', { ascending: false }).limit(100);
+  (data || []).reverse().forEach(m => list.append(renderMsg(m)));
+  list.scrollTop = list.scrollHeight;
+  if (sub) db.removeChannel(sub);
+  sub = db.channel('ch-' + c.id)
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages', filter: 'channel_id=eq.' + c.id }, async p => {
+      const { data: m } = await db.from('messages').select('id,user_id,content,created_at,profiles(username)').eq('id', p.new.id).single();
+      if (!m) return;
+      const near = list.scrollHeight - list.scrollTop - list.clientHeight < 80;
+      list.append(renderMsg(m)); if (near) list.scrollTop = list.scrollHeight;
+    })
+    .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'messages' }, p => {
+      const n = list.querySelector('[data-id="' + CSS.escape(String(p.old.id)) + '"]'); if (n) n.remove();
+    }).subscribe();
+}
+
+$('#sendForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const i = $('#msgInput'), text = i.value.trim();
+  if (!text || !current) return;
+  i.disabled = true;
+  const { error } = await db.from('messages').insert({ channel_id: current.id, content: text });
+  i.disabled = false; i.focus();
+  if (!error) i.value = '';
+});
+
+// ---------- Administración ----------
+const showChat = () => { $('#admin').hidden = true; $('#chat').hidden = false; };
+$('#closeAdmin').onclick = showChat;
+$('#adminBtn').onclick = async () => { $('#chat').hidden = true; $('#admin').hidden = false; await renderAdmin(); };
+
+async function renderAdmin() {
+  if (!me || me.role !== 'admin') return;
+  const chans = await loadChannels();
+  const cl = $('#chList'); cl.replaceChildren();
+  chans.forEach(c => {
+    const row = el('div', 'item'); const del = el('button', '', 'Eliminar');
+    del.onclick = async () => { if (confirm('¿Eliminar #' + c.name + ' y todos sus mensajes?')) { await db.from('channels').delete().eq('id', c.id); if (current && current.id === c.id) current = null; renderAdmin(); } };
+    row.append(el('span', '', '# ' + c.name + (c.admin_only ? ' (solo admins)' : '')), del); cl.append(row);
+  });
+  const { data: users } = await db.from('profiles').select('id,username,role,banned').order('username');
+  const ul = $('#userList'); ul.replaceChildren();
+  (users || []).forEach(u => {
+    const row = el('div', 'item'); row.append(el('span', '', u.username + ' · ' + u.role + (u.banned ? ' · suspendido' : '')));
+    if (u.id !== me.id) {
+      const ban = el('button', '', u.banned ? 'Reactivar' : 'Suspender');
+      ban.onclick = async () => { await db.from('profiles').update({ banned: !u.banned }).eq('id', u.id); renderAdmin(); };
+      const rol = el('button', '', u.role === 'admin' ? 'Quitar admin' : 'Hacer admin');
+      rol.onclick = async () => { await db.from('profiles').update({ role: u.role === 'admin' ? 'user' : 'admin' }).eq('id', u.id); renderAdmin(); };
+      const wipe = el('button', '', 'Borrar mensajes');
+      wipe.onclick = async () => { if (confirm('¿Borrar TODOS los mensajes de ' + u.username + '?')) await db.from('messages').delete().eq('user_id', u.id); };
+      row.append(wipe, rol, ban);
+    }
+    ul.append(row);
+  });
+}
+
+$('#chForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const { error } = await db.from('channels').insert({ name: $('#chName').value.trim(), description: $('#chDesc').value.trim() || null, admin_only: $('#chAdminOnly').checked });
+  if (!error) { e.target.reset(); renderAdmin(); }
+});
+
+start();
+
+// ---------- Contraseña para entrar en administración ----------
+// Se vuelve a comprobar tu contraseña real en el servidor de Supabase (no hay contraseña escrita en el código).
+let adminUntil = 0;
+const askPass = () => new Promise(res => {
+  const dlg = $('#gate'), inp = $('#gatePass'), msg = $('#gateMsg');
+  inp.value = ''; msg.textContent = ''; dlg.hidden = false; inp.focus();
+  const close = v => { dlg.hidden = true; $('#gateForm').onsubmit = null; $('#gateCancel').onclick = null; res(v); };
+  $('#gateCancel').onclick = () => close(false);
+  $('#gateForm').onsubmit = async e => {
+    e.preventDefault();
+    const { data: { session } } = await db.auth.getSession();
+    const { error } = await db.auth.signInWithPassword({ email: session.user.email, password: inp.value });
+    if (error) { msg.textContent = 'Contraseña incorrecta.'; inp.value = ''; return; }
+    close(true);
+  };
+});
+$('#adminBtn').onclick = async () => {
+  if (Date.now() > adminUntil) { if (!(await askPass())) return; adminUntil = Date.now() + 10 * 60 * 1000; }
+  $('#chat').hidden = true; $('#admin').hidden = false; await renderAdmin();
+};
+
+// ---------- Brasas animadas de fondo ----------
+(function () {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const c = $('#fx'), x = c.getContext('2d'); let w, h;
+  const size = () => { w = c.width = innerWidth; h = c.height = innerHeight; };
+  size(); addEventListener('resize', size);
+  const mk = init => ({ x: Math.random() * w, y: init ? Math.random() * h : h + 10, r: Math.random() * 2.2 + .4, v: Math.random() * .6 + .2, d: Math.random() * 6.28, a: Math.random() * .6 + .2 });
+  const P = Array.from({ length: 70 }, () => mk(true));
+  (function loop() {
+    x.clearRect(0, 0, w, h);
+    for (const p of P) {
+      p.y -= p.v; p.d += .01; p.x += Math.sin(p.d) * .4;
+      if (p.y < -10) Object.assign(p, mk(false));
+      x.beginPath(); x.fillStyle = 'rgba(255,' + (120 + p.r * 30 | 0) + ',90,' + (p.a * p.y / h) + ')';
+      x.shadowBlur = 12; x.shadowColor = '#ff3b3b'; x.arc(p.x, p.y, p.r, 0, 6.283); x.fill();
+    }
+    requestAnimationFrame(loop);
+  })();
+})();
+</script>
 </body>
 </html>
