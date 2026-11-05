@@ -1,0 +1,39 @@
+:root{--bg:#2a0309;--bg2:#4a0812;--panel:rgba(20,2,5,.55);--line:rgba(255,214,200,.16);--txt:#f4e6df;--dim:#c79b92;--acc:#e8b4a0;--btn:#8f1224;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font:400 16px/1.5 'Work Sans',system-ui,sans-serif;color:var(--txt);background:radial-gradient(120% 90% at 20% 0%,var(--bg2),var(--bg) 70%) fixed}
+h1,h2,h3,.logo{font-family:'Cormorant Garamond',Georgia,serif}
+button,input{font:inherit;color:inherit}
+input[type=text],input[type=email],input[type=password],input:not([type]){background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:6px;padding:.65rem .8rem;width:100%}
+input:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+button{background:transparent;border:1px solid var(--line);border-radius:6px;padding:.5rem .9rem;cursor:pointer}
+button:hover{border-color:var(--acc)}
+button.primary{background:var(--btn);border-color:transparent}
+button.primary:hover{background:#a8162b}
+[hidden]{display:none!important}
+#auth{min-height:100%;display:grid;place-content:center;gap:2rem;padding:2rem;grid-template-columns:minmax(0,22rem)}
+.brand{font-size:clamp(3.5rem,14vw,6rem);line-height:.9;font-weight:700;margin:0;letter-spacing:-.02em}
+#authForm{display:grid;gap:.7rem}
+.tabs{display:flex;gap:.5rem}.tabs button{flex:1}.tabs .on{border-color:var(--acc);color:var(--acc)}
+#authMsg{margin:0;min-height:1.4em;color:var(--acc);font-size:.9rem}
+#app{height:100%;display:grid;grid-template-columns:14rem 1fr;grid-template-rows:auto 1fr}
+header{grid-column:1/-1;display:flex;gap:.7rem;align-items:center;padding:.7rem 1.2rem;border-bottom:1px solid var(--line);background:var(--panel)}
+.logo{font-size:1.5rem;font-weight:700;margin-right:auto}
+#who{color:var(--dim)}
+aside{border-right:1px solid var(--line);background:var(--panel);overflow:auto;padding:.8rem}
+#channels button{display:block;width:100%;text-align:left;border:0;border-radius:6px;padding:.55rem .7rem;color:var(--dim)}
+#channels button.on{background:rgba(255,255,255,.08);color:var(--txt)}
+#chat,#admin{display:flex;flex-direction:column;min-height:0;min-width:0}
+#admin{grid-column:2;padding:1rem 1.4rem;overflow:auto;display:block}
+.chead{padding:.8rem 1.4rem;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:1rem;justify-content:space-between}
+#admin .chead{padding:0 0 .8rem}
+.chead h2{margin:0;font-size:1.7rem}.chead p{margin:0;color:var(--dim);font-size:.9rem;margin-right:auto}
+#msgs{flex:1;overflow:auto;padding:1rem 1.4rem;display:flex;flex-direction:column;gap:.9rem}
+.m b{color:var(--acc);font-weight:500}.m time{color:var(--dim);font-size:.8rem;margin-left:.5rem}
+.m p{margin:.1rem 0 0;overflow-wrap:anywhere;white-space:pre-wrap}
+.m .del{float:right;padding:.1rem .5rem;font-size:.8rem;color:var(--dim)}
+#sendForm{display:flex;gap:.6rem;padding:.9rem 1.4rem;border-top:1px solid var(--line);background:var(--panel)}
+.row,.item{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-bottom:.5rem}
+.row input:not([type=checkbox]){flex:1;min-width:9rem}
+.item{padding:.5rem 0;border-bottom:1px solid var(--line)}.item span{margin-right:auto}
+@media(max-width:700px){#app{grid-template-columns:1fr;grid-template-rows:auto auto 1fr}aside{border:0;border-bottom:1px solid var(--line)}#channels{display:flex;gap:.3rem;overflow:auto}#channels button{width:auto;white-space:nowrap}#admin{grid-column:1}}
