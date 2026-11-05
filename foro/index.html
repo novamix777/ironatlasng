@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://*.supabase.co wss://*.supabase.co; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Salón Carmesí</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Work+Sans:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="auth">
+  <h1 class="brand">Salón<br>Carmesí</h1>
+  <form id="authForm" autocomplete="on">
+    <div class="tabs"><button type="button" id="tabLogin" class="on">Entrar</button><button type="button" id="tabSignup">Crear cuenta</button></div>
+    <input id="username" placeholder="Usuario (3-20: letras, números, _)" maxlength="20" autocomplete="username" hidden>
+    <input id="email" type="email" placeholder="Correo" required autocomplete="email">
+    <input id="password" type="password" placeholder="Contraseña (mín. 10)" minlength="10" required autocomplete="current-password">
+    <button class="primary" id="authBtn">Entrar</button>
+    <p id="authMsg" role="alert"></p>
+  </form>
+</main>
+
+<div id="app" hidden>
+  <header>
+    <span class="logo">Salón Carmesí</span>
+    <span id="who"></span>
+    <button id="adminBtn" hidden>Administración</button>
+    <button id="logout">Salir</button>
+  </header>
+  <aside><nav id="channels"></nav></aside>
+  <section id="chat">
+    <div class="chead"><h2 id="ctitle"></h2><p id="cdesc"></p></div>
+    <div id="msgs" aria-live="polite"></div>
+    <form id="sendForm"><input id="msgInput" maxlength="500" placeholder="Escribe un mensaje" autocomplete="off"><button class="primary">Enviar</button></form>
+  </section>
+  <section id="admin" hidden>
+    <div class="chead"><h2>Administración</h2><button id="closeAdmin">Volver al chat</button></div>
+    <h3>Nueva sección</h3>
+    <form id="chForm" class="row"><input id="chName" placeholder="Nombre" maxlength="30" required><input id="chDesc" placeholder="Descripción" maxlength="120"><label><input type="checkbox" id="chAdminOnly"> Solo admins escriben</label><button class="primary">Crear</button></form>
+    <h3>Secciones</h3><div id="chList"></div>
+    <h3>Usuarios</h3><div id="userList"></div>
+  </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
