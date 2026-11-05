@@ -1,8 +1,8 @@
 // 1) Pega aquí los datos de tu proyecto Supabase (Settings > API).
 // La "anon key" es PÚBLICA por diseño: la seguridad real la ponen las políticas RLS de setup.sql.
 // NUNCA pegues aquí la "service_role key".
-const SUPABASE_URL = 'https://TU-PROYECTO.supabase.co';
-const SUPABASE_ANON_KEY = 'TU_ANON_KEY';
+const SUPABASE_URL = 'https://rzhdlvkleupmymufnwwv.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_750k-616GDN3t5r8nwiQeg_dB-g9VQf';
 
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const $ = s => document.querySelector(s);
