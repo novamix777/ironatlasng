@@ -123,6 +123,7 @@ $('#closeAdmin').onclick = showChat;
 $('#adminBtn').onclick = async () => { $('#chat').hidden = true; $('#admin').hidden = false; await renderAdmin(); };
 
 async function renderAdmin() {
+  if (!me || me.role !== 'admin') return;
   const chans = await loadChannels();
   const cl = $('#chList'); cl.replaceChildren();
   chans.forEach(c => {
@@ -139,7 +140,9 @@ async function renderAdmin() {
       ban.onclick = async () => { await db.from('profiles').update({ banned: !u.banned }).eq('id', u.id); renderAdmin(); };
       const rol = el('button', '', u.role === 'admin' ? 'Quitar admin' : 'Hacer admin');
       rol.onclick = async () => { await db.from('profiles').update({ role: u.role === 'admin' ? 'user' : 'admin' }).eq('id', u.id); renderAdmin(); };
-      row.append(rol, ban);
+      const wipe = el('button', '', 'Borrar mensajes');
+      wipe.onclick = async () => { if (confirm('¿Borrar TODOS los mensajes de ' + u.username + '?')) await db.from('messages').delete().eq('user_id', u.id); };
+      row.append(wipe, rol, ban);
     }
     ul.append(row);
   });
@@ -152,3 +155,44 @@ $('#chForm').addEventListener('submit', async e => {
 });
 
 start();
+
+// ---------- Contraseña para entrar en administración ----------
+// Se vuelve a comprobar tu contraseña real en el servidor de Supabase (no hay contraseña escrita en el código).
+let adminUntil = 0;
+const askPass = () => new Promise(res => {
+  const dlg = $('#gate'), inp = $('#gatePass'), msg = $('#gateMsg');
+  inp.value = ''; msg.textContent = ''; dlg.hidden = false; inp.focus();
+  const close = v => { dlg.hidden = true; $('#gateForm').onsubmit = null; $('#gateCancel').onclick = null; res(v); };
+  $('#gateCancel').onclick = () => close(false);
+  $('#gateForm').onsubmit = async e => {
+    e.preventDefault();
+    const { data: { session } } = await db.auth.getSession();
+    const { error } = await db.auth.signInWithPassword({ email: session.user.email, password: inp.value });
+    if (error) { msg.textContent = 'Contraseña incorrecta.'; inp.value = ''; return; }
+    close(true);
+  };
+});
+$('#adminBtn').onclick = async () => {
+  if (Date.now() > adminUntil) { if (!(await askPass())) return; adminUntil = Date.now() + 10 * 60 * 1000; }
+  $('#chat').hidden = true; $('#admin').hidden = false; await renderAdmin();
+};
+
+// ---------- Brasas animadas de fondo ----------
+(function () {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const c = $('#fx'), x = c.getContext('2d'); let w, h;
+  const size = () => { w = c.width = innerWidth; h = c.height = innerHeight; };
+  size(); addEventListener('resize', size);
+  const mk = init => ({ x: Math.random() * w, y: init ? Math.random() * h : h + 10, r: Math.random() * 2.2 + .4, v: Math.random() * .6 + .2, d: Math.random() * 6.28, a: Math.random() * .6 + .2 });
+  const P = Array.from({ length: 70 }, () => mk(true));
+  (function loop() {
+    x.clearRect(0, 0, w, h);
+    for (const p of P) {
+      p.y -= p.v; p.d += .01; p.x += Math.sin(p.d) * .4;
+      if (p.y < -10) Object.assign(p, mk(false));
+      x.beginPath(); x.fillStyle = 'rgba(255,' + (120 + p.r * 30 | 0) + ',90,' + (p.a * p.y / h) + ')';
+      x.shadowBlur = 12; x.shadowColor = '#ff3b3b'; x.arc(p.x, p.y, p.r, 0, 6.283); x.fill();
+    }
+    requestAnimationFrame(loop);
+  })();
+})();
