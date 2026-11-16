@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; object-src 'none'; base-uri 'self';">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-XSS-Protection" content="1; mode=block">
+<title>EXPEDIENTE 1044635796</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--r:#00e5ff;--c:#7c4dff;--b:#0a0a0a;--p:#111111;--brd:#1a1a1a;--t:#d0d0d0;--gold:#ffd700;--danger:#ff1744}
+*{margin:0;padding:0;box-sizing:border-box;max-width:100%;-webkit-tap-highlight-color:transparent}
+body{background:var(--b);color:var(--t);font-family:'Inter',sans-serif;line-height:1.4;user-select:none;overflow-x:hidden;min-height:100vh;position:relative}
+
+/* Fondo estático optimizado (sin lag de JS) */
+#matrix-bg{
+  position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.04;
+  background-image: linear-gradient(0deg, transparent 24%, rgba(0, 229, 255, 0.3) 25%, rgba(0, 229, 255, 0.3) 26%, transparent 27%, transparent 74%, rgba(0, 229, 255, 0.3) 75%, rgba(0, 229, 255, 0.3) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(0, 229, 255, 0.3) 25%, rgba(0, 229, 255, 0.3) 26%, transparent 27%, transparent 74%, rgba(0, 229, 255, 0.3) 75%, rgba(0, 229, 255, 0.3) 76%, transparent 77%, transparent);
+  background-size: 30px 30px;
+}
+
+#glow-effect{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(0,229,255,0.08) 0%,transparent 60%);will-change:transform}
+#particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+.container{max-width:1200px;margin:auto;padding:clamp(8px,3vw,25px);position:relative;z-index:1}
+.header-box{display:flex;gap:25px;background:var(--p);border:1px solid var(--brd);padding:clamp(15px,3vw,30px);border-left:6px solid var(--r);margin-bottom:20px;align-items:center;position:relative;overflow:hidden;border-radius:4px;transform:translateZ(0)}
+.header-box:hover{border-color:var(--r);box-shadow:0 10px 30px rgba(0,229,255,0.15)}
+
+.profile-img-stage{position:relative;width:clamp(120px,18vw,180px);height:clamp(120px,18vw,180px);flex-shrink:0}
+.profile-img{width:100%;height:100%;object-fit:cover;border:2px solid #222;filter:grayscale(0.3);transition:filter 0.3s ease, border-color 0.3s ease;position:relative;z-index:1;border-radius:8px}
+.profile-img:hover{filter:grayscale(0);border-color:var(--r)}
+
+/* CARITA MALVADA FLOTANDO ARRIBA A LA DERECHA DEL LOGO SIN TOCARLO */
+.evil-face-container {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 46px;
+  height: 46px;
+  background: rgba(10, 0, 2, 0.95);
+  border: 2px solid var(--danger);
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(255, 23, 68, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 25;
+  pointer-events: none;
+}
+.evil-eyes {
+  position: relative;
+  width: 28px;
+  height: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.evil-eye {
+  width: 8px;
+  height: 12px;
+  background: var(--danger);
+  clip-path: polygon(0% 30%, 100% 0%, 80% 100%, 20% 100%);
+  position: relative;
+}
+.evil-pupil {
+  position: absolute;
+  width: 3px;
+  height: 4px;
+  background: var(--r);
+  border-radius: 50%;
+  top: 3px;
+  left: 2px;
+}
+.evil-smile {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 5px;
+  border-bottom: 2px solid var(--danger);
+  border-radius: 0 0 50% 50%;
+}
+
+.header-content{flex:1}
+.header-content h1{color:#fff;font-size:clamp(1rem,4vw,1.8rem);margin-bottom:5px;text-transform:uppercase;letter-spacing:1px}
+.id-label{font-family:'Share Tech Mono';color:var(--c);font-size:clamp(0.7rem,1.2vw,1rem);display:block;margin-bottom:8px;letter-spacing:2px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:5px}
+.tag{background:#001a1a;color:var(--r);padding:4px 12px;font-size:clamp(0.6rem,0.8vw,0.7rem);font-weight:700;border:1px solid #003333;border-radius:3px}
+.tag-purple{background:#1a0033;color:#b388ff;border-color:#330066}
+.tag-pink{background:#1a001a;color:#ff4d8d;border-color:#330033}
+.section{background:var(--p);border:1px solid var(--brd);margin-bottom:18px;border-radius:4px;transform:translateZ(0)}
+.section-h{background:#121212;padding:clamp(8px,1.2vw,14px) clamp(12px,2vw,20px);border-bottom:1px solid var(--brd);display:flex;justify-content:space-between}
+.section-h h3{font-family:'Share Tech Mono';color:var(--c);font-size:clamp(0.7rem,1vw,0.85rem);letter-spacing:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(clamp(220px,25vw,280px),1fr));gap:clamp(12px,1.5vw,20px);padding:clamp(12px,1.5vw,20px)}
+.block{border-bottom:1px solid #151515;padding-bottom:10px}
+.lbl{display:block;font-size:clamp(0.55rem,0.7vw,0.65rem);color:#555;text-transform:uppercase;margin-bottom:4px;font-weight:700;letter-spacing:1px}
+.val{color:#fff;font-family:'Share Tech Mono';font-size:clamp(0.8rem,1vw,0.95rem);word-break:break-all}
+.wide{grid-column:1/-1}
+.entry{border-left:3px solid var(--c);padding:8px 18px;margin:12px 18px;background:rgba(124,77,255,0.03);border-radius:0 4px 4px 0}
+.entry-t{color:var(--c);font-weight:700;font-size:clamp(0.7rem,0.9vw,0.8rem);margin-bottom:4px;display:block;text-transform:uppercase;letter-spacing:1px}
+.entry-d{display:block;font-size:clamp(0.75rem,0.9vw,0.85rem);color:#888;margin-bottom:2px}
+.nav-back{padding-bottom:12px;position:relative;z-index:1}
+.nav-back a{color:#444;text-decoration:none;font-size:clamp(0.65rem,0.8vw,0.75rem);font-family:'Share Tech Mono'}
+.badge{background:#001a1a;color:#00e5ff;padding:3px 10px;border-radius:4px;font-size:clamp(0.6rem,0.7vw,0.7rem);border:1px solid #003333;font-weight:700;display:inline-block}
+.badge-danger{background:#1a0000;color:#ff1744;border-color:#330000}
+.badge-pink{background:#1a001a;color:#ff4d8d;border-color:#330033}
+.val a{color:var(--c);text-decoration:none}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(clamp(250px,30vw,350px),1fr));gap:clamp(20px,2.5vw,30px);padding:clamp(15px,2vw,25px)}
+.photo-item{background:#0a0a0a;border:2px solid var(--brd);overflow:hidden;border-radius:8px;display:flex;flex-direction:column}
+.photo-item .image-wrapper{width:100%;padding-top:75%;position:relative;background:#000}
+.photo-item .image-wrapper img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain}
+.photo-label{padding:clamp(10px,1.2vw,14px);background:var(--p);font-size:clamp(0.7rem,0.8vw,0.8rem);color:#888;text-align:center;border-top:2px solid var(--brd);font-weight:600;letter-spacing:1px}
+.tg-card{background:#0d0d0d;border:1px solid #1a1a1a;border-radius:6px;padding:15px;margin:10px 0;position:relative}
+.tg-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #1a1a1a;flex-wrap:wrap;gap:8px}
+.tg-name{color:#fff;font-weight:700;font-size:clamp(0.85rem,1.1vw,1rem);letter-spacing:1px}
+.tg-id{font-family:'Share Tech Mono';color:var(--c);font-size:clamp(0.7rem,0.8vw,0.8rem)}
+.tg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.tg-item{font-size:clamp(0.7rem,0.8vw,0.8rem)}
+.stat-bar{display:flex;align-items:center;gap:10px;margin:5px 0}
+.stat-label{font-size:clamp(0.6rem,0.7vw,0.7rem);color:#666;min-width:80px}
+.stat-track{flex:1;height:6px;background:#1a1a1a;border-radius:3px;overflow:hidden}
+.stat-fill{height:100%;border-radius:3px}
+.stat-value{font-family:'Share Tech Mono';font-size:clamp(0.7rem,0.8vw,0.8rem);color:var(--r);min-width:50px;text-align:right}
+.fill-cyan{background:#00e5ff}
+.fill-purple{background:#7c4dff}
+.fill-green{background:#00e676}
+.fill-gold{background:#ffd700}
+.bank-card{background:#0d0d0d;border:1px solid #1a1a1a;border-radius:8px;padding:15px;margin:10px 0}
+.bank-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px}
+.bank-name{color:#fff;font-weight:700;font-size:clamp(0.9rem,1.1vw,1.05rem)}
+.bank-status{padding:3px 12px;border-radius:20px;font-size:clamp(0.6rem,0.7vw,0.7rem);font-weight:700}
+.status-active{background:rgba(255,23,68,0.15);color:var(--danger);border:1px solid rgba(255,23,68,0.3)}
+.bank-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.social-card{background:#0d0d0d;border:1px solid #1a1a1a;border-radius:8px;padding:15px;margin:10px 0;display:flex;align-items:center;gap:15px;flex-wrap:wrap}
+.social-icon{width:45px;height:45px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.icon-ig{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)}
+.icon-tt{background:#000}
+.icon-sc{background:#fffc00;color:#000}
+.icon-tw{background:#9146ff}
+.social-info{flex:1;min-width:200px}
+.social-name{color:#fff;font-weight:700;font-size:clamp(0.85rem,1vw,1rem);margin-bottom:3px}
+.social-handle{font-family:'Share Tech Mono';color:var(--c);font-size:clamp(0.7rem,0.8vw,0.8rem);word-break:break-all}
+@media(max-width:768px){
+.header-box{flex-direction:column;text-align:center;padding:18px;gap:12px}
+.profile-img-stage{width:140px;height:140px}
+.grid{grid-template-columns:1fr;padding:12px;gap:12px}
+.photo-grid{grid-template-columns:1fr;padding:12px}
+.entry{margin:8px 10px;padding:6px 12px}
+.tags{justify-content:center}
+.header-content h1{font-size:1.2rem}
+.tg-grid, .bank-grid{grid-template-columns:1fr}
+.social-card{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body oncontextmenu="return false;">
+<div id="matrix-bg"></div>
+<div id="glow-effect"></div>
+<canvas id="particles"></canvas>
+
+<div class="container">
+<nav class="nav-back"><a href="../expedientes.html">← VOLVER A EXPEDIENTES</a></nav>
+<header class="header-box">
+<div class="profile-img-stage">
+<img src="https://i.postimg.cc/HnQ9F6q6/danielgranados.jpg" alt="TARGET" class="profile-img" loading="lazy" onerror="this.src='https://via.placeholder.com/300x300/111/00e5ff?text=EXTASYS'">
+<div class="evil-face-container" aria-hidden="true">
+<div class="evil-eyes">
+<div class="evil-eye"><div class="evil-pupil"></div></div>
+<div class="evil-eye"><div class="evil-pupil"></div></div>
+</div>
+<div class="evil-smile"></div>
+</div>
+</div>
+<div class="header-content">
+<span class="id-label">EXPEDIENTE: 1044635796</span>
+<h1>DANIEL JOSE GRANADOS ANAYA</h1>
+<p style="font-size:clamp(0.75rem,1vw,0.9rem);color:#777;margin-bottom:8px;">Alias: Extasys | CatalystDev | iGhost_404</p>
+<div class="tags">
+<span class="tag">@extasys777</span>
+<span class="tag">@async11</span>
+<span class="tag">@catalyst66</span>
+<span class="tag">@_shttps0</span>
+<span class="tag tag-purple">CATALYSTDEV</span>
+<span class="tag tag-pink">EXTASYS</span>
+</div>
+</div>
+</header>
+
+<div class="section">
+<div class="section-h"><h3>01. IDENTIDAD COMPLETA</h3></div>
+<div class="grid">
+<div class="block"><span class="lbl">Tipo Documento</span><span class="val">TARJETA DE IDENTIDAD</span></div>
+<div class="block"><span class="lbl">Número Documento</span><span class="val">1044635796</span></div>
+<div class="block"><span class="lbl">Nombre Completo</span><span class="val">DANIEL JOSE GRANADOS ANAYA</span></div>
+<div class="block"><span class="lbl">Fecha Nacimiento</span><span class="val">20/08/2009 (17 Años)</span></div>
+<div class="block"><span class="lbl">Fecha Expedición</span><span class="val">23/08/2016</span></div>
+<div class="block"><span class="lbl">Dirección</span><span class="val">CR 16 N 66 69 BRR VILLA ESTADIO</span></div>
+<div class="block"><span class="lbl">Ciudad / Sede</span><span class="val">SOLEDAD (Atlántico)</span></div>
+<div class="block"><span class="lbl">IPS Médica / Odontológica</span><span class="val">VSSOLEDAD</span></div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>02. REGISTROS TELEGRAM & ACTIVIDAD</h3></div>
+<div class="grid" style="grid-template-columns:1fr">
+<div class="tg-card">
+<div class="tg-header">
+<span class="tg-name">Extasys 🧙🏻 / CatalystDev</span>
+<span class="tg-id">ID: 7293647496</span>
+</div>
+<div class="tg-grid">
+<div class="tg-item"><span class="lbl">Usernames</span><span class="val">@extasys777 | @async11 | @catalyst66[cite: 3]</span></div>
+<div class="tg-item wide"><span class="lbl">Nombres Históricos</span><span class="val">Extasys 🧙🏻 (22/09/2026) • Extasys (22/09/2026) • CatalystDev (03/02/2026)[cite: 3]</span></div>
+<div class="tg-item wide"><span class="lbl">Estadísticas</span><span class="val">4,032 mensajes en 58 grupos | 46.60% replies | 5.98% media | Circles: 1, Voice: 0[cite: 3]</span></div>
+</div>
+</div>
+</div>
+<div class="grid">
+<div class="block"><span class="lbl">Periodo Activo</span><span class="val">2025-02-14 al 2026-09-30[cite: 3]</span></div>
+<div class="block"><span class="lbl">Admin en Grupos</span><span class="val">1[cite: 3]</span></div>
+<div class="block"><span class="lbl">Búsquedas Asociadas</span><span class="val">1[cite: 3]</span></div>
+</div>
+<div class="grid" style="padding-top:0">
+<div class="stat-bar wide">
+<span class="stat-label">Diversidad Msgs</span>
+<div class="stat-track"><div class="stat-fill fill-cyan" style="width:58.61%"></div></div>
+<span class="stat-value">58.61%[cite: 3]</span>
+</div>
+<div class="stat-bar wide">
+<span class="stat-label">Replies</span>
+<div class="stat-track"><div class="stat-fill fill-purple" style="width:46.60%"></div></div>
+<span class="stat-value">46.60%[cite: 3]</span>
+</div>
+<div class="stat-bar wide">
+<span class="stat-label">Media</span>
+<div class="stat-track"><div class="stat-fill fill-gold" style="width:5.98%"></div></div>
+<span class="stat-value">5.98%[cite: 3]</span>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>03. INFORMACIÓN FINANCIERA Y AFILIACIONES</h3></div>
+<div class="grid" style="grid-template-columns:1fr">
+<div class="bank-card">
+<div class="bank-header">
+<span class="bank-name">🏥 EPS / SGSS (ADRES / VSSOLEDAD)</span>
+<span class="bank-status status-active">MORA MES 1 (SIN SERVICIO)[cite: 3]</span>
+</div>
+<div class="bank-grid">
+<div class="bank-item"><span class="lbl">Contrato</span><span class="val">88095594[cite: 3]</span></div>
+<div class="bank-item"><span class="lbl">Cotizante ID</span><span class="val">22492728 (Viviana Del Carmen Anaya León)[cite: 3]</span></div>
+<div class="bank-item"><span class="lbl">Parentesco</span><span class="val">Hijo menor de 18 años[cite: 3]</span></div>
+<div class="bank-item"><span class="lbl">Teléfono EPS</span><span class="val">6632100[cite: 3]</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>04. CONTACTO Y TELEFONÍA (TRUECALLER / WHATSAPP)</h3></div>
+<div class="grid">
+<div class="block"><span class="lbl">Número Principal</span><span class="val">+57 324 8657608[cite: 3]</span></div>
+<div class="block"><span class="lbl">Operador</span><span class="val">Partners Telecom Colombia SAS[cite: 3]</span></div>
+<div class="block"><span class="lbl">País / Zona</span><span class="val">Colombia (CO) / Timezone -05:00[cite: 3]</span></div>
+<div class="block wide"><span class="lbl">WhatsApp Público</span><span class="val">"D" (iPhone - Última sincronización hace 8 días)[cite: 3]</span></div>
+<div class="block"><span class="lbl">TrueCaller Name</span><span class="val">Daniel Granados[cite: 3]</span></div>
+<div class="block"><span class="lbl">Correo Hint</span><span class="val">29hfcf***@privaterelay.appleid.com[cite: 3]</span></div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>05. REDES Y PLATAFORMAS DIGITALES</h3></div>
+<div class="grid" style="grid-template-columns:1fr">
+<div class="social-card">
+<div class="social-icon icon-ig">📷</div>
+<div class="social-info">
+<div class="social-name">INSTAGRAM / WATTAPD (@_shttps0)</div>
+<div class="social-handle">Root Xs's • 4,289 Seguidores • 986 Seguidos • 777 Posts[cite: 3]</div>
+<div class="social-handle" style="margin-top:4px; color:#888;">Nombres Previos: dn.fxpl, ighost_404[cite: 3]</div>
+</div>
+</div>
+<div class="social-card">
+<div class="social-icon icon-tt">🎵</div>
+<div class="social-info">
+<div class="social-name">TIKTOK / NGL / SCRATCH (@ighost_404)</div>
+<div class="social-handle">iGhost_404 • Creado: 24/12/2020 • 5 Seguidores[cite: 3]</div>
+</div>
+</div>
+<div class="social-card">
+<div class="social-icon icon-sc">👻</div>
+<div class="social-info">
+<div class="social-name">SNAPCHAT (@ighost_404)</div>
+<div class="social-handle">𝔾𝕙𝕠𝕤𝕥_♛💀 • Bio: "Alpha 🐺"[cite: 3]</div>
+</div>
+</div>
+<div class="social-card">
+<div class="social-icon icon-tw">🎮</div>
+<div class="social-info">
+<div class="social-name">TWITCH / GOOGLE PLAY GAMES / AMAZON DEV</div>
+<div class="social-handle">Twitch ID: 834839206 | GPG: RadialHydra5884 | Web: https://daniel-dev.site/[cite: 3]</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>06. FILTRACIONES Y DATOS VINCULADOS (BREACHFORUMS)</h3></div>
+<div class="grid">
+<div class="block"><span class="lbl">Base de Datos Filtrada</span><span class="val">addi.com[cite: 3]</span></div>
+<div class="block"><span class="lbl">Correo Vinculado</span><span class="val">root.sh777@gmail.com[cite: 3]</span></div>
+<div class="block"><span class="lbl">Cédula Asociada en Leak</span><span class="val">70906052 (LOPEZ)[cite: 3]</span></div>
+<div class="block"><span class="lbl">AliExpress ID</span><span class="val">6173564156 (@AnayaDaniel_6173564156)[cite: 3]</span></div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>07. GRUPO FAMILIAR (MADRE Y HERMANA)</h3></div>
+<div class="grid" style="grid-template-columns:1fr">
+<div class="bank-card">
+<div class="bank-header">
+<span class="bank-name">👥 COTIZANTE PRINCIPAL: VIVIANA DEL CARMEN ANAYA LEÓN</span>
+<span class="bank-status status-active">CC: 22492728[cite: 3]</span>
+</div>
+<div class="bank-grid">
+<div class="bank-item wide"><span class="lbl">Dirección / Correo</span><span class="val">CR 16 N 66 69 VILLA ESTADIO | VIVIANAYA@HOTMAIL.COM | Tel: 3014615105[cite: 3]</span></div>
+<div class="bank-item"><span class="lbl">Hermana / Beneficiaria</span><span class="val">Fiorella Granados Anaya (TI: 1044661289)[cite: 3]</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>08. FOTOS Y EVIDENCIAS</h3></div>
+<div class="photo-grid">
+<div class="photo-item">
+<div class="image-wrapper">
+<img src="https://i.postimg.cc/HnQ9F6q6/danielgranados.jpg" alt="Foto Principal" loading="lazy" onerror="this.src='https://via.placeholder.com/400x400/111/00e5ff?text=EXTASYS'">
+</div>
+<div class="photo-label">📸 FOTO PRINCIPAL / REGISTRO</div>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-h"><h3>09. NOTAS FINALES</h3></div>
+<div class="entry">
+<span class="entry-t" style="color:#ff4d8d;">ALIAS PRINCIPAL</span>
+<span class="entry-d">Extasys • CatalystDev • iGhost_404 • Daniel Granados Anaya[cite: 3]</span>
+</div>
+<div class="entry">
+<span class="entry-t" style="color:#00e5ff;">UBICACIÓN REAL / GEOLOCALIZACIÓN</span>
+<span class="entry-d">Barranquilla / Soledad, Atlántico - Barrio San Isidro, Cra 24 Esquina 53D[cite: 3]</span>
+</div>
+<div class="entry">
+<span class="entry-t" style="color:#7c4dff;">PERFILES EN REDES</span>
+<span class="entry-d">Instagram: @_shttps0 | TikTok: @ighost_404 | Snapchat: ighost_404[cite: 3]</span>
+</div>
+<div class="entry">
+<span class="entry-t" style="color:#00e676;">REGISTROS DE COMUNICACIÓN</span>
+<span class="entry-d">WhatsApp / Truecaller verificado en línea móvil colombiana (Partners Telecom)[cite: 3]</span>
+</div>
+<div class="entry">
+<span class="entry-t" style="color:#ffd700;">😈 EVIL DARK - INTEL REPORT</span>
+<span class="entry-d">Información consolidada de múltiples bases de datos OSINT y filtraciones de seguridad.</span>
+</div>
+</div>
+</div>
+
+<script>
+document.addEventListener('keydown', function(e) {
+if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || (e.ctrlKey && e.keyCode == 85)) {
+e.preventDefault();
+return false;
+}
+});
+document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+
+const glow = document.getElementById('glow-effect');
+let tickingGlow = false;
+document.addEventListener('mousemove', (e) => {
+if (!tickingGlow) {
+window.requestAnimationFrame(() => {
+const x = (e.clientX / window.innerWidth) * 100;
+const y = (e.clientY / window.innerHeight) * 100;
+glow.style.setProperty('--mx', x + '%');
+glow.style.setProperty('--my', y + '%');
+tickingGlow = false;
+});
+tickingGlow = true;
+}
+});
+
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let mouseX = 0, mouseY = 0;
+
+function resizeCanvas() {
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+document.addEventListener('mousemove', (e) => {
+mouseX = e.clientX;
+mouseY = e.clientY;
+}, {passive: true});
+
+class Particle {
+constructor() {
+this.x = Math.random() * canvas.width;
+this.y = Math.random() * canvas.height;
+this.size = Math.random() * 2 + 0.5;
+this.speedX = (Math.random() - 0.5) * 0.3;
+this.speedY = (Math.random() - 0.5) * 0.3;
+this.opacity = Math.random() * 0.4 + 0.1;
+this.color = Math.random() > 0.5 ? '#00e5ff' : '#7c4dff';
+}
+update() {
+this.x += this.speedX;
+this.y += this.speedY;
+if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+}
+draw() {
+ctx.beginPath();
+ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+ctx.fillStyle = this.color;
+ctx.globalAlpha = this.opacity;
+ctx.fill();
+}
+}
+
+for (let i = 0; i < 35; i++) {
+particles.push(new Particle());
+}
+
+function animateParticles() {
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+particles.forEach(p => {
+p.update();
+p.draw();
+});
+requestAnimationFrame(animateParticles);
+}
+animateParticles();
+</script>
+</body>
+</html>
