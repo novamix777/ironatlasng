@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; object-src 'none'; base-uri 'self';">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-XSS-Protection" content="1; mode=block">
 <title>EXPEDIENTE 1053859548</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
@@ -18,9 +22,68 @@ body{background:var(--b);color:var(--t);font-family:'Inter',sans-serif;line-heig
 .header-box::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent,rgba(0,229,255,0.05),transparent,rgba(124,77,255,0.05),transparent);animation:rotateGlow 8s linear infinite;pointer-events:none}
 @keyframes rotateGlow{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
 .header-box:hover{transform:translateY(-5px) scale(1.008);box-shadow:0 15px 50px rgba(0,229,255,0.2);border-color:var(--r)}
-.profile-img{width:clamp(120px,18vw,180px);height:clamp(120px,18vw,180px);object-fit:cover;border:2px solid #222;flex-shrink:0;filter:grayscale(0.4);transition:all 0.6s cubic-bezier(0.34,1.56,0.64,1);position:relative;z-index:1;border-radius:8px;animation:imgFloat 6s ease-in-out infinite}
+.profile-img-stage{position:relative;width:clamp(120px,18vw,180px);height:clamp(120px,18vw,180px);flex-shrink:0}
+.profile-img{width:100%;height:100%;object-fit:cover;border:2px solid #222;filter:grayscale(0.4);transition:all 0.6s cubic-bezier(0.34,1.56,0.64,1);position:relative;z-index:1;border-radius:8px;animation:imgFloat 6s ease-in-out infinite}
 @keyframes imgFloat{0%,100%{transform:translateY(0px)}50%{transform:translateY(-8px)}}
 .profile-img:hover{filter:grayscale(0) drop-shadow(0 0 30px rgba(0,229,255,0.4));transform:scale(1.08) rotate(-3deg);border-color:var(--r)}
+
+/* CARITA MALVADA FLOTANDO ARRIBA A LA DERECHA DEL LOGO/IMAGEN SIN TOCARLO */
+.evil-face-container {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 48px;
+  height: 48px;
+  background: rgba(10, 0, 2, 0.92);
+  border: 2px solid var(--danger);
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(255, 23, 68, 0.6), inset 0 0 8px rgba(255, 23, 68, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 25;
+  pointer-events: none;
+  animation: evilFloat 3s ease-in-out infinite;
+}
+@keyframes evilFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.evil-eyes {
+  position: relative;
+  width: 30px;
+  height: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.evil-eye {
+  width: 8px;
+  height: 12px;
+  background: var(--danger);
+  clip-path: polygon(0% 30%, 100% 0%, 80% 100%, 20% 100%);
+  position: relative;
+  box-shadow: 0 0 8px var(--danger);
+}
+.evil-pupil {
+  position: absolute;
+  width: 3px;
+  height: 5px;
+  background: var(--r);
+  border-radius: 50%;
+  top: 3px;
+  left: 2px;
+  box-shadow: 0 0 5px var(--r);
+}
+.evil-smile {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 6px;
+  border-bottom: 2px solid var(--danger);
+  border-radius: 0 0 50% 50%;
+  box-shadow: 0 3px 8px rgba(255, 23, 68, 0.5);
+}
+
 .header-content{flex:1}
 .header-content h1{color:#fff;font-size:clamp(1rem,4vw,1.8rem);margin-bottom:5px;text-transform:uppercase;transition:all 0.4s ease;letter-spacing:1px}
 .header-content h1:hover{color:var(--r);text-shadow:0 0 40px rgba(0,229,255,0.3);transform:scale(1.02)}
@@ -133,7 +196,7 @@ body{background:var(--b);color:var(--t);font-family:'Inter',sans-serif;line-heig
 .social-card:hover .social-handle{color:var(--r)}
 @media(max-width:768px){
 .header-box{flex-direction:column;text-align:center;padding:18px;gap:12px}
-.profile-img{width:140px;height:140px}
+.profile-img-stage{width:140px;height:140px}
 .grid{grid-template-columns:1fr;padding:12px;gap:12px}
 .section-h{padding:8px 12px}
 .photo-grid{grid-template-columns:1fr;padding:12px}
@@ -146,7 +209,7 @@ body{background:var(--b);color:var(--t);font-family:'Inter',sans-serif;line-heig
 .social-info{min-width:auto}
 }
 @media(max-width:480px){
-.profile-img{width:110px;height:110px}
+.profile-img-stage{width:110px;height:110px}
 .container{padding:6px}
 .grid{padding:8px;gap:8px}
 .block{padding-bottom:6px}
@@ -164,7 +227,16 @@ body{background:var(--b);color:var(--t);font-family:'Inter',sans-serif;line-heig
 <div class="container">
 <nav class="nav-back"><a href="../expedientes.html">← VOLVER A EXPEDIENTES</a></nav>
 <header class="header-box">
+<div class="profile-img-stage">
 <img src="https://ii.ct-stc.com/1/logos/candidates/2023/07/13/152612thumbnail.jpeg" alt="TARGET" class="profile-img" loading="lazy" onerror="this.src='https://via.placeholder.com/300x300/111/00e5ff?text=ALIAS+EL+BRUJO'">
+<div class="evil-face-container" aria-hidden="true">
+<div class="evil-eyes">
+<div class="evil-eye"><div class="evil-pupil"></div></div>
+<div class="evil-eye"><div class="evil-pupil"></div></div>
+</div>
+<div class="evil-smile"></div>
+</div>
+</div>
 <div class="header-content">
 <span class="id-label">EXPEDIENTE: 1053859548</span>
 <h1>LUIS ALEJANDRO ALBA SALAZAR</h1>
@@ -208,7 +280,7 @@ body{background:var(--b);color:var(--t);font-family:'Inter',sans-serif;line-heig
 <div class="block wide"><span class="lbl">Institución Educativa</span><span class="val">LICEO JOSÉ MARÍA BERNAL (JOMABER)</span></div>
 <div class="block"><span class="lbl">Departamento</span><span class="val">CALDAS</span></div>
 <div class="block"><span class="lbl">Municipio</span><span class="val">MANIZALES / ANTIOQUIA</span></div>
-<div class="block wide"><span class="lbl">Facebook Institucional</span><span class="val"><a href="https://www.facebook.com/profile.php?id=100054800250423" target="_blank">facebook.com/LiceoJOMABER</a></span></div>
+<div class="block wide"><span class="lbl">Facebook Institucional</span><span class="val"><a href="https://www.facebook.com/profile.php?id=100054800250423" target="_blank" rel="noopener noreferrer">facebook.com/LiceoJOMABER</a></span></div>
 </div>
 </div>
 
@@ -239,7 +311,7 @@ body{background:var(--b);color:var(--t);font-family:'Inter',sans-serif;line-heig
 <div class="block"><span class="lbl">Número Principal</span><span class="val">313 604 6117</span></div>
 <div class="block"><span class="lbl">Operador</span><span class="val">CLARO</span></div>
 <div class="block"><span class="lbl">País</span><span class="val">COLOMBIA 🇨🇴</span></div>
-<div class="block wide"><span class="lbl">WhatsApp</span><span class="val"><a href="https://wa.me/573136046117" target="_blank">wa.me/573136046117</a></span></div>
+<div class="block wide"><span class="lbl">WhatsApp</span><span class="val"><a href="https://wa.me/573136046117" target="_blank" rel="noopener noreferrer">wa.me/573136046117</a></span></div>
 <div class="block"><span class="lbl">Email</span><span class="val">salazaralejo346@gmail.com</span></div>
 <div class="block"><span class="lbl">Nombre en Addi</span><span class="val">ALEJO SALAZAR</span></div>
 </div>
@@ -252,14 +324,14 @@ body{background:var(--b);color:var(--t);font-family:'Inter',sans-serif;line-heig
 <div class="social-icon icon-ig">📷</div>
 <div class="social-info">
 <div class="social-name">INSTAGRAM</div>
-<div class="social-handle"><a href="https://www.instagram.com/alejandrosalazar____/tagged/" target="_blank">@alejandrosalazar____</a></div>
+<div class="social-handle"><a href="https://www.instagram.com/alejandrosalazar____/tagged/" target="_blank" rel="noopener noreferrer">@alejandrosalazar____</a></div>
 </div>
 </div>
 <div class="social-card">
 <div class="social-icon icon-fb">📘</div>
 <div class="social-info">
 <div class="social-name">FACEBOOK - LICEO JOMABER</div>
-<div class="social-handle"><a href="https://www.facebook.com/profile.php?id=100054800250423" target="_blank">facebook.com/LiceoJOMABER</a></div>
+<div class="social-handle"><a href="https://www.facebook.com/profile.php?id=100054800250423" target="_blank" rel="noopener noreferrer">facebook.com/LiceoJOMABER</a></div>
 </div>
 </div>
 </div>
@@ -277,9 +349,9 @@ body{background:var(--b);color:var(--t);font-family:'Inter',sans-serif;line-heig
 <div class="tg-item"><span class="lbl">Username 1</span><span class="val">@Mraxi0</span></div>
 <div class="tg-item"><span class="lbl">Username 2</span><span class="val">@Axon_bre</span></div>
 <div class="tg-item"><span class="lbl">Username 3</span><span class="val">@Serviciosnequi</span></div>
-<div class="tg-item wide"><span class="lbl">Link</span><span class="val"><a href="https://t.me/Mraxi0" target="_blank">t.me/Mraxi0</a></span></div>
-<div class="tg-item wide"><span class="lbl">Canal</span><span class="val"><a href="https://t.me/oficialstream" target="_blank">Referencias Axon Сheck</a></span></div>
-<div class="tg-item wide"><span class="lbl">Nombres Usados</span><span class="val">Usuario no encontrado (18/08/2026) • 𝑨𝑿𝑶𝑵𝑫𝑬𝑽 𝟐 𝑴𝒂𝒏𝒐 (18/08/2026) • 𝐒𝐞𝐛𝐚𝐬𝐭𝐢𝐚𝐧𝗧𝘀 𝗨𝗜 『тѕσявιт』 (06/08/2026)</span></div>
+<div class="tg-item wide"><span class="lbl">Link</span><span class="val"><a href="https://t.me/Mraxi0" target="_blank" rel="noopener noreferrer">t.me/Mraxi0</a></span></div>
+<div class="tg-item wide"><span class="lbl">Canal</span><span class="val"><a href="https://t.me/oficialstream" target="_blank" rel="noopener noreferrer">Referencias Axon Сheck</a></span></div>
+<div class="tg-item wide"><span class="lbl">Nombres Usados</span><span class="val">Usuario no encontrado (18/08/2026) • 𝑨𝑿𝑶𝑵𝑫𝑬𝑽 𝟐 𝑴𝒂𝒏𝒐 (18/08/2026) • 𝐒𝐞𝐛𝐚𝐬𝐭𝐢𝐚𝐧𝗧𝘀 𝗨𝗜 『тσявιт』 (06/08/2026)</span></div>
 </div>
 </div>
 </div>
@@ -320,7 +392,7 @@ body{background:var(--b);color:var(--t);font-family:'Inter',sans-serif;line-heig
 </div>
 <div class="tg-grid">
 <div class="tg-item"><span class="lbl">Username</span><span class="val">@Mateo109d</span></div>
-<div class="tg-item"><span class="lbl">Link</span><span class="val"><a href="https://t.me/Mateo109d" target="_blank">t.me/Mateo109d</a></span></div>
+<div class="tg-item"><span class="lbl">Link</span><span class="val"><a href="https://t.me/Mateo109d" target="_blank" rel="noopener noreferrer">t.me/Mateo109d</a></span></div>
 <div class="tg-item wide"><span class="lbl">Nombres Usados</span><span class="val">Zebra🤑 (31/05/2026) • ꪖꪀꪻ꠸ ᦓꪖρꪮᦓ (31/05/2026) • 𝓙𝓾𝓪𝓷 𝓭𝔃 𝓪𝓹𝓴🌀 (10/03/2026)</span></div>
 </div>
 </div>
@@ -548,7 +620,7 @@ matrixCtx.globalAlpha = 0.08 + Math.random() * 0.08;
 matrixCtx.fillText(char, x, y);
 }
 
-if (drops[i] * 14 > matrixCanvas.height && Math.random() > 0.975) {
+if (y > matrixCanvas.height && Math.random() > 0.975) {
 drops[i] = 0;
 }
 drops[i]++;
