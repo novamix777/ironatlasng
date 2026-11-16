@@ -261,40 +261,77 @@ img { max-width: 100%; height: auto; display: block; }
   justify-content: center;
   position: relative;
   overflow: hidden;
-  transition: transform 0.2s ease-out, box-shadow 0.4s ease;
   transform-style: preserve-3d;
 }
 
 .hero-logo {
-  width: 85%;
-  height: 85%;
-  object-fit: contain;
-  filter: drop-shadow(0 10px 25px rgba(255, 0, 60, 0.6));
-  transition: transform 0.15s ease-out;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
 }
 
-.hero-eyes-overlay {
+/* CARITA MALVADA FLOTANDO ARRIBA A LA DERECHA DEL LOGO */
+.evil-face-container {
   position: absolute;
-  inset: 0;
-  pointer-events: none;
+  top: -10px;
+  right: -10px;
+  width: 54px;
+  height: 54px;
+  background: rgba(10, 0, 2, 0.9);
+  border: 2px solid var(--crimson);
+  border-radius: 50%;
+  box-shadow: 0 0 20px var(--crimson), inset 0 0 10px rgba(255, 0, 60, 0.5);
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 10;
+  justify-content: center;
+  z-index: 20;
+  pointer-events: none;
+  transform-style: preserve-3d;
 }
 
-.interactive-pupil {
-  position: absolute;
-  width: 14px;
+.evil-eyes {
+  position: relative;
+  width: 36px;
+  height: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.evil-eye {
+  width: 10px;
   height: 14px;
+  background: var(--crimson);
+  clip-path: polygon(0% 30%, 100% 0%, 80% 100%, 20% 100%);
+  position: relative;
+  box-shadow: 0 0 10px var(--crimson);
+}
+
+.evil-pupil {
+  position: absolute;
+  width: 4px;
+  height: 6px;
   background: #00f0ff;
   border-radius: 50%;
-  box-shadow: 0 0 12px #00f0ff, 0 0 25px var(--crimson);
-  transition: transform 0.08s cubic-bezier(0,0,0.2,1);
-  opacity: 0.9;
+  top: 4px;
+  left: 3px;
+  box-shadow: 0 0 6px #00f0ff;
+  transition: transform 0.06s ease-out;
 }
-.pupil-left { transform: translate(-32px, -8px); }
-.pupil-right { transform: translate(32px, -8px); }
+
+.evil-smile {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 8px;
+  border-bottom: 2.5px solid var(--crimson);
+  border-radius: 0 0 50% 50%;
+  box-shadow: 0 4px 10px rgba(255, 0, 60, 0.6);
+}
 
 .hero-title {
   font-family: 'Orbitron', sans-serif;
@@ -740,10 +777,13 @@ img { max-width: 100%; height: auto; display: block; }
       <div class="glitch-ring" aria-hidden="true"></div>
       <div class="hero-logo-wrap" id="logo-wrap">
         <img src="/assets/iron.png" alt="IRON ATLAS" class="hero-logo" id="hero-logo" width="230" height="230" decoding="async" fetchpriority="high">
-        <div class="hero-eyes-overlay" aria-hidden="true">
-          <div class="interactive-pupil pupil-left" id="pupil-left"></div>
-          <div class="interactive-pupil pupil-right" id="pupil-right"></div>
+      </div>
+      <div class="evil-face-container" id="evil-face" aria-hidden="true">
+        <div class="evil-eyes">
+          <div class="evil-eye"><div class="evil-pupil" id="evil-pupil-left"></div></div>
+          <div class="evil-eye"><div class="evil-pupil" id="evil-pupil-right"></div></div>
         </div>
+        <div class="evil-smile"></div>
       </div>
     </div>
     <h1 class="hero-title" id="hero-title">Iron Atlas</h1>
@@ -812,7 +852,7 @@ img { max-width: 100%; height: auto; display: block; }
           <span class="card-name">𝙄𝙈𝙋𝙊𝙍𝙏 𝙍𝙀𝙎𝙌𝙐𝙀𝙎𝙏</span>
           <span class="card-role">@import_404</span>
         </div>
-        <p class="card-desc">Enfocado en la búsqueda y explotación de Vulnerabilidades, desarrollo de APIs y automatizaciones.</p>
+        <p class="card-desc">Enفocado en la búsqueda y explotación de Vulnerabilidades, desarrollo de APIs y automatizaciones.</p>
         <div class="badge-container">
           <span class="badge">Programación</span>
           <span class="badge">Osint</span>
@@ -1009,10 +1049,11 @@ img { max-width: 100%; height: auto; display: block; }
   });
 
   const logoWrap = document.getElementById('logo-wrap');
-  const pupilLeft = document.getElementById('pupil-left');
-  const pupilRight = document.getElementById('pupil-right');
+  const evilFace = document.getElementById('evil-face');
+  const pupilLeft = document.getElementById('evil-pupil-left');
+  const pupilRight = document.getElementById('evil-pupil-right');
 
-  function updateMrRobotGaze(clientX, clientY) {
+  function updateGaze(clientX, clientY) {
     if (!logoWrap) return;
     const rect = logoWrap.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
@@ -1020,58 +1061,65 @@ img { max-width: 100%; height: auto; display: block; }
     const dx = clientX - centerX;
     const dy = clientY - centerY;
     const angle = Math.atan2(dy, dx);
-    const distance = Math.min(Math.hypot(dx, dy), 300);
-    const factor = (distance / 300) * 8;
+    const distance = Math.min(Math.hypot(dx, dy), 350);
+    const factor = (distance / 350) * 3;
 
     const moveX = Math.cos(angle) * factor;
     const moveY = Math.sin(angle) * factor;
 
     if (pupilLeft && pupilRight) {
-      pupilLeft.style.transform = `translate(calc(-32px + ${moveX}px), calc(-8px + ${moveY}px))`;
-      pupilRight.style.transform = `translate(calc(32px + ${moveX}px), calc(-8px + ${moveY}px))`;
+      pupilLeft.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      pupilRight.style.transform = `translate(${moveX}px, ${moveY}px)`;
     }
 
     if (canHover) {
-      const rotX = (-dy / rect.height) * 12;
-      const rotY = (dx / rect.width) * 12;
-      logoWrap.style.transform = `perspective(600px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.03)`;
+      const rotX = (-dy / rect.height) * 10;
+      const rotY = (dx / rect.width) * 10;
+      logoWrap.style.transform = `perspective(600px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.02)`;
+      if (evilFace) {
+        evilFace.style.transform = `translateZ(25px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+      }
     }
   }
 
   window.addEventListener('mousemove', (e) => {
-    updateMrRobotGaze(e.clientX, e.clientY);
+    updateGaze(e.clientX, e.clientY);
   }, { passive: true });
 
   window.addEventListener('touchmove', (e) => {
     if (e.touches.length) {
-      updateMrRobotGaze(e.touches[0].clientX, e.touches[0].clientY);
+      updateGaze(e.touches[0].clientX, e.touches[0].clientY);
     }
   }, { passive: true });
 
   if (logoWrap && canHover) {
     logoWrap.addEventListener('mouseleave', () => {
       logoWrap.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
+      if (evilFace) evilFace.style.transform = 'translateZ(25px)';
       if (pupilLeft && pupilRight) {
-        pupilLeft.style.transform = 'translate(-32px, -8px)';
-        pupilRight.style.transform = 'translate(32px, -8px)';
+        pupilLeft.style.transform = 'translate(0, 0)';
+        pupilRight.style.transform = 'translate(0, 0)';
       }
     });
   }
 
   window.addEventListener('deviceorientation', (e) => {
     if (e.gamma !== null && e.beta !== null) {
-      const tiltX = e.gamma; 
+      const tiltX = e.gamma;
       const tiltY = e.beta - 45;
       const maxRange = 15;
       const normX = Math.max(-1, Math.min(1, tiltX / maxRange));
       const normY = Math.max(-1, Math.min(1, tiltY / maxRange));
       
       if (pupilLeft && pupilRight) {
-        pupilLeft.style.transform = `translate(calc(-32px + ${normX * 9}px), calc(-8px + ${normY * 9}px))`;
-        pupilRight.style.transform = `translate(calc(32px + ${normX * 9}px), calc(-8px + ${normY * 9}px))`;
+        pupilLeft.style.transform = `translate(${normX * 3}px, ${normY * 3}px)`;
+        pupilRight.style.transform = `translate(${normX * 3}px, ${normY * 3}px)`;
       }
       if (logoWrap) {
-        logoWrap.style.transform = `perspective(600px) rotateX(${-normY * 10}deg) rotateY(${normX * 10}deg)`;
+        logoWrap.style.transform = `perspective(600px) rotateX(${-normY * 8}deg) rotateY(${normX * 8}deg)`;
+      }
+      if (evilFace) {
+        evilFace.style.transform = `translateZ(25px) rotateX(${-normY * 8}deg) rotateY(${normX * 8}deg)`;
       }
     }
   }, { passive: true });
@@ -1151,18 +1199,6 @@ img { max-width: 100%; height: auto; display: block; }
 
   const snowSystem = new THREE.Points(snowGeo, snowMat);
   scene.add(snowSystem);
-
-  const gridGeo = new THREE.PlaneGeometry(120, 120, 30, 30);
-  const gridMat = new THREE.MeshBasicMaterial({
-    color: 0xff003c,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.09
-  });
-  const floorGrid = new THREE.Mesh(gridGeo, gridMat);
-  floorGrid.rotation.x = Math.PI / 2;
-  floorGrid.position.y = -18;
-  scene.add(floorGrid);
 
   let mouseX = 0, mouseY = 0, currentX = 0, currentY = 0;
   window.addEventListener('mousemove', (e) => {
